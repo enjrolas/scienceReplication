@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 --version)",
+      "Bash(django-admin --version)",
+      "Bash(psql --version)",
+      "Bash(pip3 list:*)",
+      "Bash(pip3 install:*)",
+      "Bash(django-admin startproject:*)",
+      "Bash(python3 manage.py startapp papers)",
+      "Bash(sudo -u postgres psql -c \"CREATE DATABASE sciencereplication;\")",
+      "Bash(sudo -u postgres psql -c \"CREATE USER sciencerepl WITH PASSWORD 'sciencerepl_pass';\")",
+      "Bash(sudo -u postgres psql -c \"GRANT ALL PRIVILEGES ON DATABASE sciencereplication TO sciencerepl;\")",
+      "Bash(psql -U postgres -c \"SELECT 1\")",
+      "Bash(psql -h localhost -U japhy -d postgres -c \"SELECT 1\")",
+      "Bash(psql -c \"SELECT 1\")",
+      "Bash(python3:*)",
+      "Bash(apache2 -v)",
+      "Bash(apache2ctl -M)",
+      "Bash(dpkg -l)",
+      "Read(//etc/apache2/sites-available/**)",
+      "Read(//etc/apache2/sites-enabled/**)",
+      "Bash(cat /etc/apache2/sites-available/scienceReplication.artiswrong.com*)",
+      "Bash(ls /etc/apache2/sites-available/*science*)",
+      "Bash(ls /etc/apache2/sites-available/*Science*)",
+      "Read(//usr/lib/apache2/modules/**)",
+      "Bash(dpkg -L libapache2-mod-wsgi-py3)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://sciencereplication.artiswrong.com/)",
+      "Bash(curl -s https://sciencereplication.artiswrong.com/)",
+      "Bash(cat /etc/apache2/sites-enabled/scienceReplication.artiswrong.com*)",
+      "Bash(ls -la /etc/apache2/sites-enabled/*scienceR*)",
+      "Bash(ls -la /etc/apache2/sites-enabled/*science*)"
+    ]
+  }
+}

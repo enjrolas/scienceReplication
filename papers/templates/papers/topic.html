@@ -1,0 +1,80 @@
+{% extends "papers/base.html" %}
+{% load papers_filters %}
+
+{% block title %}{{ topic.name }} - Science Replication{% endblock %}
+
+{% block nav_items %}
+<a href="/{{ topic.slug }}/" class="active">{{ topic.name }}</a>
+{% endblock %}
+
+{% block extra_style %}
+.summary { margin-bottom: 1.5rem; color: #555; }
+.paper {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+.paper h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+.paper h3 a { color: #1a1a2e; text-decoration: none; }
+.paper h3 a:hover { color: #2e86c1; }
+.paper .authors { color: #555; font-size: 0.85rem; margin-bottom: 0.4rem; }
+.paper .abstract {
+    font-size: 0.9rem;
+    color: #444;
+    margin: 0.6rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.paper .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.paper .date { font-size: 0.8rem; color: #888; }
+.dataset-links { margin-top: 0.5rem; font-size: 0.85rem; }
+.dataset-links a { color: #2e86c1; }
+{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 0.5rem;">{{ topic.name }}</h2>
+{% if topic.description %}<p style="color: #444; margin-bottom: 1rem;">{{ topic.description }}</p>{% endif %}
+
+<div class="summary">
+    {{ papers|length }} paper{{ papers|length|pluralize }} &mdash;
+    {{ papers_with_latex }} with LaTeX source,
+    {{ papers_with_datasets }} with dataset links
+</div>
+
+{% for paper in papers %}
+<div class="paper">
+    <h3><a href="{{ paper.url }}" target="_blank" rel="noopener">{{ paper.title }}</a></h3>
+    <div class="authors">{{ paper.authors|truncatechars:200 }}</div>
+    {% if paper.published_date %}<div class="date">{{ paper.published_date }}</div>{% endif %}
+    <div class="abstract">{{ paper.abstract }}</div>
+    <div class="badges">
+        <span class="badge badge-{{ paper.source }}">{{ paper.get_source_display }}</span>
+        {% if paper.has_latex %}<span class="badge badge-latex">LaTeX</span>{% endif %}
+        {% if paper.has_pdf %}<span class="badge badge-pdf">PDF</span>{% endif %}
+        {% if paper.dataset_links %}<span class="badge badge-data">Data</span>{% endif %}
+    </div>
+    {% if paper.dataset_links %}
+    <div class="dataset-links">
+        <strong>Datasets:</strong>
+        {% for link in paper.dataset_links %}
+        <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.description }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if paper.has_pdf and paper.pdf_path %}
+    <div style="margin-top: 0.4rem; font-size: 0.85rem;">
+        <a href="/files/{{ paper.pdf_path }}" style="color: #c0392b;">Download PDF</a>
+        {% if paper.has_latex and paper.latex_path %}
+        | <a href="/files/{{ paper.latex_path }}" style="color: #008080;">Download LaTeX</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% empty %}
+<p>No papers found yet. Run <code>python manage.py scrape_papers</code> to fetch papers.</p>
+{% endfor %}
+{% endblock %}

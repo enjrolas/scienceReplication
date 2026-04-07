@@ -1,0 +1,46 @@
+{% extends "papers/base.html" %}
+
+{% block title %}Science Replication - Home{% endblock %}
+
+{% block nav_items %}
+{% for topic in topics %}
+<a href="/{{ topic.slug }}/">{{ topic.name }}</a>
+{% endfor %}
+{% endblock %}
+
+{% block extra_style %}
+.topic-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    transition: box-shadow 0.2s;
+}
+.topic-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.topic-card h2 { margin-bottom: 0.5rem; }
+.topic-card h2 a { color: #1a1a2e; text-decoration: none; }
+.topic-card h2 a:hover { color: #2e86c1; }
+.topic-card .meta { color: #666; font-size: 0.9rem; }
+.stats { display: flex; gap: 1.5rem; margin-top: 0.5rem; font-size: 0.85rem; color: #555; }
+{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 1rem;">Topics</h2>
+<p style="margin-bottom: 1.5rem; color: #555;">
+    {{ total_papers }} paper{{ total_papers|pluralize }} across {{ topics|length }} topic{{ topics|length|pluralize }}.
+</p>
+
+{% for topic in topics %}
+<div class="topic-card">
+    <h2><a href="/{{ topic.slug }}/">{{ topic.name }}</a></h2>
+    {% if topic.description %}<p style="color: #444; margin-bottom: 0.5rem;">{{ topic.description }}</p>{% endif %}
+    <div class="meta">Search: <code>{{ topic.search_terms }}</code></div>
+    <div class="stats">
+        <span>{{ topic.papers.count }} paper{{ topic.papers.count|pluralize }}</span>
+    </div>
+</div>
+{% empty %}
+<p>No topics configured yet. Add topics via Django admin.</p>
+{% endfor %}
+{% endblock %}
