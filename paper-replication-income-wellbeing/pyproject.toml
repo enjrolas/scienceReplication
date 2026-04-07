@@ -1,0 +1,19 @@
+[project]
+name = "paper-replication-income-wellbeing"
+version = "0.1.0"
+description = "Replication of: Income and emotional well-being: Evidence for well-being plateauing around $200,000 per year"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "statsmodels>=0.14",
+    "scipy>=1.11",
+    "matplotlib>=3.7",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["analysis", "comparison"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
