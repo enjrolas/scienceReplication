@@ -19,6 +19,8 @@
             text-align: center;
         }
         header h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
+        header h1 a { color: inherit; text-decoration: none; }
+        header h1 a:hover { opacity: 0.85; }
         header p { color: #a0a0b8; font-size: 0.95rem; }
         nav {
             background: #16213e;
@@ -83,14 +85,49 @@
 }
 .paper .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .paper .date { font-size: 0.8rem; color: #888; }
-.dataset-links { margin-top: 0.5rem; font-size: 0.85rem; }
-.dataset-links a { color: #2e86c1; }
+.paper-links {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+}
+.paper-links a {
+    text-decoration: none;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+.paper-links a:hover { opacity: 0.8; }
+.link-pdf { background: #fde8e8; color: #c0392b; }
+.link-latex { background: #e0f5f5; color: #008080; }
+.link-paper { background: #eee; color: #333; }
+.dataset-links {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+.dataset-links a {
+    display: inline-block;
+    margin: 0.2rem 0.3rem 0.2rem 0;
+    padding: 0.2rem 0.5rem;
+    background: #e8f0fe;
+    color: #1a56db;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+.dataset-links a:hover { background: #d0e0fd; }
+.dataset-verified { border-left: 2px solid #27ae60; }
+.dataset-unverified { border-left: 2px solid #ccc; }
 
     </style>
 </head>
 <body>
     <header>
-        <h1>Science Replication</h1>
+        <h1><a href="/">Experiments in Replicating Science</a></h1>
         <p>Papers with reproducible materials from arXiv and bioRxiv</p>
     </header>
     <nav>
@@ -98,6 +135,8 @@
         
 <a href="/developmental-psychology/" class="active">Developmental Psychology</a>
 
+        <a href="/upload/">Upload Paper</a>
+        <a href="/manage/">Manage</a>
     </nav>
     <main>
         
@@ -105,7 +144,7 @@
 <p style="color: #444; margin-bottom: 1rem;">Papers on developmental psychology with reproducible materials</p>
 
 <div class="summary">
-    10 papers &mdash;
+    9 papers &mdash;
     9 with LaTeX source,
     1 with dataset links
 </div>
@@ -122,22 +161,21 @@
         
         
     </div>
-    
-    
-</div>
 
-<div class="paper">
-    <h3><a href="https://arxiv.org/abs/2604.04432v1" target="_blank" rel="noopener">Croissant Charts: Modulating the Performance of Normal Distribution Visualizations with Affordances</a></h3>
-    <div class="authors">Racquel Fygenson, Enrico Bertini, Lace M. Padilla</div>
-    <div class="date">April 6, 2026</div>
-    <div class="abstract">Affordances, originating in psychology, describe how an object&#x27;s design influences the physical and cognitive actions users may take. Past work applied affordance theory to visualization to explain how design decisions can impact the cognitive actions of visualization readers. In this work, we demonstrate that affordances can complement effectiveness rankings by further explaining the root causes behind visualizations&#x27; task performance. To do so, we conduct a case study on static normal probability density function plots, identifying their current affordances. Next, we identify the optimal affordances for a common probability-comparison task and develop a novel affordance-driven visualization, the Croissant Chart, to support them. We empirically validate the design&#x27;s effectiveness through a preregistered study (n = 808), demonstrating how affordances can inform predictable changes in task performance. Our findings underscore the potential for affordance-based approaches to enhance visualization effectiveness and inform future design decisions.</div>
-    <div class="badges">
-        <span class="badge badge-arxiv">arXiv</span>
-        <span class="badge badge-latex">LaTeX</span>
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04842v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
         
+        <a href="https://arxiv.org/pdf/2604.04842" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04842" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04842/2604.04842_source.tar.gz" class="link-latex">Local LaTeX</a>
         
     </div>
-    
+
     
 </div>
 
@@ -152,22 +190,50 @@
         
         
     </div>
-    
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04370v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04370" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04370" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04370/2604.04370_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
     
 </div>
 
 <div class="paper">
-    <h3><a href="https://arxiv.org/abs/2604.04105v1" target="_blank" rel="noopener">Lexical Indicators of Mind Perception in Human-AI Companionship</a></h3>
-    <div class="authors">Jaime Banks, Jianghui Li</div>
-    <div class="date">April 5, 2026</div>
-    <div class="abstract">Mind perception (MP) is a psychological phenomenon in which humans automatically infer that another entity has a mind and/or mental capacities, usually understood in two dimensions (perceived agency and experience capacities). Despite MP&#x27;s centrality to many social processes, understanding how MP may function in humans&#x27; machine companionship relations is limited. This is in part due to reliance on self reports and the gap between automatic MP processes and more purposeful and norm governed expressions of MP. We here leverage MP signaling language to explore the relationship between MP and AI companionship in humans&#x27; natural language. We systematically collected discussions about companionship from AI dedicated Reddit forums and examined the cooccurrence of words (a) known to signal agentic and experiential MP and those induced from the data and (b) discussion topics related to AI companionship. Using inductive and deductive approaches, we identify a small set of linguistic indicators as reasonable markers of MP in human/AI chat, and some are linked to critical discussions of companion authenticity and philosophical and ethical imaginaries.</div>
+    <h3><a href="https://arxiv.org/abs/2604.04432v1" target="_blank" rel="noopener">Croissant Charts: Modulating the Performance of Normal Distribution Visualizations with Affordances</a></h3>
+    <div class="authors">Racquel Fygenson, Enrico Bertini, Lace M. Padilla</div>
+    <div class="date">April 6, 2026</div>
+    <div class="abstract">Affordances, originating in psychology, describe how an object&#x27;s design influences the physical and cognitive actions users may take. Past work applied affordance theory to visualization to explain how design decisions can impact the cognitive actions of visualization readers. In this work, we demonstrate that affordances can complement effectiveness rankings by further explaining the root causes behind visualizations&#x27; task performance. To do so, we conduct a case study on static normal probability density function plots, identifying their current affordances. Next, we identify the optimal affordances for a common probability-comparison task and develop a novel affordance-driven visualization, the Croissant Chart, to support them. We empirically validate the design&#x27;s effectiveness through a preregistered study (n = 808), demonstrating how affordances can inform predictable changes in task performance. Our findings underscore the potential for affordance-based approaches to enhance visualization effectiveness and inform future design decisions.</div>
     <div class="badges">
         <span class="badge badge-arxiv">arXiv</span>
-        
+        <span class="badge badge-latex">LaTeX</span>
         
         
     </div>
-    
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04432v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04432" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04432" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04432/2604.04432_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
     
 </div>
 
@@ -182,29 +248,32 @@
         
         <span class="badge badge-data">Data</span>
     </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03976v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03976" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03976" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03976/2604.03976_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
     
     <div class="dataset-links">
         <strong>Datasets:</strong>
         
-        <a href="https://github.com/t54-labs/AgenticRiskStandard" target="_blank" rel="noopener">github.com</a>
+        <a href="https://github.com/t54-labs/AgenticRiskStandard" target="_blank" rel="noopener"
+           class="dataset-unverified"
+           >
+            github.com
+        </a>
         
     </div>
-    
-    
-</div>
-
-<div class="paper">
-    <h3><a href="https://arxiv.org/abs/2604.03470v1" target="_blank" rel="noopener">Messages in a Digital Bottle: A Youth-Coauthored Perspective on LLM Chatbots and Adolescent Loneliness</a></h3>
-    <div class="authors">Jinyao Liu, Di Fu</div>
-    <div class="date">April 3, 2026</div>
-    <div class="abstract">Adolescent loneliness is a growing concern in digitally mediated social environments. This work-in-progress presents a youth-authored critical synthesis on chatbots powered by Large Language Model (LLM) and adolescent loneliness. The first author is a 16-year-old Chinese student who recently migrated to the UK. She wrote the first draft of this paper from her lived experience, supervised by the second author. Rather than treating the youth perspective as one data point among many, we foreground it as the primary interpretive lens, grounded in interdisciplinary literature from social computing, developmental psychology, and Human-Computer Interaction (HCI). We examine how chatbots shape experiences of loneliness differently across adolescent subgroups, including those with anxiety or depression, neurodivergent youth, and immigrant adolescents, and identify both conditions under which they may temporarily reduce isolation and breakdowns that risk deepening it. We derive three population-sensitive design implications. The next phase of this work will expand the youth authorship model to a panel of adolescents across these subgroups, empirically validating the framework presented here.</div>
-    <div class="badges">
-        <span class="badge badge-arxiv">arXiv</span>
-        <span class="badge badge-latex">LaTeX</span>
-        
-        
-    </div>
-    
     
 </div>
 
@@ -219,22 +288,21 @@
         
         
     </div>
-    
-    
-</div>
 
-<div class="paper">
-    <h3><a href="https://arxiv.org/abs/2604.03386v1" target="_blank" rel="noopener">Activity-Dependent Plasticity in Morphogenetically-Grown Recurrent Networks</a></h3>
-    <div class="authors">Sergii Medvid, Andrii Valenia, Mykola Glybovets</div>
-    <div class="date">April 3, 2026</div>
-    <div class="abstract">Developmental approaches to neural architecture search grow functional networks from compact genomes through self-organisation, but the resulting networks operate with fixed post-growth weights. We characterise Hebbian and anti-Hebbian plasticity across 50,000 morphogenetically grown recurrent controllers (5M+ configurations on CartPole and Acrobot), then test whether co-evolutionary experiments -- where plasticity parameters are encoded in the genome and evolved alongside the developmental architecture -- recover these patterns independently. Our characterisation reveals that (1) anti-Hebbian plasticity significantly outperforms Hebbian for competent networks (Cohen&#x27;s d = 0.53-0.64), (2) regret (fraction of oracle improvement lost under the best fixed setting) reaches 52-100%, and (3) plasticity&#x27;s role shifts from fine-tuning to genuine adaptation under non-stationarity. Co-evolution independently discovers these patterns: on CartPole, 70% of runs evolve anti-Hebbian plasticity (p = 0.043); on Acrobot, evolution finds near-zero eta with mixed signs -- exactly matching the characterisation. A random-RNN control shows that anti-Hebbian dominance is generic to small recurrent networks, but the degree of topology-dependence is developmental-specific: regret is 2-6x higher for morphogenetically grown networks than for random graphs with matched topology statistics.</div>
-    <div class="badges">
-        <span class="badge badge-arxiv">arXiv</span>
-        <span class="badge badge-latex">LaTeX</span>
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03387v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
         
+        <a href="https://arxiv.org/pdf/2604.03387" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03387" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03387/2604.03387_source.tar.gz" class="link-latex">Local LaTeX</a>
         
     </div>
-    
+
     
 </div>
 
@@ -249,7 +317,79 @@
         
         
     </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03203v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03203" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03203" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03203/2604.03203_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
     
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03470v1" target="_blank" rel="noopener">Messages in a Digital Bottle: A Youth-Coauthored Perspective on LLM Chatbots and Adolescent Loneliness</a></h3>
+    <div class="authors">Jinyao Liu, Di Fu</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">Adolescent loneliness is a growing concern in digitally mediated social environments. This work-in-progress presents a youth-authored critical synthesis on chatbots powered by Large Language Model (LLM) and adolescent loneliness. The first author is a 16-year-old Chinese student who recently migrated to the UK. She wrote the first draft of this paper from her lived experience, supervised by the second author. Rather than treating the youth perspective as one data point among many, we foreground it as the primary interpretive lens, grounded in interdisciplinary literature from social computing, developmental psychology, and Human-Computer Interaction (HCI). We examine how chatbots shape experiences of loneliness differently across adolescent subgroups, including those with anxiety or depression, neurodivergent youth, and immigrant adolescents, and identify both conditions under which they may temporarily reduce isolation and breakdowns that risk deepening it. We derive three population-sensitive design implications. The next phase of this work will expand the youth authorship model to a panel of adolescents across these subgroups, empirically validating the framework presented here.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03470v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03470" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03470" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03470/2604.03470_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03386v1" target="_blank" rel="noopener">Activity-Dependent Plasticity in Morphogenetically-Grown Recurrent Networks</a></h3>
+    <div class="authors">Sergii Medvid, Andrii Valenia, Mykola Glybovets</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">Developmental approaches to neural architecture search grow functional networks from compact genomes through self-organisation, but the resulting networks operate with fixed post-growth weights. We characterise Hebbian and anti-Hebbian plasticity across 50,000 morphogenetically grown recurrent controllers (5M+ configurations on CartPole and Acrobot), then test whether co-evolutionary experiments -- where plasticity parameters are encoded in the genome and evolved alongside the developmental architecture -- recover these patterns independently. Our characterisation reveals that (1) anti-Hebbian plasticity significantly outperforms Hebbian for competent networks (Cohen&#x27;s d = 0.53-0.64), (2) regret (fraction of oracle improvement lost under the best fixed setting) reaches 52-100%, and (3) plasticity&#x27;s role shifts from fine-tuning to genuine adaptation under non-stationarity. Co-evolution independently discovers these patterns: on CartPole, 70% of runs evolve anti-Hebbian plasticity (p = 0.043); on Acrobot, evolution finds near-zero eta with mixed signs -- exactly matching the characterisation. A random-RNN control shows that anti-Hebbian dominance is generic to small recurrent networks, but the degree of topology-dependence is developmental-specific: regret is 2-6x higher for morphogenetically grown networks than for random graphs with matched topology statistics.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03386v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03386" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03386" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03386/2604.03386_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
     
 </div>
 
@@ -264,7 +404,21 @@
         
         
     </div>
-    
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03196v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03196" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03196" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03196/2604.03196_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
     
 </div>
 

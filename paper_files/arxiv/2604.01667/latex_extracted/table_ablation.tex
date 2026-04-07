@@ -1,0 +1,32 @@
+%================== table-ablation=====================%
+% \subfile{table-ablation.tex}
+\begin{table}[!htbp]
+    \centering
+    \caption{Ablation studies on sub-stages and sub-modules.}
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{c|cccc|cc}
+        \toprule
+        \multirow{2}{*}{\textbf{Ablation types}} &
+        \multicolumn{1}{c|}{\textbf{Stage 1}} & 
+        \multicolumn{2}{c|}{\textbf{Stage 2}} & 
+        \multicolumn{1}{c|}{\textbf{Stage 3}} &
+        \multicolumn{2}{c}{\textbf{Datasets}}
+        \\
+         & \multicolumn{1}{c|}{\small\textit{KD}}  & \small\textit{pretrain} & \multicolumn{1}{c|}{\small$\mathcal{L}_{contrast}$} & \small$\mathcal{L}_{disen}$ & HCP & zhongdaxinxiang
+        \\
+        % & $\mathcal{L}_{intra}$ & $\mathcal{L}_{inter}$  & Cora & Pubmed & Computers & CS  \\ 
+        
+        \midrule
+        $S_1.A_1$ & \XSolidBrush & \XSolidBrush & \XSolidBrush & \XSolidBrush & 76.84 $\pm$ \scriptsize{1.92} & 77.28 $\pm$ \scriptsize{4.71}\\
+        $S_2.A_1$ & \Checkmark & \XSolidBrush & \XSolidBrush & \XSolidBrush & 78.16 $\pm$ \scriptsize{1.57} & 79.67 $\pm$ \scriptsize{4.42}\\
+        $S_2.A_2$ & \Checkmark & \Checkmark & \XSolidBrush & \XSolidBrush & 78.57 $\pm$ \scriptsize{1.06} & 77.00 $\pm$ \scriptsize{2.52}\\
+        $S_3.A_1$ & \Checkmark & \Checkmark & \Checkmark & \XSolidBrush & 77.80 $\pm$ \scriptsize{1.22} & 78.68 $\pm$ \scriptsize{4.06}\\
+        \midrule
+        \textbf{M$^3$D-BFS} & \Checkmark & \Checkmark & \Checkmark & \Checkmark & \textbf{81.21 $\pm$ \scriptsize{0.85}} & \textbf{80.85 $\pm$ \scriptsize{2.44}}\\
+        \bottomrule
+    \end{tabular}    
+    } 
+    \label{tab_ablation}
+\end{table}
+
+%========================end table======================%

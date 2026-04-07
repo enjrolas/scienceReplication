@@ -1,0 +1,10 @@
+\section{Compliance and Trust}
+\label{sec:compliance}
+
+SLM's local-first architecture provides inherent compliance advantages. All data resides in local SQLite files---no data leaves the user's machine, eliminating cross-border transfer concerns for EU AI Act compliance. GDPR Article~17 right to erasure is implemented via \texttt{slm forget} with cryptographic verification. Full audit trails log every memory operation.
+
+The Bayesian trust framework from Paper~1~\cite{slm-paper1} integrates with V3.3's forgetting: low-trust agents cannot write to Core Memory, low-trust memories decay faster (Section~\ref{sec:forgetting}), and trust scores factor into retrieval fusion weights.
+
+% ============================================================================
+% 10. EVALUATION
+% ============================================================================

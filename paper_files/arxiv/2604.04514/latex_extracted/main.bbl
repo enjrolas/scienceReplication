@@ -1,0 +1,123 @@
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[mem(2024)]{memoryllm}
+{MemoryLLM}: Towards self-updatable large language models.
+\newblock 2024.
+
+\bibitem[con(2025)]{context-as-memory}
+Context-as-memory.
+\newblock \emph{arXiv preprint arXiv:2506.03141}, 2025.
+
+\bibitem[whe(2025)]{when-less-is-more}
+When less is more: 8-bit quantization improves continual learning in {LLMs}.
+\newblock \emph{arXiv preprint arXiv:2512.18934}, 2025.
+
+\bibitem[for(2026)]{forever}
+{FOREVER}: Forgetting curve-inspired memory replay for continual learning.
+\newblock \emph{arXiv preprint arXiv:2601.03938}, 2026.
+
+\bibitem[Amari(1998)]{amari-info-geo}
+Shun-ichi Amari.
+\newblock Natural gradient works efficiently in learning.
+\newblock \emph{Neural Computation}, 10\penalty0 (2):\penalty0 251--276, 1998.
+
+\bibitem[Atkinson and Mitchell(1981)]{atkinson-mitchell}
+Colin Atkinson and Ann F.~S. Mitchell.
+\newblock Rao's distance measure.
+\newblock \emph{Sankhy\={a}: The Indian Journal of Statistics, Series A}, 43\penalty0 (3):\penalty0 345--365, 1981.
+
+\bibitem[Bhardwaj(2026{\natexlab{a}})]{slm-paper1}
+Varun~Pratap Bhardwaj.
+\newblock Privacy-preserving multi-agent memory with {Bayesian} trust defense.
+\newblock \emph{arXiv preprint arXiv:2602.22302}, 2026{\natexlab{a}}.
+
+\bibitem[Bhardwaj(2026{\natexlab{b}})]{slm-paper2}
+Varun~Pratap Bhardwaj.
+\newblock Information-geometric foundations for zero-{LLM} enterprise agent memory.
+\newblock \emph{arXiv preprint arXiv:2603.14588}, 2026{\natexlab{b}}.
+
+\bibitem[Collins and Loftus(1975)]{collins-loftus}
+Allan~M. Collins and Elizabeth~F. Loftus.
+\newblock A spreading-activation theory of semantic processing.
+\newblock \emph{Psychological Review}, 82\penalty0 (6):\penalty0 407--428, 1975.
+
+\bibitem[Ebbinghaus(1885)]{ebbinghaus}
+Hermann Ebbinghaus.
+\newblock \emph{\"{U}ber das Ged\"{a}chtnis}.
+\newblock Duncker \& Humblot, Leipzig, 1885.
+
+\bibitem[{Google}(2024)]{gemini-1m}
+{Google}.
+\newblock Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context.
+\newblock 2024.
+
+\bibitem[Han et~al.(2026)Han, Kacham, Karbasi, Mirrokni, and Zandieh]{polarquant}
+Insu Han, Praneeth Kacham, Amin Karbasi, Vahab Mirrokni, and Amir Zandieh.
+\newblock {PolarQuant}: Quantizing {KV} caches with polar transformation.
+\newblock In \emph{Proceedings of AISTATS}, 2026.
+\newblock arXiv:2502.02617.
+
+\bibitem[Jiang et~al.(2026)]{synapse}
+Hanqi Jiang et~al.
+\newblock {SYNAPSE}: Synergistic associative processing \& semantic encoding.
+\newblock \emph{arXiv preprint arXiv:2601.02744}, 2026.
+
+\bibitem[Li et~al.(2025)]{cognitive-memory-survey}
+Zhongyang Li et~al.
+\newblock Cognitive memory in large language models.
+\newblock \emph{arXiv preprint arXiv:2504.02441}, 2025.
+
+\bibitem[Maharana et~al.(2024)Maharana, Lee, Tulyakov, Bansal, Barbieri, and Fang]{locomo}
+Priyanka Maharana, Dong-Ho Lee, Sergey Tulyakov, Mohit Bansal, Francesco Barbieri, and Yuwei Fang.
+\newblock Evaluating very long-term conversational memory of {LLM} agents.
+\newblock In \emph{Proceedings of ACL}, 2024.
+\newblock arXiv:2402.09714.
+
+\bibitem[McClelland et~al.(1995)McClelland, McNaughton, and O'Reilly]{cls-theory}
+James~L. McClelland, Bruce~L. McNaughton, and Randall~C. O'Reilly.
+\newblock Why there are complementary learning systems in the hippocampus and neocortex.
+\newblock \emph{Psychological Review}, 102\penalty0 (3), 1995.
+
+\bibitem[{Mem0 AI}(2024)]{mem0}
+{Mem0 AI}.
+\newblock Mem0: The memory layer for personalized {AI}.
+\newblock \url{https://github.com/mem0ai/mem0}, 2024.
+
+\bibitem[Mezzadri(2007)]{mezzadri}
+Francesco Mezzadri.
+\newblock How to generate random matrices from the classical compact groups.
+\newblock \emph{Notices of the AMS}, 54\penalty0 (5):\penalty0 592--604, 2007.
+
+\bibitem[{MIT/NUS}(2025)]{mem1}
+{MIT/NUS}.
+\newblock {MEM1}: {RL}-trained memory consolidation for {LLM} agents, 2025.
+
+\bibitem[Packer et~al.(2023)]{letta}
+Charles Packer et~al.
+\newblock {MemGPT}: Towards {LLMs} as operating systems.
+\newblock \emph{arXiv preprint arXiv:2310.08560}, 2023.
+
+\bibitem[Ramsauer et~al.(2021)]{hopfield-modern}
+Hubert Ramsauer et~al.
+\newblock {Hopfield} networks is all you need.
+\newblock In \emph{Proceedings of ICLR}, 2021.
+\newblock arXiv:2008.02217.
+
+\bibitem[Zandieh et~al.(2025)Zandieh, Daliri, and Han]{qjl}
+Amir Zandieh, Majid Daliri, and Insu Han.
+\newblock {QJL}: 1-bit quantized {JL} transform for {KV} cache quantization with zero overhead.
+\newblock In \emph{Proceedings of AAAI}, 2025.
+\newblock arXiv:2406.03482.
+
+\bibitem[Zandieh et~al.(2026)Zandieh, Daliri, Hadian, and Mirrokni]{turboquant}
+Amir Zandieh, Majid Daliri, Majid Hadian, and Vahab Mirrokni.
+\newblock {TurboQuant}: Online vector quantization with near-optimal distortion rate.
+\newblock In \emph{Proceedings of ICLR}, 2026.
+\newblock arXiv:2504.19874.
+
+\end{thebibliography}

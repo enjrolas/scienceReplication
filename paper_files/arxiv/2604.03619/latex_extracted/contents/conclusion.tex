@@ -1,0 +1,11 @@
+\section{Conclusion \& Limitations}
+We introduced TABLeT, a simple and scalable framework that uses a natural-image 2D autoencoder as a training-free tokenizer for fMRI volumes, enabling long-range temporal modeling with a lightweight Transformer. Across three datasets, TABLeT achieved competitive or better performance while offering substantial reductions in memory and computation compared to voxel-based baselines. In addition, we show that masked token pre-training further enhances downstream performance.
+Our model is based on a striking result: a 2D autoencoder trained on natural images preserves fMRI structure and functional relationships better than a 3D fMRI-trained autoencoder, enabling efficient tokenization without any domain-specific training. Our model opens the opportunity to handle much longer temporal sequences for future researchers.
+
+Despite these advantages, our study has several limitations.
+First, {\ours} tokenizes each frame of the fMRI time series independently. This process may disrupt subtle temporal dynamics. Tokenization strategies that directly incorporate temporal dependencies, especially in tasks where fine-grained dynamics are critical, could be explored in the future.
+Second, {\ours} processes all tokens jointly, without explicit modeling of their spatial or temporal structure. Architectures designed to leverage spatial and temporal alignment between tokens may further enhance the ability to capture the spatiotemporal dynamics inherent in fMRI data.
+Moreover, as discussed in Sec.~\ref{sec:main_results}, the benefits of longer temporal modeling vary across tasks, and a systematic understanding of which neuroscientific phenomena gain the most remains open.
+
+Nevertheless, we believe our study suggests a promising approach, bridging natural image processing and medical imaging, and enabling scalable, efficient spatiotemporal modeling of brain activity.
+

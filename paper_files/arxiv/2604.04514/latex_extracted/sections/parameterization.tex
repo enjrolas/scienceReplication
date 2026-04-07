@@ -1,0 +1,35 @@
+\section{Memory Parameterization (C4)}
+\label{sec:parameterization}
+
+Memory parameterization implements the Long-Term Implicit tier---the tier that no existing system provides~\cite{cognitive-memory-survey}.
+
+\subsection{From Explicit to Implicit Memory}
+
+In explicit memory, the agent retrieves text and incorporates it into context. In implicit memory, the agent's \emph{behavior} is configured by past experience without explicit retrieval.
+
+SLM achieves this through \textbf{soft prompt generation}: high-confidence patterns from consolidated memories are converted into natural language templates injected at session start.
+
+\subsection{The Parameterization Pipeline}
+
+\begin{equation*}
+\text{Episodic} \xrightarrow{\text{consolidation}} \text{Semantic patterns} \xrightarrow{\text{confidence}} \text{Filtered} \xrightarrow{\text{generation}} \text{Soft prompts} \xrightarrow{\text{injection}} \text{Agent context}
+\end{equation*}
+
+\textbf{Stage 1: Consolidation.} Related episodic memories are clustered and semantic patterns extracted.
+
+\textbf{Stage 2: Confidence filtering.} Patterns must meet minimum confidence (0.7) and minimum evidence (5 observations):
+\begin{equation}
+\text{confidence}(p) = \min\left(\frac{\text{evidence}(p)}{10}, 1.0\right) \cdot \left|\text{rate}(p) - 0.5\right| \cdot 2
+\end{equation}
+
+\textbf{Stage 3: Soft prompt generation.} Template-based generation from structured pattern fields at zero LLM cost.
+
+\textbf{Stage 4: Injection.} Soft prompts injected at session start via SessionStart hook, capped at 1,500 tokens.
+
+\subsection{Why Not LoRA?}
+
+LoRA requires access to model weights---infeasible for API-based agents (Claude, GPT-4, Gemini). SLM's natural language soft prompts work with \emph{any} LLM, any API, any provider.
+
+% ============================================================================
+% 8. ZERO-FRICTION PIPELINE (C5)
+% ============================================================================

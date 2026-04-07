@@ -1,0 +1,15 @@
+[Unit]
+Description=Science Replication Django (gunicorn)
+After=network.target postgresql.service
+
+[Service]
+User=japhy
+Group=japhy
+WorkingDirectory=/home/japhy/scienceReplication.artiswrong.com
+Environment="MANAGE_PASSWORD=changeme"
+ExecStart=/home/japhy/.local/bin/gunicorn sciencereplication.wsgi:application -c gunicorn.conf.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

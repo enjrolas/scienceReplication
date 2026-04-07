@@ -1,0 +1,126 @@
+% CVPR 2026 Paper Template; see https://github.com/cvpr-org/author-kit
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+\usepackage{cvpr}              % To produce the CAMERA-READY version
+% \usepackage[review]{cvpr}      % To produce the REVIEW version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Import additional packages in the preamble file, before hyperref
+\input{preamble}
+
+% It is strongly recommended to use hyperref, especially for the review version.
+% hyperref with option pagebackref eases the reviewers' job.
+% Please disable hyperref *only* if you encounter grave issues, 
+% e.g. with the file validation for the camera-ready version.
+%
+% If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{paralist}
+\usepackage{wrapfig}
+% \usepackage[shortlabels,inline]{enumitem}
+
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+\def\paperID{18659} % *** Enter the Paper ID here
+\def\confName{CVPR}
+\def\confYear{2026}
+
+%%%%%%%%% TITLE - PLEASE UPDATE
+% \title{You Can Tokenize Longer fMRI Brain Sequences Using Off-the-shelf Natural Image Autoencoders?}
+% \title{Can Natural Image Autoencoders Tokenize fMRI Tokenization for Long-Range Dynamics Modeling?}
+\title{Can Natural Image Autoencoders Compactly Tokenize fMRI Volumes \\for Long-Range Dynamics Modeling?}
+% \title{2D Natural Image Autoencoder can Model Long-range fMRI Dynamics}
+
+% Can Natural Image Autoencoders Tokenize 3D fMRI for Long-Range Dynamics Modeling?
+% Can Natural Image Autoencoders Compactly Tokenize fMRI for Long-Range Dynamics Modeling?
+% Compact fMRI Tokenization with Natural Image Autoencoders for Long-Range Dynamics Modeling
+
+% Compact tokenization of long-range fMRI signals via natural image autoencoders
+
+% By 정우
+% Can Pretrained 2D Natural Image Autoencoders Tokenize fMRI Volumes into Just 27 Tokens?
+
+% Are Off-the-Shelf 2D Image Autoencoders Surprisingly Superior Tokenizers for fMRI Dynamics?
+%%%%%
+
+% Achieving Efficient Spatio-temporal Trade-off for  Long-Range fMRI Dynamics Modeling with Natural Image Autoencoder
+
+
+%%%%%%%%% AUTHORS - PLEASE UPDATE
+\author{Peter Yongho Kim$^{1}$\thanks{Equal contribution.} , Juhyeon Park$^{2}$\footnotemark[1] , Jungwoo Park$^{1}$, \\Jubin Choi$^{2}$, Jungwoo Seo$^{3}$, Jiook Cha$^{2,4}$, Taesup Moon$^{1,2,5}$\thanks{Corresponding author.} \\
+$^{1}$ECE, Seoul National University,
+$^{2}$IPAI, Seoul National University, \\
+$^{3}$BCS, Seoul National University,
+$^{4}$Psychology, Seoul National University, \\
+$^{5}$ASRI / INMC / AIIS, Seoul National University\\
+\texttt{\{peterkim98, parkjh9229, tsmoon\}@snu.ac.kr} \\
+}
+% \author{Peter Yongho Kim\thanks{Equal contribution.} , Juhyeon Park\footnotemark[1] , Jungwoo Park, Jubin Choi, Jungwoo Seo, Jiook Cha, Taesup Moon\thanks{Corresponding author.}\\
+% Seoul National University\\
+% % Institution1 address\\
+% % {\tt\small firstauthor@i1.org}
+% % For a paper whose authors are all at the same institution,
+% % omit the following lines up until the closing ``}''.
+% % Additional authors and addresses can be added with ``\and'',
+% % just like the second author.
+% % To save space, use either the email address or home page, not both
+% % \and
+% % Second Author\\
+% % Institution2\\
+% % First line of institution2 address\\
+% % {\tt\small secondauthor@i2.org}
+% }
+\newcommand{\ours}{TABLeT}
+\newcommand{\meanstd}[2]{$#1_{\pm #2}$}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+% \usepackage{nameref,zref-xr}
+% \zxrsetup{toltxlabel}
+% \zexternaldocument*{supple_for_main_sep}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+Modeling long-range spatiotemporal dynamics in functional Magnetic Resonance Imaging (fMRI) remains a key challenge due to the high dimensionality of the four-dimensional signals. 
+Prior voxel-based models, although demonstrating excellent performance and interpretation capabilities, are constrained by prohibitive memory demands and thus can only capture limited temporal windows. 
+To address this, we propose TABLeT (Two-dimensionally Autoencoded Brain Latent Transformer), a novel approach that tokenizes fMRI volumes using a pre-trained 2D natural image autoencoder. Each 3D fMRI volume is compressed into a compact set of continuous tokens, enabling long-sequence modeling with a simple Transformer encoder with limited VRAM. Across large-scale benchmarks including the UK-Biobank (UKB), Human Connectome Project (HCP), and ADHD-200 datasets, TABLeT outperforms existing models in multiple tasks, while demonstrating substantial gains in computational and memory efficiency over the state-of-the-art voxel-based method given the same input. 
+Furthermore, we develop a self-supervised masked token modeling approach to pre-train {\ours}, which improves the model's performance for various downstream tasks.
+Our findings suggest a promising approach for scalable and interpretable spatiotemporal modeling of brain activity.
+Our code is available at \url{https://github.com/beotborry/TABLeT}.
+\end{abstract}
+
+
+\input{contents/introduction}
+\input{contents/related_works}
+\input{contents/method}
+\input{contents/experimental_results}
+\input{contents/conclusion}
+\section*{Acknowledgment}
+This work was supported in part by National Research Foundation of Korea (NRF) grant
+[No. RS-2025-02263628, No. RS-202300265406], the Institute of Information \& communications Technology Planning
+\& Evaluation (IITP) grants [RS-2021-II212068, RS-2022-II220113, RS-2022-II220959, RS-2021-II211343], the BK21 FOUR Education and
+Research Program for Future ICT Pioneers (Seoul
+National University), funded by the Korean government (MSIT), the Ministry of Education [RS-2024-00435727], the National Supercomputing Center [KSC-2025-CRE-0340], the U.S. Department of Energy’s ASCR Leadership Computing Challenge [m4750-2024], and Hyundai Motor Chung Mong-Koo Foundation.
+
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main}
+}
+
+% WARNING: do not forget to delete the supplementary pages from your submission 
+% \input{sec/X_suppl}
+\appendix
+\input{contents/supplementary}
+
+\end{document}

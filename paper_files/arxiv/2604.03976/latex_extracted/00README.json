@@ -1,0 +1,49 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "colm2026_conference.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "README.md"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "colm2026_conference.bbl"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "colm2026_conference.bib"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "colm2026_conference.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "colm2026_conference.fdb_latexmk"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "colm2026_conference.fls"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "colm2026_conference.out"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figures/fig4_wallet_trajectory.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "math_commands.tex"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

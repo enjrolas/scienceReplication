@@ -1,0 +1,65 @@
+\section{Introduction}
+
+\subsection{The Session Amnesia Problem}
+
+Modern AI coding agents---Claude Code, Cursor, GitHub Copilot Chat, Windsurf---have transformed software development. Yet they share a fundamental limitation: \emph{every session starts from scratch}. A developer who spends thirty minutes explaining project architecture, naming conventions, and dependency choices to an AI agent will face a blank slate in the next session. Over a week, re-establishing context costs hours of productivity.
+
+This is not a context window problem. Even with windows approaching one million tokens~\cite{gemini-1m}, the information is \emph{ephemeral}---it exists only for the duration of a single session. What is missing is \emph{persistent, cross-session memory} that accumulates, organizes, and curates knowledge over the lifetime of a developer's interaction with AI tools.
+
+Several systems have attempted to address this gap. Mem0~\cite{mem0} provides a cloud-hosted memory layer but achieves only 64.2\% on the LoCoMo benchmark~\cite{locomo} and requires API keys for all operations. Letta (formerly MemGPT)~\cite{letta} implements memory management through LLM function calls but depends on cloud inference for core operations. Zep offers enterprise memory but deprecated its open-source version in favor of a cloud-only service.
+
+All of these systems share a critical architectural limitation: they treat memory as a \emph{static store with flat retrieval}. Memories are text entries in a vector database, retrieved by similarity search, and never transformed, compressed, or curated. This contrasts sharply with human memory, which is characterized by active processes: forgetting irrelevant details, consolidating episodes into general knowledge, compressing old memories, and parameterizing frequently-used patterns into automatic behaviors.
+
+\subsection{The Cognitive Memory Gap}
+
+Li et al.'s comprehensive survey~\cite{cognitive-memory-survey} maps the cognitive memory taxonomy to AI agent systems, identifying four tiers:
+
+\begin{enumerate}[leftmargin=*, topsep=4pt, itemsep=2pt]
+  \item \textbf{Sensory Memory:} Raw perceptual input---in AI agents, the incoming prompt tokens. All LLMs handle this natively.
+  \item \textbf{Short-Term Memory (STM):} Working memory with limited capacity---the context window and KV cache.
+  \item \textbf{Long-Term Explicit Memory:} Declarative facts and episodic events stored in external databases. This is where \emph{all} existing agent memory systems operate.
+  \item \textbf{Long-Term Implicit Memory:} Procedural knowledge and learned skills encoded in parameters, not retrieved as text. \emph{No existing agent memory system implements this tier.}
+\end{enumerate}
+
+The gap is stark. Every agent memory system in production today is stuck at Tier~3. None implements the processes that transition memories \emph{between} tiers: sensory filtering, STM-to-LTM consolidation, episodic-to-semantic abstraction, or explicit-to-implicit parameterization. None implements forgetting.
+
+\textbf{Claim.} SuperLocalMemory V3.3 is the first system to span all four tiers with mathematical foundations for each transition, operating entirely on local hardware with no cloud dependency.
+
+\subsection{Contributions}
+
+This paper presents five contributions:
+
+\begin{enumerate}[leftmargin=*, label=\textbf{C\arabic*}, topsep=4pt, itemsep=2pt]
+
+  \item \textbf{Fisher-Rao Quantization-Aware Distance (FRQAD) and Local TurboQuant.}
+  A new distance metric for comparing embeddings at different quantization levels, grounded in information geometry. FRQAD treats embeddings as parameters of diagonal Gaussians with variance inflated by quantization noise, computing the Fisher-Rao geodesic on the statistical manifold. On our mixed-precision benchmark, FRQAD achieves \textbf{100\% precision} at preferring high-fidelity embeddings over quantized ones, compared to 85.6\% for cosine similarity and 70.7\% for standard Fisher-Rao (Section~\ref{sec:frqad}). We also present Local TurboQuant for Persistent Embeddings (LT2E), the first application of near-optimal data-oblivious vector quantization~\cite{turboquant} to persistent agent memory stores, with MSE within 2.7$\times$ of the information-theoretic lower bound. Our systematic literature search found \emph{zero prior work} combining information geometry with vector quantization for retrieval.
+
+  \item \textbf{Ebbinghaus Adaptive Forgetting with Lifecycle-Aware Quantization.}
+  The first mathematical forgetting curve in a local agent memory system. Memory strength $S(m)$ is a four-factor function of access frequency, importance, confirmation count, and emotional salience. Retention follows $R(t) = e^{-t/S(m)}$, coupled to Fokker-Planck lifecycle dynamics from Paper~2~\cite{slm-paper2} with provable convergence (Theorem~\ref{thm:convergence}). As memories fade, their embeddings simultaneously lose precision---Active$\to$32-bit, Warm$\to$8-bit, Cold$\to$4-bit, Archive$\to$2-bit---a mechanism that is self-consistent with the Fisher-Rao metric and has \emph{zero prior art}. Additionally, Bayesian trust scores modulate decay rates: low-trust memories forget 3$\times$ faster ($\kappa = 2.0$). Over 30 simulated days, the system achieves 6.7$\times$ discriminative power between frequently-accessed and unused memories (Section~\ref{sec:forgetting}).
+
+  \item \textbf{7-Channel Cognitive Retrieval.}
+  Retrieval through seven parallel channels---semantic (sqlite-vec KNN), BM25 keyword, entity graph traversal, temporal (bi-temporal timestamps), spreading activation (SYNAPSE-based~\cite{synapse} energy propagation), consolidation (CCQ gist blocks), and Hopfield associative memory---fused via weighted Reciprocal Rank Fusion with ONNX cross-encoder reranking. On the LoCoMo benchmark~\cite{locomo}, Mode~A (zero-LLM) achieves \textbf{70.4\%} overall accuracy (214/304), with +23.8pp on multi-hop and +12.7pp on adversarial compared to retrieval baseline (Section~\ref{sec:retrieval}).
+
+  \item \textbf{Memory Parameterization.}
+  Consolidated memories are converted into natural language soft prompts that configure agent behavior without retrieval---implementing the Long-Term Implicit tier of the cognitive taxonomy~\cite{cognitive-memory-survey} that no existing system provides. Unlike LoRA-based approaches requiring gradient access, SLM's soft prompts work with any API-based LLM at zero computational cost (Section~\ref{sec:parameterization}).
+
+  \item \textbf{Zero-Friction Auto-Cognitive Pipeline.}
+  A single \texttt{npm install -g superlocalmemory} auto-configures hooks that implement the complete memory lifecycle---recall at session start, observe during coding, save at session end, consolidate between sessions, forget over time, parameterize patterns into soft prompts---with zero commands, zero configuration, and zero risk of blocking the developer's workflow. All hooks fail silently; users opt out with a single command (Section~\ref{sec:pipeline}).
+
+\end{enumerate}
+
+\subsection{Relationship to Prior Work}
+
+This paper is the third in a trilogy. Paper~1~\cite{slm-paper1} established the trust and behavioral analysis foundations, introducing Bayesian Beta-Binomial trust scoring and OWASP-aligned memory poisoning defense. Paper~2~\cite{slm-paper2} introduced the information-geometric and lifecycle foundations: Fisher-Rao geodesic distance, cellular sheaf cohomology for contradiction detection, Riemannian Langevin dynamics for stochastic lifecycle management, and four-channel retrieval---achieving 74.8\% on LoCoMo in zero-cloud Mode~A and 87.7\% in cloud-augmented Mode~C.
+
+Paper~3 completes the system by implementing the cognitive processes that make memory \emph{alive}: learning, forgetting, compression, and automation. Additionally, this paper covers capabilities from V3.2 that were deployed but not published---including spreading activation, temporal intelligence, memory consolidation, auto-invocation, and the compliance framework. V3.3 also introduces a code knowledge graph module for developer workflows and a daemon serve architecture achieving 32$\times$ cold-start speedup, described in Section~\ref{sec:architecture}.
+
+\textbf{On the LoCoMo score.} V3.2 (Paper~2) reported 74.8\% Mode~A. V3.3 achieves 70.4\% Mode~A---a 4.4pp gap. This reflects a deliberate architectural trade-off. The expanded 7-channel pipeline (from 4 channels), cross-channel intersection logic, and session diversity enforcement introduce fusion complexity that affects single-hop retrieval ($-14.9$pp). However, V3.3 \emph{surpasses} V3.2 on adversarial reasoning (+6.1pp) and substantially closes the multi-hop gap (+23.8pp from the V3.3 retrieval baseline). The new capabilities---forgetting, quantization, parameterization, code graph---are orthogonal to retrieval and cannot be evaluated by LoCoMo alone. Mode~C (cloud-augmented) achieved 87.7\% in Paper~2~\cite{slm-paper2}; V3.3's contributions are in the retrieval and lifecycle layers, orthogonal to the LLM synthesis layer that Mode~C adds.
+
+\subsection{Paper Organization}
+
+Section~\ref{sec:related} surveys related work. Section~\ref{sec:architecture} presents the system architecture, including the code knowledge graph and daemon serve mode. Section~\ref{sec:quantization} presents FRQAD and Local TurboQuant (\textbf{C1}). Section~\ref{sec:forgetting} details Ebbinghaus adaptive forgetting (\textbf{C2}). Section~\ref{sec:retrieval} describes 7-channel retrieval (\textbf{C3}). Section~\ref{sec:parameterization} covers memory parameterization (\textbf{C4}). Section~\ref{sec:pipeline} presents the auto-cognitive pipeline (\textbf{C5}). Section~\ref{sec:compliance} discusses compliance. Section~\ref{sec:evaluation} provides evaluation with six benchmarks. Section~\ref{sec:limitations} discusses limitations.
+
+% ============================================================================
+% 2. RELATED WORK
+% ============================================================================

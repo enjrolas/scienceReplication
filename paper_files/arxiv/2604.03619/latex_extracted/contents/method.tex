@@ -1,0 +1,62 @@
+\section{Method}
+
+\subsection{Tokenization of fMRI with 2D Natural Image Autoencoder}
+\label{sec:3.1}
+To enable voxel-based, long-range fMRI dynamics modeling, our goal was to design a tokenizer that could substantially compress fMRI voxels while minimizing information loss.
+We chose to employ the encoder part of an autoencoder, since it can handle tokenization while preserving coarse spatial topology. 
+A straightforward strategy would be training an autoencoder directly on fMRI data. However, this approach is both computationally prohibitive and data hungry because training requires large sample sizes that are rarely available in medical imaging. Moreover, the resulting models often generalize poorly, as fMRI characteristics vary across scanners and acquisition protocols.
+
+
+
+Therefore, we propose to directly use an autoencoder trained with natural images, without the need for further fine-tuning on medical data.
+Among existing options, we adopt DCAE, which achieves high compression rates while maintaining reconstruction fidelity. 
+
+
+
+
+
+
+
+To check if it would be feasible to use off-the-shelf autoencoders to tokenize fMRI data, we first measured how much information would be preserved during tokenization. We compared an off-the-shelf 2D natural image DCAE (hereafter 2D DCAE) with a 3D DCAE trained directly on fMRI (hereafter 3D DCAE), as detailed in Sec.~\ref{sec:recon_quality}.
+We note that fMRI data are timeseries of 3D images, while the 2D DCAE only operates with 2D images. Therefore, we slice the data into 2D images and feed them into the autoencoder. 
+
+The 2D DCAE showed comparable information preservation capabilities across both fine-grained spatial details and global functional patterns.
+Based on this finding, we propose to tokenize each 3D volume independently using the 2D DCAE encoder, in a slice-wise manner, and apply this procedure across the entire fMRI sequence, as described below.
+
+
+
+\noindent \textbf{Tokenization of a 3D Volume with Slicing.}  
+Each fMRI frame is a 3D volume $\mathbf{X} \in \mathbb{R}^{1 \times D \times H \times W}$. The single channel is first duplicated across three channels to simulate an RGB structure, giving $\mathbf{X} \in \mathbb{R}^{3 \times D \times H \times W}$. One spatial dimension is then chosen as the slicing axis, so the volume becomes a stack of 2D images. For example, if we slice by the depth axis, the volume is treated as $D$ images of shape $\mathbb{R}^{3 \times H \times W}$. Each image slice is compressed independently into a latent representation $\mathbf{Z} \in \mathbb{R}^{C' \times \frac{H}{32} \times \frac{W}{32}}$, where the factor of 32 is the DCAE's spatial compression ratio.  
+
+\noindent \textbf{Aggregation of 3 Axes.}  
+This procedure is repeated for all three slicing axes, producing three latent volumes: $\mathbf{Z}_D \in \mathbb{R}^{D \times C' \times \frac{H}{32} \times \frac{W}{32}}, \quad
+\mathbf{Z}_H \in \mathbb{R}^{H \times C' \times \frac{D}{32} \times \frac{W}{32}}, \quad
+\mathbf{Z}_W \in \mathbb{R}^{W \times C' \times \frac{D}{32} \times \frac{H}{32}}$. As we want to align the three possible latent volumes, the latents are grouped and concatenated along the uncompressed dimension (the slicing axis) by patches of size 32, reshaping them to $\mathbf{Z}_{\text{patch},D}, \mathbf{Z}_{\text{patch},H}, \mathbf{Z}_{\text{patch},W} \in \mathbb{R}^{32C' \times \frac{D}{32} \times \frac{H}{32} \times \frac{W}{32}}$.
+This yields $\frac{D}{32} \times \frac{H}{32} \times \frac{W}{32}$ tokens for each slicing variation, where each token corresponds to a position in the downsampled 3D grid and has a hidden dimension $32C'$. The tokens from the three variations are then concatenated with the tokens from other variations that belong to the same spatial position, resulting in $\frac{D}{32} \times \frac{H}{32} \times \frac{W}{32}$ tokens per frame with hidden dimension $96C'$. In our case, $H = W = D = 96$ and $C' = 32$, which means each 3D volume of shape $(1, 96, 96, 96)$ is tokenized into 27 tokens with an embedding dimension of 3072. 
+Finally, we note that tokenization is performed only once, and the tokens are cached for later use, making its computational cost negligible compared to the subsequent training process.
+We also investigate different aggregation schemes in \cref{sec:variation_tokenization}, which shows the downstream performance is not majorly affected by the specific aggregation scheme.
+
+\subsection{{\ours} Model Architecture}
+To capture the spatiotemporal dynamics of tokenized fMRI sequences, we design a simple yet effective Transformer encoder \citep{attention}, naming the pipeline \textbf{TABLeT} (Two-dimensionally Autoencoded Brain Latent Transformer).
+The architecture is built on a standard Transformer encoder backbone and integrates several modern components commonly adopted in large language models \citep{qwen2.5, llama3}. In particular, we adopt grouped query attention \citep{GQA} to efficiently handle long sequences, along with the rotary positional encoding \citep{RoPE}.
+In addition, we employ \texttt{F.scaled\_dot\_product\_attention} from PyTorch \citep{pytorch}, which offers both speed and memory savings.
+Before being fed into the Transformer, fMRI tokens are normalized and projected into a lower-dimensional embedding space via a linear layer. A \texttt{[CLS]} token is prepended to the sequence, followed by an additional normalization step to enhance training stability.
+Unless stated otherwise, the model is composed of 12 Transformer layers with 14 attention heads and 2 key–value heads, processing sequences of tokens from 256 frames at once ($T=256$).
+We randomly sampled 256 frames from the entire sequence of each subject at every training iteration, while for validation, we used all of the frames by partitioning the sequence and averaging the outputs across partitions, following \citet{swift}.
+
+\subsection{Self-supervised Pre-training with Masked Token Modeling}
+\label{sec:masked_pretrain}
+Taking inspiration from masked image modeling (MIM) approaches like SimMIM \citep{simmim}, we propose a masked \textit{token} modeling (MTM) approach to pre-train the Transformer encoder of {\ours}. The key difference is that instead of masking image pixels or patches, we choose to directly mask the tokenized representations of the image;
+starting from the tokens created by the 2D DCAE, we randomly mask some of the tokens by replacing them with \texttt{[MASK]} tokens. From the partially masked input tokens, we task the Transformer encoder to predict the masked tokens by passing the output tokens through a linear prediction head that reconstructs the input tokens. The model is trained through an $\mathcal{L}_1$ loss exclusively on the masked tokens:
+
+\vspace{-0.1in}
+\begin{equation}
+    L = \frac{1}{\Omega(\mathbf{Z}_M)}||\mathbf{y}_M-\mathbf{Z}_M||_1,
+\end{equation}
+in which $\mathbf{Z}, \mathbf{y} \in \mathbb{R}^{96C' \times \frac{D}{32} \times \frac{H}{32} \times \frac{W}{32}}$ are the input tokens and the predicted tokens, respectively. The subscript $M$ denotes the set of masked tokens, and $\Omega$ counts the number of elements (thus the number of masked tokens). We used a masking ratio of 0.5 as the default in our experiments.
+
+Even though it would be possible to use a typical MIM approach by masking the brain volume directly, we chose MTM as it streamlines the pre-training process by removing the need to include the image encoder and decoder.
+
+\noindent \textbf{Masking Strategy.}
+We mask the input tokens with a learnable mask token.
+Also, instead of masking the tokens in a completely random manner, the same masking pattern from a single frame is repeated across different frames, similar to the tube masking strategy found within VideoMAE \citep{videomae}. This is a measure to prevent the model from ``cheating" by looking at unmasked tokens in the same location from different frames.

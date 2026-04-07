@@ -1,0 +1,26 @@
+% -------------------------------
+% Table B: Fee track (escrow)
+% -------------------------------
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{3.3cm}p{2.2cm}p{4.4cm}p{3.5cm}}
+\hline
+\textbf{Action} & \textbf{Sender} & \textbf{Required fields} & \textbf{Effect} \\
+\hline
+\texttt{LockFeeEscrow} & Requestor &
+\texttt{\{job\_id, agreement\_hash, lock\_ref, signature\}} &
+Locks service fee in escrow \\
+\texttt{SubmitDeliverable} & Business agent &
+\texttt{\{job\_id, agreement\_hash, deliverable\_ref, signature\}} &
+Emits delivery signal; enables evaluation \\
+\texttt{SettleFeeEscrow} & Settlement layer &
+\texttt{\{job\_id, agreement\_hash, release/refund, settlement\_ref\}} &
+Releases fee to business agent or refunds requestor \\
+\hline
+\end{tabular}
+\caption{\textsc{ARS} actions for the fee track (escrowed service compensation).}
+\label{tab:arp-actions-fee}
+\end{table}

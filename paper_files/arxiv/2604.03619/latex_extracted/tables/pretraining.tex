@@ -1,0 +1,33 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table*}[ht]
+\caption{Performance comparison between {\ours} trained from scratch (TFS) and fine-tuned after masked pre-training (FT) on HCP. 
+}
+
+\centering
+\resizebox{.8\linewidth}{!}{
+% \begin{adjustbox}{width=.5\textwidth,center}
+\centerline{
+
+\begin{tabular}{l|ccccccccc}
+\hline
+\multirow{3}{*}{Model} & \multicolumn{9}{c}{HCP}  \\ \cline{2-10} 
+ & \multicolumn{3}{c|}{Sex} & \multicolumn{3}{c|}{Age} & \multicolumn{3}{c}{Intelligence}  \\
+ & ACC & AUC & \multicolumn{1}{c|}{F1} & MSE & MAE & \multicolumn{1}{c|}{$\rho$} & MSE & MAE & $\rho$ \\ \hline
+
+{\ours} TFS & \meanstd{93.8}{0.9} & \meanstd{\textbf{0.987}}{0.003} & \multicolumn{1}{c|}{\meanstd{0.943}{0.008}} & \meanstd{0.773}{0.077} & \meanstd{\underline{0.705}}{0.038} & \multicolumn{1}{c|}{\meanstd{\underline{0.473}}{0.053}} & \meanstd{\underline{0.835}}{0.053} & \meanstd{\underline{0.741}}{0.028} & \meanstd{\underline{0.392}}{0.062} \\
+
+{\ours} FT & \meanstd{\textbf{95.3}}{1.3} & \meanstd{\underline{0.986}}{0.005} & \multicolumn{1}{c|}{\meanstd{\textbf{0.958}}{0.011}} & \meanstd{\textbf{0.650}}{0.045} & \meanstd{\textbf{0.655}}{0.024} & \multicolumn{1}{c|}{\meanstd{\textbf{0.552}}{0.032}} & \meanstd{\textbf{0.796}}{0.051} & \meanstd{\textbf{0.732}}{0.028} & \meanstd{\textbf{0.435}}{0.046} \\ \hline
+
+
+\end{tabular}
+}% \end{adjustbox}
+}
+
+
+\label{tab:pretraining_results}
+\vspace{-3mm}
+\end{table*}
+
+
+

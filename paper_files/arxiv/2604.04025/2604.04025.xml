@@ -1,0 +1,1703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.04025/latex_extracted"?>
+<?latexml class="IEEEtran" options="conference"?>
+<?latexml package="cite"?>
+<?latexml package="amsmath,amssymb,amsfonts"?>
+<?latexml package="algorithmic"?>
+<?latexml package="graphicx"?>
+<?latexml package="textcomp"?>
+<?latexml package="xcolor"?>
+<?latexml package="booktabs"?>
+<?latexml package="multirow"?>
+<?latexml package="url"?>
+<?latexml package="hyperref"?>
+<?latexml package="array"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>Neurological Plausibility of AI-Generated Music for Commercial Environments:<break/>An In-Silico Cortical Investigation Using Wubble and TRIBE v2</title>
+  <creator role="author">
+    <personname>Shaad Sufi
+Co-founder and CPO <break/>Wubble AI, Singapore <break/>sufi@wubble.ai</personname>
+  </creator>
+  <abstract name="Abstract">
+    <p>Background music shapes attention, affect, and approach behavior in commercial environments, yet the neural plausibility of AI-generated music for such settings remains poorly characterized. We present an in-silico pilot study that combines Wubble, a generative music system, with TRIBE v2, a publicly released whole-brain encoding model, to estimate cortical response profiles for prompt-conditioned retail music. Fully instrumental tracks were generated to span low-to-high arousal, sparse-to-dense arrangement, and neutral-to-positive valence prompts, then analyzed with audio-only TRIBE v2 inference on loudness-normalized waveforms. Analysis focused on fsaverage5 cortical predictions summarized over auditory, superior temporal, temporo-parietal, and inferior frontal HCP parcels. The fast bright major-pop condition produced the largest whole-cortex mean activation (<Math mode="inline" tex="0.0402" text="0.0402" xml:id="m1">
+        <XMath>
+          <XMTok meaning="0.0402" role="NUMBER">0.0402</XMTok>
+        </XMath>
+      </Math>), the strongest prefrontal ROI composite response (<Math mode="inline" tex="0.0704" text="0.0704" xml:id="m2">
+        <XMath>
+          <XMTok meaning="0.0704" role="NUMBER">0.0704</XMTok>
+        </XMath>
+      </Math>), and the highest parcel means in IFJa (<Math mode="inline" tex="0.1102" text="0.1102" xml:id="m3">
+        <XMath>
+          <XMTok meaning="0.1102" role="NUMBER">0.1102</XMTok>
+        </XMath>
+      </Math>), IFJp (<Math mode="inline" tex="0.0995" text="0.0995" xml:id="m4">
+        <XMath>
+          <XMTok meaning="0.0995" role="NUMBER">0.0995</XMTok>
+        </XMath>
+      </Math>), A5 (<Math mode="inline" tex="0.0188" text="0.0188" xml:id="m5">
+        <XMath>
+          <XMTok meaning="0.0188" role="NUMBER">0.0188</XMTok>
+        </XMath>
+      </Math>), and area 45 (<Math mode="inline" tex="0.0015" text="0.0015" xml:id="m6">
+        <XMath>
+          <XMTok meaning="0.0015" role="NUMBER">0.0015</XMTok>
+        </XMath>
+      </Math>). Pairwise spatial correlations ranged from <Math mode="inline" tex="0.787" text="0.787" xml:id="m7">
+        <XMath>
+          <XMTok meaning="0.787" role="NUMBER">0.787</XMTok>
+        </XMath>
+      </Math> to <Math mode="inline" tex="0.974" text="0.974" xml:id="m8">
+        <XMath>
+          <XMTok meaning="0.974" role="NUMBER">0.974</XMTok>
+        </XMath>
+      </Math>, indicating that prompt variation modulated predicted cortical states rather than yielding a single undifferentiated response profile. Predicted cortical surface maps further revealed visually distinct spatial organization between low-arousal and high-arousal conditions. These results support a cautious claim of cortical neurological plausibility: prompt-conditioned AI music can systematically shift predicted auditory-temporal-prefrontal patterns relevant to salience and valuation. Although the study does not establish subcortical reward engagement or consumer behavior, it does provide a reproducible framework for neural pre-screening and pre-optimization of commercial music generation against biologically informed cortical proxies.</p>
+  </abstract>
+  <keywords>
+AI-generated music, computational neuroscience, neuroaesthetics, commercial music, whole-brain encoding, TRIBE v2, Wubble, cortical prediction
+</keywords>
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 25 **** -->  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>I</tag>
+      <tag role="autoref">section I</tag>
+      <tag role="refnum">I</tag>
+      <tag role="typerefnum">§I</tag>
+    </tags>
+    <title><tag close=" ">I</tag><text font="smallcaps">Introduction</text></title>
+    <para xml:id="S1.p1">
+      <p>Music is a powerful contextual variable in retail, hospitality, and branded environments. Behavioral research has linked tempo, mode, loudness, and stylistic congruence to dwell time, purchase intention, perceived quality, and affective appraisal <cite class="ltx_citemacro_cite">[<bibref bibrefs="north1999,garlin2006" separator="," yyseparator=","/>]</cite>. Yet the neural interpretation of commercially deployed background music remains largely indirect, inferred from behavior or from relatively small neuroimaging literatures. The gap is even wider for AI-generated music, where fine-grained parameter control is increasingly feasible but claims about neural plausibility are often made without a corresponding neuroscientific framework.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>Recent neuroscience foundation models offer a new route for testing such questions computationally. TRIBE v2 is a tri-modal foundation model for in-silico neuroscience that leverages over 1,000 hours of fMRI across 720 subjects and is designed to support zero-shot prediction for new stimuli, tasks, and participants <cite class="ltx_citemacro_cite">[<bibref bibrefs="tribev2" separator="," yyseparator=","/>]</cite>. In parallel, generative music systems such as Wubble can produce controlled musical stimuli from text prompts, making it possible to construct systematic stimulus families without collecting new human data. Taken together, these tools enable a fully computational workflow: prompts can be manipulated, rendered to audio, and passed through a validated brain encoding model to estimate whether different musical configurations are predicted to recruit distinct cortical states.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>This paper reports a focused in-silico pilot study using Wubble-generated tracks designed for commercial background-music settings. The study was intentionally constrained to the public cortical inference path of TRIBE v2 and therefore does not claim direct evidence about subcortical nuclei such as the nucleus accumbens or amygdala. Instead, we test a narrower and more defensible hypothesis: prompt-conditioned AI-generated music can differentially modulate predicted cortical activity in auditory, temporal, temporo-parietal, and inferior frontal regions plausibly involved in salience, affective appraisal, and valuation-related processing.</p>
+    </para>
+    <subsection inlist="toc" xml:id="S1.SS1">
+      <tags>
+        <tag>I-A</tag>
+        <tag role="autoref">subsection I-A</tag>
+        <tag role="refnum">I-A</tag>
+        <tag role="typerefnum">§I-A</tag>
+      </tags>
+      <title><tag close=" ">I-A</tag><text font="italic">Research Question</text></title>
+      <para xml:id="S1.SS1.p1">
+        <p>Our central question is: <emph font="italic">Can prompt-controlled AI-generated commercial music produce separable cortical response profiles in a whole-brain encoding model, with stronger predicted engagement in auditory and frontal parcels for brighter, faster, higher-arousal conditions than for slower, sparser conditions?</emph>
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 50 **** --></p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S1.SS2">
+      <tags>
+        <tag>I-B</tag>
+        <tag role="autoref">subsection I-B</tag>
+        <tag role="refnum">I-B</tag>
+        <tag role="typerefnum">§I-B</tag>
+      </tags>
+      <title><tag close=" ">I-B</tag><text font="italic">Contributions</text></title>
+      <para xml:id="S1.SS2.p1">
+        <p>This work makes four contributions:</p>
+        <enumerate xml:id="S1.I1">
+          <item xml:id="S1.I1.i1">
+            <tags>
+              <tag>1.</tag>
+              <tag role="autoref">item 1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">item 1</tag>
+            </tags>
+            <para xml:id="S1.I1.i1.p1">
+              <p>It introduces a reproducible Wubble-to-TRIBE pipeline for studying AI-generated music with biologically informed neural proxies.</p>
+            </para>
+          </item>
+          <item xml:id="S1.I1.i2">
+            <tags>
+              <tag>2.</tag>
+              <tag role="autoref">item 2</tag>
+              <tag role="refnum">2</tag>
+              <tag role="typerefnum">item 2</tag>
+            </tags>
+            <para xml:id="S1.I1.i2.p1">
+              <p>It operationalizes a prompt design spanning tempo, arrangement density, and valence across finished instrumental tracks tailored to commercial use cases.</p>
+            </para>
+          </item>
+          <item xml:id="S1.I1.i3">
+            <tags>
+              <tag>3.</tag>
+              <tag role="autoref">item 3</tag>
+              <tag role="refnum">3</tag>
+              <tag role="typerefnum">item 3</tag>
+            </tags>
+            <para xml:id="S1.I1.i3.p1">
+              <p>It quantifies cortical differences using global activation summaries, parcel-wise ROI means, and whole-brain pairwise spatial correlations.</p>
+            </para>
+          </item>
+          <item xml:id="S1.I1.i4">
+            <tags>
+              <tag>4.</tag>
+              <tag role="autoref">item 4</tag>
+              <tag role="refnum">4</tag>
+              <tag role="typerefnum">item 4</tag>
+            </tags>
+            <para xml:id="S1.I1.i4.p1">
+              <p>It provides a publication-ready pilot result supporting cortical neurological plausibility while clearly delimiting the absence of human validation and subcortical inference.</p>
+            </para>
+          </item>
+        </enumerate>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>II</tag>
+      <tag role="autoref">section II</tag>
+      <tag role="refnum">II</tag>
+      <tag role="typerefnum">§II</tag>
+    </tags>
+    <title><tag close=" ">II</tag><text font="smallcaps">Related Work</text></title>
+    <subsection inlist="toc" xml:id="S2.SS1">
+      <tags>
+        <tag>II-A</tag>
+        <tag role="autoref">subsection II-A</tag>
+        <tag role="refnum">II-A</tag>
+        <tag role="typerefnum">§II-A</tag>
+      </tags>
+      <title><tag close=" ">II-A</tag><text font="italic">Music in Commercial Environments</text></title>
+      <para xml:id="S2.SS1.p1">
+        <p>Environmental psychology and marketing research have repeatedly shown that music affects consumer behavior through tempo, congruence, arousal, and affective tone <cite class="ltx_citemacro_cite">[<bibref bibrefs="north1999,garlin2006,bruner1990" separator="," yyseparator=","/>]</cite>. Slower music has been associated with longer browsing and dwell time, while more activating music can increase perceived energy and movement through a space. These effects are robust enough to motivate active curation in retail and hospitality, yet the neural mechanisms of such influence remain incompletely characterized.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS2">
+      <tags>
+        <tag>II-B</tag>
+        <tag role="autoref">subsection II-B</tag>
+        <tag role="refnum">II-B</tag>
+        <tag role="typerefnum">§II-B</tag>
+      </tags>
+      <title><tag close=" ">II-B</tag><text font="italic">Music, Reward, and Neuroaesthetics</text></title>
+      <para xml:id="S2.SS2.p1">
+        <p>Human neuroimaging studies suggest that pleasurable music listening can recruit auditory cortices together with frontal, insular, striatal, and limbic systems involved in prediction, valuation, and reward <cite class="ltx_citemacro_cite">[<bibref bibrefs="salimpoor2011,zatorre2013,koelsch2014" separator="," yyseparator=","/>]</cite>. Not all of these regions are accessible in the public cortical output path used here, but the cortical literature motivates examining auditory and frontal parcels as partial indicators of engagement-relevant processing.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS3">
+      <tags>
+        <tag>II-C</tag>
+        <tag role="autoref">subsection II-C</tag>
+        <tag role="refnum">II-C</tag>
+        <tag role="typerefnum">§II-C</tag>
+      </tags>
+      <title><tag close=" ">II-C</tag><text font="italic">AI-Generated Music Evaluation</text></title>
+      <para xml:id="S2.SS3.p1">
+        <p>Generative music systems are typically evaluated through listening tests, style fidelity, or text-audio alignment, rather than through neural plausibility. Existing work on background-music optimization has likewise centered on recommendation, mood tagging, or affect prediction rather than direct brain-response modeling. A computational neuroscience pipeline can complement standard music-information-retrieval evaluation by asking whether generated stimuli induce systematically different predicted neural states, aligning with broader calls for in-silico experimentation as a serious scientific workflow <cite class="ltx_citemacro_cite">[<bibref bibrefs="jain2024" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 75 **** -->    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS4">
+      <tags>
+        <tag>II-D</tag>
+        <tag role="autoref">subsection II-D</tag>
+        <tag role="refnum">II-D</tag>
+        <tag role="typerefnum">§II-D</tag>
+      </tags>
+      <title><tag close=" ">II-D</tag><text font="italic">Whole-Brain Encoding Models</text></title>
+      <para xml:id="S2.SS4.p1">
+        <p>Encoding models map stimulus features to predicted neural responses and have become increasingly powerful through multimodal pretraining and large naturalistic datasets <cite class="ltx_citemacro_cite">[<bibref bibrefs="nishimoto2011,huth2016" separator="," yyseparator=","/>]</cite>. TRIBE v2 extends this paradigm with a tri-modal foundation model that supports public audio-driven cortical prediction on fsaverage5 surfaces <cite class="ltx_citemacro_cite">[<bibref bibrefs="tribev2" separator="," yyseparator=","/>]</cite>. Its public availability makes it well suited to hypothesis-driven in-silico studies, particularly when new neuroimaging data collection is infeasible and one instead seeks a model-based estimate of group-level cortical response before running expensive human experiments.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:methods" xml:id="S3">
+    <tags>
+      <tag>III</tag>
+      <tag role="autoref">section III</tag>
+      <tag role="refnum">III</tag>
+      <tag role="typerefnum">§III</tag>
+    </tags>
+    <title><tag close=" ">III</tag><text font="smallcaps">Methods</text></title>
+    <subsection inlist="toc" xml:id="S3.SS1">
+      <tags>
+        <tag>III-A</tag>
+        <tag role="autoref">subsection III-A</tag>
+        <tag role="refnum">III-A</tag>
+        <tag role="typerefnum">§III-A</tag>
+      </tags>
+      <title><tag close=" ">III-A</tag><text font="italic">Study Design</text></title>
+      <para xml:id="S3.SS1.p1">
+        <p>The experiment used AI-generated instrumental tracks created with Wubble. Rather than treating model outputs as arbitrary generations, we defined a small prompt-conditioned set intended to span dimensions commonly implicated in commercial music design:</p>
+        <enumerate xml:id="S3.I1">
+          <item xml:id="S3.I1.i1">
+            <tags>
+              <tag>1.</tag>
+              <tag role="autoref">item 1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">item 1</tag>
+            </tags>
+            <para xml:id="S3.I1.i1.p1">
+              <p>tempo band: slow, medium, and fast;</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i2">
+            <tags>
+              <tag>2.</tag>
+              <tag role="autoref">item 2</tag>
+              <tag role="refnum">2</tag>
+              <tag role="typerefnum">item 2</tag>
+            </tags>
+            <para xml:id="S3.I1.i2.p1">
+              <p>arrangement density: sparse, balanced, rich, bright, and dense;</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i3">
+            <tags>
+              <tag>3.</tag>
+              <tag role="autoref">item 3</tag>
+              <tag role="refnum">3</tag>
+              <tag role="typerefnum">item 3</tag>
+            </tags>
+            <para xml:id="S3.I1.i3.p1">
+              <p>affective mode or valence framing: minor-neutral, neutral, major-positive, and high-arousal positive.</p>
+            </para>
+          </item>
+        </enumerate>
+        <p>Each track was rendered as a finished song and analyzed independently. No human listeners, behavioral responses, or neuroimaging recordings were collected.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS2">
+      <tags>
+        <tag>III-B</tag>
+        <tag role="autoref">subsection III-B</tag>
+        <tag role="refnum">III-B</tag>
+        <tag role="typerefnum">§III-B</tag>
+      </tags>
+      <title><tag close=" ">III-B</tag><text font="italic">Stimulus Generation</text></title>
+      <para xml:id="S3.SS2.p1">
+        <p>Wubble requests were issued through the deployed music-generation workflow used for this study. To minimize semantic contamination from lyrics, all prompts specified instrumental-only background music and used the placeholder lyrics field <text font="typewriter">[Instrumental]</text>. Table <ref labelref="LABEL:tab:stimuli"/> summarizes the resulting stimulus set.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:stimuli" placement="t" xml:id="S3.T1">
+        <tags>
+          <tag>TABLE I</tag>
+          <tag role="autoref">Table I</tag>
+          <tag role="refnum">I</tag>
+          <tag role="typerefnum">TABLE I</tag>
+        </tags>
+        <toccaption class="ltx_centering"><tag close=" ">I</tag>Prompt-Conditioned Wubble Stimulus Set</toccaption>
+        <caption class="ltx_centering"><tag close=": ">TABLE I</tag>Prompt-Conditioned Wubble Stimulus Set</caption>
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 100 **** -->        <tabular class="ltx_centering ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="justify" border="tt" thead="column" width="19.9pt"><text class="ltx_wrap" font="bold">ID</text></td>
+              <td align="justify" border="tt" thead="column" width="91.0pt"><text class="ltx_wrap" font="bold">Title</text></td>
+              <td align="justify" border="tt" thead="column" width="31.3pt"><text class="ltx_wrap" font="bold">BPM</text></td>
+              <td align="justify" border="tt" thead="column" width="34.1pt"><text class="ltx_wrap" font="bold">Density</text></td>
+              <td align="justify" border="tt" thead="column" width="42.7pt"><text class="ltx_wrap" font="bold">Valence</text></td>
+              <td align="justify" border="tt" thead="column" width="239.0pt"><text class="ltx_wrap" font="bold">Prompt Summary</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="justify" border="t" width="19.9pt">T1</td>
+              <td align="justify" border="t" width="91.0pt">Slow Sparse Ambient Minor</td>
+              <td align="justify" border="t" width="31.3pt">68</td>
+              <td align="justify" border="t" width="34.1pt">Sparse</td>
+              <td align="justify" border="t" width="42.7pt">Minor/neutral</td>
+              <td align="justify" border="t" width="239.0pt">Premium retail ambient music with soft piano, warm pads, subtle texture, low arousal, restrained affect.</td>
+            </tr>
+            <tr>
+              <td align="justify" width="19.9pt">T2</td>
+              <td align="justify" width="91.0pt">Slow Rich Warm Major</td>
+              <td align="justify" width="31.3pt">78</td>
+              <td align="justify" width="34.1pt">Rich</td>
+              <td align="justify" width="42.7pt">Major/positive</td>
+              <td align="justify" width="239.0pt">Welcoming boutique music with acoustic guitar, soft piano, light percussion, warm major framing.</td>
+            </tr>
+            <tr>
+              <td align="justify" width="19.9pt">T3</td>
+              <td align="justify" width="91.0pt">Mid Balanced Neutral</td>
+              <td align="justify" width="31.3pt">100</td>
+              <td align="justify" width="34.1pt">Balanced</td>
+              <td align="justify" width="42.7pt">Neutral</td>
+              <td align="justify" width="239.0pt">Neutral commercial ambient-pop track with steady groove and moderate arousal.</td>
+            </tr>
+            <tr>
+              <td align="justify" width="19.9pt">T4</td>
+              <td align="justify" width="91.0pt">Fast Bright Major Pop</td>
+              <td align="justify" width="31.3pt">124</td>
+              <td align="justify" width="34.1pt">Bright</td>
+              <td align="justify" width="42.7pt">Major/positive</td>
+              <td align="justify" width="239.0pt">Upbeat retail pop with energetic percussion, crisp bass, bright synth accents, lively commercial tone.</td>
+            </tr>
+            <tr>
+              <td align="justify" border="bb" width="19.9pt">T5</td>
+              <td align="justify" border="bb" width="91.0pt">Fast Dense High-Arousal Electronic</td>
+              <td align="justify" border="bb" width="31.3pt">132</td>
+              <td align="justify" border="bb" width="34.1pt">Dense</td>
+              <td align="justify" border="bb" width="42.7pt">High-arousal positive</td>
+              <td align="justify" border="bb" width="239.0pt">Dense layered electronic-pop background music with bright synths and strong attentional capture.</td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS3">
+      <tags>
+        <tag>III-C</tag>
+        <tag role="autoref">subsection III-C</tag>
+        <tag role="refnum">III-C</tag>
+        <tag role="typerefnum">§III-C</tag>
+      </tags>
+      <title><tag close=" ">III-C</tag><text font="italic">Audio Preprocessing</text></title>
+      <para xml:id="S3.SS3.p1">
+        <p>Generated audio files were downloaded and converted to a common waveform format, then loudness-normalized before inference. Normalization reduces trivial amplitude-driven differences and improves comparability across tracks. Let <Math mode="inline" tex="x_{i}(t)" text="x _ i * t" xml:id="S3.SS3.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                  <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                </XMApp>
+                <XMDual>
+                  <XMRef idref="S3.SS3.p1.m1.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS3.p1.m1.1">t</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> denote the waveform of stimulus <Math mode="inline" tex="i" text="i" xml:id="S3.SS3.p1.m2">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="\mathcal{N}(\cdot)" text="N * cdot" xml:id="S3.SS3.p1.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="caligraphic" role="UNKNOWN">N</XMTok>
+                <XMDual>
+                  <XMRef idref="S3.SS3.p1.m3.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok name="cdot" role="MULOP" xml:id="S3.SS3.p1.m3.1">⋅</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> the normalization operator; inference operated on:</p>
+        <equation xml:id="S3.E1">
+          <tags>
+            <tag>(1)</tag>
+            <tag role="autoref">Equation 1</tag>
+            <tag role="refnum">1</tag>
+          </tags>
+          <Math mode="display" tex="\tilde{x}_{i}(t)=\mathcal{N}\left(x_{i}(t)\right)." text="(tilde@(x)) _ i * t = N * x _ i * t" xml:id="S3.E1.m1">
+            <XMath>
+              <XMDual>
+                <XMRef idref="S3.E1.m1.3"/>
+                <XMWrap>
+                  <XMApp xml:id="S3.E1.m1.3">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMApp>
+                          <XMTok name="tilde" role="OVERACCENT" stretchy="false">~</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        </XMApp>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMDual>
+                        <XMRef idref="S3.E1.m1.1"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMTok font="italic" role="UNKNOWN" xml:id="S3.E1.m1.1">t</XMTok>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="caligraphic" role="UNKNOWN">N</XMTok>
+                      <XMDual>
+                        <XMRef idref="S3.E1.m1.3.1"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="true">(</XMTok>
+                          <XMApp xml:id="S3.E1.m1.3.1">
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                            <XMDual>
+                              <XMRef idref="S3.E1.m1.2"/>
+                              <XMWrap>
+                                <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                <XMTok font="italic" role="UNKNOWN" xml:id="S3.E1.m1.2">t</XMTok>
+                                <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                              </XMWrap>
+                            </XMDual>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="true">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PERIOD">.</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>
+        </equation>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS4">
+      <tags>
+        <tag>III-D</tag>
+        <tag role="autoref">subsection III-D</tag>
+        <tag role="refnum">III-D</tag>
+        <tag role="typerefnum">§III-D</tag>
+      </tags>
+      <title><tag close=" ">III-D</tag><text font="italic">TRIBE v2 Audio-Only Inference</text></title>
+      <para xml:id="S3.SS4.p1">
+        <p>We used the public TRIBE v2 weights and code path for average-subject cortical prediction on the fsaverage5 surface <cite class="ltx_citemacro_cite">[<bibref bibrefs="tribev2" separator="," yyseparator=","/>]</cite>. The inference configuration explicitly restricted features to audio only, disabled non-audio modalities, and forced the audio feature extractor onto CPU for reproducibility in the local environment. Segment-level predictions were then aggregated into per-track mean cortical maps.</p>
+      </para>
+      <para xml:id="S3.SS4.p2">
+        <p>Formally, if <Math mode="inline" tex="\mathbf{y}_{i,s}\in\mathbb{R}^{V}" text="y _ (list@(i, s)) element-of R ^ V" xml:id="S3.SS4.p2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                  <XMDual>
+                    <XMApp>
+                      <XMTok meaning="list"/>
+                      <XMRef idref="S3.SS4.p2.m1.1"/>
+                      <XMRef idref="S3.SS4.p2.m1.2"/>
+                    </XMApp>
+                    <XMWrap>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.SS4.p2.m1.1">i</XMTok>
+                      <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.SS4.p2.m1.2">s</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                </XMApp>
+                <XMApp>
+                  <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="blackboard" role="UNKNOWN">R</XMTok>
+                  <XMTok font="italic" fontsize="70%" role="UNKNOWN">V</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math> denotes the predicted cortical response vector for segment <Math mode="inline" tex="s" text="s" xml:id="S3.SS4.p2.m2">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">s</XMTok>
+            </XMath>
+          </Math> of stimulus <Math mode="inline" tex="i" text="i" xml:id="S3.SS4.p2.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math> over <Math mode="inline" tex="V=20{,}484" text="V = list@(20, 484)" xml:id="S3.SS4.p2.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">V</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="list"/>
+                    <XMRef idref="S3.SS4.p2.m4.1"/>
+                    <XMRef idref="S3.SS4.p2.m4.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok meaning="20" role="NUMBER" xml:id="S3.SS4.p2.m4.1">20</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="484" role="NUMBER" xml:id="S3.SS4.p2.m4.2">484</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> fsaverage5 vertices, then the track-level mean map is:
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 125 **** --></p>
+        <equation labels="LABEL:eq:trackmean" xml:id="S3.E2">
+          <tags>
+            <tag>(2)</tag>
+            <tag role="autoref">Equation 2</tag>
+            <tag role="refnum">2</tag>
+          </tags>
+          <Math mode="display" tex="\bar{\mathbf{y}}_{i}=\frac{1}{S_{i}}\sum_{s=1}^{S_{i}}\mathbf{y}_{i,s}," text="(bar@(y)) _ i = (1 / S _ i) * ((sum _ (s = 1)) ^ (S _ i))@(y _ (list@(i, s)))" xml:id="S3.E2.m1">
+            <XMath>
+              <XMDual>
+                <XMRef idref="S3.E2.m1.3"/>
+                <XMWrap>
+                  <XMApp xml:id="S3.E2.m1.3">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMApp>
+                        <XMTok name="bar" role="OVERACCENT" stretchy="false">¯</XMTok>
+                        <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                      </XMApp>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMApp>
+                        <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                        <XMTok meaning="1" role="NUMBER">1</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                      </XMApp>
+                      <XMApp>
+                        <XMApp scriptpos="mid">
+                          <XMTok role="SUPERSCRIPTOP" scriptpos="mid1"/>
+                          <XMApp scriptpos="mid">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                            <XMTok mathstyle="display" meaning="sum" role="SUMOP" scriptpos="mid">∑</XMTok>
+                            <XMApp>
+                              <XMTok fontsize="70%" meaning="equals" role="RELOP">=</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">s</XMTok>
+                              <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                            </XMApp>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                            <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                          <XMDual>
+                            <XMApp>
+                              <XMTok meaning="list"/>
+                              <XMRef idref="S3.E2.m1.1"/>
+                              <XMRef idref="S3.E2.m1.2"/>
+                            </XMApp>
+                            <XMWrap>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E2.m1.1">i</XMTok>
+                              <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E2.m1.2">s</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>
+        </equation>
+        <p>where <Math mode="inline" tex="S_{i}" text="S _ i" xml:id="S3.SS4.p2.m5">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> is the number of analyzed segments for stimulus <Math mode="inline" tex="i" text="i" xml:id="S3.SS4.p2.m6">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math>.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS5">
+      <tags>
+        <tag>III-E</tag>
+        <tag role="autoref">subsection III-E</tag>
+        <tag role="refnum">III-E</tag>
+        <tag role="typerefnum">§III-E</tag>
+      </tags>
+      <title><tag close=" ">III-E</tag><text font="italic">ROI Analysis</text></title>
+      <para xml:id="S3.SS5.p1">
+        <p>Because the public model path is cortical, we focused on HCP parcels plausibly relevant to auditory processing and frontal valuation-related processing <cite class="ltx_citemacro_cite">[<bibref bibrefs="glasser2016" separator="," yyseparator=","/>]</cite>. The selected regions were A5, STSvp, STSva, STSdp, PGi, TE1a, area 45, IFJa, and IFJp. This ROI set was further motivated by the TRIBE v2 paper’s own in-silico localizer results, which prominently recover associative auditory cortex A5 and area 45 among task-relevant parcels <cite class="ltx_citemacro_cite">[<bibref bibrefs="tribev2" separator="," yyseparator=","/>]</cite>. For ROI <Math mode="inline" tex="r" text="r" xml:id="S3.SS5.p1.m1">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> with vertex set <Math mode="inline" tex="\mathcal{V}_{r}" text="V _ r" xml:id="S3.SS5.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="caligraphic" role="UNKNOWN">V</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">r</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, the mean predicted activation for track <Math mode="inline" tex="i" text="i" xml:id="S3.SS5.p1.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math> was computed as:</p>
+        <equation labels="LABEL:eq:roimean" xml:id="S3.E3">
+          <tags>
+            <tag>(3)</tag>
+            <tag role="autoref">Equation 3</tag>
+            <tag role="refnum">3</tag>
+          </tags>
+          <Math mode="display" tex="\mu_{i,r}=\frac{1}{|\mathcal{V}_{r}|}\sum_{v\in\mathcal{V}_{r}}\bar{y}_{i,v}." text="mu _ (list@(i, r)) = (1 / absolute-value@(V _ r)) * (sum _ (v element-of V _ r))@((bar@(y)) _ (list@(i, v)))" xml:id="S3.E3.m1">
+            <XMath>
+              <XMDual>
+                <XMRef idref="S3.E3.m1.6"/>
+                <XMWrap>
+                  <XMApp xml:id="S3.E3.m1.6">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="list"/>
+                          <XMRef idref="S3.E3.m1.1"/>
+                          <XMRef idref="S3.E3.m1.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E3.m1.1">i</XMTok>
+                          <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E3.m1.2">r</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMApp>
+                        <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                        <XMTok meaning="1" role="NUMBER">1</XMTok>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.E3.m1.3"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMApp xml:id="S3.E3.m1.3">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="caligraphic" role="UNKNOWN">V</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">r</XMTok>
+                            </XMApp>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                      <XMApp>
+                        <XMApp scriptpos="mid">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                          <XMTok mathstyle="display" meaning="sum" role="SUMOP" scriptpos="mid">∑</XMTok>
+                          <XMApp>
+                            <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">v</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="caligraphic" fontsize="70%" role="UNKNOWN">V</XMTok>
+                              <XMTok font="italic" fontsize="50%" role="UNKNOWN">r</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMApp>
+                            <XMTok name="bar" role="OVERACCENT" stretchy="false">¯</XMTok>
+                            <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                          </XMApp>
+                          <XMDual>
+                            <XMApp>
+                              <XMTok meaning="list"/>
+                              <XMRef idref="S3.E3.m1.4"/>
+                              <XMRef idref="S3.E3.m1.5"/>
+                            </XMApp>
+                            <XMWrap>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E3.m1.4">i</XMTok>
+                              <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E3.m1.5">v</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PERIOD">.</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>
+        </equation>
+      </para>
+      <para xml:id="S3.SS5.p2">
+        <p>To aid interpretation, we also computed a prefrontal composite by averaging area 45, IFJa, and IFJp:</p>
+        <equation labels="LABEL:eq:pfc" xml:id="S3.E4">
+          <tags>
+            <tag>(4)</tag>
+            <tag role="autoref">Equation 4</tag>
+            <tag role="refnum">4</tag>
+          </tags>
+          <Math mode="display" tex="\mu^{\text{PFC}}_{i}=\frac{1}{3}\left(\mu_{i,45}+\mu_{i,\mathrm{IFJa}}+\mu_{i,%&#10;\mathrm{IFJp}}\right)." text="(mu ^ [PFC]) _ i = (1 / 3) * (mu _ (list@(i, 45)) + mu _ (list@(i, IFJa)) + mu _ (list@(i, IFJp)))" xml:id="S3.E4.m1">
+            <XMath>
+              <XMDual>
+                <XMRef idref="S3.E4.m1.7"/>
+                <XMWrap>
+                  <XMApp xml:id="S3.E4.m1.7">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMApp>
+                        <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                        <XMText><text fontsize="70%">PFC</text></XMText>
+                      </XMApp>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMApp>
+                        <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                        <XMTok meaning="1" role="NUMBER">1</XMTok>
+                        <XMTok meaning="3" role="NUMBER">3</XMTok>
+                      </XMApp>
+                      <XMDual>
+                        <XMRef idref="S3.E4.m1.7.1"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="true">(</XMTok>
+                          <XMApp xml:id="S3.E4.m1.7.1">
+                            <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                              <XMDual>
+                                <XMApp>
+                                  <XMTok meaning="list"/>
+                                  <XMRef idref="S3.E4.m1.1"/>
+                                  <XMRef idref="S3.E4.m1.2"/>
+                                </XMApp>
+                                <XMWrap>
+                                  <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E4.m1.1">i</XMTok>
+                                  <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                                  <XMTok fontsize="70%" meaning="45" role="NUMBER" xml:id="S3.E4.m1.2">45</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                              <XMDual>
+                                <XMApp>
+                                  <XMTok meaning="list"/>
+                                  <XMRef idref="S3.E4.m1.3"/>
+                                  <XMRef idref="S3.E4.m1.4"/>
+                                </XMApp>
+                                <XMWrap>
+                                  <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E4.m1.3">i</XMTok>
+                                  <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                                  <XMTok fontsize="70%" role="UNKNOWN" xml:id="S3.E4.m1.4">IFJa</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                              <XMDual>
+                                <XMApp>
+                                  <XMTok meaning="list"/>
+                                  <XMRef idref="S3.E4.m1.5"/>
+                                  <XMRef idref="S3.E4.m1.6"/>
+                                </XMApp>
+                                <XMWrap>
+                                  <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E4.m1.5">i</XMTok>
+                                  <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                                  <XMTok fontsize="70%" role="UNKNOWN" xml:id="S3.E4.m1.6">IFJp</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="true">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PERIOD">.</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>
+        </equation>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS6">
+      <tags>
+        <tag>III-F</tag>
+        <tag role="autoref">subsection III-F</tag>
+        <tag role="refnum">III-F</tag>
+        <tag role="typerefnum">§III-F</tag>
+      </tags>
+      <title><tag close=" ">III-F</tag><text font="italic">Whole-Brain Contrast Analysis</text></title>
+      <para xml:id="S3.SS6.p1">
+        <p>For each pair of tracks <Math mode="inline" tex="(i,j)" text="open-interval@(i, j)" xml:id="S3.SS6.p1.m1">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="open-interval"/>
+                  <XMRef idref="S3.SS6.p1.m1.1"/>
+                  <XMRef idref="S3.SS6.p1.m1.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS6.p1.m1.1">i</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS6.p1.m1.2">j</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>, we quantified similarity between their mean cortical maps using Pearson spatial correlation:</p>
+        <equation labels="LABEL:eq:corr" xml:id="S3.E5">
+          <tags>
+            <tag>(5)</tag>
+            <tag role="autoref">Equation 5</tag>
+            <tag role="refnum">5</tag>
+          </tags>
+          <Math mode="display" tex="\rho_{ij}=\mathrm{corr}\left(\bar{\mathbf{y}}_{i},\bar{\mathbf{y}}_{j}\right)." text="rho _ (i * j) = corr * open-interval@((bar@(y)) _ i, (bar@(y)) _ j)" xml:id="S3.E5.m1">
+            <XMath>
+              <XMDual>
+                <XMRef idref="S3.E5.m1.1"/>
+                <XMWrap>
+                  <XMApp xml:id="S3.E5.m1.1">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" name="rho" role="UNKNOWN">ρ</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok role="UNKNOWN">corr</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="open-interval"/>
+                          <XMRef idref="S3.E5.m1.1.1"/>
+                          <XMRef idref="S3.E5.m1.1.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="true">(</XMTok>
+                          <XMApp xml:id="S3.E5.m1.1.1">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMApp>
+                              <XMTok name="bar" role="OVERACCENT" stretchy="false">¯</XMTok>
+                              <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                            </XMApp>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.E5.m1.1.2">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMApp>
+                              <XMTok name="bar" role="OVERACCENT" stretchy="false">¯</XMTok>
+                              <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                            </XMApp>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="true">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PERIOD">.</XMTok>
+<!--  %**** paper_ieee_mureka_tribe_v2.tex Line 150 **** -->                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>
+        </equation>
+        <p>We additionally retained the Euclidean distance between maps as a complementary separation measure:</p>
+        <equation labels="LABEL:eq:l2" xml:id="S3.E6">
+          <tags>
+            <tag>(6)</tag>
+            <tag role="autoref">Equation 6</tag>
+            <tag role="refnum">6</tag>
+          </tags>
+          <Math mode="display" tex="d_{ij}=\left\lVert\bar{\mathbf{y}}_{i}-\bar{\mathbf{y}}_{j}\right\rVert_{2}." text="d _ (i * j) = (norm@((bar@(y)) _ i - (bar@(y)) _ j)) _ 2" xml:id="S3.E6.m1">
+            <XMath>
+              <XMDual>
+                <XMRef idref="S3.E6.m1.1"/>
+                <XMWrap>
+                  <XMApp xml:id="S3.E6.m1.1">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="norm"/>
+                          <XMRef idref="S3.E6.m1.1.1"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok name="lVert" role="OPEN" stretchy="true">∥</XMTok>
+                          <XMApp xml:id="S3.E6.m1.1.1">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMApp>
+                                <XMTok name="bar" role="OVERACCENT" stretchy="false">¯</XMTok>
+                                <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                              </XMApp>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMApp>
+                                <XMTok name="bar" role="OVERACCENT" stretchy="false">¯</XMTok>
+                                <XMTok font="bold" role="UNKNOWN">y</XMTok>
+                              </XMApp>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                            </XMApp>
+                          </XMApp>
+                          <XMTok name="rVert" role="CLOSE" stretchy="true">∥</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                      <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PERIOD">.</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>
+        </equation>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:results" xml:id="S4">
+    <tags>
+      <tag>IV</tag>
+      <tag role="autoref">section IV</tag>
+      <tag role="refnum">IV</tag>
+      <tag role="typerefnum">§IV</tag>
+    </tags>
+    <title><tag close=" ">IV</tag><text font="smallcaps">Results</text></title>
+    <subsection inlist="toc" xml:id="S4.SS1">
+      <tags>
+        <tag>IV-A</tag>
+        <tag role="autoref">subsection IV-A</tag>
+        <tag role="refnum">IV-A</tag>
+        <tag role="typerefnum">§IV-A</tag>
+      </tags>
+      <title><tag close=" ">IV-A</tag><text font="italic">Track-Level Cortical Summaries</text></title>
+      <para xml:id="S4.SS1.p1">
+        <p>All tracks produced stable cortical predictions, with 147–175 analyzed segments per song and <Math mode="inline" tex="20{,}484" text="list@(20, 484)" xml:id="S4.SS1.p1.m1">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="list"/>
+                  <XMRef idref="S4.SS1.p1.m1.1"/>
+                  <XMRef idref="S4.SS1.p1.m1.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok meaning="20" role="NUMBER" xml:id="S4.SS1.p1.m1.1">20</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok meaning="484" role="NUMBER" xml:id="S4.SS1.p1.m1.2">484</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> surface vertices per mean map. Table <ref labelref="LABEL:tab:global"/> shows that the global mean predicted activation increased monotonically from the slow sparse condition (T1, <Math mode="inline" tex="0.0073" text="0.0073" xml:id="S4.SS1.p1.m2">
+            <XMath>
+              <XMTok meaning="0.0073" role="NUMBER">0.0073</XMTok>
+            </XMath>
+          </Math>) to the fast bright major-pop condition (T4, <Math mode="inline" tex="0.0402" text="0.0402" xml:id="S4.SS1.p1.m3">
+            <XMath>
+              <XMTok meaning="0.0402" role="NUMBER">0.0402</XMTok>
+            </XMath>
+          </Math>), with the fast dense electronic condition (T5, <Math mode="inline" tex="0.0278" text="0.0278" xml:id="S4.SS1.p1.m4">
+            <XMath>
+              <XMTok meaning="0.0278" role="NUMBER">0.0278</XMTok>
+            </XMath>
+          </Math>) ranking second.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:global" placement="t" xml:id="S4.T2">
+        <tags>
+          <tag>TABLE II</tag>
+          <tag role="autoref">Table II</tag>
+          <tag role="refnum">II</tag>
+          <tag role="typerefnum">TABLE II</tag>
+        </tags>
+        <toccaption class="ltx_centering"><tag close=" ">II</tag>Track-Level Global Cortical Prediction Summary</toccaption>
+        <caption class="ltx_centering"><tag close=": ">TABLE II</tag>Track-Level Global Cortical Prediction Summary</caption>
+        <tabular class="ltx_centering ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="tt" thead="column row"><text font="bold">Track</text></td>
+              <td align="right" border="tt" thead="column row"><text font="bold">Segments</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">Mean</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">Std.</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">Max</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t" thead="row">T1</td>
+              <td align="right" border="t" thead="row">147</td>
+              <td align="right" border="t">0.0073</td>
+              <td align="right" border="t">0.0528</td>
+              <td align="right" border="t">0.1914</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T2</td>
+              <td align="right" thead="row">147</td>
+              <td align="right">0.0083</td>
+              <td align="right">0.0597</td>
+              <td align="right">0.2392</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T3</td>
+              <td align="right" thead="row">175</td>
+              <td align="right">0.0211</td>
+              <td align="right">0.0563</td>
+              <td align="right">0.2452</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T4</td>
+              <td align="right" thead="row">151</td>
+              <td align="right">0.0402</td>
+              <td align="right">0.0673</td>
+              <td align="right">0.3108</td>
+            </tr>
+            <tr>
+              <td align="left" border="bb" thead="row">T5</td>
+              <td align="right" border="bb" thead="row">163</td>
+              <td align="right" border="bb">0.0278</td>
+              <td align="right" border="bb">0.0610</td>
+              <td align="right" border="bb">0.2937</td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+      <para xml:id="S4.SS1.p2">
+        <p>Figure <ref labelref="LABEL:fig:globalmean"/> visualizes this ordering and indicates that higher-arousal prompt conditions tended to yield stronger overall cortical response magnitudes in the TRIBE v2 prediction space.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:globalmean" placement="t" xml:id="S4.F1">
+        <tags>
+          <tag>Fig. 1</tag>
+          <tag role="autoref">Figure 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Fig. 1</tag>
+        </tags>
+        <graphics candidates="global_mean_activation.png" class="ltx_centering" graphic="global_mean_activation.png" options="width=433.62pt" xml:id="S4.F1.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">1</tag>Whole-cortex mean predicted activation for each prompt-conditioned Wubble track. Error bars show the per-track whole-cortex standard deviation across vertices of the mean map.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Fig. 1</tag>Whole-cortex mean predicted activation for each prompt-conditioned Wubble track. Error bars show the per-track whole-cortex standard deviation across vertices of the mean map.</caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS2">
+      <tags>
+        <tag>IV-B</tag>
+        <tag role="autoref">subsection IV-B</tag>
+        <tag role="refnum">IV-B</tag>
+        <tag role="typerefnum">§IV-B</tag>
+      </tags>
+      <title><tag close=" ">IV-B</tag><text font="italic">ROI Effects</text></title>
+      <para xml:id="S4.SS2.p1">
+        <p>The ROI analysis showed a consistent advantage for T4 across frontal and auditory parcels. Table <ref labelref="LABEL:tab:roi"/> reports the parcel means used in the manuscript. T4 produced the highest activation in all nine tracked parcels, including IFJa (<Math mode="inline" tex="0.1102" text="0.1102" xml:id="S4.SS2.p1.m1">
+            <XMath>
+              <XMTok meaning="0.1102" role="NUMBER">0.1102</XMTok>
+            </XMath>
+          </Math>), IFJp (<Math mode="inline" tex="0.0995" text="0.0995" xml:id="S4.SS2.p1.m2">
+            <XMath>
+              <XMTok meaning="0.0995" role="NUMBER">0.0995</XMTok>
+            </XMath>
+          </Math>), area 45 (<Math mode="inline" tex="0.0015" text="0.0015" xml:id="S4.SS2.p1.m3">
+            <XMath>
+              <XMTok meaning="0.0015" role="NUMBER">0.0015</XMTok>
+            </XMath>
+          </Math>), and A5 (<Math mode="inline" tex="0.0188" text="0.0188" xml:id="S4.SS2.p1.m4">
+            <XMath>
+              <XMTok meaning="0.0188" role="NUMBER">0.0188</XMTok>
+            </XMath>
+          </Math>). Although some auditory and superior temporal parcel means remained negative in absolute model units, they were <emph font="italic">least negative</emph> for T4, indicating a relative shift toward stronger predicted engagement than in the slower and sparser tracks.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:roi" placement="t" xml:id="S4.T3">
+        <tags>
+          <tag>TABLE III</tag>
+          <tag role="autoref">Table III</tag>
+          <tag role="refnum">III</tag>
+          <tag role="typerefnum">TABLE III</tag>
+        </tags>
+        <toccaption class="ltx_centering"><tag close=" ">III</tag>ROI Mean Predicted Activations by Track</toccaption>
+        <caption class="ltx_centering"><tag close=": ">TABLE III</tag>ROI Mean Predicted Activations by Track</caption>
+        <tabular class="ltx_centering ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="tt" thead="column row"><text font="bold">Track</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">A5</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">STSvp</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">STSva</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">STSdp</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">PGi</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">TE1a</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">45</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">IFJa</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">IFJp</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t" thead="row">T1</td>
+              <td align="right" border="t">-0.1181</td>
+              <td align="right" border="t">-0.1481</td>
+              <td align="right" border="t">-0.1301</td>
+              <td align="right" border="t">-0.1578</td>
+              <td align="right" border="t">-0.0833</td>
+              <td align="right" border="t">-0.0976</td>
+              <td align="right" border="t">-0.0193</td>
+              <td align="right" border="t">0.0446</td>
+              <td align="right" border="t">0.0451</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T2</td>
+              <td align="right">-0.0913</td>
+              <td align="right">-0.1583</td>
+              <td align="right">-0.1283</td>
+              <td align="right">-0.1609</td>
+              <td align="right">-0.0832</td>
+              <td align="right">-0.1036</td>
+              <td align="right">-0.0378</td>
+              <td align="right">0.0456</td>
+              <td align="right">0.0509</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T3</td>
+              <td align="right">-0.0677</td>
+              <td align="right">-0.1273</td>
+              <td align="right">-0.1045</td>
+              <td align="right">-0.1407</td>
+              <td align="right">-0.0501</td>
+              <td align="right">-0.0922</td>
+              <td align="right">-0.0099</td>
+              <td align="right">0.0808</td>
+              <td align="right">0.0724</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T4</td>
+              <td align="right">0.0188</td>
+              <td align="right">-0.0912</td>
+              <td align="right">-0.0670</td>
+              <td align="right">-0.0787</td>
+              <td align="right">-0.0205</td>
+              <td align="right">-0.0714</td>
+              <td align="right">0.0015</td>
+              <td align="right">0.1102</td>
+              <td align="right">0.0995</td>
+            </tr>
+            <tr>
+              <td align="left" border="bb" thead="row">T5</td>
+              <td align="right" border="bb">-0.0147</td>
+              <td align="right" border="bb">-0.1070</td>
+              <td align="right" border="bb">-0.0750</td>
+              <td align="right" border="bb">-0.1094</td>
+              <td align="right" border="bb">-0.0323</td>
+              <td align="right" border="bb">-0.0735</td>
+              <td align="right" border="bb">-0.0123</td>
+              <td align="right" border="bb">0.0823</td>
+              <td align="right" border="bb">0.0807</td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+      <para xml:id="S4.SS2.p2">
+        <p>The prefrontal composite <Math mode="inline" tex="\mu^{\text{PFC}}_{i}" text="(mu ^ [PFC]) _ i" xml:id="S4.SS2.p2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMApp>
+                  <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                  <XMText><text fontsize="70%">PFC</text></XMText>
+                </XMApp>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> in (<ref labelref="LABEL:eq:pfc"/>) ranked the tracks as T4 (<Math mode="inline" tex="0.0704" text="0.0704" xml:id="S4.SS2.p2.m2">
+            <XMath>
+              <XMTok meaning="0.0704" role="NUMBER">0.0704</XMTok>
+            </XMath>
+          </Math>) <Math mode="inline" tex="&gt;" text="&gt;" xml:id="S4.SS2.p2.m3">
+            <XMath>
+              <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+            </XMath>
+          </Math> T5 (<Math mode="inline" tex="0.0502" text="0.0502" xml:id="S4.SS2.p2.m4">
+            <XMath>
+              <XMTok meaning="0.0502" role="NUMBER">0.0502</XMTok>
+            </XMath>
+          </Math>) <Math mode="inline" tex="&gt;" text="&gt;" xml:id="S4.SS2.p2.m5">
+            <XMath>
+              <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+            </XMath>
+          </Math> T3 (<Math mode="inline" tex="0.0478" text="0.0478" xml:id="S4.SS2.p2.m6">
+            <XMath>
+              <XMTok meaning="0.0478" role="NUMBER">0.0478</XMTok>
+            </XMath>
+          </Math>) <Math mode="inline" tex="&gt;" text="&gt;" xml:id="S4.SS2.p2.m7">
+            <XMath>
+              <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+            </XMath>
+          </Math> T1 (<Math mode="inline" tex="0.0235" text="0.0235" xml:id="S4.SS2.p2.m8">
+            <XMath>
+              <XMTok meaning="0.0235" role="NUMBER">0.0235</XMTok>
+            </XMath>
+          </Math>) <Math mode="inline" tex="&gt;" text="&gt;" xml:id="S4.SS2.p2.m9">
+            <XMath>
+              <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+            </XMath>
+          </Math> T2 (<Math mode="inline" tex="0.0196" text="0.0196" xml:id="S4.SS2.p2.m10">
+            <XMath>
+              <XMTok meaning="0.0196" role="NUMBER">0.0196</XMTok>
+            </XMath>
+          </Math>), supporting the interpretation that faster, brighter prompt configurations induce stronger predicted recruitment in inferior frontal parcels than slower boutique-ambient conditions.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:roi" placement="t" xml:id="S4.F2">
+        <tags>
+          <tag>Fig. 2</tag>
+          <tag role="autoref">Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Fig. 2</tag>
+        </tags>
+        <graphics candidates="roi_comparison.png" class="ltx_centering" graphic="roi_comparison.png" options="width=411.939pt" xml:id="S4.F2.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">2</tag>Parcel-wise cortical response profiles for the prompt-conditioned Wubble tracks. T4 shows the strongest frontal values and the largest shift toward less negative auditory-temporal parcel means.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Fig. 2</tag>Parcel-wise cortical response profiles for the prompt-conditioned Wubble tracks. T4 shows the strongest frontal values and the largest shift toward less negative auditory-temporal parcel means.</caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS3">
+      <tags>
+        <tag>IV-C</tag>
+        <tag role="autoref">subsection IV-C</tag>
+        <tag role="refnum">IV-C</tag>
+        <tag role="typerefnum">§IV-C</tag>
+      </tags>
+      <title><tag close=" ">IV-C</tag><text font="italic">Predicted Cortical Surface Maps</text></title>
+      <para xml:id="S4.SS3.p1">
+        <p>TRIBE v2 also enables direct visualization of predicted cortical response maps on the fsaverage5 surface, analogous to the cortical visualizations shown in the TRIBE v2 paper <cite class="ltx_citemacro_cite">[<bibref bibrefs="tribev2" separator="," yyseparator=","/>]</cite>. Importantly, these are not raw participant MRI scans or newly acquired empirical fMRI maps. They are <emph font="italic">model-predicted cortical activation surfaces</emph> derived from audio input under the public average-subject inference pathway. We include them because they provide an intuitive view of how the predicted spatial pattern shifts across conditions.</p>
+      </para>
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 225 **** -->      <figure inlist="lof" labels="LABEL:fig:surfaces" placement="t" xml:id="S4.F3">
+        <tags>
+          <tag>Fig. 3</tag>
+          <tag role="autoref">Figure 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Fig. 3</tag>
+        </tags>
+        <graphics candidates="cortical_surface_maps.png" class="ltx_centering" graphic="cortical_surface_maps.png" options="width=433.62pt" xml:id="S4.F3.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">3</tag>Predicted cortical surface maps from TRIBE v2 for the low-arousal baseline-like condition T1, the strongest condition T4, and the T4<Math mode="inline" tex="-" text="-" xml:id="S4.F3.m1">
+            <XMath>
+              <XMTok meaning="minus" role="ADDOP">-</XMTok>
+            </XMath>
+          </Math>T1 contrast. These visualizations are model-predicted cortical maps on the fsaverage5 surface, not raw acquired MRI scans.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Fig. 3</tag>Predicted cortical surface maps from TRIBE v2 for the low-arousal baseline-like condition T1, the strongest condition T4, and the T4<Math mode="inline" tex="-" text="-" xml:id="S4.F3.m2">
+            <XMath>
+              <XMTok meaning="minus" role="ADDOP">-</XMTok>
+            </XMath>
+          </Math>T1 contrast. These visualizations are model-predicted cortical maps on the fsaverage5 surface, not raw acquired MRI scans.</caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS4">
+      <tags>
+        <tag>IV-D</tag>
+        <tag role="autoref">subsection IV-D</tag>
+        <tag role="refnum">IV-D</tag>
+        <tag role="typerefnum">§IV-D</tag>
+      </tags>
+      <title><tag close=" ">IV-D</tag><text font="italic">Whole-Brain Spatial Contrasts</text></title>
+      <para xml:id="S4.SS4.p1">
+        <p>Track-level mean maps were broadly similar but not identical. Spatial correlations across the ten pairwise comparisons ranged from <Math mode="inline" tex="0.787" text="0.787" xml:id="S4.SS4.p1.m1">
+            <XMath>
+              <XMTok meaning="0.787" role="NUMBER">0.787</XMTok>
+            </XMath>
+          </Math> to <Math mode="inline" tex="0.974" text="0.974" xml:id="S4.SS4.p1.m2">
+            <XMath>
+              <XMTok meaning="0.974" role="NUMBER">0.974</XMTok>
+            </XMath>
+          </Math> (Table <ref labelref="LABEL:tab:contrast"/>). The smallest similarity occurred between the slow sparse ambient condition T1 and the fast bright major-pop condition T4 (<Math mode="inline" tex="\rho=0.787" text="rho = 0.787" xml:id="S4.SS4.p1.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="rho" role="UNKNOWN">ρ</XMTok>
+                <XMTok meaning="0.787" role="NUMBER">0.787</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="d=7.589" text="d = 7.589" xml:id="S4.SS4.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="7.589" role="NUMBER">7.589</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), suggesting the widest cortical separation in the stimulus set. The largest similarity occurred between T4 and T5 (<Math mode="inline" tex="\rho=0.974" text="rho = 0.974" xml:id="S4.SS4.p1.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="rho" role="UNKNOWN">ρ</XMTok>
+                <XMTok meaning="0.974" role="NUMBER">0.974</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="d=2.888" text="d = 2.888" xml:id="S4.SS4.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="2.888" role="NUMBER">2.888</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), implying that the two highest-arousal tracks occupied closely related cortical states.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:contrast" placement="t" xml:id="S4.T4">
+        <tags>
+          <tag>TABLE IV</tag>
+          <tag role="autoref">Table IV</tag>
+          <tag role="refnum">IV</tag>
+          <tag role="typerefnum">TABLE IV</tag>
+        </tags>
+        <toccaption class="ltx_centering"><tag close=" ">IV</tag>Selected Pairwise Whole-Brain Contrasts</toccaption>
+        <caption class="ltx_centering"><tag close=": ">TABLE IV</tag>Selected Pairwise Whole-Brain Contrasts</caption>
+        <tabular class="ltx_centering ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="tt" thead="column row"><text font="bold">Track Pair</text></td>
+              <td align="right" border="tt" thead="column"><text font="bold">Spatial Corr.</text></td>
+              <td align="right" border="tt" thead="column"><Math mode="inline" tex="L_{2}" text="L _ 2" xml:id="S4.T4.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">L</XMTok>
+                      <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math><text font="bold"> Dist.</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t" thead="row">T1 vs. T2</td>
+              <td align="right" border="t">0.964</td>
+              <td align="right" border="t">2.385</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T1 vs. T3</td>
+              <td align="right">0.930</td>
+              <td align="right">3.574</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T1 vs. T4</td>
+              <td align="right">0.787</td>
+              <td align="right">7.589</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T1 vs. T5</td>
+              <td align="right">0.811</td>
+              <td align="right">5.919</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T2 vs. T4</td>
+              <td align="right">0.899</td>
+              <td align="right">6.227</td>
+            </tr>
+            <tr>
+              <td align="left" thead="row">T3 vs. T4</td>
+              <td align="right">0.937</td>
+              <td align="right">4.446</td>
+            </tr>
+            <tr>
+              <td align="left" border="bb" thead="row">T4 vs. T5</td>
+              <td align="right" border="bb">0.974</td>
+              <td align="right" border="bb">2.888</td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+      <figure inlist="lof" labels="LABEL:fig:heatmap" placement="t" xml:id="S4.F4">
+        <tags>
+          <tag>Fig. 4</tag>
+          <tag role="autoref">Figure 4</tag>
+          <tag role="refnum">4</tag>
+          <tag role="typerefnum">Fig. 4</tag>
+        </tags>
+        <graphics candidates="spatial_correlation_heatmap.png" class="ltx_centering" graphic="spatial_correlation_heatmap.png" options="width=433.62pt" xml:id="S4.F4.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">4</tag>Whole-brain spatial correlation matrix between track-level mean cortical maps. Prompt manipulations change cortical state geometry without eliminating shared structure across all music conditions.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Fig. 4</tag>Whole-brain spatial correlation matrix between track-level mean cortical maps. Prompt manipulations change cortical state geometry without eliminating shared structure across all music conditions.</caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS5">
+      <tags>
+        <tag>IV-E</tag>
+        <tag role="autoref">subsection IV-E</tag>
+        <tag role="refnum">IV-E</tag>
+        <tag role="typerefnum">§IV-E</tag>
+      </tags>
+      <title><tag close=" ">IV-E</tag><text font="italic">Interpretation Relative to the Hypothesis</text></title>
+      <para xml:id="S4.SS5.p1">
+        <p>The results support the core pilot hypothesis in a cortical sense. The generated tracks did not collapse onto a single response template; instead, they formed a graded pattern in which higher-arousal positive commercial music yielded larger whole-cortex means and stronger inferior frontal parcel responses. T4 emerged as the most consistently activating condition across both global and regional summaries, while T1 was the least activating and most dissimilar from T4 in whole-brain space. Taken together, these findings support the view that prompt-level control over tempo, brightness, and commercial energy can tune predicted cortical states in biologically meaningful directions.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>V</tag>
+      <tag role="autoref">section V</tag>
+      <tag role="refnum">V</tag>
+      <tag role="typerefnum">§V</tag>
+    </tags>
+    <title><tag close=" ">V</tag><text font="smallcaps">Discussion</text></title>
+    <subsection inlist="toc" xml:id="S5.SS1">
+      <tags>
+        <tag>V-A</tag>
+        <tag role="autoref">subsection V-A</tag>
+        <tag role="refnum">V-A</tag>
+        <tag role="typerefnum">§V-A</tag>
+      </tags>
+      <title><tag close=" ">V-A</tag><text font="italic">What the Present Results Support</text></title>
+      <para xml:id="S5.SS1.p1">
+        <p>This study provides evidence for <emph font="italic">cortical neurological plausibility</emph> of prompt-conditioned AI-generated music in commercial contexts. That phrase is intentionally narrower than claiming that AI music “activates reward circuitry” in the full neurobiological sense. The public TRIBE v2 path used here returns cortical surface predictions only, and the present analysis should therefore be understood as targeting auditory, temporal, temporo-parietal, and inferior frontal systems plausibly relevant to salience, valuation, and contextual music processing. Within those limits, the pattern is coherent: brighter, faster Wubble tracks shift predicted cortical activity upward relative to slower and more restrained prompts.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS2">
+      <tags>
+        <tag>V-B</tag>
+        <tag role="autoref">subsection V-B</tag>
+        <tag role="refnum">V-B</tag>
+        <tag role="typerefnum">§V-B</tag>
+      </tags>
+      <title><tag close=" ">V-B</tag><text font="italic">Commercial Interpretation</text></title>
+      <para xml:id="S5.SS2.p1">
+        <p>The ordering from T1/T2 to T4/T5 is noteworthy for applied music design. T1 and T2 represent premium or boutique-style background conditions that may suit low-arousal spaces, whereas T4 represents an energetic but still brand-safe commercial profile. The results suggest that generative prompting can be used not only to alter style descriptively but also to modulate a neural-response proxy quantitatively. This opens the possibility of optimization loops in which commercial music is tuned against cortical targets rather than solely against subjective heuristics.
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 275 **** --></p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS3">
+      <tags>
+        <tag>V-C</tag>
+        <tag role="autoref">subsection V-C</tag>
+        <tag role="refnum">V-C</tag>
+        <tag role="typerefnum">§V-C</tag>
+      </tags>
+      <title><tag close=" ">V-C</tag><text font="italic">Methodological Value</text></title>
+      <para xml:id="S5.SS3.p1">
+        <p>The broader value of the pipeline lies in its reproducibility. Prompt definitions, generated tracks, normalized audio, cortical predictions, parcel summaries, contrasts, and manuscript figures are all derived from code-driven steps. This makes the framework suitable for extension to larger factorial studies, richer prompt families, or model-comparison work across different generative music systems. In practical terms, the pipeline can function as a neural pre-screening stage in which candidate commercial music prompts are filtered or prioritized in silico before downstream listener studies or campaign deployment.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS4">
+      <tags>
+        <tag>V-D</tag>
+        <tag role="autoref">subsection V-D</tag>
+        <tag role="refnum">V-D</tag>
+        <tag role="typerefnum">§V-D</tag>
+      </tags>
+      <title><tag close=" ">V-D</tag><text font="italic">Limitations</text></title>
+      <para xml:id="S5.SS4.p1">
+        <p>Several limitations are important.</p>
+        <enumerate xml:id="S5.I1">
+          <item xml:id="S5.I1.i1">
+            <tags>
+              <tag>1.</tag>
+              <tag role="autoref">item 1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">item 1</tag>
+            </tags>
+            <para xml:id="S5.I1.i1.p1">
+              <p><text font="bold">Cortical-only inference:</text> the analysis cannot support claims about striatal, amygdalar, or other subcortical reward structures.</p>
+            </para>
+          </item>
+          <item xml:id="S5.I1.i2">
+            <tags>
+              <tag>2.</tag>
+              <tag role="autoref">item 2</tag>
+              <tag role="refnum">2</tag>
+              <tag role="typerefnum">item 2</tag>
+            </tags>
+            <para xml:id="S5.I1.i2.p1">
+              <p><text font="bold">No human validation:</text> there were no listener ratings, purchasing measures, psychophysiology, or empirical fMRI data against which to calibrate the predictions.</p>
+            </para>
+          </item>
+          <item xml:id="S5.I1.i3">
+            <tags>
+              <tag>3.</tag>
+              <tag role="autoref">item 3</tag>
+              <tag role="refnum">3</tag>
+              <tag role="typerefnum">item 3</tag>
+            </tags>
+            <para xml:id="S5.I1.i3.p1">
+              <p><text font="bold">Model-space units:</text> TRIBE outputs are model predictions in arbitrary response units and should be interpreted comparatively rather than as absolute neural magnitudes.</p>
+            </para>
+          </item>
+          <item xml:id="S5.I1.i4">
+            <tags>
+              <tag>4.</tag>
+              <tag role="autoref">item 4</tag>
+              <tag role="refnum">4</tag>
+              <tag role="typerefnum">item 4</tag>
+            </tags>
+            <para xml:id="S5.I1.i4.p1">
+              <p><text font="bold">Prompt dependence:</text> results reflect the chosen prompts, generation stochasticity, and the single model version used here.</p>
+            </para>
+          </item>
+        </enumerate>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS5">
+      <tags>
+        <tag>V-E</tag>
+        <tag role="autoref">subsection V-E</tag>
+        <tag role="refnum">V-E</tag>
+        <tag role="typerefnum">§V-E</tag>
+      </tags>
+      <title><tag close=" ">V-E</tag><text font="italic">Future Work</text></title>
+      <para xml:id="S5.SS5.p1">
+        <p>The natural next step is to expand this pilot into a larger design-of-experiments framework. Future studies should increase the number of generations per condition, include repeated seeds, quantify acoustic descriptors directly from the resulting audio, and compare multiple generative models. If subcortical-capable encoders become available, the framework could be extended to reward-focused hypotheses. Most importantly, the cortical predictions should ultimately be triangulated with human behavioral ratings and neurophysiological or neuroimaging measurements.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S6">
+    <tags>
+      <tag>VI</tag>
+      <tag role="autoref">section VI</tag>
+      <tag role="refnum">VI</tag>
+      <tag role="typerefnum">§VI</tag>
+    </tags>
+    <title><tag close=" ">VI</tag><text font="smallcaps">Conclusion</text></title>
+    <para xml:id="S6.p1">
+      <p>We presented a full in-silico pipeline for studying AI-generated music with a whole-brain encoding model and applied it to prompt-conditioned commercial tracks generated by Wubble. Using public TRIBE v2 cortical inference, we found that the generated tracks produce distinguishable cortical response profiles, with the fast bright major-pop condition showing the strongest whole-cortex mean activation and the highest values in several inferior frontal and auditory-associated parcels. These findings support a cautious but meaningful conclusion: AI-generated commercial music can be tuned to modulate predicted cortical states in ways consistent with salience- and valuation-relevant processing. The study does not replace human validation, but it does establish a reproducible computational basis for neurally informed music generation research and for neural pre-screening of candidate commercial music conditions before more expensive empirical testing.</p>
+    </para>
+  </section>
+  <section xml:id="Sx1">
+    <title>Reproducibility Statement</title>
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 300 **** -->    <para xml:id="Sx1.p1">
+      <p>The manuscript results were generated from a local pipeline consisting of Wubble-based stimulus generation, waveform normalization, audio-only TRIBE v2 cortical inference, ROI summarization, pairwise contrast analysis, and manuscript figure synthesis. All numeric values in the tables and figures are taken directly from the produced experiment artifacts.</p>
+    </para>
+  </section>
+  <bibliography xml:id="bib">
+    <title>References</title>
+    <biblist>
+      <bibitem key="north1999" xml:id="bib.bib1">
+        <tags>
+          <tag>[1]</tag>
+          <tag role="autoref">1</tag>
+          <tag role="refnum">1</tag>
+        </tags>
+        <bibblock>
+A. C. North and D. J. Hargreaves, “The influence of music on atmosphere and purchase intentions in a cafeteria,” <emph font="italic">Journal of Applied Social Psychology</emph>, vol. 28, no. 24, pp. 2254–2273, 1998.
+</bibblock>
+      </bibitem>
+      <bibitem key="garlin2006" xml:id="bib.bib2">
+        <tags>
+          <tag>[2]</tag>
+          <tag role="autoref">2</tag>
+          <tag role="refnum">2</tag>
+        </tags>
+        <bibblock>
+F. V. Garlin and N. Owen, “Setting the tone with the tune: A meta-analytic review of the effects of background music in retail settings,” <emph font="italic">Journal of Business Research</emph>, vol. 59, no. 6, pp. 755–764, 2006.
+</bibblock>
+      </bibitem>
+      <bibitem key="bruner1990" xml:id="bib.bib3">
+        <tags>
+          <tag>[3]</tag>
+          <tag role="autoref">3</tag>
+          <tag role="refnum">3</tag>
+        </tags>
+        <bibblock>
+G. C. Bruner, “Music, mood, and marketing,” <emph font="italic">Journal of Marketing</emph>, vol. 54, no. 4, pp. 94–104, 1990.
+</bibblock>
+      </bibitem>
+      <bibitem key="salimpoor2011" xml:id="bib.bib4">
+        <tags>
+          <tag>[4]</tag>
+          <tag role="autoref">4</tag>
+          <tag role="refnum">4</tag>
+        </tags>
+        <bibblock>
+V. N. Salimpoor, M. Benovoy, K. Larcher, A. Dagher, and R. J. Zatorre, “Anatomically distinct dopamine release during anticipation and experience of peak emotion to music,” <emph font="italic">Nature Neuroscience</emph>, vol. 14, no. 2, pp. 257–262, 2011.
+</bibblock>
+      </bibitem>
+      <bibitem key="zatorre2013" xml:id="bib.bib5">
+        <tags>
+          <tag>[5]</tag>
+          <tag role="autoref">5</tag>
+          <tag role="refnum">5</tag>
+        </tags>
+        <bibblock>
+R. J. Zatorre and V. N. Salimpoor, “From perception to pleasure: Music and its neural substrates,” <emph font="italic">Proceedings of the National Academy of Sciences</emph>, vol. 110, suppl. 2, pp. 10430–10437, 2013.
+</bibblock>
+      </bibitem>
+      <bibitem key="koelsch2014" xml:id="bib.bib6">
+        <tags>
+          <tag>[6]</tag>
+          <tag role="autoref">6</tag>
+          <tag role="refnum">6</tag>
+        </tags>
+        <bibblock>
+S. Koelsch, “Brain correlates of music-evoked emotions,” <emph font="italic">Nature Reviews Neuroscience</emph>, vol. 15, no. 3, pp. 170–180, 2014.
+</bibblock>
+      </bibitem>
+      <bibitem key="nishimoto2011" xml:id="bib.bib7">
+        <tags>
+          <tag>[7]</tag>
+          <tag role="autoref">7</tag>
+          <tag role="refnum">7</tag>
+        </tags>
+        <bibblock>
+S. Nishimoto, A. T. Vu, T. Naselaris, Y. Benjamini, B. Yu, and J. L. Gallant, “Reconstructing visual experiences from brain activity evoked by natural movies,” <emph font="italic">Current Biology</emph>, vol. 21, no. 19, pp. 1641–1646, 2011.
+<!--  %**** paper˙ieee˙mureka˙tribe˙v2.tex Line 325 **** --></bibblock>
+      </bibitem>
+      <bibitem key="huth2016" xml:id="bib.bib8">
+        <tags>
+          <tag>[8]</tag>
+          <tag role="autoref">8</tag>
+          <tag role="refnum">8</tag>
+        </tags>
+        <bibblock>
+A. G. Huth, W. A. de Heer, T. L. Griffiths, F. E. Theunissen, and J. L. Gallant, “Natural speech reveals the semantic maps that tile human cerebral cortex,” <emph font="italic">Nature</emph>, vol. 532, pp. 453–458, 2016.
+</bibblock>
+      </bibitem>
+      <bibitem key="jain2024" xml:id="bib.bib9">
+        <tags>
+          <tag>[9]</tag>
+          <tag role="autoref">9</tag>
+          <tag role="refnum">9</tag>
+        </tags>
+        <bibblock>
+S. Jain, V. A. Vo, L. Wehbe, and A. G. Huth, “Computational language modeling and the promise of in silico experimentation,” <emph font="italic">Neurobiology of Language</emph>, vol. 5, no. 1, pp. 80–106, 2024.
+</bibblock>
+      </bibitem>
+      <bibitem key="glasser2016" xml:id="bib.bib10">
+        <tags>
+          <tag>[10]</tag>
+          <tag role="autoref">10</tag>
+          <tag role="refnum">10</tag>
+        </tags>
+        <bibblock>
+M. F. Glasser, T. S. Coalson, E. C. Robinson, C. D. Hacker, J. Harwell, E. Yacoub, K. Ugurbil, J. Andersson, C. F. Beckmann, M. Jenkinson, et al., “A multi-modal parcellation of human cerebral cortex,” <emph font="italic">Nature</emph>, vol. 536, no. 7615, pp. 171–178, 2016.
+</bibblock>
+      </bibitem>
+      <bibitem key="tribev2" xml:id="bib.bib11">
+        <tags>
+          <tag>[11]</tag>
+          <tag role="autoref">11</tag>
+          <tag role="refnum">11</tag>
+        </tags>
+        <bibblock>
+S. d’Ascoli, J. Rapin, Y. Benchetrit, T. Brookes, K. Begany, J. Raugel, H. Banville, and J.-R. King, “A foundation model of vision, audition, and language for in-silico neuroscience,” preprint, Mar. 25, 2026. [Online]. Available: <ref class="ltx_url" font="typewriter" href="https://github.com/facebookresearch/tribev2">https://github.com/facebookresearch/tribev2</ref>; <ref class="ltx_url" font="typewriter" href="https://huggingface.co/facebook/tribev2">https://huggingface.co/facebook/tribev2</ref>
+</bibblock>
+      </bibitem>
+    </biblist>
+  </bibliography>
+</document>

@@ -1,0 +1,140 @@
+% SuperLocalMemory V3.3: The Living Brain
+% Main document file
+% Author: Varun Pratap Bhardwaj (Independent Researcher)
+% Target: arXiv (full-length) -> NeurIPS 2026
+%
+% Part of Qualixar | Author: Varun Pratap Bhardwaj (qualixar.com | varunpratap.com)
+
+\documentclass[11pt,a4paper]{article}
+
+% --- Page geometry for arXiv (no page limit) ---
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\emergencystretch=1em
+
+% --- Mathematics ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bm}
+
+% --- Figures and tables ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+
+% --- Formatting ---
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[capitalize,nameinlink]{cleveref}
+\usepackage{microtype}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% --- Theorem environments ---
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% --- Custom commands ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\dF}{d_{\mathrm{FR}}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\slm}{\textsc{SLM-V3.3}}
+
+% --- Hyperref configuration ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=Blue,
+    citecolor=Green,
+    urlcolor=Maroon,
+    pdfauthor={Varun Pratap Bhardwaj},
+    pdftitle={SuperLocalMemory V3.3: The Living Brain},
+}
+
+% ============================================================================
+\title{SuperLocalMemory V3.3: The Living Brain ---\\
+       Biologically-Inspired Forgetting, Cognitive Quantization, and\\
+       Multi-Channel Retrieval for Zero-LLM Agent Memory Systems}
+
+\author{%
+  Varun Pratap Bhardwaj\\
+  Independent Researcher, Solution Architect\\
+  India\\
+  \texttt{varun.pratap.bhardwaj@gmail.com}\\[2pt]
+  \small ORCID: 0009-0002-8726-4289
+}
+
+\date{}
+
+% ============================================================================
+\begin{document}
+
+\maketitle
+
+% --- Abstract ---
+\input{sections/abstract}
+
+% --- Introduction ---
+\input{sections/introduction}
+
+% --- Background and Related Work ---
+\input{sections/related}
+
+% --- Architecture ---
+\input{sections/architecture}
+
+% --- FRQAD and TurboQuant (C1) ---
+\input{sections/quantization}
+
+% --- Ebbinghaus Forgetting (C2) ---
+\input{sections/forgetting}
+
+% --- 7-Channel Retrieval (C3) ---
+\input{sections/retrieval}
+
+% --- Memory Parameterization (C4) ---
+\input{sections/parameterization}
+
+% --- Auto-Cognitive Pipeline (C5) ---
+\input{sections/pipeline}
+
+% --- Compliance ---
+\input{sections/compliance}
+
+% --- Evaluation ---
+\input{sections/experiments}
+
+% --- Limitations ---
+\input{sections/limitations}
+
+% --- Conclusion ---
+\input{sections/conclusion}
+
+% --- Acknowledgments ---
+\input{sections/acknowledgments}
+
+% --- Author Biography ---
+\input{sections/biography}
+
+% --- Bibliography ---
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

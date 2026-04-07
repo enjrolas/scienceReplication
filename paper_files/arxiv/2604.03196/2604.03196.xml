@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.03196/latex_extracted"?>
+<?latexml class="acmart" options="sigconf"?>
+<?latexml package="listings"?>
+<?latexml package="placeins"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line ltx_leqno">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <resource src="ltx-amsart.css" type="text/css"/>
+  <resource src="ltx-listings.css" type="text/css"/>
+  <title>From Industry Claims to Empirical Reality: An Empirical Study of Code Review Agents in Pull Requests</title>
+  <creator role="author">
+    <personname>Kowshik Chowdhury</personname>
+    <contact role="email">kchowdh1@students.kennesaw.edu</contact>
+    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">Kennesaw State University</text>
+<text class="ltx_affiliation_city">Marietta</text>
+<text class="ltx_affiliation_state">Georgia</text>
+<text class="ltx_affiliation_country">USA</text>
+</contact>
+  </creator>
+  <creator before=", " role="author">
+    <personname>Dipayan Banik</personname>
+    <contact role="email">dipayan5175@gmail.com</contact>
+<!--  %**** main.tex Line 50 **** -->    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">Quanta Technology</text>
+<text class="ltx_affiliation_city">Raleigh</text>
+<text class="ltx_affiliation_state">North Carolina</text>
+<text class="ltx_affiliation_country">USA</text>
+</contact>
+  </creator>
+  <creator before=", " role="author">
+    <personname>K M Ferdous</personname>
+    <contact role="email">kferdous@students.kennesaw.edu</contact>
+    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">Kennesaw State University</text>
+<text class="ltx_affiliation_city">Marietta</text>
+<text class="ltx_affiliation_state">Georgia</text>
+<text class="ltx_affiliation_country">USA</text>
+</contact>
+  </creator>
+  <creator before=" and " role="author">
+    <personname>Shazibul Islam Shamim</personname>
+    <contact role="email">mshamim@kennesaw.edu</contact>
+    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">Kennesaw State University</text>
+<text class="ltx_affiliation_city">Marietta</text>
+<text class="ltx_affiliation_state">Georgia</text>
+<text class="ltx_affiliation_country">USA</text>
+</contact>
+  </creator>
+  <date role="copyright">2026</date>
+  <abstract name="Abstract.">
+<!--  %**** main.tex Line 75 **** -->    <p>Autonomous coding agents are generating code at an unprecedented scale, with OpenAI Codex alone creating over 400,000 pull requests (PRs) in two months. As agentic PR volumes increase, code review agents (CRAs) have become routine gatekeepers in development workflows. Industry reports claim that CRAs can manage 80% of PRs in open source repositories without human involvement. As a result, understanding the effectiveness of CRA reviews is crucial for maintaining developmental workflows and preventing wasted effort on abandoned pull requests. However, empirical evidence on how CRA feedback quality affects PR outcomes remains limited. <text font="italic">The goal of this paper is to help researchers and practitioners understand when and how CRAs influence PR merge success by empirically analyzing reviewer composition and the signal quality of CRA-generated comments. </text>From AIDev’s 19,450 PRs, we analyze 3,109 unique PRs in <text font="typewriter">Commented</text> review state, comparing human-only versus CRA-only reviews. We examine 98 closed CRA-only PRs to assess whether low signal-to-noise ratios contribute to abandonment. CRA-only PRs achieve a 45.20% merge rate, 23.17 percentage points lower than human-only PRs (68.37%), with significantly higher abandonment. Our signal-to-noise analysis reveals that 60.2% of closed CRA-only PRs fall into the 0–30% signal range, and 12 of 13 CRAs exhibit average signal ratios below 60%, indicating substantial noise in automated review feedback. These findings suggest that CRAs without human oversight often generate low-signal feedback associated with higher abandonment. For practitioners, our results indicate that CRAs should augment rather than replace human reviewers, and that human involvement remains critical for effective and actionable code review.</p>
+  </abstract>
+  <keywords>AI code review, automated code review, pull requests, code review agents, signal-to-noise ratio, merge rates, GitHub</keywords>
+  <note role="copyright">acmlicensed</note>
+  <note role="journalyear">2026</note>
+  <note role="copyright">cc</note>
+  <note role="conference">23rd International Conference on Mining Software Repositories; April 13–14, 2026; Rio de Janeiro, Brazil</note>
+  <note role="booktitle">23rd International Conference on Mining Software Repositories (MSR ’26), April 13–14, 2026, Rio de Janeiro, Brazil</note>
+  <note role="doi">10.1145/3793302.3793614</note>
+  <note role="isbn">979-8-4007-2474-9/2026/04</note>
+  <note role="ccs">Software and its engineering Software creation and management</note>
+  <note role="ccs">Software and its engineering Collaboration in software development</note>
+  <note role="ccs">Software and its engineering Software verification and validation</note>
+  <note role="ccs">Computing methodologies Artificial intelligence</note>
+  <note role="ccs">Software and its engineering Software quality</note>
+  <ERROR class="undefined">\setcctype</ERROR>
+  <para xml:id="p1">
+    <p>by
+
+
+<!--  %“acmPrice–˝ -->
+
+<!--  %**** main.tex Line 25 **** --></p>
+  </para>
+  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=". ">1</tag>Introduction</title>
+    <toctitle><tag close=" ">1</tag>Introduction</toctitle>
+    <para xml:id="S1.p1">
+      <p>Recent software engineering platforms are witnessing a surge in autonomous coding agents. OpenAI Codex alone created over 400,000 pull requests in open-source GitHub repositories in less than two months since its release and code review agents (CRAs) such as coderabbitai have become routine parts of development workflows <cite class="ltx_citemacro_citep">(<bibref bibrefs="Li_2025_SE3" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. As these agents generate increasing volumes of code, code review remains critical for quality assurance, leading to CRAs being integrated into GitHub pull requests (PRs). Prior studies show that code review is a socio-technical process influenced by reviewer roles, build outcomes, and project activity <cite class="ltx_citemacro_citep">(<bibref bibrefs="EcosystemPR_2024" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="PREmpirical_2021" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, indicating that merge decisions depend on various interactions inside the review discussion.
+<!--  %**** main.tex Line 125 **** --></p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>Software developers perceive these tools as beneficial for automating repetitive tasks and detecting issues early <cite class="ltx_citemacro_citep">(<bibref bibrefs="Castaldi_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="CHASE_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="ACRPractice_2024" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Recent industry reports present an optimistic picture: Qodo’s 2025 report, based on a survey of 609 developers, shows that 81% of CRA users see quality improvements and 69% see speed improvements, with 80% of PRs receiving no human comments when CRAs are enabled <cite class="ltx_citemacro_citep">(<bibref bibrefs="QodoReport_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Similarly, Greptile blogs state that 82% of developers use CRAs daily or weekly <cite class="ltx_citemacro_citep">(<bibref bibrefs="GreptileReport_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. These industry reports and blogs suggest CRAs can handle most PRs with minimal human oversight.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>However, empirical evidence reveals constraints. CRA adoption is limited by trust issues and lack of project-specific context <cite class="ltx_citemacro_citep">(<bibref bibrefs="CHASE_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="LLMReview_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. A large-scale analysis found that human comments were addressed more often (60%) than CRA comments (0.9% to 19.2%) <cite class="ltx_citemacro_citep">(<bibref bibrefs="AICodeChanges_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, suggesting substantial noise in automated feedback. Meanwhile, CRAs often review code from the same provider <cite class="ltx_citemacro_citep">(<bibref bibrefs="Li_2025_SE3" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, raising concerns about closed-loop biases. Noisy CRA comments may lead to higher PR abandonment, which can create technical debt.</p>
+    </para>
+    <para xml:id="S1.p4">
+      <p>The gap between industry claims (80% of PRs need no human comments <cite class="ltx_citemacro_citep">(<bibref bibrefs="QodoReport_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="GreptileReport_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>) and empirical findings (low CRA adoption <cite class="ltx_citemacro_citep">(<bibref bibrefs="AICodeChanges_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>) motivates investigating whether CRAs can effectively review PRs without human involvement and whether noisy feedback correlates with abandonment. Yet no prior work has systematically quantified signal-to-noise ratios in CRA reviews or linked them to PR outcomes.</p>
+    </para>
+    <para xml:id="S1.p5">
+      <p><text font="italic">The goal of this paper is to help researchers and practitioners understand when and how CRAs influence PR merge success by empirically analyzing reviewer composition and the signal quality of CRA-generated comments.</text> We focus on the following research questions:</p>
+    </para>
+    <para xml:id="S1.p6">
+      <itemize xml:id="S1.I1">
+        <item xml:id="S1.I1.i1">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">1st item</tag>
+          </tags>
+          <para xml:id="S1.I1.i1.p1">
+            <p><text font="bold">RQ1:</text> <text font="italic">What are the differences in merge rates between human-only reviewed and CRA-only reviewed PRs in the commented review state?</text></p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i2">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">2nd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i2.p1">
+            <p><text font="bold">RQ2:</text> <text font="italic">How much does low signal-to-noise ratio in CRA comments contribute to lower merge rates in CRA-only reviewed PRs?</text></p>
+          </para>
+        </item>
+      </itemize>
+    </para>
+    <para xml:id="S1.p7">
+      <p>To address these questions, we analyze the AIDev dataset <cite class="ltx_citemacro_citep">(<bibref bibrefs="Li_2025_SE3" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, which contains 19,450 PRs with review activity from HuggingFace <note mark="1" role="footnote" xml:id="footnote1"><tags>
+            <tag>1</tag>
+            <tag role="autoref">footnote 1</tag>
+            <tag role="refnum">1</tag>
+            <tag role="typerefnum">footnote 1</tag>
+          </tags><ref class="ltx_url" font="typewriter" href="https://huggingface.co/datasets/hao-li/AIDev/viewer/pr_review_comments">https://huggingface.co/datasets/hao-li/AIDev/viewer/pr_review_comments</ref></note>. We extract 3,109 unique PRs and examine reviewer composition to distinguish between human-only, CRA-only, and mixed review scenarios. We measure merge and abandonment outcomes across these categories. We analyze CRA comments by classifying them using a two-tier keyword framework and computing signal-to-noise ratios to evaluate the relationship between CRA feedback quality and PR abandonment.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=". ">2</tag>Dataset Description</title>
+    <toctitle><tag close=" ">2</tag>Dataset Description</toctitle>
+    <para xml:id="S2.p1">
+      <p>Our analysis centers on the <text font="bold">PRReviewComment</text> table (19,450 records), which we enrich with additional information from related tables. This table provides the core data for our analysis. Each comment includes: <text font="bold">(1) <text font="typewriter">user</text>:</text> the name or identifier of the CRA or human who posted the comment, <text font="bold">(2) <text font="typewriter">user_type</text>:</text> categorical classification identifying reviewers as “User” (human) or “Bot” (CRA), <text font="bold">(3) <text font="typewriter">body</text>:</text> textual content of review comments, essential for signal-to-noise ratio analysis, and <text font="bold">(4) <text font="typewriter">pull_request_url</text>:</text> API endpoint referencing the parent PR.</p>
+    </para>
+    <para xml:id="S2.p2">
+      <p>To enable outcome analysis, we enrich each comment with additional attributes by merging data from the <text font="bold">PRReview</text> and <text font="bold">PullRequest</text> tables. From <text font="bold">PRReview</text>, we obtain the review <text font="typewriter">state</text> attribute, which categorizes review feedback as <text font="typewriter">COMMENTED</text> (general feedback without explicit approval or rejection), <text font="typewriter">APPROVED</text> (approval to merge), <text font="typewriter">CHANGES_REQUESTED</text> (explicit request for modifications), or <text font="typewriter">DISMISSED</text> (review dismissed or withdrawn). From <text font="bold">PullRequest</text>, we obtain the PR <text font="typewriter">state</text> (open or closed) and <text font="typewriter">merged_at</text> (timestamp in ISO format, null if not merged), which are critical for determining PR outcomes. These tables are merged using <text font="typewriter">pr_id</text> as the foreign key, and then joined to the comment-level data using <text font="typewriter">pull_request_review_id</text>.</p>
+    </para>
+    <para xml:id="S2.p3">
+      <p>We construct our analytical dataset by aggregating enriched records by <text font="typewriter">pr_id</text>, including only PRs with at least one review comment, producing 3,177 unique PRs. To ensure inclusion of only code review agents (CRAs), unique GitHub bot names were first extracted from the <text font="typewriter">user</text> field. These bots were then manually classified by their functionality, and entities of github bots (e.g., <text font="typewriter">github-actions[bot]</text>) that perform CI/CD and workflow automation rather than code review feedback were excluded. This filtering produced a final dataset of 3,109 PRs reviewed by actual CRAs. This aggregation (1) collects comment bodies into lists for signal detection, (2) aggregates review metadata to classify reviewer composition (human-only, CRA-only, or mixed), and (3) computes total comments per PR.</p>
+    </para>
+<!--  %**** main.tex Line 150 **** -->  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=". ">3</tag>Methodology</title>
+    <toctitle><tag close=" ">3</tag>Methodology</toctitle>
+<!--  %“textbf–Reviewer Type Classification.˝ -->    <para xml:id="S3.p1">
+      <p>For each of the 3,109 unique PRs, we examine the <text font="typewriter">user_type</text> values across all review comments to determine reviewer composition. We count the number of “User” (human) and “Bot” (CRA) reviewers and assign one of five categories: <text font="italic">CRAs</text> (only bots), <text font="italic">User</text> (only humans), <text font="italic">Mixed(CRAs)</text> (bots outnumber humans), <text font="italic">Mixed(Human)</text> (humans outnumber bots), or <text font="italic">Mixed</text> (equal counts). We also determine the review condition by examining the <text font="typewriter">state</text> attribute across all comments for each PR. We arrange PRs by their most definitive review status: <text font="typewriter">Approved</text> takes precedence, followed by <text font="typewriter">Dismissed</text>, then <text font="typewriter">Changes Requested</text>, with <text font="typewriter">Commented</text> as the default. For example, a PR with two <text font="typewriter">Commented</text> and one <text font="typewriter">Approved</text> review is classified as <text font="typewriter">Approved</text>.</p>
+    </para>
+<!--  %“textbf–PR Outcome Determination.˝ -->    <para xml:id="S3.p2">
+      <p>We classify each PR into three outcomes using <text font="typewriter">state</text> and <text font="typewriter">merged_at</text> attributes: <text font="typewriter">Merged</text> (state is “closed” and merged_at is not null), <text font="typewriter">Closed</text> (state is “closed” but merged_at is null, indicating abandonment), or <text font="typewriter">Stalled</text> (state is “open”).</p>
+    </para>
+<!--  %“textbf–Statistical Significance Testing (RQ1).˝ -->    <para xml:id="S3.p3">
+      <p>To answer RQ1, we examine PR outcomes across all review conditions. Only the <text font="typewriter">Commented</text> condition contains PRs reviewed solely by CRAs (281 PRs out of 2,456 total <text font="typewriter">Commented</text> condition PRs). Other conditions contain only mixed or human-only reviewers, showing that single CRA reviewers cannot independently approve, dismiss, or request changes. Since <text font="typewriter">Commented</text> is a neutral state where CRAs provide feedback without explicit decisions and the highest percentage (2,456 PRs out of 3,109), we use it as the basis for comparing human-only versus CRA-only effectiveness. We filter PRs with <text font="typewriter">review_condition</text> equal to <text font="typewriter">Commented</text>, construct a contingency table with reviewer types as rows and PR outcomes as columns, and perform a chi-squared test of independence to validate statistical significance.
+<!--  %The chi-squared statistic is: --></p>
+    </para>
+<!--  %“begin–equation˝ 
+     %“chi^2 = “sum “frac–(O˙–ij˝ - E˙–ij˝)^2˝–E˙–ij˝˝
+     %“end–equation˝
+     %Where:
+     %“begin–itemize˝
+     %“item $O˙–ij˝$ is the observed count of PRs for reviewer type $i$ with outcome $j$.
+     %“item $E˙–ij˝$ is the expected count of PRs for reviewer type $i$ with outcome $j$ under the assumption of independence between reviewer type and PR outcome.
+     %“end–itemize˝
+     %**** main.tex Line 175 ****
+     %“textbf–Signal-to-Noise Ratio Computation (RQ2).˝-->    <para xml:id="S3.p4">
+      <p>To answer RQ2, we analyze PRs reviewed solely by CRAs with <text font="italic">Closed</text> outcomes to understand why CRA-only reviews failed to merge. We adopt the Signal-to-Noise Ratio framework from the blog <cite class="ltx_citemacro_citep">(<bibref bibrefs="JetXu_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> to evaluate review quality. We define two keyword tiers: <text font="bold">Tier 1 (Critical Signal)</text> includes runtime errors, crashes, compilation failures, API-breaking changes, and security vulnerabilities; <text font="bold">Tier 2 (Important Signal)</text> includes architectural problems, performance issues, and maintainability concerns. For each closed CRA-only PR, we count comments containing these keywords and classify them with a qualitative analysis technique called open coding <cite class="ltx_citemacro_citep">(<bibref bibrefs="saldana2021coding" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, achieving Cohen’s Kappa coefficient of 0.75 for inter-rater agreement. We compute the signal-to-noise ratio as:</p>
+    </para>
+    <para xml:id="S3.p5">
+      <equation xml:id="S3.E1">
+        <tags>
+          <tag>(1)</tag>
+          <tag role="autoref">Equation 1</tag>
+          <tag role="refnum">1</tag>
+        </tags>
+        <Math mode="display" tex="\text{Signal Ratio}=\frac{\text{Tier 1 Count}+\text{Tier 2 Count}}{\text{Total%&#10; Comments}}" text="[Signal Ratio] = ([Tier 1 Count] + [Tier 2 Count]) / [Total Comments]" xml:id="S3.E1.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMText>Signal Ratio</XMText>
+              <XMApp>
+                <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                <XMApp>
+                  <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                  <XMText>Tier 1 Count</XMText>
+                  <XMText>Tier 2 Count</XMText>
+                </XMApp>
+                <XMText>Total Comments</XMText>
+              </XMApp>
+            </XMApp>
+          </XMath>
+        </Math>
+      </equation>
+    </para>
+    <para xml:id="S3.p6">
+      <p>This ratio ranges from 0.0 (no signal) to 1.0 (all actionable feedback). We categorize PRs into four signal ranges: 0-30% (predominantly noisy, less than one-third actionable), 31-59% (more noise than signal), 60-79% (more signal than noise), and 80-100% (predominantly actionable, high-quality feedback). These thresholds divide PRs based on whether signal or noise dominates their feedback content, allowing us to determine if noisy comments cause PR abandonment. Our implementation is publicly available <cite class="ltx_citemacro_citep">(<bibref bibrefs="msr2026:challenge:CRA" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=". ">4</tag>Analysis and Findings</title>
+    <toctitle><tag close=" ">4</tag>Analysis and Findings</toctitle>
+    <subsection inlist="toc" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="autoref">subsection 4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=". ">4.1</tag>Merge Rate Differences Between Human-Only and CRA-Only Reviews</title>
+      <toctitle><tag close=" ">4.1</tag>Merge Rate Differences Between Human-Only and CRA-Only Reviews</toctitle>
+      <para xml:id="S4.SS1.p1">
+        <p>We begin by examining the distribution of review conditions across all 3,109 PRs. We find that <text font="typewriter">Commented</text> contains the majority, with 2,456 PRs (79.0%), followed by <text font="typewriter">Changes Requested</text> with 492 PRs (15.8%), <text font="typewriter">Approved</text> with 129 PRs (4.1%), and <text font="typewriter">Dismissed</text> with only 32 PRs (1.0%). Critically, PRs reviewed solely by CRAs appear exclusively in the <text font="typewriter">Commented</text> condition, as CRAs provide feedback without making explicit merge decisions.</p>
+      </para>
+      <para xml:id="S4.SS1.p2">
+        <p>We analyze the 2,456 PRs with <text font="typewriter">Commented</text> review condition to understand how reviewer composition affects outcomes. Table <ref labelref="LABEL:tab:commented_outcomes"/> presents the distribution across five reviewer types: <text font="italic">CRA</text>, <text font="italic">User</text>, <text font="italic">Mixed(CRA)</text>, <text font="italic">Mixed(Human)</text>, and <text font="italic">Mixed</text>. PRs reviewed solely by CRAs achieve 127 merged outcomes from 281 total PRs, yielding a 45.20% merge rate. In contrast, human-only reviewed PRs merge 804 out of 1,176 PRs, achieving 68.37%. This represents a 23.17 percentage point difference in merge success.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:commented_outcomes" placement="h" xml:id="S4.T1">
+        <tags>
+          <tag><text fontsize="90%">Table 1</text></tag>
+          <tag role="autoref"><text fontsize="90%">Table 1</text></tag>
+          <tag role="refnum"><text fontsize="90%">1</text></tag>
+          <tag role="typerefnum"><text fontsize="90%">Table 1</text></tag>
+        </tags>
+        <toccaption class="ltx_centering"><tag close=" "><text fontsize="90%">1</text></tag><text fontsize="90%">PR Outcomes by Reviewer Type</text></toccaption>
+        <caption class="ltx_centering" fontsize="90%"><tag close=". ">Table 1</tag>PR Outcomes by Reviewer Type</caption>
+        <tabular class="ltx_centering ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="t" thead="column row"><text font="bold" fontsize="90%">Reviewer Type</text></td>
+              <td align="right" border="t" thead="column row"><text font="bold" fontsize="90%">Total</text></td>
+              <td align="right" border="t" thead="column"><text font="bold" fontsize="90%">Merged</text></td>
+              <td align="right" border="t" thead="column"><text font="bold" fontsize="90%">Closed</text></td>
+              <td align="right" border="t" thead="column"><text font="bold" fontsize="90%">Stalled</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t" thead="row"><text fontsize="90%">CRA</text></td>
+              <td align="right" border="t" thead="row"><text fontsize="90%">281</text></td>
+              <td align="right" border="t"><text fontsize="90%">127 (45.20%)</text></td>
+              <td align="right" border="t"><text fontsize="90%">98 (34.88%)</text></td>
+              <td align="right" border="t"><text fontsize="90%">56 (19.93%)</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="90%">Mixed(CRA)</text></td>
+              <td align="right" thead="row"><text fontsize="90%">117</text></td>
+              <td align="right"><text fontsize="90%">74 (63.25%)</text></td>
+              <td align="right"><text fontsize="90%">17 (14.53%)</text></td>
+              <td align="right"><text fontsize="90%">26 (22.22%)</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="90%">Mixed</text></td>
+              <td align="right" thead="row"><text fontsize="90%">604</text></td>
+              <td align="right"><text fontsize="90%">369 (61.09%)</text></td>
+              <td align="right"><text fontsize="90%">128 (21.19%)</text></td>
+              <td align="right"><text fontsize="90%">107 (17.72%)</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="90%">Mixed(Human)</text></td>
+              <td align="right" thead="row"><text fontsize="90%">278</text></td>
+              <td align="right"><text fontsize="90%">189 (67.99%)</text></td>
+              <td align="right"><text fontsize="90%">41 (14.75%)</text></td>
+              <td align="right"><text fontsize="90%">48 (17.27%)</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="b" thead="row"><text fontsize="90%">User</text></td>
+              <td align="right" border="b" thead="row"><text fontsize="90%">1,176</text></td>
+              <td align="right" border="b"><text fontsize="90%">804 (68.37%)</text></td>
+              <td align="right" border="b"><text fontsize="90%">254 (21.60%)</text></td>
+              <td align="right" border="b"><text fontsize="90%">118 (10.03%)</text></td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+      <para xml:id="S4.SS1.p3">
+        <p>The table reveals significant differences in abandonment patterns. CRA-only reviewed PRs show a 34.88% closure rate (98 out of 281 PRs), substantially exceeding the 21.60% for human-only reviews (254 out of 1,176 PRs). The mixed reviewer categories demonstrate intermediate outcomes: human-dominated reviews achieve 67.99%, CRA-dominated reviews show 63.25%, and balanced mixed reviews achieve 61.09%. This pattern suggests that human involvement substantially improves merge outcomes, even when CRAs are present. And the noticeable part is human-only user merged rate 23.17 percentage points higher than the CRA-only.</p>
+      </para>
+      <para xml:id="S4.SS1.p4">
+        <p>To validate statistical significance, we perform a chi-squared test of independence between reviewer type and PR outcome. The test yields <Math mode="inline" tex="\chi^{2}=83.0319" text="chi ^ 2 = 83.0319" xml:id="S4.SS1.p4.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMApp>
+                  <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" name="chi" role="UNKNOWN">χ</XMTok>
+                  <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                </XMApp>
+                <XMTok meaning="83.0319" role="NUMBER">83.0319</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> with 8 degrees of freedom and <Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.SS1.p4.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, demonstrating a statistically significant association between reviewer type and merge outcomes.</p>
+      </para>
+<!--  %“vspace–0.5cm˝ -->      <para class="ltx_noindent" xml:id="S4.SS1.p5">
+        <p><inline-para class="ltx_minipage" framed="rectangle" vattach="middle" width="420.6pt">
+            <para xml:id="S4.SS1.p5.p1">
+              <p><text font="bold">Answer to RQ1:</text> CRA-only reviewed PRs achieve a 45.20% merge rate, 23.17 percentage points lower than human-only PRs (68.37%), with significantly higher abandonment (34.88% vs 21.60%). This difference is statistically significant (<Math mode="inline" tex="\chi^{2}=83.0319" text="chi ^ 2 = 83.0319" xml:id="S4.SS1.p5.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMApp>
+                        <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" name="chi" role="UNKNOWN">χ</XMTok>
+                        <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                      </XMApp>
+                      <XMTok meaning="83.0319" role="NUMBER">83.0319</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>, <Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.SS1.p5.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                      <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>).</p>
+            </para>
+          </inline-para> </p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="autoref">subsection 4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=". ">4.2</tag>Signal-to-Noise Ratio in CRAs Comments</title>
+      <toctitle><tag close=" ">4.2</tag>Signal-to-Noise Ratio in CRAs Comments</toctitle>
+      <para xml:id="S4.SS2.p1">
+        <p>RQ1 revealed that CRA-only reviewed PRs experience a substantially higher abandonment rate (34.88%) compared to other reviewer types in Table <ref labelref="LABEL:tab:commented_outcomes"/>. To understand why CRA-only reviewed PRs show lower merge rates, we analyze the signal-to-noise ratio of the 98 closed CRA-only reviewed PRs. Figure <ref labelref="LABEL:fig:signal_distribution"/>(a) presents the distribution across four signal ratio categories. The data reveals a heavily skewed pattern: 59 PRs (60.2%) fall into the 0-30% signal range, indicating more than half contain predominantly noisy comments. Additionally, 14 PRs (14.3%) achieve 31-59%, 7 PRs (7.1%) reach 60-79%, while 18 PRs (18.4%) achieve 80-100% signal ratio. This overwhelming concentration in the lowest category suggests that low signal-to-noise ratio is a primary factor in PR abandonment.</p>
+      </para>
+<!--  %**** main.tex Line 225 **** -->      <para xml:id="S4.SS2.p2">
+        <p>Figure <ref labelref="LABEL:fig:signal_distribution"/>(b) shows the relationship between signal ratio and comment volume. PRs with great signal ratios (<Math mode="inline" tex="\geq" text="&gt;=" xml:id="S4.SS2.p2.m1">
+            <XMath>
+              <XMTok meaning="greater-than-or-equals" name="geq" role="RELOP">≥</XMTok>
+            </XMath>
+          </Math>0.80, dark green) cluster in the 1 to 3 comment range, achieving ratios near 1.0, indicating high-quality CRA reviews provide concise feedback. PRs with good signal ratios (0.60-0.79, light green) scatter between 2 to 6 comments. In contrast, PRs with poor signal ratios (<Math mode="inline" tex="&lt;" text="less" xml:id="S4.SS2.p2.m2">
+            <XMath>
+              <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+            </XMath>
+          </Math>0.30, dark red) concentrate heavily at the bottom across 1 to 8 comments, exhibiting ratios near 0.0. The middle-quality PRs (0.30-0.59, yellow-orange) scatter throughout with ratios between 0.20-0.50. This demonstrates that comment volume alone does not determine quality; the proportion of actionable feedback is critical.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:signal_distribution" placement="htbp" xml:id="S4.F1">
+        <tags>
+          <tag>Figure 1</tag>
+          <tag role="autoref">Figure 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Figure 1</tag>
+        </tags>
+        <graphics candidates="signal_ratio_analysis_simplified.pdf" class="ltx_centering" graphic="signal_ratio_analysis_simplified.pdf" options="width=433.62pt" xml:id="S4.F1.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">1</tag>Signal-to-noise ratio distribution across closed CRA-only PRs</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 1</tag>Signal-to-noise ratio distribution across closed CRA-only PRs</caption>
+      </figure>
+      <para xml:id="S4.SS2.p3">
+        <p>We investigate the 98 closed PRs to identify which CRAs contribute to the noise problem. We find 13 unique CRAs, with github-advanced-security[bot] having the highest count (36 PRs), followed by Copilot (24 PRs) and ellipsis-dev[bot] (11 PRs). However, PR count does not correlate with quality. Copilot achieves only a 19.79% average signal ratio, while github-advanced-security[bot] achieves 27.62%. Multiple CRAs show very low ratios: codefactor-io[bot] at 0.00%, aikido-pr-checks[bot] at 20.00%, semgrep-code-assistant-ws[bot] at 25.00%. Only semgrep-code-getsentry[bot] achieves 100.00%, though it reviewed just 1 PR. Among CRAs with substantial counts, entelligence-ai-pr-reviews[bot] shows the highest ratio at 52.29% (7 PRs), followed by cursor[bot] at 43.40% (5 PRs). Critically, 12 of 13 CRAs (92.31%) exhibit average signal ratios below 60%.</p>
+      </para>
+<!--  %“vspace–0.05cm˝ -->      <para class="ltx_noindent" xml:id="S4.SS2.p4">
+        <p><inline-para class="ltx_minipage" framed="rectangle" vattach="middle" width="420.6pt">
+            <para xml:id="S4.SS2.p4.p1">
+              <p><text font="bold">Answer to RQ2:</text> Among 98 closed CRA-only PRs, 60.2% show 0–30% signal ratios, and 12 of 13 CRAs exhibit ratios below 60%, confirming that low signal-to-noise ratio substantially contributes to PR abandonment.</p>
+            </para>
+          </inline-para> </p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=". ">5</tag>Threats to Validity</title>
+    <toctitle><tag close=" ">5</tag>Threats to Validity</toctitle>
+    <para xml:id="S5.p1">
+      <p><text font="bold">Construct Validity:</text> Our keyword-based signal-to-noise classification may miss actionable feedback without keywords or incorrectly label keyword-containing but irrelevant comments. We manually validated keyword-matched comments to mitigate this. Our priority-based review state classification was cross-checked against GitHub labels for consistency.</p>
+    </para>
+    <para xml:id="S5.p2">
+      <p><text font="bold">Conclusion Validity:</text> Manual validation can introduce bias or misclassification. To mitigate this, two researchers independently classified comments, discussed disagreements, and iteratively refined keyword lists. While our chi-squared test shows statistically significant associations between reviewer type and PR outcomes, correlation does not imply causation.
+<!--  %**** main.tex Line 250 **** --></p>
+    </para>
+    <para xml:id="S5.p3">
+      <p><text font="bold">External Validity:</text> Our findings are based on 3,109 PRs from the AIDev dataset on GitHub repositories with AI-generated code, which may not generalize to proprietary repositories, other platforms, or projects without CRAs. However, the dataset spans diverse domains, sizes, and maturity levels, providing a strong basis for understanding CRA behavior in open-source environments.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S6">
+    <tags>
+      <tag>6</tag>
+      <tag role="autoref">section 6</tag>
+      <tag role="refnum">6</tag>
+      <tag role="typerefnum">§6</tag>
+    </tags>
+    <title><tag close=". ">6</tag>Related Work</title>
+    <toctitle><tag close=" ">6</tag>Related Work</toctitle>
+    <para xml:id="S6.p1">
+      <p>Studies have examined AI coding agents in PR workflows. Watanabe et al. showed that agentic PRs are used for maintenance tasks like refactoring, documentation, and test generation <cite class="ltx_citemacro_citep">(<bibref bibrefs="Watanabe_2025_AgenticPR" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Horikawa et al. reported that AI agents perform refactorings, including renaming and type-related edits <cite class="ltx_citemacro_citep">(<bibref bibrefs="Horikawa_2025_AgenticRefactoring" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Twist found that agents import libraries but rarely add new dependencies <cite class="ltx_citemacro_citep">(<bibref bibrefs="Twist_2025_LibraryUsage" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. These studies focus on what PRs change, not how review comments affect outcomes.</p>
+    </para>
+    <para xml:id="S6.p2">
+      <p>Researchers have studied CRAs in open-source software. Wessel et al. found that agents reduce manual work and standardize feedback, but introduce noise and harm communication when poorly aligned <cite class="ltx_citemacro_citep">(<bibref bibrefs="Wessel_2020_BotsSurvey" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Recent work examines LLM-based review tools in industry. Ramesh et al. reported that developers found an LLM assistant helpful but relied on human judgment for decisions <cite class="ltx_citemacro_citep">(<bibref bibrefs="Ramesh_2025_Ericsson" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Vijayvergiya et al. deployed AutoCommenter at Google, showing these tools can work at scale <cite class="ltx_citemacro_citep">(<bibref bibrefs="Vijayvergiya_2024_AutoCommenter" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. These studies examine tool adoption and developer views rather than PR outcomes.</p>
+    </para>
+    <para xml:id="S6.p3">
+      <p>Other studies investigate whether LLMs correctly understand code review content. Lin et al. proposed CodeReviewQA, showing that many models struggle with identifying review intent and required changes <cite class="ltx_citemacro_citep">(<bibref bibrefs="Lin_2025_CodeReviewQA" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. This indicates AI-generated comments may suffer from limited precision. Beyond review generation, researchers examined how context shapes workflows. Chatlatanagulchai et al. found developers often provide build instructions but less frequently document security and policy constraints <cite class="ltx_citemacro_citep">(<bibref bibrefs="Chatlatanagulchai_2025_AgentREADMEs" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. TiCoder shows that structured interaction reduces cognitive load and improves evaluation of AI-generated code <cite class="ltx_citemacro_citep">(<bibref bibrefs="Fakhoury_2024_TiCoder" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>.</p>
+    </para>
+    <para xml:id="S6.p4">
+      <p>Prior work has explored agent-authored PRs <cite class="ltx_citemacro_citep">(<bibref bibrefs="Watanabe_2025_AgenticPR" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="Horikawa_2025_AgenticRefactoring" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="Twist_2025_LibraryUsage" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, traditional CRAs <cite class="ltx_citemacro_citep">(<bibref bibrefs="Wessel_2020_BotsSurvey" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, LLM-based review tools <cite class="ltx_citemacro_citep">(<bibref bibrefs="Ramesh_2025_Ericsson" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="Vijayvergiya_2024_AutoCommenter" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="Lin_2025_CodeReviewQA" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, and context in workflows <cite class="ltx_citemacro_citep">(<bibref bibrefs="Chatlatanagulchai_2025_AgentREADMEs" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="Fakhoury_2024_TiCoder" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. However, these studies focus on authoring behavior or perception rather than how reviewer composition and comment quality relate to merge and abandonment outcomes.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S7">
+    <tags>
+      <tag>7</tag>
+      <tag role="autoref">section 7</tag>
+      <tag role="refnum">7</tag>
+      <tag role="typerefnum">§7</tag>
+    </tags>
+    <title><tag close=". ">7</tag>Discussion</title>
+    <toctitle><tag close=" ">7</tag>Discussion</toctitle>
+    <para xml:id="S7.p1">
+      <p><text font="bold">The Need for Human Code Reviewers:</text> Our analysis reveals two critical takeaways. First, CRAs cannot effectively replace human reviewers: while industry reports claim 80% of PRs need no human comments <cite class="ltx_citemacro_citep">(<bibref bibrefs="QodoReport_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> <cite class="ltx_citemacro_citep">(<bibref bibrefs="GreptileReport_2025" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, CRA-only reviews achieve only 45.20% merge rates versus 68.37% for human-only reviews, with 34.88% abandonment rates. Second, most CRAs generate predominantly noisy feedback: signal-to-noise analysis shows 60.2% of closed CRA-only PRs fall into the 0-30% signal range, and 92.31% of CRAs perform below 60% signal quality. This noise burden overwhelms developers, forcing them to sift through irrelevant feedback, increasing cognitive load without providing clear improvement paths.</p>
+    </para>
+    <para xml:id="S7.p2">
+      <p><text font="bold">Effective Use Cases for Code Review Agents:</text> For developers, we provide actionable strategies by identifying concrete use cases for code review agents. Developers should configure CRAs for narrow, specific checks such as security vulnerabilities or style violations rather than general-purpose review, because specialized checks reduce false positives and improve feedback relevance. Specialized CRAs like semgrep-code-getsentry[bot] demonstrate higher precision in the AIDev dataset. Enforce human approval before merging, as human-dominated reviews achieve 67.99% merge rates by providing contextual judgment that CRAs lack. Establish workflows where CRA comments trigger human review rather than direct developer responses, combining automation efficiency with human judgment on design and architectural decisions.</p>
+    </para>
+<!--  %**** main.tex Line 275 **** -->  </section>
+  <section inlist="toc" xml:id="S8">
+    <tags>
+      <tag>8</tag>
+      <tag role="autoref">section 8</tag>
+      <tag role="refnum">8</tag>
+      <tag role="typerefnum">§8</tag>
+    </tags>
+    <title><tag close=". ">8</tag>Conclusion</title>
+    <toctitle><tag close=" ">8</tag>Conclusion</toctitle>
+    <para xml:id="S8.p1">
+      <p>This paper investigates the effectiveness of CRA code reviews in Agentic PR workflows. While industry reports claim that 80% of PRs receive no human comments when AI review is enabled, our analysis of 3,109 PRs reveals a contrasting reality. CRA-only reviewed PRs achieve a 45.20% merge rate, significantly lower than the 68.37% rate for human-only reviewed PRs, with substantially higher abandonment rates (34.88% vs 21.60%). Investigation of the 98 closed CRA-only PRs reveals that 60.2% fall into the 0-30% signal range, and 12 of 13 unique CRAs (92.31%) exhibit average signal ratios below 60%. This demonstrates that current CRAs frequently generate noisy feedback with minimal actionable content, which increases abandonment risk and burdens developers with low-value comments. The mixed reviewer results show that human involvement substantially improves outcomes.</p>
+    </para>
+    <para xml:id="S8.p2">
+      <p>As autonomous coding agents generate code at an unprecedented scale, our findings reveal an urgent need of extend this work in three directions. First, develop metrics that quantify actionable signals in automated review comments beyond merge outcomes. Second, analyze reviewer effort by examining comment volume, requested changes, and integration feedback to design CRAs that reduce review burden. Third, investigate decision models that determine when automated reviews require human involvement based on review outcomes and past agent performance. Pursuing these directions can enable empirically grounded review systems that improve PR outcomes while mitigating the risk of abandonment.</p>
+    </para>
+  </section>
+  <bibliography citestyle="authoryear" files="references" xml:id="bib">
+    <title>References</title>
+  </bibliography>
+</document>

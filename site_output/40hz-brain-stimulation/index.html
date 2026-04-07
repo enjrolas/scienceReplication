@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40hz brain stimulation - Science Replication</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8f9fa;
+        }
+        header {
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 2rem;
+            text-align: center;
+        }
+        header h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
+        header h1 a { color: inherit; text-decoration: none; }
+        header h1 a:hover { opacity: 0.85; }
+        header p { color: #a0a0b8; font-size: 0.95rem; }
+        nav {
+            background: #16213e;
+            padding: 0.8rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            color: #7ec8e3;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        nav a:hover, nav a.active { background: rgba(126, 200, 227, 0.15); }
+        main { max-width: 960px; margin: 2rem auto; padding: 0 1.5rem; }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.85rem;
+            border-top: 1px solid #ddd;
+            margin-top: 3rem;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge-arxiv { background: #b31b1b; color: white; }
+        .badge-biorxiv { background: #7a2d2d; color: white; }
+        .badge-latex { background: #008080; color: white; }
+        .badge-pdf { background: #c0392b; color: white; }
+        .badge-data { background: #2e86c1; color: white; }
+        
+.summary { margin-bottom: 1.5rem; color: #555; }
+.paper {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+.paper h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+.paper h3 a { color: #1a1a2e; text-decoration: none; }
+.paper h3 a:hover { color: #2e86c1; }
+.paper .authors { color: #555; font-size: 0.85rem; margin-bottom: 0.4rem; }
+.paper .abstract {
+    font-size: 0.9rem;
+    color: #444;
+    margin: 0.6rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.paper .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.paper .date { font-size: 0.8rem; color: #888; }
+.paper-links {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+}
+.paper-links a {
+    text-decoration: none;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+.paper-links a:hover { opacity: 0.8; }
+.link-pdf { background: #fde8e8; color: #c0392b; }
+.link-latex { background: #e0f5f5; color: #008080; }
+.link-paper { background: #eee; color: #333; }
+.dataset-links {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+.dataset-links a {
+    display: inline-block;
+    margin: 0.2rem 0.3rem 0.2rem 0;
+    padding: 0.2rem 0.5rem;
+    background: #e8f0fe;
+    color: #1a56db;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+.dataset-links a:hover { background: #d0e0fd; }
+.dataset-verified { border-left: 2px solid #27ae60; }
+.dataset-unverified { border-left: 2px solid #ccc; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/">Experiments in Replicating Science</a></h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        
+<a href="/40hz-brain-stimulation/" class="active">40hz brain stimulation</a>
+
+        <a href="/upload/">Upload Paper</a>
+        <a href="/manage/">Manage</a>
+    </nav>
+    <main>
+        
+<h2 style="margin-bottom: 0.5rem;">40hz brain stimulation</h2>
+
+
+<div class="summary">
+    18 papers &mdash;
+    18 with LaTeX source,
+    4 with dataset links
+</div>
+
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.04511v1" target="_blank" rel="noopener">MedROI: Codec-Agnostic Region of Interest-Centric Compression for Medical Images</a></h3>
+    <div class="authors">Jiwon Kim, Ikbeom Jang</div>
+    <div class="date">April 6, 2026</div>
+    <div class="abstract">Medical imaging archives are growing rapidly in both size and resolution, making efficient compression increasingly important for storage and data transfer. Most existing codecs compress full images/volumes(including non-diagnostic background) or apply differential ROI coding that still preserves background bits. We propose MedROI, a codec-agnostic, plug-and-play ROI-centric framework that discards background voxels prior to compression. MedROI extracts a tight tissue bounding box via lightweight intensity-based thresholding and stores a fixed 54byte meta data record to enable spatial restoration during decompression. The cropped ROI is then compressed using any existing 2D or 3D codec without architectural modifications or retraining. We evaluate MedROI on 200 T1-weighted brain MRI volumes from ADNI using 6 codec configurations spanning conventional codecs (JPEG2000 2D/3D, HEIF) and neural compressors (LIC_TCM, TCM+AuxT, BCM-Net, SirenMRI). MedROI yields statistically significant improvements in compression ratio and encoding/decoding time for most configurations (two-sided t-test with multiple-comparison correction), while maintaining comparable reconstruction quality when measured within the ROI; HEIF is the primary exception in compression-ratio gains. For example, on JPEG20002D (lv3), MedROI improves CR from 20.35 to 27.37 while reducing average compression time from 1.701s to 1.380s. Code is available at https://github.com/labhai/MedROI.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        <span class="badge badge-data">Data</span>
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04511v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04511" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04511" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04511/2604.04511_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+    <div class="dataset-links">
+        <strong>Datasets:</strong>
+        
+        <a href="https://github.com/labhai/MedROI" target="_blank" rel="noopener"
+           class="dataset-unverified"
+           >
+            github.com
+        </a>
+        
+    </div>
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.04514v1" target="_blank" rel="noopener">SuperLocalMemory V3.3: The Living Brain -- Biologically-Inspired Forgetting, Cognitive Quantization, and Multi-Channel Retrieval for Zero-LLM Agent Memory Systems</a></h3>
+    <div class="authors">Varun Pratap Bhardwaj</div>
+    <div class="date">April 6, 2026</div>
+    <div class="abstract">AI coding agents operate in a paradox: they possess vast parametric knowledge yet cannot remember a conversation from an hour ago. Existing memory systems store text in vector databases with single-channel retrieval, require cloud LLMs for core operations, and implement none of the cognitive processes that make human memory effective.
+  We present SuperLocalMemory V3.3 (&quot;The Living Brain&quot;), a local-first agent memory system implementing the full cognitive memory taxonomy with mathematical lifecycle dynamics. Building on the information-geometric foundations of V3.2 (arXiv:2603.14588), we introduce five contributions: (1) Fisher-Rao Quantization-Aware Distance (FRQAD) -- a new metric on the Gaussian statistical manifold achieving 100% precision at preferring high-fidelity embeddings over quantized ones (vs 85.6% for cosine), with zero prior art; (2) Ebbinghaus Adaptive Forgetting with lifecycle-aware quantization -- the first mathematical forgetting curve in local agent memory coupled to progressive embedding compression, achieving 6.7x discriminative power; (3) 7-channel cognitive retrieval spanning semantic, keyword, entity graph, temporal, spreading activation, consolidation, and Hopfield associative channels, achieving 70.4% on LoCoMo in zero-LLM Mode A; (4) memory parameterization implementing Long-Term Implicit memory via soft prompts; (5) zero-friction auto-cognitive pipeline automating the complete memory lifecycle.
+  On LoCoMo, V3.3 achieves 70.4% in Mode A (zero-LLM), with +23.8pp on multi-hop and +12.7pp on adversarial. V3.2 achieved 74.8% Mode A and 87.7% Mode C; the 4.4pp gap reflects a deliberate architectural trade-off. SLM V3.3 is open source under the Elastic License 2.0, runs entirely on CPU, with over 5,000 monthly downloads.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        <span class="badge badge-data">Data</span>
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04514v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04514" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04514" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04514/2604.04514_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+    <div class="dataset-links">
+        <strong>Datasets:</strong>
+        
+        <a href="https://github.com/qualixar/superlocalmemory" target="_blank" rel="noopener"
+           class="dataset-unverified"
+           >
+            github.com
+        </a>
+        
+    </div>
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.04025v1" target="_blank" rel="noopener">Neurological Plausibility of AI-Generated Music for Commercial Environments: An In-Silico Cortical Investigation Using Wubble and TRIBE v2</a></h3>
+    <div class="authors">Shaad Sufi</div>
+    <div class="date">April 5, 2026</div>
+    <div class="abstract">Background music shapes attention, affect, and approach behavior in commercial environments, yet the neural plausibility of AI-generated music for such settings remains poorly characterized. We present an in-silico pilot study that combines Wubble, a generative music system, with TRIBE v2, a publicly released whole-brain encoding model, to estimate cortical response profiles for prompt-conditioned retail music. Five fully instrumental tracks were generated to span low-to-high arousal, sparse-to-dense arrangement, and neutral-to-positive valence prompts, then analyzed with audio-only TRIBE v2 inference on loudness-normalized waveforms. Analysis focused on fsaverage5 cortical predictions summarized over auditory, superior temporal, temporo-parietal, and inferior frontal HCP parcels. The fast bright major-pop condition produced the largest whole-cortex mean activation (0.0402), the strongest prefrontal ROI composite response (0.0704), and the highest parcel means in IFJa (0.1102), IFJp (0.0995), A5 (0.0188), and area 45 (0.0015). Pairwise spatial correlations ranged from 0.787 to 0.974, indicating that prompt variation modulated predicted cortical states rather than yielding a single undifferentiated response profile. Predicted cortical surface maps further revealed visually distinct spatial organization between low-arousal and high-arousal conditions. These results support a cautious claim of cortical neurological plausibility: prompt-conditioned AI music can systematically shift predicted auditory-temporal-prefrontal patterns relevant to salience and valuation. Although the study does not establish subcortical reward engagement or consumer behavior, it provides a reproducible framework for neural pre-screening and pre-optimization of commercial music generation against biologically informed cortical proxies.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04025v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04025" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04025" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04025/2604.04025_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.04313v1" target="_blank" rel="noopener">Convolutional Neural Network and Adversarial Autoencoder in EEG images classification</a></h3>
+    <div class="authors">Albert Nasybullin, Semen Kurkin</div>
+    <div class="date">April 5, 2026</div>
+    <div class="abstract">In this paper, we consider applying computer vision algorithms for the classification problem one faces in neuroscience during EEG data analysis. Our approach is to apply a combination of computer vision and neural network methods to solve human brain activity classification problems during hand movement. We pre-processed raw EEG signals and generated 2D EEG topograms. Later, we developed supervised and semi-supervised neural networks to classify different motor cortex activities.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04313v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04313" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04313" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04313/2604.04313_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.04156v1" target="_blank" rel="noopener">Two-Sample Testing for Multivariate Cross-Correlation Functions with Applications to Gut-Brain Reward Learning</a></h3>
+    <div class="authors">Bhaskar Ray, Tùng Bùi, William Matthew Howe, Srijan Sengupta</div>
+    <div class="date">April 5, 2026</div>
+    <div class="abstract">Cross-correlation functions (CCFs) are classical tools for studying lead-lag relationships between paired time series, but they are most often used descriptively rather than inferentially. Motivated by mouse experiments on gut-brain interactions in reward learning, we carry out a two-sample hypothesis test for formal statistical inference on collections of subject-specific CCF curves. In our application, each experimental session yields two related CCFs describing the temporal association of dopamine activity with locomotor velocity and acceleration, which leads naturally to a multivariate functional data formulation. We treat each empirical CCF as a functional observation indexed by lag and test equality of mean multivariate CCF functions across groups using integrated and maximum-type global statistics, \(F_{\mathrm{int}}\) and \(F_{\max}\), constructed from pointwise Hotelling \(T^2\) statistics. The integrated test targets broad differences across the lag domain, whereas the maximum test is sensitive to local differences. Applied to free-feeding and intragastric infusion datasets, the proposed methods detect substantial differences in dopamine-locomotion coupling across brain region and biological sex in the free-feeding experiment, with more selective effects in the infusion setting. The proposed framework provides a flexible and rigorous FDA-based approach for comparing dynamic dependence structures across experimental conditions.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.04156v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.04156" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.04156" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.04156/2604.04156_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03952v1" target="_blank" rel="noopener">Multidimensional physical fitness is associated with reduced dementia risk through proteomic and neuroimaging pathways: a prospective cohort study of the UK Biobank</a></h3>
+    <div class="authors">Yiqing Sun, Runyu Lin, Jiayue Qin, Feiyue Pan, Bingjie Li, Zhigang Yao</div>
+    <div class="date">April 5, 2026</div>
+    <div class="abstract">Dementia affects over 55 million people worldwide, yet whether distinct domains of physical fitness independently protect against neurodegeneration through shared or divergent biological mechanisms remains unknown. Using the UK Biobank (n = 51,517; 12-year follow-up), we integrated epidemiological, proteomic, and neuroimaging analyses to systematically characterize the multidimensional fitness-dementia relationship. Higher handgrip strength, cardiorespiratory fitness, and pulmonary function were each independently associated with reduced dementia risk (HRs 0.50, 0.62, and 0.73, respectively, for highest vs. lowest tertiles), with stronger associations in women and younger individuals. Plasma proteomic profiling revealed domain-specific molecular signatures--neurofilament light chain predominating for muscular and cardiorespiratory fitness, and inflammatory mediators including GDF15 for pulmonary function--with 22-40 proteins per domain independently predicting dementia, converging on neuroinflammatory and neurovascular pathways. Brain MRI analyses identified hippocampal volume as a significant structural mediator (proportion mediated: 3.7-10.1%), indicating structural preservation as one of multiple mechanistic pathways. Population attributable fraction analyses estimated that suboptimal fitness may account for approximately 26% of dementia cases. These findings reveal that multidimensional physical fitness shapes dementia risk through distinct yet converging neuroinflammatory, neurovascular, and structural brain mechanisms, with implications for life-course prevention.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03952v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03952" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03952" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03952/2604.03952_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03619v1" target="_blank" rel="noopener">Can Natural Image Autoencoders Compactly Tokenize fMRI Volumes for Long-Range Dynamics Modeling?</a></h3>
+    <div class="authors">Peter Yongho Kim, Juhyeon Park, Jungwoo Park, Jubin Choi, Jungwoo Seo, Jiook Cha, Taesup Moon</div>
+    <div class="date">April 4, 2026</div>
+    <div class="abstract">Modeling long-range spatiotemporal dynamics in functional Magnetic Resonance Imaging (fMRI) remains a key challenge due to the high dimensionality of the four-dimensional signals. Prior voxel-based models, although demonstrating excellent performance and interpretation capabilities, are constrained by prohibitive memory demands and thus can only capture limited temporal windows. To address this, we propose TABLeT (Two-dimensionally Autoencoded Brain Latent Transformer), a novel approach that tokenizes fMRI volumes using a pre-trained 2D natural image autoencoder. Each 3D fMRI volume is compressed into a compact set of continuous tokens, enabling long-sequence modeling with a simple Transformer encoder with limited VRAM. Across large-scale benchmarks including the UK-Biobank (UKB), Human Connectome Project (HCP), and ADHD-200 datasets, TABLeT outperforms existing models in multiple tasks, while demonstrating substantial gains in computational and memory efficiency over the state-of-the-art voxel-based method given the same input. Furthermore, we develop a self-supervised masked token modeling approach to pre-train TABLeT, which improves the model&#x27;s performance for various downstream tasks. Our findings suggest a promising approach for scalable and interpretable spatiotemporal modeling of brain activity. Our code is available at https://github.com/beotborry/TABLeT.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        <span class="badge badge-data">Data</span>
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03619v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03619" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03619" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03619/2604.03619_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+    <div class="dataset-links">
+        <strong>Datasets:</strong>
+        
+        <a href="https://github.com/beotborry/TABLeT" target="_blank" rel="noopener"
+           class="dataset-unverified"
+           >
+            github.com
+        </a>
+        
+    </div>
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03565v1" target="_blank" rel="noopener">Personality Requires Struggle: Three Regimes of the Baldwin Effect in Neuroevolved Chess Agents</a></h3>
+    <div class="authors">Diego Armando Resendez Prado</div>
+    <div class="date">April 4, 2026</div>
+    <div class="abstract">Can lifetime learning expand behavioral diversity over evolutionary time, rather than collapsing it? Prior theory predicts that plasticity reduces variance by buffering organisms against environmental noise. We test this in a competitive domain: chess agents with eight NEAT-evolved neural modules, Hebbian within-game plasticity, and a desirability-domain signal chain with imagination. Across 10~seeds per Hebbian condition, a variance crossover emerges: Hebbian ON starts with lower cross-seed variance than OFF, then surpasses it at generation~34. The crossover trend is monotonic (\r{ho} = 0.91, p &lt; 10^{-6): plasticity&#x27;s effect on behavioral variance reverses over evolutionary time, initially compressing diversity (consistent with prior predictions) then expanding it as evolved Perception differences are amplified through imagination -- a feedback loop that mutation alone cannot sustain.
+  The result is structured behavioral divergence: evolved agents select different moves on the same positions (62\% disagreement), develop distinct opening repertoires, piece preferences, and game lengths. These are not different sampling policies -- they are reproducible behavioral signatures (ICC &gt; 0.8) with interpretable signal chain configurations. Three regimes appear depending on opponent type: exploration (Hebbian ON, heterogeneous opponent), lottery (Hebbian OFF, elitism lock-in), and transparent (same-model opponent, brain self-erasure). The transparent regime generates a falsifiable prediction: self-play systems may systematically suppress behavioral diversity by eliminating the heterogeneity that personality requires.
+  \textbf{Keywords: Baldwin Effect, neuroevolution, NEAT, Hebbian learning, chess, cognitive architecture, personality emergence, imagination</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03565v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03565" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03565" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03565/2604.03565_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.02886v1" target="_blank" rel="noopener">High-dimensional Many-to-many-to-many Mediation Analysis</a></h3>
+    <div class="authors">Tien Dat Nguyen, Trung Khang Tran, Cong Khanh Truong, Duy-Cat Can, Binh T. Nguyen, Oliver Y. Chén</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">We study high-dimensional mediation analysis in which exposures, mediators, and outcomes are all multivariate, and both exposures and mediators may be high-dimensional. We formalize this as a many (exposures)-to-many (mediators)-to-many (outcomes) (MMM) mediation analysis problem. Methodologically, MMM mediation analysis simultaneously performs variable selection for high-dimensional exposures and mediators, estimates the indirect effect matrix (i.e., the coefficient matrices linking exposure-to-mediator and mediator-to-outcome pathways), and enables prediction of multivariate outcomes. Theoretically, we show that the estimated indirect effect matrices are consistent and element-wise asymptotically normal, and we derive error bounds for the estimators. To evaluate the efficacy of the MMM mediation framework, we first investigate its finite-sample performance, including convergence properties, the behavior of the asymptotic approximations, and robustness to noise, via simulation studies. We then apply MMM mediation analysis to data from the Alzheimer&#x27;s Disease Neuroimaging Initiative to study how cortical thickness of 202 brain regions may mediate the effects of 688 genome-wide significant single nucleotide polymorphisms (SNPs) (selected from approximately 1.5 million SNPs) on eleven cognitive-behavioral and diagnostic outcomes. The MMM mediation framework identifies biologically interpretable, many-to-many-to-many genetic-neural-cognitive pathways and improves downstream out-of-sample classification and prediction performance. Taken together, our results demonstrate the potential of MMM mediation analysis and highlight the value of statistical methodology for investigating complex, high-dimensional multi-layer pathways in science. The MMM package is available at https://github.com/THELabTop/MMM-Mediation.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        <span class="badge badge-data">Data</span>
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.02886v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.02886" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.02886" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.02886/2604.02886_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+    <div class="dataset-links">
+        <strong>Datasets:</strong>
+        
+        <a href="https://github.com/THELabTop/MMM-Mediation" target="_blank" rel="noopener"
+           class="dataset-unverified"
+           >
+            github.com
+        </a>
+        
+    </div>
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.02748v1" target="_blank" rel="noopener">Visual Instruction-Finetuned Language Model for Versatile Brain MR Image Tasks</a></h3>
+    <div class="authors">Jonghun Kim, Sinyoung Ra, Hyunjin Park</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">LLMs have demonstrated remarkable capabilities in linguistic reasoning and are increasingly adept at vision-language tasks. The integration of image tokens into transformers has enabled direct visual input and output, advancing research from image-to-text descriptions to text-to-image generation. However, simple text-to-image generation holds limited clinical utility. In medical imaging, tasks such as image segmentation for localizing pathologies or image translation for reconstructing missing sequences have much greater clinical importance. Despite this, integrating these diverse, clinically relevant tasks within a single, versatile language model remains unexplored. Our method, LLaBIT (Large Language Model for Brain Image Translation), extends the visual reasoning of LLMs to these clinically meaningful tasks in the brain MRI domain. To mitigate the spatial information loss inherent in image tokenization, we incorporate a mechanism to reuse feature maps from the image encoder, minimizing data degradation. We also generate text data using LLMs with strict predefined instructions to augment limited image-text paired data in brain MRI. We comprehensively evaluated our method on five brain MRI datasets across four distinct tasks: report generation, visual question answering, image segmentation, and image translation. Our model not only demonstrated superior performance across all tasks but also outperformed specialized, task-specific models in direct comparisons, highlighting its efficacy and versatility</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.02748v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.02748" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.02748" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.02748/2604.02748_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03480v1" target="_blank" rel="noopener">Large Language Models Align with the Human Brain during Creative Thinking</a></h3>
+    <div class="authors">Mete Ismayilzada, Simone A. Luchini, Abdulkadir Gokce, Badr AlKhamissi, Antoine Bosselut, Antonio Laverghetta, Lonneke van der Plas, Roger E. Beaty</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">Creative thinking is a fundamental aspect of human cognition, and divergent thinking-the capacity to generate novel and varied ideas-is widely regarded as its core generative engine. Large language models (LLMs) have recently demonstrated impressive performance on divergent thinking tests and prior work has shown that models with higher task performance tend to be more aligned to human brain activity. However, existing brain-LLM alignment studies have focused on passive, non-creative tasks. Here, we explore brain alignment during creative thinking using fMRI data from 170 participants performing the Alternate Uses Task (AUT). We extract representations from LLMs varying in size (270M-72B) and measure alignment to brain responses via Representational Similarity Analysis (RSA), targeting the creativity-related default mode and frontoparietal networks. We find that brain-LLM alignment scales with model size (default mode network only) and idea originality (both networks), with effects strongest early in the creative process. We further show that post-training objectives shape alignment in functionally selective ways: a creativity-optimized \texttt{Llama-3.1-8B-Instruct} preserves alignment with high-creativity neural responses while reducing alignment with low-creativity ones; a human behavior fine-tuned model elevates alignment with both; and a reasoning-trained variant shows the opposite pattern, suggesting chain-of-thought training steers representations away from creative neural geometry toward analytical processing. These results demonstrate that post-training objectives selectively reshape LLM representations relative to the neural geometry of human creative thought.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03480v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03480" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03480" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03480/2604.03480_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03432v1" target="_blank" rel="noopener">YANA: Bridging the Neuromorphic Simulation-to-Hardware Gap</a></h3>
+    <div class="authors">Brian Pachideh, Sven Nitzsche, Moritz Neher, Jann Krausse, Carmen Weigelt, Klaus Knobloch, Victor Pazmino Betancourt, Juergen Becker</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">Spiking Neural Networks (SNNs) promise significant advantages over conventional Artificial Neural Networks (ANNs) for applications requiring real-time processing of temporally sparse data streams under strict power constraints -- a concept known as the Neuromorphic Advantage. However, the limited availability of neuromorphic hardware creates a substantial simulation-to-hardware gap that impedes algorithmic innovation, hardware-software co-design, and the development of mature open-source ecosystems. To address this challenge, we introduce Yet Another Neuromorphic Accelerator (YANA), an FPGA-based digital SNN accelerator designed to bridge this gap by providing an accessible hardware and software framework for neuromorphic computing. YANA implements a five-stage, event-driven processing pipeline that fully exploits temporal and spatial sparsity while supporting arbitrary SNN topologies through point-to-point neuron connections. The architecture features an input preprocessing scheme that maintains steady event processing at one event per cycle without buffer overflow risks, and implements hardware-efficient event-driven neuron updates using lookup tables for leak calculations. We demonstrate YANA&#x27;s sparsity exploitation capabilities through experiments on the Spiking Heidelberg Digits dataset, showing near-linear scaling of inference time with both spatial and temporal sparsity levels. Deployed on the accessible AMD Kria KR260 platform, a single YANA core utilizes 740 LUTs, 918 registers, 7 BRAMS and 24 URAMs, supporting up to $2^{17}$ synapses and $2^{10}$ neurons. We release the YANA framework as an open-source project, providing an end-to-end solution for training, optimizing, and deploying SNNs that integrates with existing neuromorphic computing tools through the Neuromorphic Intermediate Representation (NIR).</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03432v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03432" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03432" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03432/2604.03432_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.03150v1" target="_blank" rel="noopener">HyperFitS -- Hypernetwork Fitting Spectra for metabolic quantification of ${}^1$H MR spectroscopic imaging</a></h3>
+    <div class="authors">Paul J. Weiser, Gulnur Ungan, Amirmohammad Shamaei, Georg Langs, Wolfgang Bogner, Malte Hoffmann, Antoine Klauser, Ovidiu C. Andronesi</div>
+    <div class="date">April 3, 2026</div>
+    <div class="abstract">Purpose: Proton magnetic resonance spectroscopic imaging ($^1$H MRSI) enables the mapping of whole-brain metabolites concentrations in-vivo. However, a long-standing problem for its clinical applicability is the metabolic quantification, which can require extensive time for spectral fitting. Recently, deep learning methods have been able to provide whole-brain metabolic quantification in only a few seconds. However, neural network implementations often lack configurability and require retraining to change predefined parameter settings. Methods: We introduce HyperFitS, a hypernetwork for spectral fitting for metabolite quantification in whole-brain $^1$H MRSI that flexibly adapts to a broad range of baseline corrections and water suppression factors. Metabolite maps of human subjects acquired at 3T and 7T with isotropic resolutions of 10 mm, 3.4 mm and 2 mm by water-suppressed and water-unsuppressed MRSI were quantified with HyperFitS and compared to conventional LCModel fitting. Results: Metabolic maps show a substantial agreement between the new and gold-standard methods, with significantly faster fitting times by HyperFitS. Quantitative results further highlight the impact of baseline parametrization on metabolic quantification, which can alter results by up to 30%. Conclusion: HyperFitS shows strong agreement with state-of-the-art conventional methods, while reducing processing times from hours to a few seconds. Compared to prior deep learning based spectral fitting methods, HyperFitS enables a wide range of configurability and can adapt to data quality acquired with multiple protocols and field strengths without retraining.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.03150v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.03150" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.03150" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.03150/2604.03150_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.01667v1" target="_blank" rel="noopener">M3D-BFS: a Multi-stage Dynamic Fusion Strategy for Sample-Adaptive Multi-Modal Brain Network Analysis</a></h3>
+    <div class="authors">Rui Dong, Xiaotong Zhang, Jiaxing Li, Yueying Li, Jiayin Wei, Youyong Kong</div>
+    <div class="date">April 2, 2026</div>
+    <div class="abstract">Multi-modal fusion is of great significance in neuroscience which integrates information from different modalities and can achieve better performance than uni-modal methods in downstream tasks. Current multi-modal fusion methods in brain networks, which mainly focus on structural connectivity (SC) and functional connectivity (FC) modalities, are static in nature. They feed different samples into the same model with identical computation, ignoring inherent difference between input samples. This lack of sample adaptation hinders model&#x27;s further performance. To this end, we innovatively propose a multi-stage dynamic fusion strategy (M3D-BFS) for sample-adaptive multi-modal brain network analysis. Unlike other static fusion methods, we design different mixture-of-experts (MoEs) for uni- and multi-modal representations where modules can adaptively change as input sample changes during inference. To alleviate issue of MoE where training of experts may be collapsed, we divide our method into 3 stages. We first train uni-modal encoders respectively, then pretrain single experts of MoEs before finally finetuning the whole model. A multi-modal disentanglement loss is designed to enhance the final representations. To the best of our knowledge, this is the first work for dynamic fusion for multi-modal brain network analysis. Extensive experiments on different real-world datasets demonstrates the superiority of M3D-BFS.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.01667v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.01667" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.01667" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.01889v1" target="_blank" rel="noopener">LI-DSN: A Layer-wise Interactive Dual-Stream Network for EEG Decoding</a></h3>
+    <div class="authors">Chenghao Yue, Zhiyuan Ma, Zhongye Xia, Xinche Zhang, Yisi Zhang, Xinke Shen, Sen Song</div>
+    <div class="date">April 2, 2026</div>
+    <div class="abstract">Electroencephalography (EEG) provides a non-invasive window into brain activity, offering high temporal resolution crucial for understanding and interacting with neural processes through brain-computer interfaces (BCIs). Current dual-stream neural networks for EEG often process temporal and spatial features independently through parallel branches, delaying their integration until a final, late-stage fusion. This design inherently leads to an &quot;information silo&quot; problem, precluding intermediate cross-stream refinement and hindering spatial-temporal decompositions essential for full feature utilization. We propose LI-DSN, a layer-wise interactive dual-stream network that facilitates progressive, cross-stream communication at each layer, thereby overcoming the limitations of late-fusion paradigms. LI-DSN introduces a novel Temporal-Spatial Integration Attention (TSIA) mechanism, which constructs a Spatial Affinity Correlation Matrix (SACM) to capture inter-electrode spatial structural relationships and a Temporal Channel Aggregation Matrix (TCAM) to integrate cosine-gated temporal dynamics under spatial guidance. Furthermore, we employ an adaptive fusion strategy with learnable channel weights to optimize the integration of dual-stream features. Extensive experiments across eight diverse EEG datasets, encompassing motor imagery (MI) classification, emotion recognition, and steady-state visual evoked potentials (SSVEP), consistently demonstrate that LI-DSN significantly outperforms 13 state-of-the-art (SOTA) baseline models, showcasing its superior robustness and decoding performance. The code will be publicized after acceptance.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.01889v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.01889" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.01889" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.01889/2604.01889_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.01932v1" target="_blank" rel="noopener">BraiNCA: brain-inspired neural cellular automata and applications to morphogenesis and motor control</a></h3>
+    <div class="authors">Léo Pio-Lopez, Benedikt Hartl, Michael Levin</div>
+    <div class="date">April 2, 2026</div>
+    <div class="abstract">Most of the Neural Cellular Automata (NCAs) defined in the literature have a common theme: they are based on regular grids with a Moore neighborhood (one-hop neighbour). They do not take into account long-range connections and more complex topologies as we can find in the brain. In this paper, we introduce BraiNCA, a brain-inspired NCA with an attention layer, long-range connections and complex topology. BraiNCAs shows better results in terms of robustness and speed of learning on the two tasks compared to Vanilla NCAs establishing that incorporating attention-based message selection together with explicit long-range edges can yield more sample-efficient and damage-tolerant self-organization than purely local, grid-based update rules. These results support the hypothesis that, for tasks requiring distributed coordination over extended spatial and temporal scales, the choice of interaction topology and the ability to dynamically route information will impact the robustness and speed of learning of an NCA. More broadly, BraiNCA provides brain-inspired NCA formulation that preserves the decentralized local update principle while better reflecting non-local connectivity patterns, making it a promising substrate for studying collective computation under biologically-realistic network structure and evolving cognitive substrates.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.01932v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.01932" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.01932" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.01932/2604.01932_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.02057v1" target="_blank" rel="noopener">Thermodynamic connectivity reveals functional specialization and multiplex organization of extrasynaptic signaling</a></h3>
+    <div class="authors">Giridhar Sunil, Habib Benali, Elkaïoum M. Moutuou</div>
+    <div class="date">April 2, 2026</div>
+    <div class="abstract">Neural communication operates on both fast synaptic transmission and slower, diffusive extrasynaptic signaling, yet how these two modes jointly organize brain function remains unclear. Here, using the complete synaptic and neuropeptidergic connectomes of \emph{Caenorhabditis elegans}, we develop a unified multiplex framework linking anatomical wiring to functional communication. We infer structure-derived functional connectivity from the synaptic connectome using equilibrium principles from statistical physics, yielding a probabilistic map of information flow across all synaptic pathways, and compare this functional layer directly with the extrasynaptic connectome. This reveals a principled functional specialization across four communication regimes: (i) a topology-dependent layer that reinforces and stabilizes synaptic motor circuits, (ii) a topology-resilient modulatory layer supporting global regulation and behavioral state control, (iii) a purely extrasynaptic network sustaining survival and homeostasis, and (iv) a purely synaptic regime mediating rapid, low-latency sensorimotor processing. Together, these findings reveal that synaptic and extrasynaptic signaling form complementary architectures optimized for speed, modulation, robustness, and survival, and provide a general strategy for integrating structural and modulatory connectomes to understand how distinct communication modes cooperate to sustain coherent brain function.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.02057v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.02057" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.02057" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.02057/2604.02057_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+<div class="paper">
+    <h3><a href="https://arxiv.org/abs/2604.02059v1" target="_blank" rel="noopener">Collective attention under digital exposure: A dynamical systems approach</a></h3>
+    <div class="authors">Nuno Crokidakis</div>
+    <div class="date">April 2, 2026</div>
+    <div class="abstract">The widespread use of digital devices has raised growing concerns about its impact on sustained attention at the population level. In this work, we propose a minimal dynamical framework to describe the collective evolution of attention under continuous exposure to screen-mediated environments. We introduce a macroscopic variable representing the average level of sustained attention and model its dynamics as the result of competing mechanisms: intrinsic cognitive recovery and degradation induced by digital stimulation. The digital environment is treated as an external control parameter that continuously perturbs the system, leading to a relaxational dynamics. The proposed mechanisms are consistent with empirical findings on attentional dynamics under digital exposure. We first analyze a linear formulation, which provides an analytically tractable baseline, and then extend the model by incorporating a nonlinear degradation term that captures amplification effects under high-intensity stimulation. We derive an explicit expression for the stationary state and show that the equilibrium attention level decreases monotonically with increasing exposure. An effective potential formulation is introduced, revealing that digital overstimulation progressively deforms the dynamical landscape, shifting the stable state toward regimes of reduced attention without generating multiple equilibria. Importantly, the model does not rely on social contagion or interaction-driven bistability, but instead describes a continuous displacement of the collective cognitive regime under environmental pressure. Our results suggest that the impact of digital technologies on attention may be understood as a gradual macroscopic effect emerging from persistent external stimulation, rather than as a transition between competing behavioral states.</div>
+    <div class="badges">
+        <span class="badge badge-arxiv">arXiv</span>
+        <span class="badge badge-latex">LaTeX</span>
+        
+        
+    </div>
+
+    <div class="paper-links">
+        <a href="https://arxiv.org/abs/2604.02059v1" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        
+        <a href="https://arxiv.org/pdf/2604.02059" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        
+        
+        <a href="https://arxiv.org/e-print/2604.02059" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        
+        
+        
+        <a href="/files/paper_files/arxiv/2604.02059/2604.02059_source.tar.gz" class="link-latex">Local LaTeX</a>
+        
+    </div>
+
+    
+</div>
+
+
+    </main>
+    <footer>
+        Science Replication &mdash; sciencereplication.artiswrong.com
+    </footer>
+</body>
+</html>

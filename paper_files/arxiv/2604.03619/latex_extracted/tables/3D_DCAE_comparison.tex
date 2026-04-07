@@ -1,0 +1,30 @@
+\begin{table*}[ht]
+\caption{Performance comparison between {\ours} with latents from 3D DCAE and 2D DCAE on HCP and ADHD-200. Standard deviations are provided in Sec.~\ref{sec:detailed_experimental_results}.
+}
+\centering
+\resizebox{.8\linewidth}{!}{
+\centerline{
+
+\begin{tabular}{l|ccccccccc|ccc}
+\hline
+\multirow{3}{*}{Tokenizer} & \multicolumn{9}{c|}{HCP} & \multicolumn{3}{c}{ADHD-200} \\ \cline{2-13} 
+ & \multicolumn{3}{c|}{Sex} & \multicolumn{3}{c|}{Age} & \multicolumn{3}{c|}{Intelligence} & \multicolumn{3}{c}{Diagnosis} \\
+ & ACC & AUC & \multicolumn{1}{c|}{F1} & MSE & MAE & \multicolumn{1}{c|}{$\rho$} & MSE & MAE & $\rho$ & ACC & AUC & F1 \\ \hline
+
+3D DCAE & 92.2 & 0.973 & \multicolumn{1}{c|}{0.929} & \textbf{0.767} & \textbf{0.693} & \multicolumn{1}{c|}{\textbf{0.475}} & 0.869 & 0.755 & \multicolumn{1}{c|}{0.387} & \textbf{65.8} & 0.711 & \textbf{0.644}  \\
+
+2D DCAE & \textbf{93.8} & \textbf{0.987} & \multicolumn{1}{c|}{\textbf{0.943}} & 0.773 & 0.705 & \multicolumn{1}{c|}{0.473} & \textbf{0.835} & \textbf{0.741} & \textbf{0.392} &\textbf{65.8} & \textbf{0.729} & 0.630 \\ \hline
+
+
+
+\end{tabular}
+}% \end{adjustbox}
+}
+
+
+\label{tab:3D_DCAE_comparison}
+\vspace{0mm}
+\end{table*}
+
+
+

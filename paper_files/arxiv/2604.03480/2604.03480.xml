@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.03480/latex_extracted"?>
+<?latexml class="article"?>
+<?latexml package="colm2026_conference" options="preprint"?>
+<?latexml package="microtype"?>
+<?latexml package="hyperref"?>
+<?latexml package="url"?>
+<?latexml package="booktabs"?>
+<?latexml package="graphicx"?>
+<?latexml package="xcolor" options="table"?>
+<?latexml package="makecell"?>
+<?latexml package="subcaption"?>
+<?latexml package="nicematrix"?>
+<?latexml package="tcolorbox" options="most"?>
+<?latexml package="fvextra"?>
+<!--  %NOTE: including geometry package --><!--  %The geometery package modifies some page properties when used. This can dramatically change the page margins, leading to severe template violation, and potential desk rejection. If the package is required, it can be used with the ”pass” flag to skip the default page modifications, as in the following line: --><!--  %“usepackage[pass]–geometry˝ --><?latexml package="lineno"?>
+<!--  %**** colm2026˙conference.tex Line 25 **** --><?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>Large Language Models Align with the Human Brain during Creative Thinking</title>
+  <creator role="author">
+    <personname>Mete Ismayilzada<sup>1,2</sup>
+   Simone A. Luchini<sup>4,5</sup>
+   Abdulkadir Gokce<sup>1</sup>
+   Badr AlKhamissi<sup>1</sup> <break/><text font="bold">Antoine Bosselut<sup><text font="medium">1</text></sup></text>
+   <text font="bold">Antonio Laverghetta Jr.<sup><text font="medium">3</text></sup></text>
+   <text font="bold">Lonneke van der Plas<sup><text font="medium">†2</text></sup></text> <break/><text font="bold">Roger E. Beaty<sup><text font="medium">†5</text></sup></text> <break/><sup>1</sup>EPFL,
+<sup>2</sup>Università della Svizzera italiana (USI),
+<sup>3</sup>Wesleyan University,<break/><sup>4</sup>Paris Brain Institute (ICM),
+<sup>5</sup>Pennsylvania State University
+</personname>
+  </creator>
+  <abstract name="Abstract">
+<!--  %short version -->    <p>Creative thinking is a fundamental aspect of human cognition, and divergent thinking—the capacity to generate novel and varied ideas—is widely regarded as its core generative engine. Large language models (LLMs) have recently demonstrated impressive performance on divergent thinking tests and prior work has shown that models with higher task performance tend to be more aligned to human brain activity. However, existing brain-LLM alignment studies have focused on passive, non-creative tasks. Here, we explore brain alignment during creative thinking using fMRI data from 170 participants performing the Alternate Uses Task (AUT). We extract representations from LLMs varying in size (270M–72B) and measure alignment to brain responses via Representational Similarity Analysis (RSA), targeting the creativity-related default mode and frontoparietal networks. We find that brain-LLM alignment scales with model size (default mode network only) and idea originality (both networks), with effects strongest early in the creative process. We further show that post-training objectives shape alignment in functionally selective ways: a creativity-optimized <text font="typewriter">Llama-3.1-8B-Instruct</text> preserves alignment with high-creativity neural responses while reducing alignment with low-creativity ones; a human behavior fine-tuned model elevates alignment with both; and a reasoning-trained variant shows the opposite pattern, suggesting chain-of-thought training steers representations away from creative neural geometry toward analytical processing. These results demonstrate that post-training objectives selectively reshape LLM representations relative to the neural geometry of human creative thought.</p>
+<!--  %long version 
+     %Creative thinking is a fundamental aspect of human cognition, and divergent thinking—the capacity to generate novel and varied ideas—is widely regarded as its core generative engine. Large language models (LLMs) have recently demonstrated impressive performance on divergent thinking tests, and prior work has shown that models with higher task performance tend to be more aligned to human brain activity. However, existing brain-LLM alignment studies have focused on passive, non-creative tasks. Here, we explore brain alignment during creative thinking, exploring whether larger or more creative LLMs are more aligned with neural activity recorded during the Alternate Uses Task (AUT)—a standard divergent thinking task requiring the generation of original object uses. We investigate this question using fMRI data from 170 human participants as they generated ideas. We extract representations from a range of LLMs varying in size (from 270M to 72B) and measure their alignment to brain responses using Representational Similarity Analysis (RSA), targeting canonical creativity-related brain regions within the default mode and frontoparietal networks.
+     %We find that LLM-brain alignment during creative thinking scales positively with both model size (for the default mode network only) and the rated originality of ideas (for both brain networks). Critically, this pattern is strongest early in the creative process, indicating stage-dependent shifts in alignment.
+     %We further find that post-training objectives shape brain alignment in functionally selective ways. A “texttt–Llama-3.1-8B-Instruct˝ model optimized for creativity via preference optimization preserves moderate alignment with high-creativity neural responses while significantly decreasing alignment with low-creativity ones, whereas a model fine-tuned to simulate human behavior shows elevated alignment with both populations.
+     %On the other hand, the same model trained with reasoning chains distilled from “texttt–DeepSeek-R1˝ exhibits the opposite pattern, suggesting that chain-of-thought reasoning training steers model representations away from the neural geometry of creative ideation and toward more analytical processing. These results demonstrate that post-training objectives can selectively reshape LLM representations relative to the neural geometry of human creative thought in interpretable and distinct ways.
+     %We also find that post-training a “texttt–Llama-3.1-8B-Instruct˝ model via preference optimization using creative human responses selectively increases its alignment with brain responses during the generation of highly original ideas, while decreasing brain alignment recorded during less original ideas. These results suggest that post-training for creativity can selectively reshape LLM representations toward the neural geometry of human creative thought.-->  </abstract>
+  <ERROR class="undefined">\newtcolorbox</ERROR>
+  <para xml:id="p1">
+    <p>[list inside=prompt,auto counter,number within=section]prompt[1][]
+colbacktitle=black!60,
+fonttitle=<text fontsize="90%">,
+coltitle=white,
+fontupper=<text fontsize="89%">,
+boxsep=3pt,
+left=0pt,
+right=0pt,
+top=0pt,
+bottom=0pt,
+boxrule=1pt,
+#1,
+breakable, <!--  %¡__ allow page/column breaks --></text></text>
+<!--  %“title–Investigating Brain-LLM Alignment in Creative Thinking˝ -->
+<!--  %Authors must not appear in the submitted version. This should be be taken care of automatically as long as you are using the ”submission” option for the colm2026˙conference package. But it’s on the authors to verify. Non-anonymous submissions will be rejected without review. -->
+<!--  %**** colm2026˙conference.tex Line 50 **** -->
+<note mark="\textsuperscript{\textdagger}" role="footnotetext" xml:id="footnotex1">Equal supervision</note>
+<!--  %The “author macro works with any number of authors. There are two commands 
+     %used to separate the names and addresses of multiple authors: “And and “AND.
+     %Using “And between authors leaves it to “LaTeX–˝ to determine where to break
+     %the lines. Using “AND forces a linebreak at that point. So, if “LaTeX–˝
+     %puts 3 of 4 authors names on the first line, and the last on the second
+     %line, try using “AND instead of “And before the third author name.
+     %**** colm2026˙conference.tex Line 75 ****--></p>
+  </para>
+  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <para xml:id="S1.p1">
+      <p>Creative thinking stands as one of the most distinctive and complex capacities of the human mind, underpinning scientific discovery, artistic expression, and everyday problem-solving <cite class="ltx_citemacro_citep">(<bibref bibrefs="torrance1974torrance,guilford1967nature,duncker1948problem" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Within the broader landscape of human cognition, creativity is commonly decomposed into two complementary modes: <text font="italic">convergent thinking</text>, which involves narrowing down multiple possibilities to arrive at a single, well-defined solution, and <text font="italic">divergent thinking</text>, which involves generating a wide range of novel ideas or associations from a single starting point <cite class="ltx_citemacro_citep">(<bibref bibrefs="guilford1967nature,mednick1962associative" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. While both modes contribute to creative cognition, divergent thinking is widely considered the more foundational driver of creativity, as it captures the generative, open-ended exploration that gives rise to original thought <cite class="ltx_citemacro_citep">(<bibref bibrefs="runco2012divergent" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Its study has therefore attracted greater attention in both cognitive psychology and neuroscience, with researchers seeking to understand not only what makes humans capable of such flexible ideation, but also what neural substrates and cognitive mechanisms support it <cite class="ltx_citemacro_citep">(<bibref bibrefs="beaty2018robust,abraham2013promises,beaty2016creative" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>.</p>
+    </para>
+    <figure inlist="lof" labels="LABEL:fig:method" placement="t" xml:id="S1.F1">
+      <tags>
+        <tag><text fontsize="90%">Figure 1</text></tag>
+        <tag role="autoref">Figure 1</tag>
+        <tag role="refnum">1</tag>
+        <tag role="typerefnum">Figure 1</tag>
+      </tags>
+      <graphics candidates="figures/cadabra_method_v2.png" class="ltx_centering" graphic="figures/cadabra_method_v2.png" options="width=433.62pt, trim=1cm 1cm 0cm 1cm" xml:id="S1.F1.g1"/>
+      <toccaption class="ltx_centering"><tag close=" ">1</tag><text font="bold">Our high-level brain alignment methodology.</text></toccaption>
+      <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 1</text></tag><text font="bold" fontsize="90%">Our high-level brain alignment methodology.</text></caption>
+    </figure>
+    <para xml:id="S1.p2">
+      <p>In recent years, large language models (LLMs) have rapidly expanded their reach across a wide range of cognitive tasks, with divergent thinking among the abilities they now exhibit <cite class="ltx_citemacro_citep">(<bibref bibrefs="ismayilzada2024creativity,zhao2023survey" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Models have shown impressive results on established creativity benchmarks such as the Alternative Uses Test (AUT), which measures the ability to generate diverse and unconventional uses for everyday objects, in some cases reaching or exceeding average human performance. <cite class="ltx_citemacro_citep">(<bibref bibrefs="goes2023pushing,stevenson2022putting,bellemare2026divergent" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Alongside these behavioral results, a growing body of work has established that LLMs with higher task performance tend to exhibit greater alignment with the human language system <cite class="ltx_citemacro_citep">(<bibref bibrefs="schrimpf2021neural,goldstein2022shared,caucheteux2022brains" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. However, prior work has predominantly focused on passive language processing tasks, in which participants read or listen to naturalistic text <cite class="ltx_citemacro_citep">(<bibref bibrefs="aw2023instruction,alkhamissi2025language,lebel2023natural" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> or, recently, simple word association <cite class="ltx_citemacro_citep">(<bibref bibrefs="kwon2024assessing" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> and abstract reasoning tasks <cite class="ltx_citemacro_citep">(<bibref bibrefs="pinier2025large" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Divergent thinking, however, is a higher-order cognitive function often employing a broad and distributed network of brain regions well beyond the classical language system <cite class="ltx_citemacro_citep">(<bibref bibrefs="liu2024neural" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Whether more creative LLMs are correspondingly more aligned to the neural representations underlying human creative cognition, therefore, remains an open and compelling question, and one that existing brain-LLM alignment frameworks have yet to address.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>In this work, we take a first step toward addressing this question by systematically investigating brain-LLM alignment in the context of creative thinking using the AUT task. We leverage fMRI data collected from <cite class="ltx_citemacro_citet"><bibref bibrefs="beaty2018robust" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite>, in which participants performed both a creative task, namely the AUT, and a matched non-creative control task, namely the Object Characteristics Task (OCT), which involves generating typical characteristics of everyday objects <cite class="ltx_citemacro_citep">(<bibref bibrefs="beaty2018robust" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Similarly, we extract model representations to the same stimuli in these tasks from a range of LLMs and measure their alignment to the corresponding brain responses using Representational Similarity Analysis (RSA) <cite class="ltx_citemacro_citep">(<bibref bibrefs="kriegeskorte2008representational" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. On the neural side, we examine alignment across several canonical regions of interest involved in creative thinking, namely, the Default Mode Network (DMN) and the Frontoparietal Network (FPN) <cite class="ltx_citemacro_citep">(<bibref bibrefs="luchini2025role,liu2024neural" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>.
+<!--  %We further complement this atlas-based approach with functional localization “citep–fedorenko2010new˝, a technique borrowed from cognitive neuroscience, to identify a creative model network, and examine alignment between these functionally defined networks and brain regions. -->Our results reveal that brain alignment during creative thinking is stage-dependent: alignment scales positively with model size and creative task performance when measured at the prompt stage, but this relationship weakens once models generate responses. We further find that post-training objectives shape alignment in functionally selective and interpretable ways, with creativity-optimized and reasoning-chain training steering model representations toward fundamentally different regions of the neural geometry of human creative thought. To the best of our knowledge, this is the first study to directly examine brain-LLM alignment in the context of an active creative thinking task, and we hope our findings encourage deeper investigation into the neural plausibility of creative cognition in language models. <text font="bold">Our main contributions are as follows:</text></p>
+      <itemize xml:id="S1.I1">
+        <item xml:id="S1.I1.i1">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">1st item</tag>
+          </tags>
+          <para xml:id="S1.I1.i1.p1">
+            <p>We present the first systematic investigation of brain-LLM alignment in the context of an active creative thinking task, extending the existing alignment literature beyond passive language processing to a higher-order cognitive domain.</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i2">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">2nd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i2.p1">
+            <p>We show that brain alignment during creative thinking scales positively with model size and task performance when measured at the prompt stage, but that this relationship weakens once models generate responses, revealing an important stage-dependent limitation of current alignment analyses.</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i3">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">3rd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i3.p1">
+            <p>We show that post-training objectives shape alignment in a functionally selective way: creativity-optimized training selectively increases alignment with high-creativity neural responses while decreasing alignment with low-creativity ones, whereas reasoning-chain training produces a striking reversal, suggesting that different training objectives steer model representations toward fundamentally different regions of the neural geometry of human creative thought.</p>
+          </para>
+        </item>
+      </itemize>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>Related Work</title>
+    <paragraph inlist="toc" xml:id="S2.SS0.SSS0.Px1">
+      <title>Brain-LLM Alignment</title>
+      <para xml:id="S2.SS0.SSS0.Px1.p1">
+        <p>A growing body of work has established that the internal representations of large language models (LLMs) exhibit meaningful similarity to neural activity recorded during vision <cite class="ltx_citemacro_citep">(<bibref bibrefs="yamins2014performance,khaligh2014deep,cichy2016comparison,gokce2024scaling" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, auditory <cite class="ltx_citemacro_citep">(<bibref bibrefs="koumura2023human,kell2018task,tuckute2023many" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, and human language processing <cite class="ltx_citemacro_citep">(<bibref bibrefs="schrimpf2021neural,goldstein2022shared,caucheteux2022brains,tuckute2024driving" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. These studies have demonstrated that LLM representations can linearly predict brain responses to the same linguistic stimuli across a variety of neuroimaging paradigms, including reading naturalistic stories and sentences. More recent work has extended these findings by examining how specific model properties relate to brain alignment, finding strong correlations with model size and world knowledge, and demonstrating that instruction-tuning further improves alignment beyond what is achieved by pretraining alone <cite class="ltx_citemacro_citep">(<bibref bibrefs="aw2023instruction" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Parallel efforts have examined how brain alignment evolves over the course of LLM training, revealing that alignment with the human language network saturates early and tracks the acquisition of formal linguistic competence (knowledge of syntactic rules and grammatical structure) more closely than functional competence involving world knowledge and reasoning <cite class="ltx_citemacro_citep">(<bibref bibrefs="alkhamissi2025language" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. However, it is notable that prior alignment work has been conducted largely using passive language paradigms in which participants read or listen to naturalistic text. Only recently, some works have examined the brain alignment in active cognitive reasoning tasks such as novel word association generation <cite class="ltx_citemacro_citep">(<bibref bibrefs="kwon2024assessing" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> and abstract reasoning <cite class="ltx_citemacro_citep">(<bibref bibrefs="pinier2025large" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Closest to our work is <cite class="ltx_citemacro_citet"><bibref bibrefs="kwon2024assessing" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite>, which has evaluated alignment across two task conditions: A creative condition where participants had to generate original associates to a target word, and a non-creative condition where participants would generate appropriate associations. Findings have revealed that LLM activations align with human brain activity during creative word associations, but not during appropriate word associations, indicating that complex language production is crucial to alignment. However, to the best of our knowledge, no prior work has examined brain alignment during active creative thinking. We address this gap by studying brain–LLM alignment in an active creative task (AUT task), extending emerging efforts that probe alignment in settings requiring cognitive flexibility.</p>
+      </para>
+    </paragraph>
+    <paragraph inlist="toc" xml:id="S2.SS0.SSS0.Px2">
+      <title>LLMs and Creative Thinking</title>
+      <para xml:id="S2.SS0.SSS0.Px2.p1">
+        <p>Beyond passive language comprehension, LLMs have recently been shown to exhibit impressive performance on tasks requiring creative and divergent thinking <cite class="ltx_citemacro_citep">(<bibref bibrefs="ismayilzada2024creativity" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Studies evaluating models on creativity tasks such as the AUT have found that frontier models can generate responses that are rated as highly original, sometimes matching or exceeding average human performance <cite class="ltx_citemacro_citep">(<bibref bibrefs="goes2023pushing,stevenson2022putting,bellemare2026divergent" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Prior work has proposed various techniques to improve creative thinking and problem-solving in LLMs, such as creative prompting <cite class="ltx_citemacro_citep">(<bibref bibrefs="nguyen2025divergent,tian2024macgyver,lu2025benchmarking" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> and fine-tuning/preference optimization strategies <cite class="ltx_citemacro_citep">(<bibref bibrefs="puerto2025fine,ismayilzada-etal-2025-creative" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Overall, progress in this field has mainly focused on evaluating and improving divergent creative thinking in LLMs; however, the question of whether high performance on creative thinking tasks is accompanied by representational similarity to the neural systems that support human creativity remains unexplored. We aim to investigate this question of brain-LLM alignment in the present work.</p>
+      </para>
+    </paragraph>
+  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>Methodology</title>
+    <subsection inlist="toc" xml:id="S3.SS1">
+      <tags>
+        <tag>3.1</tag>
+        <tag role="autoref">subsection 3.1</tag>
+        <tag role="refnum">3.1</tag>
+        <tag role="typerefnum">§3.1</tag>
+      </tags>
+      <title><tag close=" ">3.1</tag>Brain Data</title>
+      <para xml:id="S3.SS1.p1">
+        <p>We use the fMRI recordings of human subjects while they solve AUT and OCT tasks from <cite class="ltx_citemacro_citet"><bibref bibrefs="beaty2018robust" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite>. This brain dataset contains fMRI recordings from <Math mode="inline" tex="170" text="170" xml:id="S3.SS1.p1.m1">
+            <XMath>
+              <XMTok meaning="170" role="NUMBER">170</XMTok>
+            </XMath>
+          </Math> healthy subjects. Subjects were given the following instructions, respectively, for each task, and then were shown a stimulus one at a time.</p>
+      </para>
+      <ERROR class="undefined">{prompt}</ERROR>
+      <para xml:id="S3.SS1.p2">
+        <p>[title=AUT Instructions, label=prompt:aut_instructions]
+<ERROR class="undefined">{Verbatim}</ERROR>[breaklines, breaksymbol=]
+Think of creative uses for objects. Report the most original idea. Keep thinking of ideas during the thinking period. Quality is more important than quantity.</p>
+      </para>
+      <ERROR class="undefined">{prompt}</ERROR>
+      <para xml:id="S3.SS1.p3">
+        <p>[title=OCT Instructions, label=prompt:oct_instructions]
+<ERROR class="undefined">{Verbatim}</ERROR>[breaklines, breaksymbol=]
+Think of the physical properties of objects. Report the most prominent characteristic. Keep thinking of ideas during the thinking period.</p>
+      </para>
+      <para xml:id="S3.SS1.p4">
+        <p>After a brief period of thinking, their responses, along with fMRI recordings, were collected for each stimulus. In total, subjects solved both tasks for <Math mode="inline" tex="46" text="46" xml:id="S3.SS1.p4.m1">
+            <XMath>
+              <XMTok meaning="46" role="NUMBER">46</XMTok>
+            </XMath>
+          </Math> stimuli, where each subject was exposed to on average <Math mode="inline" tex="23" text="23" xml:id="S3.SS1.p4.m2">
+            <XMath>
+              <XMTok meaning="23" role="NUMBER">23</XMTok>
+            </XMath>
+          </Math> stimuli for each task. For example, given the stimulus <text font="italic">“kite”</text>, one subject responded with <text font="italic">“a paper to write on”</text> and <text font="italic">“rectangular”</text> respectively for AUT and OCT tasks.</p>
+      </para>
+      <para xml:id="S3.SS1.p5">
+        <p>We first perform data cleaning based on the subject responses and, as a result, remove data for <Math mode="inline" tex="8" text="8" xml:id="S3.SS1.p5.m1">
+            <XMath>
+              <XMTok meaning="8" role="NUMBER">8</XMTok>
+            </XMath>
+          </Math> participants who failed to follow the task instructions, failed to provide a response, or whose brain data were incompatible with others in the neural representation dimension. Next, we apply standard fMRI data preprocessing (e.g., removing confounders, detrending, standardizing, and signal filtering) using <text font="typewriter">nilearn<note mark="1" role="footnote" xml:id="footnote1"><tags>
+                <tag><text font="serif">1</text></tag>
+                <tag role="autoref"><text font="serif">footnote 1</text></tag>
+                <tag role="refnum"><text font="serif">1</text></tag>
+                <tag role="typerefnum"><text font="serif">footnote 1</text></tag>
+              </tags><text font="serif">https://nilearn.github.io</text></note></text> library, which results in “clean” (but raw) fMRI brain activations <cite class="ltx_citemacro_citep">(<bibref bibrefs="matthews2004functional" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Rather than using these raw activations, we follow standard practice and estimate single-trial beta maps using a General Linear Model (GLM) <cite class="ltx_citemacro_citep">(<bibref bibrefs="draper1998applied" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, and conduct all subsequent brain-LLM alignment analyses on these estimated neural response patterns. We extracted brain data from across three functional brain networks using the <cite class="ltx_citemacro_citet"><bibref bibrefs="yeo2011organization" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> parcellation: the Default Mode Network (DMN), the Frontoparietal Network (FPN), and the Somatomotor Network. The DMN and FPN were selected given their well-established roles in creative cognition <cite class="ltx_citemacro_citep">(<bibref bibrefs="beaty2016creative,luchini2025role,liu2024neural" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, while the Somatomotor Network was selected given its limited involvement in higher-order cognitive processes, making it a suitable control network.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS2">
+      <tags>
+        <tag>3.2</tag>
+        <tag role="autoref">subsection 3.2</tag>
+        <tag role="refnum">3.2</tag>
+        <tag role="typerefnum">§3.2</tag>
+      </tags>
+      <title><tag close=" ">3.2</tag>Model Data</title>
+      <para xml:id="S3.SS2.p1">
+        <p>We provide the same instructions<note mark="2" role="footnote" xml:id="footnote2"><tags>
+              <tag>2</tag>
+              <tag role="autoref">footnote 2</tag>
+              <tag role="refnum">2</tag>
+              <tag role="typerefnum">footnote 2</tag>
+            </tags>We only replace the word “objects” with the stimulus name since we evaluate language-only models.</note> and the stimuli to an LLM and extract its intermediate layer activations as the model representations of the stimuli. Prior brain-LLM alignment studies typically extract model representations for the input prompt alone, which is sufficient for passive language tasks where no generation occurs. However, this is not sufficient for our task, which involves active generation, so we extract representations at both the prompt stage and after the model has generated a response, allowing us to capture the full generative process that more closely mirrors the demands of the AUT task. We note that this setup is similar to <cite class="ltx_citemacro_citet"><bibref bibrefs="kwon2024assessing" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> except that we investigate alignment both at the prompt and generation stage, while <cite class="ltx_citemacro_citet"><bibref bibrefs="kwon2024assessing" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> only examines alignment at the generation stage.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:alignment-aut-yeo-dmn-prompt" placement="t" xml:id="S3.F2">
+        <tags>
+          <tag><text fontsize="90%">Figure 2</text></tag>
+          <tag role="autoref">Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Figure 2</tag>
+        </tags>
+        <graphics candidates="figures/main_results_yeo_dmn_prompt_nc0_t_1_t_mean.pdf" class="ltx_centering" graphic="figures/main_results_yeo_dmn_prompt_nc0_t_1_t_mean.pdf" options="width=433.62pt" xml:id="S3.F2.g1"/>
+<!--  %**** 03˙methodology.tex Line 25 **** -->        <toccaption class="ltx_centering"><tag close=" ">2</tag><text font="bold">Default Mode Network (DMN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) only.</text> <Math mode="inline" tex="r" text="r" xml:id="S3.F2.m1">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="S3.F2.m2">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math> correspond to the Pearson correlation coefficient and p-value.</toccaption>
+        <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 2</text></tag><text font="bold" fontsize="90%">Default Mode Network (DMN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) only.<text font="medium"> <Math mode="inline" tex="r" text="r" xml:id="S3.F2.m3">
+                <XMath>
+                  <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                </XMath>
+              </Math> and <Math mode="inline" tex="p" text="p" xml:id="S3.F2.m4">
+                <XMath>
+                  <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                </XMath>
+              </Math> correspond to the Pearson correlation coefficient and p-value.</text></text></caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS3">
+      <tags>
+        <tag>3.3</tag>
+        <tag role="autoref">subsection 3.3</tag>
+        <tag role="refnum">3.3</tag>
+        <tag role="typerefnum">§3.3</tag>
+      </tags>
+      <title><tag close=" ">3.3</tag>Brain Alignment</title>
+      <para xml:id="S3.SS3.p1">
+        <p>Brain alignment refers to the degree of similarity between the internal representations of an LLM and human neural activity <cite class="ltx_citemacro_citep">(<bibref bibrefs="schrimpf2018brain" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. We evaluate alignment using Representational Similarity Analysis (RSA) <cite class="ltx_citemacro_citep">(<bibref bibrefs="kriegeskorte2008representational" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. We note that while some past works have used linear predictivity (i.e., fitting a regression model to predict voxel-wise fMRI responses) <cite class="ltx_citemacro_citep">(<bibref bibrefs="schrimpf2018brain,schrimpf2021neural" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, this metric typically requires a large sample of stimuli responses to be effective. While our data is large in terms of the number of subjects, the number of stimulus samples per subject is insufficient to train a meaningful regression model. Therefore, we opt not to use it in our alignment computation.
+<!--  %For linear predictivity, we fit a regression model to predict voxel-wise fMRI responses from LLM representations using k-fold cross-validation. At each fold, the fitted model is applied to held-out fMRI responses from the original corpus of recordings, and alignment is computed as the Pearson correlation between the predicted and actual responses. Correlations are then averaged across folds, yielding a per-voxel alignment score. -->To compute the RSA predictivity, we compare the geometry of representational dissimilarity matrices (RDMs) constructed from LLM representations and fMRI responses, respectively. We compute alignment at the level of individual subjects and report the median across subjects. To account for the inherent noise in fMRI measurements, we estimate a noise ceiling per subject, which represents the maximum alignment score achievable given the reliability of the neural data. Raw alignment scores are then divided by their corresponding noise ceilings, yielding noise-ceiling-normalized scores that allow for more meaningful comparisons across brain regions and models. We evaluate alignment at every layer of each LLM and take the maximum value across layers as the model’s overall brain alignment score, following <cite class="ltx_citemacro_citet"><bibref bibrefs="schrimpf2018brain" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite>. This layer-selection procedure is motivated by the observation that different layers of a network capture different levels of representational abstraction and allow each model to be assessed at its most brain-aligned processing stage <cite class="ltx_citemacro_citep">(<bibref bibrefs="elhage2021mathematical,tenney2019bert,jawahar-etal-2019-bert" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>.</p>
+      </para>
+<!--  %“subsection–Localizing LLM Creativity Networks˝ 
+     %In addition to examining alignment within individual model layers, we also employ functional localization to identify data-driven creativity networks in the LLM representations.
+     %For the brain, we leverage the OCT task as a low-creativity control condition and perform a group-level GLM across subjects to compute the contrast between neural responses to AUT and OCT stimuli, expressed as z-scores. A threshold is then applied to this contrast map to identify a set of voxels that are selectively and reliably recruited during creative thinking, yielding a functionally defined brain creativity network. Figure “ref–fig:brain-custom-cre˝ shows the resulting network atlas.
+     %We follow the approach previously used to identify the language network in language models “citet–alkhamissi2025llm, fedorenko2010new˝ and steer models to amplify creativity “citep–olson2024steering˝ and extract representations for both AUT and OCT stimuli and responses from each model. We then define the model’s creativity network as the top-k units that maximally differentiate between the two conditions, identified by selecting units with the largest positive t-values from a Welch’s t-test comparing activation magnitudes across AUT and OCT stimuli. This parallel localization procedure allows us to identify the most creativity-selective components of the model, and to examine their alignment in a functionally grounded manner.
+     %“begin–figure˝[t]
+     %“includegraphics[width=“linewidth]–figures/aut˙sub˙oct˙slm˙z˙score˙th6.png˝
+     %“centering
+     %“caption–Brain creativity network.˝
+     %“label–fig:brain-custom-cre˝
+     %“end–figure˝-->    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:high-low" xml:id="S3.SS4">
+      <tags>
+        <tag>3.4</tag>
+        <tag role="autoref">subsection 3.4</tag>
+        <tag role="refnum">3.4</tag>
+        <tag role="typerefnum">§3.4</tag>
+      </tags>
+      <title><tag close=" ">3.4</tag>Alignment with High vs. Low Creativity Responses</title>
+<!--  %**** 03˙methodology.tex Line 50 **** -->      <para xml:id="S3.SS4.p1">
+        <p>Prior work has shown that instruction tuning improves LLM alignment with the human language system <cite class="ltx_citemacro_citep">(<bibref bibrefs="aw2023instruction" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, raising the question of whether different post-training approaches, such as those targeting creativity, human behavioral simulation, or reasoning, can selectively modulate alignment with neural responses associated with creative ideation. To explore this, we partition the human brain data into high- and low-creativity populations based on the mean human creativity rating assigned to each response. For each AUT stimulus, participant responses were rated on their creativity by four independent human raters (<Math mode="inline" tex="ICC=0.75" text="I * C * C = 0.75" xml:id="S3.SS4.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">C</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">C</XMTok>
+                </XMApp>
+                <XMTok meaning="0.75" role="NUMBER">0.75</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, good inter-rater agreement), and we followed a standard practice to aggregate these scores by averaging to yield a single creativity score per response <cite class="ltx_citemacro_citep">(<bibref bibrefs="organisciak2023beyond,amabile1982social" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Since responses are rated on a scale of 1 to 5 and the mean rating distribution is left-skewed (Appendix Figure <ref labelref="LABEL:fig:dist-mean-rating"/>), to roughly match the number of samples between two conditions, we use a cutoff of <Math mode="inline" tex="2.0" text="2.0" xml:id="S3.SS4.p1.m2">
+            <XMath>
+              <XMTok meaning="2.0" role="NUMBER">2.0</XMTok>
+            </XMath>
+          </Math> to define low-creativity responses (<Math mode="inline" tex="rating&lt;2.0" text="r * a * t * i * n * g less 2.0" xml:id="S3.SS4.p1.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">g</XMTok>
+                </XMApp>
+                <XMTok meaning="2.0" role="NUMBER">2.0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>; <Math mode="inline" tex="N=1,978" text="N = list@(1, 978)" xml:id="S3.SS4.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="list"/>
+                    <XMRef idref="S3.SS4.p1.m4.1"/>
+                    <XMRef idref="S3.SS4.p1.m4.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok meaning="1" role="NUMBER" xml:id="S3.SS4.p1.m4.1">1</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="978" role="NUMBER" xml:id="S3.SS4.p1.m4.2">978</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>) and high-creativity responses (<Math mode="inline" tex="rating\geq 2.0" text="r * a * t * i * n * g &gt;= 2.0" xml:id="S3.SS4.p1.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than-or-equals" name="geq" role="RELOP">≥</XMTok>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">g</XMTok>
+                </XMApp>
+                <XMTok meaning="2.0" role="NUMBER">2.0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>; <Math mode="inline" tex="N=1,358" text="N = list@(1, 358)" xml:id="S3.SS4.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="list"/>
+                    <XMRef idref="S3.SS4.p1.m6.1"/>
+                    <XMRef idref="S3.SS4.p1.m6.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok meaning="1" role="NUMBER" xml:id="S3.SS4.p1.m6.1">1</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="358" role="NUMBER" xml:id="S3.SS4.p1.m6.2">358</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>).</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:alignment-best-layer-aut-yeo-dmn" placement="t" xml:id="S3.F3">
+        <tags>
+          <tag><text fontsize="90%">Figure 3</text></tag>
+          <tag role="autoref">Figure 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Figure 3</tag>
+        </tags>
+        <graphics candidates="figures/best_layer_res_yeo_dmn_aut_prompt_nc0_t_1.pdf" class="ltx_centering" graphic="figures/best_layer_res_yeo_dmn_aut_prompt_nc0_t_1.pdf" options="width=433.62pt" xml:id="S3.F3.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">3</tag><text font="bold">Left:</text> The distribution of the best model layer (measured as relative depth) for alignment. <text font="bold">Right:</text> Default Mode Network (DMN) brain alignment results by best layer relative depth using model activations on stimuli (prompt) only.</toccaption>
+        <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 3</text></tag><text font="bold" fontsize="90%">Left:<text font="medium"> The distribution of the best model layer (measured as relative depth) for alignment. </text>Right:<text font="medium"> Default Mode Network (DMN) brain alignment results by best layer relative depth using model activations on stimuli (prompt) only.</text></text></caption>
+      </figure>
+<!--  %To further probe the nature of brain-LLM alignment in divergent thinking, we investigate whether model representations are differentially aligned to neural responses associated with high versus low creativity ideation. 
+     %This analysis allows us to ask a more fine-grained question than overall alignment: do LLMs, and in particular more creative LLMs, preferentially align to the neural representations underlying genuinely creative ideation, or is their alignment driven equally by routine, low-creativity responses?
+     %If more creative models show disproportionately higher alignment to high-creativity brain responses, this would suggest that the representational geometry of creative LLM processing is specifically more similar to the neural geometry of human creative thought, rather than reflecting a general improvement in language processing. This would provide stronger evidence for a functionally meaningful correspondence between LLM creativity and human creative cognition at the neural level.-->    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Experimental Setup</title>
+<!--  %**** colm2026˙conference.tex Line 100 **** -->    <subsection inlist="toc" labels="LABEL:sec:models" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="autoref">subsection 4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=" ">4.1</tag>Models</title>
+      <para xml:id="S4.SS1.p1">
+        <p>We consider several open-source instruction following models varying in their size: <text font="typewriter">Gemma-3-{270M, 1B, 4B, 12B, 27B}-it</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="kamath2025gemma" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, <text font="typewriter">Llama-3.1-{8B, 70B}-Instruct</text>, <text font="typewriter">Llama-3.2-{1B, 3B}-Instruct</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="grattafiori2024llama" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, <text font="typewriter">Olmo-3.1-32B-Instruct</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="olmo2025olmo3" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, <text font="typewriter">Falcon-40B-Instruct</text>, <text font="typewriter">DeepSeek-R1-Distill-Llama-70B</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="deepseekai2025deepseekr1incentivizingreasoningcapability" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> and <text font="typewriter">Qwen2.5-{14B, 32B, 72B}-Instruct</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="qwen2.5,qwen2" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Additionally, to study the alignment difference between high vs. low creativity responses and the effect of post-training techniques, we consider several variants of <text font="typewriter">Llama-3.1-8B-Instruct</text>: <text font="typewriter">Llama-3.1-8B</text> which is the base pretrained model, <text font="typewriter">CrPO-llama-3.1-8b-instruct-cre</text> that has been trained to align with human creative preferences and optimized for multiple dimensions of creativity, namely, novelty, surprise, diversity, and quality <cite class="ltx_citemacro_citep">(<bibref bibrefs="ismayilzada-etal-2025-creative" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, <text font="typewriter">Llama-3.1-Minitaur-8B</text> that has been finetuned to predict and simulate human behavior <cite class="ltx_citemacro_citep">(<bibref bibrefs="binz2025foundation" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, <text font="typewriter">DeepSeek-R1-Distill-Llama-8B</text> that has been finetuned with the reasoning outputs of <text font="typewriter">DeepSeek-R1</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="deepseekai2025deepseekr1incentivizingreasoningcapability" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. To ensure high creativity and diversity of outputs, we sample four generations for each prompt with <text font="italic">temperature=0.7</text> and <text font="italic">top_p=0.95</text>.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="autoref">subsection 4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=" ">4.2</tag>Alignment Factors</title>
+      <para xml:id="S4.SS2.p1">
+        <p>To analyze the factors driving brain–LLM alignment, we compute the Pearson correlation between alignment scores and two model attributes: parameter count and performance on the AUT task.
+<!--  %For evaluating AUT performance, we employ the “texttt–CLAUS˝ model from “citet–patterson2025cap˝, which is specifically fine-tuned to assess the originality of AUT responses. -->For evaluating AUT performance, we employ the <text font="typewriter">Gemini-3-Flash</text> <cite class="ltx_citemacro_citep">(<bibref bibrefs="gemini3google" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> model as LLMs have been shown to accurately predict human creativity on the AUT <cite class="ltx_citemacro_citep">(<bibref bibrefs="saretzki2026investigating,organisciak2023beyond" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>.
+We slightly adapt the original prompt by instructing the model to produce only a few words, ensuring that it outputs a single, most original idea without additional text. This adjustment makes the outputs more comparable to human responses, which are typically concise, and enables consistent scoring (Appendix Tables <ref labelref="LABEL:prompt:aut_instructions_scoring"/>, <ref labelref="LABEL:prompt:oct_instructions_scoring"/>)</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS3">
+      <tags>
+        <tag>4.3</tag>
+        <tag role="autoref">subsection 4.3</tag>
+        <tag role="refnum">4.3</tag>
+        <tag role="typerefnum">§4.3</tag>
+      </tags>
+      <title><tag close=" ">4.3</tag>Model Representations</title>
+      <para xml:id="S4.SS3.p1">
+        <p>Since the model representations are extracted per token, past work has considered two main strategies: extracting representations from the <text font="italic">last token</text> or averaging over all token representations (i.e. <text font="italic">mean token</text>). We consider both approaches in our work and choose the best one for a given analysis unless specified otherwise.
+<!--  %Similarly, in the LLM creativity network localization, both approaches can be applied.  For creativity network localization, we consider the top 1“% of the neurons in the LLM. --></p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=" ">5</tag>Results</title>
+    <figure inlist="lof" labels="LABEL:fig:alignment-high-low" placement="t" xml:id="S5.F4">
+      <tags>
+        <tag><text fontsize="90%">Figure 4</text></tag>
+        <tag role="autoref">Figure 4</tag>
+        <tag role="refnum">4</tag>
+        <tag role="typerefnum">Figure 4</tag>
+      </tags>
+      <graphics candidates="figures/high_low_cre_comparison_nc0.0.pdf" class="ltx_centering" graphic="figures/high_low_cre_comparison_nc0.0.pdf" options="width=433.62pt" xml:id="S5.F4.g1"/>
+      <toccaption class="ltx_centering"><tag close=" ">4</tag><text font="bold">Default Mode Network (DMN) AUT brain alignment results for high and low creativity response populations.</text> The left red and right green bars indicate positive alignment with high and low creativity responses, respectively. Flipped bars indicate negative alignment.</toccaption>
+      <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 4</text></tag><text font="bold" fontsize="90%">Default Mode Network (DMN) AUT brain alignment results for high and low creativity response populations.<text font="medium"> The left red and right green bars indicate positive alignment with high and low creativity responses, respectively. Flipped bars indicate negative alignment.</text></text></caption>
+    </figure>
+    <paragraph inlist="toc" xml:id="S5.SS0.SSS0.Px1">
+      <title>LLMs Align with the Human Brain During Creative Thinking</title>
+      <para xml:id="S5.SS0.SSS0.Px1.p1">
+        <p>Figure <ref labelref="LABEL:fig:alignment-aut-yeo-dmn-prompt"/> shows the brain alignment between the Default Mode Network (DMN) and model representations extracted during early cue processing — that is, after the prompt has been presented but before any response has been generated. Notably, the DMN has been directly implicated in creative cognition and is considered a core neural substrate of creative thinking <cite class="ltx_citemacro_citep">(<bibref bibrefs="luchini2025role" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. We observe moderate and consistent alignment across models, and crucially, this <text font="bold">alignment is positively correlated with both model size</text> (<Math mode="inline" tex="r=0.58,p&lt;0.05" text="formulae@(r = 0.58, p less 0.05)" xml:id="S5.SS0.SSS0.Px1.p1.m1">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="formulae"/>
+                  <XMRef idref="S5.SS0.SSS0.Px1.p1.m1.1"/>
+                  <XMRef idref="S5.SS0.SSS0.Px1.p1.m1.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMApp xml:id="S5.SS0.SSS0.Px1.p1.m1.1">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                    <XMTok meaning="0.58" role="NUMBER">0.58</XMTok>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S5.SS0.SSS0.Px1.p1.m1.2">
+                    <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                    <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                  </XMApp>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>) and <text font="bold">creative task performance</text> as measured by the AUT score (<Math mode="inline" tex="r=0.51,p&lt;0.05" text="formulae@(r = 0.51, p less 0.05)" xml:id="S5.SS0.SSS0.Px1.p1.m2">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="formulae"/>
+                  <XMRef idref="S5.SS0.SSS0.Px1.p1.m2.1"/>
+                  <XMRef idref="S5.SS0.SSS0.Px1.p1.m2.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMApp xml:id="S5.SS0.SSS0.Px1.p1.m2.1">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                    <XMTok meaning="0.51" role="NUMBER">0.51</XMTok>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S5.SS0.SSS0.Px1.p1.m2.2">
+                    <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                    <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                  </XMApp>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>). This suggests that larger and more creatively capable models more closely mirror the neural representations underlying human divergent thinking during the initial stages of ideation. However, when alignment is measured using representations extracted after the model has generated its response, alignment values become more variable across models, and the correlations with both model size and task performance weaken (Appendix Figure <ref labelref="LABEL:fig:alignment-aut-yeo-dmn-response"/>). This decoupling may reflect the fact that models tend to converge on similar responses regardless of scale <cite class="ltx_citemacro_citep">(<bibref bibrefs="wenger2025we,ismayilzada2024evaluating" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, or alternatively, that generated responses increasingly diverge from human responses in length, structure, and quality as model scale grows. We also replicate some of these patterns (i.e. correlation with AUT score) for the Frontoparietal Network (FPN) (See Appendix Figures <ref labelref="LABEL:fig:alignment-aut-yeo-fp-prompt"/> and <ref labelref="LABEL:fig:alignment-aut-yeo-fp-response"/>). To assess whether these effects are specific to creative cognition or reflect more general properties of model or brain representations, we repeat the alignment analyses using the non-creative OCT task and a brain network not typically associated with creativity, namely the Somatomotor network <cite class="ltx_citemacro_citep">(<bibref bibrefs="ji2019mapping" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. As shown in Appendix Figures <ref labelref="LABEL:fig:alignment-oct-model-size-yeo-dmn"/> and <ref labelref="LABEL:fig:alignment-aut-yeo-som-prompt"/>, neither model size nor task performance correlates significantly with alignment in either of these conditions, providing an important double dissociation that strengthens the interpretation that the observed alignment effects are driven specifically by the conjunction of a creativity-relevant task and a creativity-relevant brain network.</p>
+      </para>
+    </paragraph>
+    <paragraph inlist="toc" xml:id="S5.SS0.SSS0.Px2">
+      <title>Higher Layers of LLMs Show Stronger Alignment with Creative Brain Responses</title>
+      <para xml:id="S5.SS0.SSS0.Px2.p1">
+        <p>A well-established finding is that different layers of a model capture qualitatively different aspects of linguistic and cognitive processing: earlier layers tend to encode core syntactic and lexical properties, while later layers are associated with higher-level, task-specific representations involving reasoning and cognition <cite class="ltx_citemacro_citep">(<bibref bibrefs="tenney2019bert,jawahar-etal-2019-bert" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Given that creative thinking is itself a higher-order cognitive process, we hypothesized that deeper layers of LLMs would show preferentially stronger alignment with brain responses during the AUT task. To investigate this, we visualize the distribution of the relative layer depth (Figure <ref labelref="LABEL:fig:alignment-best-layer-aut-yeo-dmn"/>) at which peak alignment is achieved across models (defined as the best layer index divided by the total number of layers), and compute its correlation with alignment predictivity. As shown in Figure <ref labelref="LABEL:fig:alignment-best-layer-aut-yeo-dmn"/>, we find a significant positive correlation between relative layer depth and alignment (<Math mode="inline" tex="r=0.54,p&lt;0.05" text="formulae@(r = 0.54, p less 0.05)" xml:id="S5.SS0.SSS0.Px2.p1.m1">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="formulae"/>
+                  <XMRef idref="S5.SS0.SSS0.Px2.p1.m1.1"/>
+                  <XMRef idref="S5.SS0.SSS0.Px2.p1.m1.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMApp xml:id="S5.SS0.SSS0.Px2.p1.m1.1">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                    <XMTok meaning="0.54" role="NUMBER">0.54</XMTok>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S5.SS0.SSS0.Px2.p1.m1.2">
+                    <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                    <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                  </XMApp>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>), indicating that brain alignment during creative thinking is predominantly driven by the higher-level representations of LLMs rather than early-layer processing. This is consistent with the view that the neural geometry of divergent thinking is more closely mirrored by the abstract, task-sensitive representations that emerge in the later stages of model computation <cite class="ltx_citemacro_citep">(<bibref bibrefs="caucheteux2022brains" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>.</p>
+      </para>
+    </paragraph>
+    <paragraph inlist="toc" xml:id="S5.SS0.SSS0.Px3">
+      <title>Post-Training Objectives Differentially Modulate Alignment with High- and Low-Creativity Neural Responses</title>
+      <para xml:id="S5.SS0.SSS0.Px3.p1">
+        <p>To investigate the effects of different post-training approaches, we partition the brain data into high and low creativity populations as described in Section <ref labelref="LABEL:sec:high-low"/> and measure brain alignment separately for each population across several variants of the <text font="typewriter">Llama-3.1-8B</text> model as described in Section <ref labelref="LABEL:sec:models"/>. The results are shown in Figure <ref labelref="LABEL:fig:alignment-high-low"/>. During early prompt processing, all model variants show broadly comparable alignment with both populations. However, once models begin generating responses, the alignment dynamics diverge markedly across training conditions. Most notably, comparing <text font="typewriter">Llama-3.1-8B-Instruct</text> with its creativity-optimized counterpart <text font="typewriter">CrPO-Llama-3.1-8B-Instruct</text>, we find that while the instruct model maintains similar alignment with both populations, the CRPO model shows a significant decrease in alignment with low-creativity responses while preserving moderate alignment with high-creativity responses, a targeted shift consistent with the model’s training objective. The base pretrained <text font="typewriter">Llama-3.1-8B</text> largely loses alignment in the response generation stage, likely due to its inability to follow task instructions. In contrast, <text font="typewriter">Llama-3.1-Minitaur-8B</text>, which is fine-tuned to predict and simulate human behavior, shows elevated alignment with both populations during response generation, plausibly reflecting its closer correspondence to human response patterns. Finally, <text font="typewriter">DeepSeek-R1-Distill-Llama-8B</text>, the base model fine-tuned with reasoning chains distilled from DeepSeek-R1, exhibits a striking reversal: negative alignment with high-creativity responses and positive alignment with low-creativity responses, suggesting that chain-of-thought reasoning training steers model representations away from the neural geometry of creative ideation and toward more systematic, analytical processing.</p>
+      </para>
+    </paragraph>
+  </section>
+  <section inlist="toc" xml:id="S6">
+    <tags>
+      <tag>6</tag>
+      <tag role="autoref">section 6</tag>
+      <tag role="refnum">6</tag>
+      <tag role="typerefnum">§6</tag>
+    </tags>
+    <title><tag close=" ">6</tag>Discussion</title>
+    <para xml:id="S6.p1">
+      <p>In summary, our results demonstrate that 1) LLM alignment with the human brain is driven by both model size and performance on divergent thinking assessments, 2) alignment is stronger for later layers than earlier layers, and 3) post-training can increase this alignment, but only if the post-training objective is explicitly designed to optimize alignment with human behavior, or to push models towards greater diversity in responses. Notably, however, these effects are stage-dependent: the relationship between model properties and brain alignment is clearest during prompt processing, and weakens once models begin generating responses, suggesting that the representational dynamics of language generation diverge from human creative cognition in ways that are not simply resolved by scaling. Perhaps most strikingly, our post-training results reveal that the choice of training objective has interpretable and selective consequences for how model representations relate to the neural geometry of creative thought: reasoning-chain training steers representations away from high-creativity neural responses entirely, while creativity-optimized training produces the opposite effect.</p>
+    </para>
+    <para xml:id="S6.p2">
+      <p>Our post-training results carry important implications for how language models should be fine-tuned in future work. Post-training strategies and datasets have thus far emphasized tasks requiring <text font="italic">convergent thinking</text>, such as solving difficult math problems or coding tasks <cite class="ltx_citemacro_citep">(<bibref bibrefs="deepseekai2025deepseekr1incentivizingreasoningcapability,lightman2023let,chen2021evaluating" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, because they are easily evaluated using a human-provided ground truth or an LLM judge. While this has proven effective for developing models that can solve tasks which emphasize convergent thinking — reasoning toward a single correct answer or solution — our findings indicate that it may simultaneously impair the ability of LLMs to come up with many and varied ideas, the hallmark of divergent thinking <cite class="ltx_citemacro_citep">(<bibref bibrefs="runco2012divergent" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Specifically, a model trained for reasoning consistently demonstrated stronger alignment for low-creativity responses than high-creativity ones, suggesting that its post-training had inadvertently shifted it toward neural representations associated with lower creativity. Together, these findings suggest that brain alignment offers a uniquely informative lens for evaluating and developing language models in the context of creative cognition — one that goes beyond behavioral benchmarks and captures something closer to the computational principles underlying human creative thought. Given the crucial role of creativity in fostering scientific, engineering, and artistic advances <cite class="ltx_citemacro_citep">(<bibref bibrefs="torrance1974torrance,guilford1967nature" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, we must develop LLMs capable of creativity when tasked with solving challenging, long-horizon, or ambiguously scoped problems. Our findings suggest that post-training exclusively with convergent-thinking tasks may actively degrade models’ capacity for divergent thinking.</p>
+    </para>
+  </section>
+  <section xml:id="Sx1">
+    <title>Conclusion</title>
+    <para xml:id="Sx1.p1">
+      <p>We presented the first investigation of brain-LLM alignment in the context of divergent creative thinking, using fMRI data from participants performing the Alternative Uses Test alongside a non-creative control task. Our results reveal that alignment with creativity-relevant brain networks scales positively with model size and creative task performance during prompt processing, but weakens once models generate responses, suggesting that the generative process introduces representational dynamics that diverge from human creative cognition. We further show that post-training objectives have selective and interpretable effects: creativity-optimized training increases alignment with high-creativity neural responses while decreasing alignment with low-creativity ones, whereas reasoning-chain training produces the opposite pattern. Together, these findings suggest that the correspondence between LLM representations and the neural geometry of human creative thought is nuanced and sensitive to both the stage of processing examined and the nature of the training objective. We hope these results encourage further investigation into the neural plausibility of creative cognition in language models.</p>
+    </para>
+<!--  %“section*–Limitations˝ 
+     %“input–08˙limitations˝
+     %“section*–Ethics Statement˝
+     %“input–09˙ethics˝-->  </section>
+  <section xml:id="Sx2">
+    <title>Acknowledgements</title>
+    <para xml:id="Sx2.p1">
+      <p>LP gratefully acknowledges the support of the Swiss National Science Foundation (grant 205121_207437: C - LING). R.E.B. is supported by Amazon and grants from the National Science Foundation (DRL-2400782; DUE-2155070). AB also gratefully acknowledges the support of the Swiss National Science Foundation (No. 215390), the European Research Council (Starting grant no. 101222478, RESPECT-LM), the AI2050 program at Schmidt Sciences (Grant #G-25-69783), Sony Group Corporation, and the Swiss National Supercomputing Center (CSCS) in the form of an infrastructure engineering and development project.</p>
+    </para>
+  </section>
+  <bibliography citestyle="authoryear" files="colm2026_conference" xml:id="bib">
+    <title>References</title>
+  </bibliography>
+  <pagination role="newpage"/>
+<!--  %**** colm2026˙conference.tex Line 125 **** -->  <figure inlist="lof" labels="LABEL:fig:alignment-aut-yeo-dmn-response" placement="h" xml:id="A0.F5">
+    <tags>
+      <tag><text fontsize="90%">Figure 5</text></tag>
+      <tag role="autoref">Figure 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">Figure 5</tag>
+    </tags>
+    <graphics candidates="figures/main_results_yeo_dmn_model_resp_nc0_t_1_t_mean.pdf" class="ltx_centering" graphic="figures/main_results_yeo_dmn_model_resp_nc0_t_1_t_mean.pdf" options="width=433.62pt" xml:id="A0.F5.g1"/>
+    <toccaption class="ltx_centering"><tag close=" ">5</tag><text font="bold">Default Mode Network (DMN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) and model response.</text> <Math mode="inline" tex="r" text="r" xml:id="A0.F5.m1">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">r</XMTok>
+        </XMath>
+      </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F5.m2">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">p</XMTok>
+        </XMath>
+      </Math> correspond to the Pearson correlation coefficient and p-value.</toccaption>
+    <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 5</text></tag><text font="bold" fontsize="90%">Default Mode Network (DMN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) and model response.<text font="medium"> <Math mode="inline" tex="r" text="r" xml:id="A0.F5.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F5.m4">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math> correspond to the Pearson correlation coefficient and p-value.</text></text></caption>
+  </figure>
+  <figure inlist="lof" labels="LABEL:fig:alignment-aut-yeo-fp-prompt" placement="h" xml:id="A0.F6">
+    <tags>
+      <tag><text fontsize="90%">Figure 6</text></tag>
+      <tag role="autoref">Figure 6</tag>
+      <tag role="refnum">6</tag>
+      <tag role="typerefnum">Figure 6</tag>
+    </tags>
+    <graphics candidates="figures/main_results_yeo_fp_prompt_nc0_t_1_t_mean.pdf" class="ltx_centering" graphic="figures/main_results_yeo_fp_prompt_nc0_t_1_t_mean.pdf" options="width=433.62pt" xml:id="A0.F6.g1"/>
+    <toccaption class="ltx_centering"><tag close=" ">6</tag><text font="bold">Frontoparietal Network (FPN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) only.</text> <Math mode="inline" tex="r" text="r" xml:id="A0.F6.m1">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">r</XMTok>
+        </XMath>
+      </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F6.m2">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">p</XMTok>
+        </XMath>
+      </Math> correspond to the Pearson correlation coefficient and p-value.</toccaption>
+    <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 6</text></tag><text font="bold" fontsize="90%">Frontoparietal Network (FPN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) only.<text font="medium"> <Math mode="inline" tex="r" text="r" xml:id="A0.F6.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F6.m4">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math> correspond to the Pearson correlation coefficient and p-value.</text></text></caption>
+  </figure>
+  <figure inlist="lof" labels="LABEL:fig:alignment-aut-yeo-fp-response" placement="h" xml:id="A0.F7">
+    <tags>
+      <tag><text fontsize="90%">Figure 7</text></tag>
+      <tag role="autoref">Figure 7</tag>
+      <tag role="refnum">7</tag>
+      <tag role="typerefnum">Figure 7</tag>
+    </tags>
+    <graphics candidates="figures/main_results_yeo_fp_model_resp_nc0_t_1_t_mean.pdf" class="ltx_centering" graphic="figures/main_results_yeo_fp_model_resp_nc0_t_1_t_mean.pdf" options="width=433.62pt" xml:id="A0.F7.g1"/>
+    <toccaption class="ltx_centering"><tag close=" ">7</tag><text font="bold">Frontoparietal Network (DMN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) and model response.</text> <Math mode="inline" tex="r" text="r" xml:id="A0.F7.m1">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">r</XMTok>
+        </XMath>
+      </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F7.m2">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">p</XMTok>
+        </XMath>
+      </Math> correspond to the Pearson correlation coefficient and p-value.</toccaption>
+    <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 7</text></tag><text font="bold" fontsize="90%">Frontoparietal Network (DMN) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) and model response.<text font="medium"> <Math mode="inline" tex="r" text="r" xml:id="A0.F7.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F7.m4">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math> correspond to the Pearson correlation coefficient and p-value.</text></text></caption>
+  </figure>
+  <figure inlist="lof" labels="LABEL:fig:alignment-oct-model-size-yeo-dmn" placement="h" xml:id="A0.F8">
+    <tags>
+      <tag><text fontsize="90%">Figure 8</text></tag>
+      <tag role="autoref">Figure 8</tag>
+      <tag role="refnum">8</tag>
+      <tag role="typerefnum">Figure 8</tag>
+    </tags>
+    <graphics candidates="figures/model_size_res_yeo_dmn_oct_nc0_t_1.pdf" class="ltx_centering" graphic="figures/model_size_res_yeo_dmn_oct_nc0_t_1.pdf" options="width=433.62pt" xml:id="A0.F8.g1"/>
+<!--  %**** 11˙appendix.tex Line 25 **** -->    <toccaption class="ltx_centering"><tag close=" ">8</tag><text font="bold">Default Mode Network (DMN) OCT brain alignment results by model size on both stimuli (prompt) only and stimuli+model response activations.</text> <Math mode="inline" tex="r" text="r" xml:id="A0.F8.m1">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">r</XMTok>
+        </XMath>
+      </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F8.m2">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">p</XMTok>
+        </XMath>
+      </Math> correspond to the Pearson correlation coefficient and p-value.</toccaption>
+    <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 8</text></tag><text font="bold" fontsize="90%">Default Mode Network (DMN) OCT brain alignment results by model size on both stimuli (prompt) only and stimuli+model response activations.<text font="medium"> <Math mode="inline" tex="r" text="r" xml:id="A0.F8.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F8.m4">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math> correspond to the Pearson correlation coefficient and p-value.</text></text></caption>
+  </figure>
+  <figure inlist="lof" labels="LABEL:fig:alignment-aut-yeo-som-prompt" placement="h" xml:id="A0.F9">
+    <tags>
+      <tag><text fontsize="90%">Figure 9</text></tag>
+      <tag role="autoref">Figure 9</tag>
+      <tag role="refnum">9</tag>
+      <tag role="typerefnum">Figure 9</tag>
+    </tags>
+    <graphics candidates="figures/main_results_yeo_som_prompt_nc0_t_1_t_mean.pdf" class="ltx_centering" graphic="figures/main_results_yeo_som_prompt_nc0_t_1_t_mean.pdf" options="width=433.62pt" xml:id="A0.F9.g1"/>
+    <toccaption class="ltx_centering"><tag close=" ">9</tag><text font="bold">Somatomotor Network (SOM) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) only.</text> <Math mode="inline" tex="r" text="r" xml:id="A0.F9.m1">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">r</XMTok>
+        </XMath>
+      </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F9.m2">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">p</XMTok>
+        </XMath>
+      </Math> correspond to the Pearson correlation coefficient and p-value.</toccaption>
+    <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 9</text></tag><text font="bold" fontsize="90%">Somatomotor Network (SOM) AUT brain alignment results by model size and task performance using model activations on stimuli (prompt) only.<text font="medium"> <Math mode="inline" tex="r" text="r" xml:id="A0.F9.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">r</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="A0.F9.m4">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math> correspond to the Pearson correlation coefficient and p-value.</text></text></caption>
+  </figure>
+  <figure inlist="lof" labels="LABEL:fig:dist-mean-rating" placement="h" xml:id="A0.F10">
+    <tags>
+      <tag><text fontsize="90%">Figure 10</text></tag>
+      <tag role="autoref">Figure 10</tag>
+      <tag role="refnum">10</tag>
+      <tag role="typerefnum">Figure 10</tag>
+    </tags>
+    <graphics candidates="figures/mean_rating_distribution.pdf" class="ltx_centering" graphic="figures/mean_rating_distribution.pdf" options="width=433.62pt" xml:id="A0.F10.g1"/>
+    <toccaption class="ltx_centering"><tag close=" ">10</tag>Distribution of mean AUT ratings per human response.</toccaption>
+    <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 10</text></tag><text fontsize="90%">Distribution of mean AUT ratings per human response.</text></caption>
+  </figure>
+  <ERROR class="undefined">{prompt}</ERROR>
+  <para xml:id="p2">
+    <p>[title=Modified AUT Instructions for scoring, label=prompt:aut_instructions_scoring]
+<ERROR class="undefined">{Verbatim}</ERROR>[breaklines, breaksymbol=]
+Think of creative uses for objects. Report only the most original idea in a few words.</p>
+  </para>
+  <ERROR class="undefined">{prompt}</ERROR>
+  <para xml:id="p3">
+    <p>[title=Modified OCT Instructions for scoring, label=prompt:oct_instructions_scoring]
+<!--  %**** 11˙appendix.tex Line 50 **** --><ERROR class="undefined">{Verbatim}</ERROR>[breaklines, breaksymbol=]
+Think of the physical properties of objects. Report only the most prominent characteristic in a few words.</p>
+  </para>
+</document>

@@ -1,0 +1,29 @@
+% -------------------------------
+% Table D: Evaluation, collateral, and claims
+% -------------------------------
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{3.3cm}p{2.2cm}p{4.4cm}p{3.5cm}}
+\hline
+\textbf{Action} & \textbf{Sender} & \textbf{Required fields} & \textbf{Effect} \\
+\hline
+\texttt{EvaluateOutcome} & Evaluator/arbiter &
+\texttt{\{job\_id, agreement\_hash, pass/fail, trigger?, evidence\_ref?\}} &
+Produces auditable outcome under $\mathcal{A}$ \\
+\texttt{SettleCollateral} & Settlement layer &
+\texttt{\{job\_id, agreement\_hash, slash/unlock, amount, settlement\_ref\}} &
+Applies collateral policy under $\mathcal{A}$ \\
+\texttt{FileClaim} & Requestor &
+\texttt{\{job\_id, agreement\_hash, trigger, claimed\_loss, evidence\_ref\}} &
+Requests reimbursement under coverage terms \\
+\texttt{PayClaim} & Underwriter (or payout vault) &
+\texttt{\{job\_id, agreement\_hash, payout, payout\_ref, signature?\}} &
+Pays reimbursement up to coverage limit \\
+\hline
+\end{tabular}
+\caption{\textsc{ARS} actions for evaluation, collateral settlement, and claims.}
+\label{tab:arp-actions-settlement}
+\end{table}

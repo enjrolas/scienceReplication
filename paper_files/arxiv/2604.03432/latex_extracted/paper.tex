@@ -1,0 +1,58 @@
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[misc]{ifsym}
+\newcommand{\corr}{(\Letter)}
+\input{misc/packages}
+\begin{document}
+\title{YANA: Bridging the Neuromorphic Simulation-to-Hardware Gap}
+\author{
+    Brian Pachideh\inst{1,3} \corr \and
+    Sven Nitzsche\inst{1,3} \and
+    Moritz Neher\inst{1,2,3} \and
+    Jann Krausse\inst{2,3} \and
+    Carmen Weigelt\inst{2,3} \and
+    Klaus Knobloch\inst{2} \and
+    Victor Pazmino Betancourt\inst{1,3} \and
+    Juergen Becker\inst{1,3}
+}
+\authorrunning{Brian Pachideh et al.}
+\institute{
+    FZI Research Center for Information Technology, Karlsruhe, Germany \\ \email{\{pachideh, nitzsche, neher, pazmino\}@fzi.de}
+    \and
+    Infineon Technologies, Dresden, Germany \\
+    \email{\{jann.krausse, carmen.weigelt, klaus.knobloch\}@infineon.com}
+    \and
+    Karlsruhe Institute of Technology, Karlsruhe, Germany \\ \email{becker@kit.edu}
+}
+\maketitle
+\input{misc/acronyms}
+
+\begin{abstract}
+    \input{sections/01_abstract}
+    \keywords{neuromorphic computing \and spiking neural networks \and fpga \and event-driven hardware \and hardware accelerator \and embedded computing systems}
+\end{abstract}
+\section{Introduction}
+    \input{sections/02_introduction}
+
+\section{YANA Hardware Accelerator}
+    \label{sec:yana_hw_accelerator}
+    \input{sections/03_yana_architecture}
+
+\section{YANA Software Framework}
+    \input{sections/04_yana_framework}
+
+\section{Evaluation}
+    \label{sec:evaluation}
+    \input{sections/05_evaluation}
+
+\section{Discussion \& Future Work}
+    \input{sections/06_discussion}
+
+\section{Conclusion}
+    \input{sections/07_conclusion}
+
+\bibliographystyle{splncs04}
+\bibliography{references.bib}
+\end{document}

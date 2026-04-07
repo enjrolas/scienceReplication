@@ -31,8 +31,43 @@
 }
 .paper .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .paper .date { font-size: 0.8rem; color: #888; }
-.dataset-links { margin-top: 0.5rem; font-size: 0.85rem; }
-.dataset-links a { color: #2e86c1; }
+.paper-links {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+}
+.paper-links a {
+    text-decoration: none;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+.paper-links a:hover { opacity: 0.8; }
+.link-pdf { background: #fde8e8; color: #c0392b; }
+.link-latex { background: #e0f5f5; color: #008080; }
+.link-paper { background: #eee; color: #333; }
+.dataset-links {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+.dataset-links a {
+    display: inline-block;
+    margin: 0.2rem 0.3rem 0.2rem 0;
+    padding: 0.2rem 0.5rem;
+    background: #e8f0fe;
+    color: #1a56db;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+.dataset-links a:hover { background: #d0e0fd; }
+.dataset-verified { border-left: 2px solid #27ae60; }
+.dataset-unverified { border-left: 2px solid #ccc; }
 {% endblock %}
 
 {% block content %}
@@ -57,20 +92,33 @@
         {% if paper.has_pdf %}<span class="badge badge-pdf">PDF</span>{% endif %}
         {% if paper.dataset_links %}<span class="badge badge-data">Data</span>{% endif %}
     </div>
+
+    <div class="paper-links">
+        <a href="{{ paper.url }}" target="_blank" rel="noopener" class="link-paper">Paper</a>
+        {% if paper.pdf_url %}
+        <a href="{{ paper.pdf_url }}" target="_blank" rel="noopener" class="link-pdf">PDF</a>
+        {% endif %}
+        {% if paper.latex_url %}
+        <a href="{{ paper.latex_url }}" target="_blank" rel="noopener" class="link-latex">LaTeX Source</a>
+        {% endif %}
+        {% if paper.has_pdf and paper.pdf_path %}
+        <a href="/files/{{ paper.pdf_path }}" class="link-pdf">Local PDF</a>
+        {% endif %}
+        {% if paper.has_latex and paper.latex_path %}
+        <a href="/files/{{ paper.latex_path }}" class="link-latex">Local LaTeX</a>
+        {% endif %}
+    </div>
+
     {% if paper.dataset_links %}
     <div class="dataset-links">
         <strong>Datasets:</strong>
         {% for link in paper.dataset_links %}
-        <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.description }}</a>{% if not forloop.last %}, {% endif %}
+        <a href="{{ link.url }}" target="_blank" rel="noopener"
+           class="{% if link.verified %}dataset-verified{% else %}dataset-unverified{% endif %}"
+           {% if link.size_info %}title="Size: {{ link.size_info }}"{% endif %}>
+            {{ link.description }}{% if link.verified %} &#10003;{% endif %}
+        </a>
         {% endfor %}
-    </div>
-    {% endif %}
-    {% if paper.has_pdf and paper.pdf_path %}
-    <div style="margin-top: 0.4rem; font-size: 0.85rem;">
-        <a href="/files/{{ paper.pdf_path }}" style="color: #c0392b;">Download PDF</a>
-        {% if paper.has_latex and paper.latex_path %}
-        | <a href="/files/{{ paper.latex_path }}" style="color: #008080;">Download LaTeX</a>
-        {% endif %}
     </div>
     {% endif %}
 </div>

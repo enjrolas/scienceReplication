@@ -1,0 +1,90 @@
+\begin{table*}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.08}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccc|ccc|ccc|ccc|ccc@{}}
+\toprule
+\multirow{3}{*}{\textbf{Model}} 
+& \multicolumn{3}{c|}{\textbf{CoA (new)}} 
+& \multicolumn{3}{c|}{\textbf{AMA}} 
+& \multicolumn{3}{c|}{\textbf{Crescendo}} 
+& \multicolumn{3}{c|}{\textbf{Actor-Attack}} 
+& \multicolumn{3}{c}{\textbf{Ours}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16}
+& \multicolumn{2}{c}{\textbf{CARES}} & \textbf{GPT}
+& \multicolumn{2}{c}{\textbf{CARES}} & \textbf{GPT}
+& \multicolumn{2}{c}{\textbf{CARES}} & \textbf{GPT}
+& \multicolumn{2}{c}{\textbf{CARES}} & \textbf{GPT}
+& \multicolumn{2}{c}{\textbf{CARES}} & \textbf{GPT} \\
+& \textbf{SS$\downarrow$} & \textbf{ASR$\uparrow$} & \textbf{ASR$\uparrow$}
+& \textbf{SS$\downarrow$} & \textbf{ASR$\uparrow$} & \textbf{ASR$\uparrow$}
+& \textbf{SS$\downarrow$} & \textbf{ASR$\uparrow$} & \textbf{ASR$\uparrow$}
+& \textbf{SS$\downarrow$} & \textbf{ASR$\uparrow$} & \textbf{ASR$\uparrow$}
+& \textbf{SS$\downarrow$} & \textbf{ASR$\uparrow$} & \textbf{ASR$\uparrow$} \\
+\midrule
+
+Llama-3.1-8B
+& 0.72 & 0.56 & 0.19
+& 0.84 & 0.29 & \underline{0.64}
+& \underline{0.66} & \underline{0.69} & 0.52
+& 0.73 & 0.45 & 0.15
+& \textbf{0.43} & \textbf{0.84} & \textbf{0.89} \\
+
+Llama-3.1-70B
+& 0.69 & 0.59 & 0.18
+& 0.75 & 0.44 & \underline{0.66}
+& \underline{0.61} & \underline{0.64} & 0.51
+& 0.77 & 0.41 & 0.34
+& \textbf{0.53} & \textbf{0.77} & \textbf{0.78} \\
+
+GPT-3.5
+& 0.75 & 0.44 & 0.25
+& 0.76 & 0.32 & 0.19
+& \underline{0.66} & \underline{0.58} & \underline{0.53}
+& 0.76 & 0.41 & 0.42
+& \textbf{0.36} & \textbf{0.88} & \textbf{0.79} \\
+
+GPT-5.1
+& \underline{0.60} & \underline{0.59} & 0.21
+& 0.67 & 0.48 & 0.27
+& 0.65 & 0.52 & \underline{0.44}
+& 0.75 & 0.38 & 0.32
+& \textbf{0.53} & \textbf{0.74} & \textbf{0.71} \\
+
+Crispers-7B
+& 0.66 & 0.53 & 0.30
+& 0.75 & 0.37 & 0.11
+& \underline{0.62} & \underline{0.63} & \underline{0.47}
+& 0.74 & 0.42 & 0.38
+& \textbf{0.40} & \textbf{0.84} & \textbf{0.81} \\
+
+Psycho-8B
+& 0.67 & 0.58 & 0.21
+& 0.77 & 0.38 & \underline{0.59}
+& \underline{0.62} & \underline{0.62} & 0.44
+& 0.80 & 0.34 & 0.29
+& \textbf{0.46} & \textbf{0.86} & \textbf{0.88} \\
+
+Qwen-3-14B
+& 0.71 & 0.52 & 0.22
+& 0.74 & 0.47 & \underline{0.48}
+& 0.70 & 0.51 & 0.22
+& \underline{0.69} & \underline{0.53} & 0.33
+& \textbf{0.59} & \textbf{0.67} & \textbf{0.84} \\
+
+Qwen-2.5-72B
+& 0.73 & 0.49 & 0.21
+& 0.77 & 0.40 & \underline{0.64}
+& \underline{0.67} & \underline{0.55} & 0.48
+& 0.76 & 0.40 & 0.25
+& \textbf{0.51} & \textbf{0.77} & \textbf{0.82} \\
+
+\bottomrule
+\end{tabular}%
+}
+\caption{Attack Success Rate (ASR$\uparrow$) and Safety Score (SS$\downarrow$) of different jailbreak methods across 8 target models on the CARES benchmark and GPT-as-a-Judge. Best results are highlighted in \textbf{bold}, second-best \underline{underlined}.}
+\vspace{-1.2em}
+\label{tab:my-table}
+\end{table*}

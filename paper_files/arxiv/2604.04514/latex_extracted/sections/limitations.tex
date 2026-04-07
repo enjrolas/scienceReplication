@@ -1,0 +1,18 @@
+\section{Limitations and Future Work}
+\label{sec:limitations}
+
+\textbf{Cold-start.} Behavioral learning requires $\sim$200 feedback signals before the full adaptive model trains. During cold-start, retrieval relies on fixed channel weights.
+
+\textbf{Soft prompts vs.\ fine-tuning.} Natural language soft prompts are less powerful than LoRA. They can configure preferences but cannot teach new capabilities.
+
+\textbf{Extreme compression.} At 2-bit precision, embedding quality degrades significantly. 2-bit is appropriate only for archived memories.
+
+\textbf{LoCoMo regression on single-hop.} The 7-channel architecture introduces fusion noise on simple queries. Query-dependent channel routing (dynamically weighting channels based on query classification) is a promising direction.
+
+\textbf{Hook specificity.} The zero-friction pipeline is Claude Code-specific. The MCP server works with any MCP-compatible agent, but automatic lifecycle requires per-platform hook integration.
+
+\textbf{Future directions:} Hyperbolic embeddings (Poincar\'{e} ball) for hierarchical structure; LoRA-based parameterization when model weight access becomes available; federated memory with differential privacy; automatic forgetting calibration from usage patterns; query-dependent channel routing to close the single-hop gap.
+
+% ============================================================================
+% 12. CONCLUSION
+% ============================================================================

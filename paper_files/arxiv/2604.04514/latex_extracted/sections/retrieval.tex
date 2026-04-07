@@ -1,0 +1,46 @@
+\section{Seven-Channel Cognitive Retrieval (C3)}
+\label{sec:retrieval}
+
+\begin{table}[h]
+\centering
+\caption{Seven-channel retrieval architecture.}
+\label{tab:channels}
+\small
+\begin{tabular}{clllr}
+\toprule
+\textbf{\#} & \textbf{Channel} & \textbf{Source} & \textbf{Retrieves} & \textbf{Weight} \\
+\midrule
+1 & Semantic & sqlite-vec KNN (float[768]) & Meaning-similar & 1.2 \\
+2 & BM25 & FTS5 keyword index & Exact term matches & 1.0 \\
+3 & Entity Graph & Knowledge graph traversal & Entity-connected & 1.0 \\
+4 & Temporal & Bi-temporal timestamps & Recently relevant & 1.0 \\
+5 & Spreading Activation & Energy propagation & Causally-connected & 1.0 \\
+6 & Consolidation & CCQ gist blocks & Compressed knowledge & 0.8 \\
+7 & Hopfield & Modern Hopfield network & Pattern-completed & 0.8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Channels 1--5 were introduced in Papers~1 and~2. Channel~6 (Consolidation) was built in V3.2 but not published. Channel~7 (Hopfield) is new in V3.3.
+
+\subsection{Hopfield Associative Memory}
+
+Modern continuous Hopfield networks~\cite{hopfield-modern} provide content-addressable memory with exponential storage capacity---$2^{d/2}$ patterns in $d$ dimensions. The update rule:
+\begin{equation}
+\xi^{\text{new}} = \mathbf{X}^T \text{softmax}(\beta \mathbf{X} \xi)
+\end{equation}
+where $\mathbf{X} \in \mathbb{R}^{N \times d}$ is the matrix of stored patterns and $\beta = 1/\sqrt{d}$ is the inverse temperature following Ramsauer et al. Hopfield retrieval complements the other channels for pattern completion from partial cues and associative recall of composite patterns.
+
+\subsection{Channel Fusion and Cross-Encoder Reranking}
+
+Results from all seven channels are merged via weighted Reciprocal Rank Fusion:
+\begin{equation}
+\text{score}(m) = \sum_{c=1}^{7} w_c \cdot \frac{1}{k + \text{rank}_c(m)}
+\end{equation}
+with $k = 15$ (optimized for candidate pools of 50--200 facts; standard RRF uses $k = 60$). V3.3 introduced cross-channel intersection that fires for multi-hop queries only: when a query is classified as multi-hop, the system intersects entity-channel and temporal-channel results before RRF fusion, preventing noise from independent channels from diluting precise entity-temporal matches.
+
+ONNX cross-encoder reranking (ms-marco-MiniLM-L-6-v2, $\sim$90MB) takes (query, memory text) pairs and produces relevance scores.
+
+% ============================================================================
+% 7. MEMORY PARAMETERIZATION (C4)
+% ============================================================================

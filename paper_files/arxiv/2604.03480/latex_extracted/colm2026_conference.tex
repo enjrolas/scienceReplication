@@ -1,0 +1,128 @@
+
+\documentclass{article} % For LaTeX2e
+\usepackage[preprint]{colm2026_conference}
+
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{makecell}
+\usepackage{subcaption}
+\usepackage{nicematrix}
+\usepackage[most]{tcolorbox}
+\usepackage{fvextra}
+
+% NOTE: including geometry package
+% The geometery package modifies some page properties when used. This can dramatically change the page margins, leading to severe template violation, and potential desk rejection. If the package is required, it can be used with the "pass" flag to skip the default page modifications, as in the following line:
+% \usepackage[pass]{geometry}
+
+\usepackage{lineno}
+
+\definecolor{darkblue}{rgb}{0, 0, 0.5}
+\hypersetup{colorlinks=true, citecolor=darkblue, linkcolor=darkblue, urlcolor=darkblue}
+
+\newtcolorbox[list inside=prompt,auto counter,number within=section]{prompt}[1][]{
+    colbacktitle=black!60,
+    fonttitle=\small,
+    coltitle=white,
+    fontupper=\footnotesize,
+    boxsep=3pt,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    boxrule=1pt,
+    #1,
+    breakable,              % <--- allow page/column breaks
+}
+
+% \title{Investigating Brain-LLM Alignment in Creative Thinking}
+\title{Large Language Models Align with the Human Brain during Creative Thinking}
+
+% Authors must not appear in the submitted version. This should be be taken care of automatically as long as you are using the "submission" option for the colm2026_conference package. But it's on the authors to verify. Non-anonymous submissions will be rejected without review.
+
+\newcommand{\authsep}{\hspace{0.8em}}
+
+\author{Mete Ismayilzada\textsuperscript{1,2} 
+\authsep Simone A. Luchini\textsuperscript{4,5}
+\authsep Abdulkadir Gokce\textsuperscript{1} 
+\authsep Badr AlKhamissi\textsuperscript{1} \\
+\textbf{Antoine Bosselut}\textsuperscript{1} 
+\authsep \textbf{Antonio Laverghetta Jr.}\textsuperscript{3} 
+\authsep \textbf{Lonneke van der Plas}\textsuperscript{\textdagger2} \\
+\textbf{Roger E. Beaty}\textsuperscript{\textdagger5} \\
+\textsuperscript{1}EPFL, 
+\textsuperscript{2}Università della Svizzera italiana (USI), 
+\textsuperscript{3}Wesleyan University,\\
+\textsuperscript{4}Paris Brain Institute (ICM),
+\textsuperscript{5}Pennsylvania State University
+}
+
+\begingroup
+\renewcommand\thefootnote{\textsuperscript{\textdagger}}\footnotetext{Equal supervision}
+\endgroup
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\begin{document}
+
+\ifcolmsubmission
+\linenumbers
+\fi
+
+\maketitle
+
+\begin{abstract}
+\input{00_abstract}
+\end{abstract}
+
+\section{Introduction}
+\input{01_introduction}
+
+\section{Related Work}
+\input{02_related_work}
+
+\section{Methodology}
+\input{03_methodology}
+
+\section{Experimental Setup}
+\input{04_experiments}
+
+\section{Results}
+\input{05_results}
+
+\section{Discussion}
+\input{06_discussion}
+
+\section*{Conclusion}
+\input{07_conclusion}
+
+% \section*{Limitations}
+% \input{08_limitations}
+
+% \section*{Ethics Statement}
+% \input{09_ethics}
+
+\section*{Acknowledgements}
+\input{10_acknowledgements}
+
+\bibliography{colm2026_conference}
+\bibliographystyle{colm2026_conference}
+
+\newpage
+\appendix
+
+\input{11_appendix}
+
+\end{document}

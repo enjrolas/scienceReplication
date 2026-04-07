@@ -1,0 +1,84 @@
+\section{Ebbinghaus Adaptive Forgetting (C2)}
+\label{sec:forgetting}
+
+\subsection{Why Forgetting is Essential}
+
+An agent memory system that never forgets faces three problems: (1)~retrieval degradation as irrelevant memories dilute results, (2)~storage bloat ($\sim$3KB per embedding at 768 dimensions), and (3)~context pollution where old memories crowd out recent ones.
+
+\subsection{Ebbinghaus Forgetting Dynamics}
+
+\begin{definition}[Memory Strength]
+For a memory $m$ with access count $a(m)$, importance $\iota(m) \in [0,1]$, confirmation count $\gamma(m)$, and emotional salience $\varepsilon(m) \in [0,1]$:
+\begin{equation}
+S(m) = \max\!\left(S_{\min},\; \alpha \cdot \log(1 + a(m)) + \beta \cdot \iota(m) + \gamma_c \cdot \gamma(m) + \delta \cdot \varepsilon(m)\right)
+\label{eq:strength}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Retention]
+$R(m, t) = \exp\left(-t / S(m)\right)$
+\label{eq:retention}
+\end{definition}
+
+The logarithmic dependence on access count produces the \textbf{spacing effect}: initial retrievals dramatically increase strength, with diminishing returns thereafter.
+
+\subsubsection{Lifecycle State Mapping}
+
+Retention maps to discrete lifecycle states:
+\begin{equation}
+\text{state}(m, t) = \begin{cases}
+\textsc{Active} & R > 0.8 \\
+\textsc{Warm} & 0.5 < R \leq 0.8 \\
+\textsc{Cold} & 0.2 < R \leq 0.5 \\
+\textsc{Archive} & 0.05 < R \leq 0.2 \\
+\textsc{Forgotten} & R \leq 0.05
+\end{cases}
+\label{eq:lifecycle}
+\end{equation}
+
+\subsection{Integration with Fokker-Planck Lifecycle Dynamics}
+
+Paper~2~\cite{slm-paper2} modeled memory lifecycle via Riemannian Langevin dynamics on the information-geometric manifold. We extend with a forgetting drift term:
+
+\begin{equation}
+d\xi_t = \left[-g^{-1}(\xi_t) \nabla U(\xi_t) - \lambda(m) \cdot F(\xi_t)\right] dt + \sqrt{2T_{\text{eff}}(m) \, dt} \, g^{-1/2}(\xi_t) \, d\eta_t
+\label{eq:langevin-extended}
+\end{equation}
+where $\lambda(m) = 1/S(m)$ is the forgetting rate, $F(\xi_t)$ pushes memories toward Archive/Forgotten states, and $T_{\text{eff}}(m) = T_0 / (\text{fisher\_confidence}(m) + \epsilon)$.
+
+\begin{theorem}[Convergence of Ebbinghaus-Fokker-Planck System]
+\label{thm:convergence}
+Under the extended SDE~(\ref{eq:langevin-extended}), the probability density $p(\xi, t)$ converges to a unique stationary distribution $p^*(\xi)$ satisfying:
+\begin{equation}
+\nabla \cdot \left[\left(g^{-1} \nabla U + \lambda F\right) p^* + T_{\text{eff}} \, g^{-1} \nabla p^*\right] = 0
+\end{equation}
+provided that $U(\xi) + \lambda \Phi_F(\xi)$ is confining and $T_{\text{eff}} > 0$, where $F = -\nabla \Phi_F$.
+\end{theorem}
+
+\textit{Proof sketch.} The forgetting drift adds a confining potential $\lambda \Phi_F$ to the total energy landscape. The combined potential $U + \lambda \Phi_F$ remains confining (sum of confining potentials), satisfying the Lyapunov condition for ergodicity. Detailed balance is preserved because the forgetting drift is gradient-derived. $\square$
+
+\subsection{Forgetting-Quantization Coupling}
+
+The central insight: forgetting and quantization are unified:
+\begin{equation}
+b(m, t) = \begin{cases}
+32 & \textsc{Active} \\
+8 & \textsc{Warm} \\
+4 & \textsc{Cold} \\
+2 & \textsc{Archive}
+\end{cases}
+\end{equation}
+
+This is biologically inspired: faded memories are ``blurry.'' Critically, this coupling is \textbf{self-consistent with the Fisher-Rao metric}: quantization increases effective variance, so quantized memories automatically receive lower similarity scores.
+
+\subsection{Trust-Weighted Forgetting}
+
+Bayesian trust scores from Paper~1~\cite{slm-paper1} modulate the forgetting rate:
+\begin{equation}
+\lambda_{\text{eff}}(m) = \lambda(m) \cdot (1 + \kappa \cdot (1 - \tau_{\text{source}(m)}))
+\end{equation}
+where $\kappa = 2.0$ (default sensitivity). For a fully trusted source ($\tau = 1$), $\lambda_{\text{eff}} = \lambda$---standard decay. For a zero-trust source ($\tau = 0$), $\lambda_{\text{eff}} = 3\lambda$---the memory decays three times faster. The forgetting scheduler queries the \texttt{trust\_scores} table to retrieve the trust score of each fact's creating agent, and applies the modulated rate during batch decay cycles.
+
+% ============================================================================
+% 6. 7-CHANNEL RETRIEVAL (C3)
+% ============================================================================

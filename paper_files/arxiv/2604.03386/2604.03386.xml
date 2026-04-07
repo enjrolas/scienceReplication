@@ -1,0 +1,3207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.03386/latex_extracted"?>
+<!--  %%% ”Activity-Dependent Plasticity in Morphogenetically-Grown Recurrent Networks” --><!--  %%% Medvid S.O., Valenia A.I., Glybovets M.M. --><!--  %%% --><!--  %%% arXiv version --><!--  %%% Compile with: pdflatex main˙arxiv &amp;&amp; pdflatex main˙arxiv --><?latexml class="acmart" options="sigconf,nonacm"?>
+<!--  %Remove ACM-specific metadata for workshop submission --><?latexml package="booktabs"?>
+<?latexml package="multirow"?>
+<?latexml package="graphicx"?>
+<?latexml package="xcolor"?>
+<?latexml package="amsmath"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line ltx_leqno">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <resource src="ltx-amsart.css" type="text/css"/>
+  <title>Activity-Dependent Plasticity in Morphogenetically-Grown Recurrent Networks</title>
+  <creator role="author">
+    <personname>Sergii Medvid</personname>
+    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">National University of Kyiv-Mohyla Academy</text>
+<text class="ltx_affiliation_city">Kyiv</text>
+<text class="ltx_affiliation_country">Ukraine</text>
+</contact>
+    <contact role="email">s.medvid@ukma.edu.ua</contact>
+  </creator>
+  <creator before=", " role="author">
+    <personname>Andrii Valenia</personname>
+    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">National University of Kyiv-Mohyla Academy</text>
+<text class="ltx_affiliation_city">Kyiv</text>
+<text class="ltx_affiliation_country">Ukraine</text>
+</contact>
+    <contact role="email">a.valenia@ukma.edu.ua</contact>
+  </creator>
+  <creator before=" and " role="author">
+    <personname>Mykola Glybovets</personname>
+    <contact role="additional_affiliation"><text class="ltx_affiliation_institution">National University of Kyiv-Mohyla Academy</text>
+<text class="ltx_affiliation_city">Kyiv</text>
+<text class="ltx_affiliation_country">Ukraine</text>
+</contact>
+    <contact role="email">glib@ukma.edu.ua</contact>
+  </creator>
+  <abstract name="Abstract.">
+    <p>Developmental approaches to neural architecture search grow functional networks from compact genomes through self-organisation, but the resulting networks operate with fixed post-growth weights.
+We characterise Hebbian and anti-Hebbian plasticity across 50,000 morphogenetically grown recurrent controllers (5M+ configurations on CartPole and Acrobot), then test whether co-evolutionary experiments—where plasticity parameters are encoded in the genome and evolved alongside the developmental architecture—recover these patterns independently.
+Our characterisation reveals that (1) anti-Hebbian plasticity significantly outperforms Hebbian for competent networks (Cohen’s <Math mode="inline" tex="d=0.53" text="d = 0.53" xml:id="m1">
+        <XMath>
+          <XMApp>
+            <XMTok meaning="equals" role="RELOP">=</XMTok>
+            <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            <XMTok meaning="0.53" role="NUMBER">0.53</XMTok>
+          </XMApp>
+        </XMath>
+      </Math>–<Math mode="inline" tex="0.64" text="0.64" xml:id="m2">
+        <XMath>
+          <XMTok meaning="0.64" role="NUMBER">0.64</XMTok>
+        </XMath>
+      </Math>), (2) regret (fraction of oracle improvement lost under the best fixed setting) reaches 52–100%, and (3) plasticity’s role shifts from fine-tuning to genuine adaptation under non-stationarity.
+Co-evolution independently discovers these patterns: on CartPole, 70% of runs evolve anti-Hebbian plasticity (<Math mode="inline" tex="p=0.043" text="p = 0.043" xml:id="m3">
+        <XMath>
+          <XMApp>
+            <XMTok meaning="equals" role="RELOP">=</XMTok>
+            <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            <XMTok meaning="0.043" role="NUMBER">0.043</XMTok>
+          </XMApp>
+        </XMath>
+      </Math>); on Acrobot, evolution finds near-zero <Math mode="inline" tex="\eta" text="eta" xml:id="m4">
+        <XMath>
+          <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+        </XMath>
+      </Math> with mixed signs—exactly matching the characterisation.
+A random-RNN control shows that anti-Hebbian dominance is generic to small recurrent networks, but the <emph font="italic">degree</emph> of topology-dependence is developmental-specific: regret is 2–6<Math mode="inline" tex="\times" text="*" xml:id="m5">
+        <XMath>
+          <XMTok meaning="times" role="MULOP">×</XMTok>
+        </XMath>
+      </Math> higher for morphogenetically grown networks than for random graphs with matched topology statistics.</p>
+  </abstract>
+  <keywords>developmental neural networks, synaptic plasticity, morphogenetic self-organisation, neuroevolution, indirect encoding</keywords>
+  <note role="ccs">Computing methodologies Neural networks</note>
+  <note role="ccs">Computing methodologies Bio-inspired approaches</note>
+<!--  %**** main˙arxiv.tex Line 25 **** 
+     %**** main˙arxiv.tex Line 75 ****
+     %% ============================================================-->  <section inlist="toc" labels="LABEL:sec:intro" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=". ">1</tag>Introduction</title>
+    <toctitle><tag close=" ">1</tag>Introduction</toctitle>
+    <para xml:id="S1.p1">
+      <p>Developmental approaches to neural architecture search—including Neural Developmental Programs (NDP) <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2023ndp" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, HyperNCA <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2022hypernca" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, and MorphoNAS <cite class="ltx_citemacro_citep">(<bibref bibrefs="glybovets2026morphonas" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>—encode compact genomes that unfold into functional neural networks through developmental processes. These systems demonstrate that self-organising developmental rules can produce effective controllers from far fewer parameters than direct weight specification, echoing the genomic bottleneck observed in biological brains <cite class="ltx_citemacro_citep">(<bibref bibrefs="zador2019critique" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>In MorphoNAS, as in NDP and HyperNCA, the network topology and weights are fixed once development completes. This contrasts with biological neural circuits, where activity-dependent synaptic plasticity enables within-lifetime adaptation <cite class="ltx_citemacro_citep">(<bibref bibrefs="hebb1949organization" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Recent work on Hebbian neuroevolution <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2020meta" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> has shown that evolving plasticity rules can produce adaptive agents, but this work operates on fixed-topology networks rather than developmentally grown architectures. Palm et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="palm2021testing" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> tested the genomic bottleneck hypothesis with Hebbian meta-learning but found that naive bottleneck application to plasticity rules leads to poor performance, suggesting a difficult joint optimisation problem.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>Two fundamental questions arise. First, <text font="bold">can post-developmental plasticity meaningfully improve morphogenetically grown networks, and if so, under what conditions?</text> Second, <text font="bold">can evolutionary optimisation discover the right plasticity parameters for each architecture, and does this interaction differ between developmental and random networks?</text> These questions are central to evolving self-organising systems: structural self-organisation (development) and functional self-organisation (plasticity) may interact in ways that neither uniform parameter tuning nor isolated analysis can reveal.</p>
+    </para>
+    <para xml:id="S1.p4">
+      <p>We present a systematic characterisation of synaptic plasticity in developmental networks at population scale, followed by co-evolutionary experiments that test whether evolutionary optimisation recovers the characterisation patterns. We use MorphoNAS <cite class="ltx_citemacro_citep">(<bibref bibrefs="glybovets2026morphonas" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> as our experimental platform. Its reaction-diffusion dynamics <cite class="ltx_citemacro_citep">(<bibref bibrefs="turing1952chemical" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> produce structurally diverse topologies from compact genomes, making it a suitable testbed for the broader class of developmental encodings. We evaluate Hebbian and anti-Hebbian plasticity across 50,000 morphogenetically grown CartPole controllers under three task conditions (static, 10<Math mode="inline" tex="\times" text="*" xml:id="S1.p4.m1">
+          <XMath>
+            <XMTok meaning="times" role="MULOP">×</XMTok>
+          </XMath>
+        </Math> pole mass, 2<Math mode="inline" tex="\times" text="*" xml:id="S1.p4.m2">
+          <XMath>
+            <XMTok meaning="times" role="MULOP">×</XMTok>
+          </XMath>
+        </Math> gravity), replicate key findings on 5,000 Acrobot controllers, then test whether co-evolving plasticity parameters alongside the developmental genome recovers the characterisation patterns. A random-RNN control disentangles developmental from generic network effects. Our contributions are:</p>
+    </para>
+    <para xml:id="S1.p5">
+      <itemize xml:id="S1.I1">
+        <item xml:id="S1.I1.i1">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">1st item</tag>
+          </tags>
+          <para xml:id="S1.I1.i1.p1">
+            <p>A stratified characterisation across 3.75M evaluations revealing anti-Hebbian dominance (Cohen’s <Math mode="inline" tex="d=0.53" text="d = 0.53" xml:id="S1.I1.i1.p1.m1">
+                <XMath>
+                  <XMApp>
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                    <XMTok meaning="0.53" role="NUMBER">0.53</XMTok>
+                  </XMApp>
+                </XMath>
+              </Math>–<Math mode="inline" tex="0.64" text="0.64" xml:id="S1.I1.i1.p1.m2">
+                <XMath>
+                  <XMTok meaning="0.64" role="NUMBER">0.64</XMTok>
+                </XMath>
+              </Math>), topology-dependent regret (52–100%), and a functional role-shift from fine-tuning to genuine within-lifetime adaptation under non-stationarity.</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i2">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">2nd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i2.p1">
+            <p>Co-evolutionary validation: when plasticity parameters are encoded in the genome and evolved, evolution independently discovers anti-Hebbian dominance on CartPole (<Math mode="inline" tex="p=0.043" text="p = 0.043" xml:id="S1.I1.i2.p1.m1">
+                <XMath>
+                  <XMApp>
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                    <XMTok meaning="0.043" role="NUMBER">0.043</XMTok>
+                  </XMApp>
+                </XMath>
+              </Math>) and the correct <Math mode="inline" tex="\eta" text="eta" xml:id="S1.I1.i2.p1.m2">
+                <XMath>
+                  <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                </XMath>
+              </Math> scale on both benchmarks.</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i3">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">3rd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i3.p1">
+            <p>A random-RNN control showing that anti-Hebbian dominance is generic to small RNNs, but the <emph font="italic">degree</emph> of topology-dependence (regret) is 2–6<Math mode="inline" tex="\times" text="*" xml:id="S1.I1.i3.p1.m1">
+                <XMath>
+                  <XMTok meaning="times" role="MULOP">×</XMTok>
+                </XMath>
+              </Math> higher for developmental networks, confirming that morphogenetic structure creates uniquely diverse plasticity interactions.</p>
+          </para>
+        </item>
+      </itemize>
+    </para>
+<!--  %% ============================================================ -->  </section>
+  <section inlist="toc" labels="LABEL:sec:related" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=". ">2</tag>Related Work</title>
+    <toctitle><tag close=" ">2</tag>Related Work</toctitle>
+<!--  %**** main˙arxiv.tex Line 100 **** -->    <para xml:id="S2.p1">
+      <p><text font="bold">Developmental neural networks.</text>
+Indirect encodings that grow neural networks through developmental processes have a rich history in evolutionary computation. Stanley’s NEAT <cite class="ltx_citemacro_citep">(<bibref bibrefs="stanley2002evolving" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> complexifies topology through mutation, while HyperNEAT <cite class="ltx_citemacro_citep">(<bibref bibrefs="stanley2009hypercube" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> uses compositional pattern-producing networks to exploit geometric regularities. Neural Cellular Automata (NCA) <cite class="ltx_citemacro_citep">(<bibref bibrefs="mordvintsev2020growing" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> demonstrated that self-organising update rules can grow complex patterns from local interactions; Neural Developmental Programs (NDP) <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2023ndp" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> and HyperNCA <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2022hypernca" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> extend this to grow functional neural networks through self-assembling developmental processes. MorphoNAS <cite class="ltx_citemacro_citep">(<bibref bibrefs="glybovets2026morphonas" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> takes a complementary developmental path, using Turing-type reaction-diffusion morphogen dynamics <cite class="ltx_citemacro_citep">(<bibref bibrefs="turing1952chemical" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> rather than learned update rules. Nisioti et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="nisioti2024growing" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> showed that maintaining neuronal diversity during NDP growth—via intrinsic hidden states and lateral inhibition—is essential for producing functional controllers, providing independent evidence that the developmental process shapes the structural heterogeneity of the resulting networks. In all these systems, weights are typically fixed during task execution.</p>
+    </para>
+    <para xml:id="S2.p2">
+      <p><text font="bold">Plasticity in neuroevolution.</text>
+Soltoggio et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="soltoggio2018born" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> survey the field of evolved plastic networks, identifying Hebbian and neuromodulated plasticity as the dominant paradigms. Najarro and Risi <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2020meta" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> demonstrated that Hebbian learning rules evolved via meta-learning can produce agents that adapt within their lifetime—but on fixed-topology random networks, not developmentally grown ones. Plantec et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="plantec2024evolving" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> introduced the Lifelong Neural Developmental Program (LNDP), combining graph-transformer-based development with experience-dependent structural plasticity, enabling networks to add and prune connections during task execution. García Núñez et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="garcianunez2025time" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> proposed time-modulated Hebbian learning (tm-HL) for classic control tasks, introducing a decay term <Math mode="inline" tex="\mu_{t}=e^{-\lambda t}" text="mu _ t = e ^ (- lambda * t)" xml:id="S2.p2.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" name="mu" role="UNKNOWN">μ</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">t</XMTok>
+              </XMApp>
+              <XMApp>
+                <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                <XMApp>
+                  <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                  <XMApp>
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMTok font="italic" fontsize="70%" name="lambda" role="UNKNOWN">λ</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">t</XMTok>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMApp>
+          </XMath>
+        </Math> that transitions networks from high plasticity to fixed weights over the agent’s lifetime; they used <Math mode="inline" tex="\lambda=0.01" text="lambda = 0.01" xml:id="S2.p2.m2">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+              <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+            </XMApp>
+          </XMath>
+        </Math>—the same value we find effective for weight decay. However, their work uses fixed feedforward architectures and does not test anti-Hebbian rules. Our work complements theirs by characterising plasticity across 50,000 <emph font="italic">developmentally grown</emph> topologies, revealing that the interaction between plasticity and network structure—rather than plasticity parameters alone—is the dominant factor.</p>
+    </para>
+    <para xml:id="S2.p3">
+      <p><text font="bold">The genomic bottleneck.</text>
+Zador <cite class="ltx_citemacro_citep">(<bibref bibrefs="zador2019critique" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> argued that biological brains leverage compact genomic encodings that specify wiring rules rather than individual weights, with experience fine-tuning pre-wired circuits. Palm et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="palm2021testing" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> tested whether a genomic bottleneck improves Hebbian meta-learning but found the joint optimisation problem difficult under their approach. Our work takes a different approach: we first characterise how simple plasticity interacts with the topology already compressed through morphogenetic development, then test whether encoding plasticity parameters in the genome and co-evolving them alongside the developmental architecture can exploit this interaction.</p>
+    </para>
+<!--  %% ============================================================ -->  </section>
+  <section inlist="toc" labels="LABEL:sec:design" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=". ">3</tag>Experimental Design</title>
+    <toctitle><tag close=" ">3</tag>Experimental Design</toctitle>
+    <subsection inlist="toc" xml:id="S3.SS1">
+      <tags>
+        <tag>3.1</tag>
+        <tag role="autoref">subsection 3.1</tag>
+        <tag role="refnum">3.1</tag>
+        <tag role="typerefnum">§3.1</tag>
+      </tags>
+      <title><tag close=". ">3.1</tag>MorphoNAS Developmental System</title>
+      <toctitle><tag close=" ">3.1</tag>MorphoNAS Developmental System</toctitle>
+      <para xml:id="S3.SS1.p1">
+        <p>We use MorphoNAS <cite class="ltx_citemacro_citep">(<bibref bibrefs="glybovets2026morphonas" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>, a morphogenetic neural architecture search system where a compact genome (54 parameters for 3 morphogens) encodes morphogen secretion rates, diffusion tensors, cross-inhibition coefficients, cell-fate thresholds, and axon growth rules. Starting from a single progenitor cell on a 2D toroidal grid, each developmental iteration involves morphogen secretion, spatial diffusion, competitive cross-inhibition (producing reaction-diffusion dynamics and symmetry breaking), local cell-fate decisions (division, differentiation, or quiescence), and chemotactic axon growth with distance-dependent weight initialisation (<Math mode="inline" tex="w=\max(0.01,\;c/(1+d))" text="w = maximum@(0.01, c / (1 + d))" xml:id="S3.SS1.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">w</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMRef idref="S3.SS1.p1.m1.1"/>
+                    <XMRef idref="S3.SS1.p1.m1.2"/>
+                    <XMRef idref="S3.SS1.p1.m1.3"/>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="maximum" role="OPFUNCTION" scriptpos="post" xml:id="S3.SS1.p1.m1.1">max</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMTok meaning="0.01" role="NUMBER" xml:id="S3.SS1.p1.m1.2">0.01</XMTok>
+                      <XMTok role="PUNCT" rpadding="2.8pt">,</XMTok>
+                      <XMApp xml:id="S3.SS1.p1.m1.3">
+                        <XMTok meaning="divide" role="MULOP">/</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                        <XMDual>
+                          <XMRef idref="S3.SS1.p1.m1.3.1"/>
+                          <XMWrap>
+                            <XMTok role="OPEN" stretchy="false">(</XMTok>
+                            <XMApp xml:id="S3.SS1.p1.m1.3.1">
+                              <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                              <XMTok meaning="1" role="NUMBER">1</XMTok>
+                              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                            </XMApp>
+                            <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMApp>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>). After a genome-specified number of iterations, the process yields a recurrent neural network (RNN) whose topology and weights emerge entirely from local chemical interactions (Figure <ref labelref="LABEL:fig:morphonas"/>). The process is fully deterministic: the same genome always produces the same network. Crucially, the 54 parameters do not specify individual neurons or connections—they encode morphogen dynamics whose self-organising interactions constrain the phenotype space to morphogenetically plausible topologies. Different genomes produce structurally distinct networks, and it is these structural differences that make the interaction with plasticity topology-dependent (Section <ref labelref="LABEL:sec:results"/>). See <cite class="ltx_citemacro_citep">(<bibref bibrefs="glybovets2026morphonas" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> for full details.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:morphonas" placement="t" xml:id="S3.F1">
+        <tags>
+          <tag>Figure 1</tag>
+          <tag role="autoref">Figure 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Figure 1</tag>
+        </tags>
+        <graphics candidates="figures/morphonas_development.pdf" class="ltx_centering" graphic="figures/morphonas_development.pdf" options="width=433.62pt" xml:id="S3.F1.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">1</tag>Developmental dynamics of a MorphoNAS network on a <Math mode="inline" tex="10\times 10" text="10 * 10" xml:id="S3.F1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> grid. Background colour encodes morphogen concentrations (RGB = 3 morphogens); white squares = neurons; white lines = connections. From a single progenitor cell (Step 2), reaction-diffusion dynamics drive cell division, differentiation, and chemotactic axon growth, producing a 7-neuron, 13-connection recurrent controller by Step 200.</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 1</tag>Developmental dynamics of a MorphoNAS network on a <Math mode="inline" tex="10\times 10" text="10 * 10" xml:id="S3.F1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> grid. Background colour encodes morphogen concentrations (RGB = 3 morphogens); white squares = neurons; white lines = connections. From a single progenitor cell (Step 2), reaction-diffusion dynamics drive cell division, differentiation, and chemotactic axon growth, producing a 7-neuron, 13-connection recurrent controller by Step 200.</caption>
+      </figure>
+<!--  %**** main˙arxiv.tex Line 125 **** -->    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS2">
+      <tags>
+        <tag>3.2</tag>
+        <tag role="autoref">subsection 3.2</tag>
+        <tag role="refnum">3.2</tag>
+        <tag role="typerefnum">§3.2</tag>
+      </tags>
+      <title><tag close=". ">3.2</tag>Task and Network Pool</title>
+      <toctitle><tag close=" ">3.2</tag>Task and Network Pool</toctitle>
+      <para xml:id="S3.SS2.p1">
+        <p>The resulting networks are evaluated as controllers on CartPole-v1 (OpenAI Gymnasium <cite class="ltx_citemacro_citep">(<bibref bibrefs="towers2024gymnasium" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>), where the objective is to balance a pole on a cart for up to 500 timesteps. CartPole is deliberately chosen as a minimal substrate: its simplicity isolates the development-plasticity interaction from task complexity, while mid-episode physics perturbations (Section <ref labelref="LABEL:sec:adaptation"/>) reveal how plasticity’s role changes with environmental demands.</p>
+      </para>
+      <para xml:id="S3.SS2.p2">
+        <p>We generated 50,000 networks from <emph font="italic">randomly sampled</emph> genomes (no evolutionary selection; each genome drawn independently from the MorphoNAS parameter space). We stratified networks by baseline CartPole performance (mean reward over 20 episodes without plasticity):</p>
+      </para>
+      <para xml:id="S3.SS2.p3">
+        <itemize xml:id="S3.I1">
+          <item xml:id="S3.I1.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S3.I1.i1.p1">
+              <p><text font="bold">Weak</text> (<Math mode="inline" tex="r&lt;200" text="r less 200" xml:id="S3.I1.i1.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                      <XMTok meaning="200" role="NUMBER">200</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>): <Math mode="inline" tex="N=47{,}638" text="N = list@(47, 638)" xml:id="S3.I1.i1.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="list"/>
+                          <XMRef idref="S3.I1.i1.p1.m2.1"/>
+                          <XMRef idref="S3.I1.i1.p1.m2.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok meaning="47" role="NUMBER" xml:id="S3.I1.i1.p1.m2.1">47</XMTok>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMTok meaning="638" role="NUMBER" xml:id="S3.I1.i1.p1.m2.2">638</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMath>
+                </Math> (95.3%)</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S3.I1.i2.p1">
+              <p><text font="bold">Low-mid</text> (<Math mode="inline" tex="200\leq r&lt;350" text="200 less= r less 350" xml:id="S3.I1.i2.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="multirelation"/>
+                      <XMTok meaning="200" role="NUMBER">200</XMTok>
+                      <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                      <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                      <XMTok meaning="350" role="NUMBER">350</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>): <Math mode="inline" tex="N=1{,}235" text="N = list@(1, 235)" xml:id="S3.I1.i2.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="list"/>
+                          <XMRef idref="S3.I1.i2.p1.m2.1"/>
+                          <XMRef idref="S3.I1.i2.p1.m2.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok meaning="1" role="NUMBER" xml:id="S3.I1.i2.p1.m2.1">1</XMTok>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMTok meaning="235" role="NUMBER" xml:id="S3.I1.i2.p1.m2.2">235</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMath>
+                </Math></p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S3.I1.i3.p1">
+              <p><text font="bold">High-mid</text> (<Math mode="inline" tex="350\leq r&lt;450" text="350 less= r less 450" xml:id="S3.I1.i3.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="multirelation"/>
+                      <XMTok meaning="350" role="NUMBER">350</XMTok>
+                      <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                      <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                      <XMTok meaning="450" role="NUMBER">450</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>): <Math mode="inline" tex="N=256" text="N = 256" xml:id="S3.I1.i3.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                      <XMTok meaning="256" role="NUMBER">256</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i4">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">4th item</tag>
+            </tags>
+            <para xml:id="S3.I1.i4.p1">
+              <p><text font="bold">Near-perfect</text> (<Math mode="inline" tex="450\leq r&lt;475" text="450 less= r less 475" xml:id="S3.I1.i4.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="multirelation"/>
+                      <XMTok meaning="450" role="NUMBER">450</XMTok>
+                      <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                      <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                      <XMTok meaning="475" role="NUMBER">475</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>): <Math mode="inline" tex="N=102" text="N = 102" xml:id="S3.I1.i4.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                      <XMTok meaning="102" role="NUMBER">102</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i5">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">5th item</tag>
+            </tags>
+            <para xml:id="S3.I1.i5.p1">
+              <p><text font="bold">Perfect</text> (<Math mode="inline" tex="r\geq 475" text="r &gt;= 475" xml:id="S3.I1.i5.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="greater-than-or-equals" name="geq" role="RELOP">≥</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                      <XMTok meaning="475" role="NUMBER">475</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math>): <Math mode="inline" tex="N=769" text="N = 769" xml:id="S3.I1.i5.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                      <XMTok meaning="769" role="NUMBER">769</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></p>
+            </para>
+          </item>
+        </itemize>
+      </para>
+      <para xml:id="S3.SS2.p4">
+        <p>That 95.3% of random genomes produce Weak networks indicates that, in our setting, <emph font="italic">viable topology is the primary determinant of performance</emph>: while 15% of Weak networks show marginal improvement, the developmental process must produce a functional architecture before plasticity can contribute substantially.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS3">
+      <tags>
+        <tag>3.3</tag>
+        <tag role="autoref">subsection 3.3</tag>
+        <tag role="refnum">3.3</tag>
+        <tag role="typerefnum">§3.3</tag>
+      </tags>
+      <title><tag close=". ">3.3</tag>Plasticity Protocol</title>
+      <toctitle><tag close=" ">3.3</tag>Plasticity Protocol</toctitle>
+      <para xml:id="S3.SS3.p1">
+        <p>We apply a Hebbian plasticity rule after development completes. At each propagation timestep during task execution, weights are updated according to:</p>
+        <equation labels="LABEL:eq:hebb" xml:id="S3.E1">
+          <tags>
+            <tag>(1)</tag>
+            <tag role="autoref">Equation 1</tag>
+            <tag role="refnum">1</tag>
+          </tags>
+          <Math mode="display" tex="\Delta w_{ij}=\eta\cdot x_{i}\cdot x_{j}-\lambda\cdot w_{ij}" text="Delta * w _ (i * j) = eta cdot x _ i cdot x _ j - lambda cdot w _ (i * j)" xml:id="S3.E1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMTok name="Delta" role="UNKNOWN">Δ</XMTok>
+                  <XMApp>
+                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">w</XMTok>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                    </XMApp>
+                  </XMApp>
+                </XMApp>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMApp>
+                    <XMTok name="cdot" role="MULOP">⋅</XMTok>
+                    <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok name="cdot" role="MULOP">⋅</XMTok>
+                    <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">w</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>
+        </equation>
+        <p>where <Math mode="inline" tex="\eta" text="eta" xml:id="S3.SS3.p1.m1">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> is the learning rate (positive for Hebbian, negative for anti-Hebbian), <Math mode="inline" tex="x_{i},x_{j}" text="list@(x _ i, x _ j)" xml:id="S3.SS3.p1.m2">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="list"/>
+                  <XMRef idref="S3.SS3.p1.m2.1"/>
+                  <XMRef idref="S3.SS3.p1.m2.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMApp xml:id="S3.SS3.p1.m2.1">
+                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S3.SS3.p1.m2.2">
+                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                  </XMApp>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> are pre- and post-synaptic activations, and <Math mode="inline" tex="\lambda" text="lambda" xml:id="S3.SS3.p1.m3">
+            <XMath>
+              <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+            </XMath>
+          </Math> is a weight decay coefficient that acts as a stability mechanism.</p>
+      </para>
+<!--  %**** main˙arxiv.tex Line 150 **** -->      <para xml:id="S3.SS3.p2">
+        <p>Each network is evaluated under a rigorous protocol: (1) baseline measurement with plasticity disabled, (2) plasticity-enabled evaluation over 20 episodes with fixed seeds (42–61), (3) fitness comparison. The improvement <Math mode="inline" tex="\Delta r" text="Delta * r" xml:id="S3.SS3.p2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok name="Delta" role="UNKNOWN">Δ</XMTok>
+                <XMTok font="italic" role="UNKNOWN">r</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> is the difference in mean reward between the plasticity-enabled and baseline evaluations. All experiments ran on AWS c6i.4xlarge instances (16 vCPU, Intel Xeon 8375C); the full experimental programme (characterisation, co-evolution, and random-RNN control) required approximately 7,700 core-hours.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS4">
+      <tags>
+        <tag>3.4</tag>
+        <tag role="autoref">subsection 3.4</tag>
+        <tag role="refnum">3.4</tag>
+        <tag role="typerefnum">§3.4</tag>
+      </tags>
+      <title><tag close=". ">3.4</tag>Parameter Sweeps</title>
+      <toctitle><tag close=" ">3.4</tag>Parameter Sweeps</toctitle>
+      <para xml:id="S3.SS4.p1">
+        <p>We conducted three CartPole experimental phases at increasing resolution, followed by an Acrobot replication.</p>
+      </para>
+      <para xml:id="S3.SS4.p2">
+        <p><text font="bold">Primary sweep</text> (CartPole): 50,000 networks <Math mode="inline" tex="\times" text="*" xml:id="S3.SS4.p2.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> 75 parameter combinations (<Math mode="inline" tex="\eta\in[-0.05,+0.05]" text="eta element-of closed-interval@(- 0.05, + 0.05)" xml:id="S3.SS4.p2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="closed-interval"/>
+                    <XMRef idref="S3.SS4.p2.m2.1"/>
+                    <XMRef idref="S3.SS4.p2.m2.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">[</XMTok>
+                    <XMApp xml:id="S3.SS4.p2.m2.1">
+                      <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS4.p2.m2.2">
+                      <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>, 15 non-uniform levels; <Math mode="inline" tex="\lambda\in\{0,10^{-5},10^{-4},10^{-3},10^{-2}\}" text="lambda element-of set@(0, 10 ^ (- 5), 10 ^ (- 4), 10 ^ (- 3), 10 ^ (- 2))" xml:id="S3.SS4.p2.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="set"/>
+                    <XMRef idref="S3.SS4.p2.m3.1"/>
+                    <XMRef idref="S3.SS4.p2.m3.2"/>
+                    <XMRef idref="S3.SS4.p2.m3.3"/>
+                    <XMRef idref="S3.SS4.p2.m3.4"/>
+                    <XMRef idref="S3.SS4.p2.m3.5"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">{</XMTok>
+                    <XMTok meaning="0" role="NUMBER" xml:id="S3.SS4.p2.m3.1">0</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS4.p2.m3.2">
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="10" role="NUMBER">10</XMTok>
+                      <XMApp>
+                        <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok fontsize="70%" meaning="5" role="NUMBER">5</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS4.p2.m3.3">
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="10" role="NUMBER">10</XMTok>
+                      <XMApp>
+                        <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok fontsize="70%" meaning="4" role="NUMBER">4</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS4.p2.m3.4">
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="10" role="NUMBER">10</XMTok>
+                      <XMApp>
+                        <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok fontsize="70%" meaning="3" role="NUMBER">3</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS4.p2.m3.5">
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="10" role="NUMBER">10</XMTok>
+                      <XMApp>
+                        <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">}</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>) = 3,750,000 evaluations.</p>
+      </para>
+      <para xml:id="S3.SS4.p3">
+        <p><text font="bold">Extended validation</text> (CartPole): 2,862 non-Weak networks (including borderline cases near stratum boundaries) <Math mode="inline" tex="\times" text="*" xml:id="S3.SS4.p3.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> 248-point grid (<Math mode="inline" tex="\eta\in[-0.5,+0.5]" text="eta element-of closed-interval@(- 0.5, + 0.5)" xml:id="S3.SS4.p3.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="closed-interval"/>
+                    <XMRef idref="S3.SS4.p3.m2.1"/>
+                    <XMRef idref="S3.SS4.p3.m2.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">[</XMTok>
+                    <XMApp xml:id="S3.SS4.p3.m2.1">
+                      <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS4.p3.m2.2">
+                      <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>, 31 levels; <Math mode="inline" tex="\lambda\in\{0,\ldots,0.1\}" text="lambda element-of set@(0, ldots, 0.1)" xml:id="S3.SS4.p3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="set"/>
+                    <XMRef idref="S3.SS4.p3.m3.1"/>
+                    <XMRef idref="S3.SS4.p3.m3.2"/>
+                    <XMRef idref="S3.SS4.p3.m3.3"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">{</XMTok>
+                    <XMTok meaning="0" role="NUMBER" xml:id="S3.SS4.p3.m3.1">0</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok name="ldots" role="ID" xml:id="S3.SS4.p3.m3.2">…</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="0.1" role="NUMBER" xml:id="S3.SS4.p3.m3.3">0.1</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">}</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>, 8 levels) = 709,776 evaluations. Used for cross-validated regret estimation.</p>
+      </para>
+      <para xml:id="S3.SS4.p4">
+        <p><text font="bold">Non-stationarity sweep</text> (CartPole): 2,362 non-Weak networks <Math mode="inline" tex="\times" text="*" xml:id="S3.SS4.p4.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> 22-point grid (anti-Hebbian range only), evaluated on two variants where physics change abruptly at timestep 200 with no signal to the network: (a) pole mass increases 10<Math mode="inline" tex="\times" text="*" xml:id="S3.SS4.p4.m2">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> (0.1<Math mode="inline" tex="\to" text="to" xml:id="S3.SS4.p4.m3">
+            <XMath>
+              <XMTok name="to" role="ARROW">→</XMTok>
+            </XMath>
+          </Math>1.0 kg), affecting inertial dynamics, and (b) gravity doubles (9.8<Math mode="inline" tex="\to" text="to" xml:id="S3.SS4.p4.m4">
+            <XMath>
+              <XMTok name="to" role="ARROW">→</XMTok>
+            </XMath>
+          </Math>20.0 m/s<Math mode="inline" tex="{}^{2}" text="^2" xml:id="S3.SS4.p4.m5">
+            <XMath>
+              <XMApp role="FLOATSUPERSCRIPT" scriptpos="1">
+                <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), uniformly scaling forces. Together: 103,928 evaluations.</p>
+      </para>
+      <para xml:id="S3.SS4.p5">
+        <p><text font="bold">Adaptation control</text> (CartPole): To isolate genuine adaptation from robustness, we evaluated the same 2,362 networks with plasticity <emph font="italic">disabled</emph> during Phase 1 (pre-switch) and enabled only at the switch point (OFF<Math mode="inline" tex="\to" text="to" xml:id="S3.SS4.p5.m1">
+            <XMath>
+              <XMTok name="to" role="ARROW">→</XMTok>
+            </XMath>
+          </Math>ON protocol), on both non-stationary variants. A dose-response experiment varied the switch time (100, 200, 300, 400) under heavy-pole to test whether more post-switch adaptation time yields larger benefits. Together: 155,892 evaluations.</p>
+      </para>
+      <para xml:id="S3.SS4.p6">
+        <p><text font="bold">Acrobot replication</text>: To test cross-task generalisation, we repeated the analysis on Acrobot-v1 (6-dimensional observations, 3 discrete actions) using a <Math mode="inline" tex="20\times 20" text="20 * 20" xml:id="S3.SS4.p6.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok meaning="20" role="NUMBER">20</XMTok>
+                <XMTok meaning="20" role="NUMBER">20</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> developmental grid. We sampled 5,000 random genomes; 513 non-Weak networks were evaluated on a coarse 22-point grid followed by an extended 248-point micro-<Math mode="inline" tex="\eta" text="eta" xml:id="S3.SS4.p6.m2">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> grid (<Math mode="inline" tex="|\eta|\in[5\times 10^{-5},0.1]" text="absolute-value@(eta) element-of closed-interval@(5 * 10 ^ (- 5), 0.1)" xml:id="S3.SS4.p6.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="absolute-value"/>
+                    <XMRef idref="S3.SS4.p6.m3.1"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S3.SS4.p6.m3.1">η</XMTok>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  </XMWrap>
+                </XMDual>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="closed-interval"/>
+                    <XMRef idref="S3.SS4.p6.m3.3"/>
+                    <XMRef idref="S3.SS4.p6.m3.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">[</XMTok>
+                    <XMApp xml:id="S3.SS4.p6.m3.3">
+                      <XMTok meaning="times" role="MULOP">×</XMTok>
+                      <XMTok meaning="5" role="NUMBER">5</XMTok>
+                      <XMApp>
+                        <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                        <XMTok meaning="10" role="NUMBER">10</XMTok>
+                        <XMApp>
+                          <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                          <XMTok fontsize="70%" meaning="5" role="NUMBER">5</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="0.1" role="NUMBER" xml:id="S3.SS4.p6.m3.2">0.1</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>; <Math mode="inline" tex="\lambda\in[0,0.1]" text="lambda element-of closed-interval@(0, 0.1)" xml:id="S3.SS4.p6.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="closed-interval"/>
+                    <XMRef idref="S3.SS4.p6.m4.1"/>
+                    <XMRef idref="S3.SS4.p6.m4.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">[</XMTok>
+                    <XMTok meaning="0" role="NUMBER" xml:id="S3.SS4.p6.m4.1">0</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="0.1" role="NUMBER" xml:id="S3.SS4.p6.m4.2">0.1</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>), under both static and non-stationary conditions (2<Math mode="inline" tex="\times" text="*" xml:id="S3.SS4.p6.m5">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> lower-link mass at step 50).</p>
+      </para>
+      <para xml:id="S3.SS4.p7">
+        <p>Across all characterisation experiments, the total evaluation budget exceeds 5 million plasticity configurations.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:coevolution_design" xml:id="S3.SS5">
+      <tags>
+        <tag>3.5</tag>
+        <tag role="autoref">subsection 3.5</tag>
+        <tag role="refnum">3.5</tag>
+        <tag role="typerefnum">§3.5</tag>
+      </tags>
+      <title><tag close=". ">3.5</tag>Co-Evolutionary Validation</title>
+      <toctitle><tag close=" ">3.5</tag>Co-Evolutionary Validation</toctitle>
+      <para xml:id="S3.SS5.p1">
+        <p>To test whether evolutionary optimisation independently recovers the characterisation findings, we ran a genetic algorithm evolving MorphoNAS genomes under three conditions (30 independent runs each, population 50, 200 generations):</p>
+        <itemize xml:id="S3.I2">
+          <item xml:id="S3.I2.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S3.I2.i1.p1">
+              <p><text font="bold">Condition A</text> (no plasticity): standard MorphoNAS GA, fitness evaluated with frozen weights.</p>
+            </para>
+          </item>
+          <item xml:id="S3.I2.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S3.I2.i2.p1">
+              <p><text font="bold">Condition B</text> (fixed plasticity): same GA, but fitness evaluated with fixed anti-Hebbian plasticity (<Math mode="inline" tex="\eta=-0.01" text="eta = - 0.01" xml:id="S3.I2.i2.p1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                      <XMApp>
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMath>
+                </Math>, <Math mode="inline" tex="\lambda=0.01" text="lambda = 0.01" xml:id="S3.I2.i2.p1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                      <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math> for CartPole; <Math mode="inline" tex="\eta=-0.001" text="eta = - 0.001" xml:id="S3.I2.i2.p1.m3">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                      <XMApp>
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMath>
+                </Math>, <Math mode="inline" tex="\lambda=0.05" text="lambda = 0.05" xml:id="S3.I2.i2.p1.m4">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                      <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math> for Acrobot—the recommended defaults from the characterisation).
+<!--  %**** main˙arxiv.tex Line 175 **** --></p>
+            </para>
+          </item>
+          <item xml:id="S3.I2.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S3.I2.i3.p1">
+              <p><text font="bold">Condition C</text> (co-evolved plasticity): the genome is extended with two plasticity parameters (<Math mode="inline" tex="\eta" text="eta" xml:id="S3.I2.i3.p1.m1">
+                  <XMath>
+                    <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                  </XMath>
+                </Math>, <Math mode="inline" tex="\lambda" text="lambda" xml:id="S3.I2.i3.p1.m2">
+                  <XMath>
+                    <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                  </XMath>
+                </Math>) that are mutated and crossed over alongside the developmental genome. On CartPole: <Math mode="inline" tex="\eta\in[-0.5,+0.5]" text="eta element-of closed-interval@(- 0.5, + 0.5)" xml:id="S3.I2.i3.p1.m3">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                      <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="closed-interval"/>
+                          <XMRef idref="S3.I2.i3.p1.m3.1"/>
+                          <XMRef idref="S3.I2.i3.p1.m3.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">[</XMTok>
+                          <XMApp xml:id="S3.I2.i3.p1.m3.1">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.I2.i3.p1.m3.2">
+                            <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                            <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMath>
+                </Math>, <Math mode="inline" tex="\lambda\in[0,0.1]" text="lambda element-of closed-interval@(0, 0.1)" xml:id="S3.I2.i3.p1.m4">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                      <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="closed-interval"/>
+                          <XMRef idref="S3.I2.i3.p1.m4.1"/>
+                          <XMRef idref="S3.I2.i3.p1.m4.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">[</XMTok>
+                          <XMTok meaning="0" role="NUMBER" xml:id="S3.I2.i3.p1.m4.1">0</XMTok>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMTok meaning="0.1" role="NUMBER" xml:id="S3.I2.i3.p1.m4.2">0.1</XMTok>
+                          <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMath>
+                </Math>; on Acrobot: <Math mode="inline" tex="\eta\in[-0.1,+0.1]" text="eta element-of closed-interval@(- 0.1, + 0.1)" xml:id="S3.I2.i3.p1.m5">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                      <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="closed-interval"/>
+                          <XMRef idref="S3.I2.i3.p1.m5.1"/>
+                          <XMRef idref="S3.I2.i3.p1.m5.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">[</XMTok>
+                          <XMApp xml:id="S3.I2.i3.p1.m5.1">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMTok meaning="0.1" role="NUMBER">0.1</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.I2.i3.p1.m5.2">
+                            <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                            <XMTok meaning="0.1" role="NUMBER">0.1</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMath>
+                </Math>, <Math mode="inline" tex="\lambda\in[0,0.1]" text="lambda element-of closed-interval@(0, 0.1)" xml:id="S3.I2.i3.p1.m6">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                      <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="closed-interval"/>
+                          <XMRef idref="S3.I2.i3.p1.m6.1"/>
+                          <XMRef idref="S3.I2.i3.p1.m6.2"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">[</XMTok>
+                          <XMTok meaning="0" role="NUMBER" xml:id="S3.I2.i3.p1.m6.1">0</XMTok>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMTok meaning="0.1" role="NUMBER" xml:id="S3.I2.i3.p1.m6.2">0.1</XMTok>
+                          <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMath>
+                </Math>.</p>
+            </para>
+          </item>
+        </itemize>
+        <p>CartPole experiments used a <Math mode="inline" tex="10\times 10" text="10 * 10" xml:id="S3.SS5.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> grid (matching the characterisation), and Acrobot used <Math mode="inline" tex="20\times 20" text="20 * 20" xml:id="S3.SS5.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok meaning="20" role="NUMBER">20</XMTok>
+                <XMTok meaning="20" role="NUMBER">20</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>. Selection: top-20%; elitism: 2; mutation rate: 0.3.
+Total: 180 GA runs (90 per benchmark), each 10,050 fitness evaluations.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:random_rnn_design" xml:id="S3.SS6">
+      <tags>
+        <tag>3.6</tag>
+        <tag role="autoref">subsection 3.6</tag>
+        <tag role="refnum">3.6</tag>
+        <tag role="typerefnum">§3.6</tag>
+      </tags>
+      <title><tag close=". ">3.6</tag>Random-RNN Control</title>
+      <toctitle><tag close=" ">3.6</tag>Random-RNN Control</toctitle>
+      <para xml:id="S3.SS6.p1">
+        <p>To disentangle developmental from generic network effects, we generated 11,810 random directed graphs matched to the topology statistics (neuron count, connection count) of 2,362 competent MorphoNAS CartPole networks (5 random RNNs per source network). Weights were drawn from <Math mode="inline" tex="\text{Uniform}[0.01,1.0]" text="[Uniform] * closed-interval@(0.01, 1.0)" xml:id="S3.SS6.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMText>Uniform</XMText>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="closed-interval"/>
+                    <XMRef idref="S3.SS6.p1.m1.1"/>
+                    <XMRef idref="S3.SS6.p1.m1.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">[</XMTok>
+                    <XMTok meaning="0.01" role="NUMBER" xml:id="S3.SS6.p1.m1.1">0.01</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="1.0" role="NUMBER" xml:id="S3.SS6.p1.m1.2">1.0</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>, matching MorphoNAS’s <Math mode="inline" tex="w=\max(0.01,c/(1{+}d))" text="w = maximum@(0.01, c / (1 + d))" xml:id="S3.SS6.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">w</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMRef idref="S3.SS6.p1.m2.1"/>
+                    <XMRef idref="S3.SS6.p1.m2.2"/>
+                    <XMRef idref="S3.SS6.p1.m2.3"/>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="maximum" role="OPFUNCTION" scriptpos="post" xml:id="S3.SS6.p1.m2.1">max</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMTok meaning="0.01" role="NUMBER" xml:id="S3.SS6.p1.m2.2">0.01</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMApp xml:id="S3.SS6.p1.m2.3">
+                        <XMTok meaning="divide" role="MULOP">/</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                        <XMDual>
+                          <XMRef idref="S3.SS6.p1.m2.3.1"/>
+                          <XMWrap>
+                            <XMTok role="OPEN" stretchy="false">(</XMTok>
+                            <XMApp xml:id="S3.SS6.p1.m2.3.1">
+                              <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                              <XMTok meaning="1" role="NUMBER">1</XMTok>
+                              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                            </XMApp>
+                            <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMApp>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> range but without distance-dependent structure. We applied the same 75-point plasticity grid as the primary characterisation sweep to all competent random RNNs.</p>
+      </para>
+<!--  %% ============================================================ -->    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:results" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=". ">4</tag>Characterisation Results</title>
+    <toctitle><tag close=" ">4</tag>Characterisation Results</toctitle>
+    <subsection inlist="toc" labels="LABEL:sec:stratified" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="autoref">subsection 4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=". ">4.1</tag>Stratified Plasticity Impact</title>
+      <toctitle><tag close=" ">4.1</tag>Stratified Plasticity Impact</toctitle>
+      <para xml:id="S4.SS1.p1">
+        <p>Table <ref labelref="LABEL:tab:stratified"/> presents the per-stratum impact of plasticity under <emph font="italic">oracle</emph> tuning—exhaustive per-network grid search for the best <Math mode="inline" tex="(\eta,\lambda)" text="open-interval@(eta, lambda)" xml:id="S4.SS1.p1.m1">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="open-interval"/>
+                  <XMRef idref="S4.SS1.p1.m1.1"/>
+                  <XMRef idref="S4.SS1.p1.m1.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.SS1.p1.m1.1">η</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" name="lambda" role="UNKNOWN" xml:id="S4.SS1.p1.m1.2">λ</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> pair, representing an upper bound on achievable benefit.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:stratified" placement="t" xml:id="S4.T1">
+        <tags>
+          <tag>Table 1</tag>
+          <tag role="autoref">Table 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Table 1</tag>
+        </tags>
+        <toccaption><tag close=" ">1</tag>CartPole plasticity impact by performance stratum under per-network oracle parameters. Regret: fraction of oracle improvement lost when using the single best fixed parameter pair instead.</toccaption>
+        <caption><tag close=". ">Table 1</tag>CartPole plasticity impact by performance stratum under per-network oracle parameters. Regret: fraction of oracle improvement lost when using the single best fixed parameter pair instead.</caption>
+        <tabular class="ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="tt" thead="column"><text fontsize="90%">Stratum</text></td>
+              <td align="right" border="tt" thead="column"><Math mode="inline" tex="N" text="N" xml:id="S4.T1.m1">
+                  <XMath>
+                    <XMTok font="italic" fontsize="90%" role="UNKNOWN">N</XMTok>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="tt" thead="column"><text fontsize="90%">Oracle </text><Math mode="inline" tex="\Delta r" text="Delta * r" xml:id="S4.T1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok fontsize="90%" name="Delta" role="UNKNOWN">Δ</XMTok>
+                      <XMTok font="italic" fontsize="90%" role="UNKNOWN">r</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="tt" thead="column"><text fontsize="90%">% Impr.</text></td>
+              <td align="right" border="tt" thead="column"><text fontsize="90%">Best </text><Math mode="inline" tex="\eta" text="eta" xml:id="S4.T1.m3">
+                  <XMath>
+                    <XMTok font="italic" fontsize="90%" name="eta" role="UNKNOWN">η</XMTok>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="tt" thead="column"><text fontsize="90%">Regret</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t"><text fontsize="90%">Weak</text></td>
+              <td align="right" border="t"><text fontsize="90%">47,638</text></td>
+              <td align="right" border="t"><Math mode="inline" tex="+2.2" text="+ 2.2" xml:id="S4.T1.m4">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="2.2" role="NUMBER">2.2</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="t"><text fontsize="90%">15%</text></td>
+              <td align="right" border="t"><Math mode="inline" tex="+0.05" text="+ 0.05" xml:id="S4.T1.m5">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="0.05" role="NUMBER">0.05</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="t"><text fontsize="90%">59%</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="90%">Low-mid</text></td>
+              <td align="right"><text fontsize="90%">1,235</text></td>
+              <td align="right"><Math mode="inline" tex="+35.7" text="+ 35.7" xml:id="S4.T1.m6">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="35.7" role="NUMBER">35.7</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right"><text fontsize="90%">50%</text></td>
+              <td align="right"><Math mode="inline" tex="-0.05" text="- 0.05" xml:id="S4.T1.m7">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok fontsize="90%" meaning="0.05" role="NUMBER">0.05</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right"><text fontsize="90%">52%</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text font="bold" fontsize="90%">High-mid</text></td>
+              <td align="right"><text font="bold" fontsize="90%">256</text></td>
+              <td align="right"><Math mode="inline" tex="\mathbf{+60.6}" text="+ 60.6" xml:id="S4.T1.m8">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok font="bold" fontsize="90%" meaning="60.6" role="NUMBER">60.6</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right"><text font="bold" fontsize="90%">93%</text></td>
+              <td align="right"><Math mode="inline" tex="\mathbf{-0.05}" text="- 0.05" xml:id="S4.T1.m9">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok font="bold" fontsize="90%" meaning="0.05" role="NUMBER">0.05</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right"><text font="bold" fontsize="90%">86%</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="90%">Near-perf.</text></td>
+              <td align="right"><text fontsize="90%">102</text></td>
+              <td align="right"><Math mode="inline" tex="+22.5" text="+ 22.5" xml:id="S4.T1.m10">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="22.5" role="NUMBER">22.5</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right"><text fontsize="90%">84%</text></td>
+              <td align="right"><Math mode="inline" tex="-0.005" text="- 0.005" xml:id="S4.T1.m11">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok fontsize="90%" meaning="0.005" role="NUMBER">0.005</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right"><text fontsize="90%">89%</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="bb"><text fontsize="90%">Perfect</text></td>
+              <td align="right" border="bb"><text fontsize="90%">769</text></td>
+              <td align="right" border="bb"><Math mode="inline" tex="+7.7" text="+ 7.7" xml:id="S4.T1.m12">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="7.7" role="NUMBER">7.7</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="bb"><text fontsize="90%">20%</text></td>
+              <td align="right" border="bb"><text fontsize="90%">—</text></td>
+              <td align="right" border="bb"><text fontsize="90%">100%</text></td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+      <para xml:id="S4.SS1.p2">
+        <p>Three key patterns emerge. First, plasticity <emph font="italic">cannot rescue weak topologies</emph>: networks with non-functional architectures show negligible improvement regardless of plasticity parameters. In our experiments, topology produced by morphogenetic development is the primary determinant of viability. Second, <emph font="italic">competent networks benefit substantially</emph>: up to 93% of High-mid networks improve under oracle tuning, with mean gains of +60.6 reward points. Third, <emph font="italic">per-network parameter heterogeneity is large</emph>: regret under fixed parameters ranges from 52% (Low-mid) to 100% (Perfect), indicating that no single parameter setting captures the oracle potential.</p>
+      </para>
+      <para xml:id="S4.SS1.p3">
+        <p>Table <ref labelref="LABEL:tab:stratified"/> reports conservative estimates from the 75-point primary sweep; the best <Math mode="inline" tex="\eta" text="eta" xml:id="S4.SS1.p3.m1">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> for Low-mid and High-mid falls at the grid boundary (<Math mode="inline" tex="|\eta|=0.05" text="absolute-value@(eta) = 0.05" xml:id="S4.SS1.p3.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="absolute-value"/>
+                    <XMRef idref="S4.SS1.p3.m2.1"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.SS1.p3.m2.1">η</XMTok>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  </XMWrap>
+                </XMDual>
+                <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). The extended 248-point validation grid, which widens the range to <Math mode="inline" tex="|\eta|\leq 0.5" text="absolute-value@(eta) less= 0.5" xml:id="S4.SS1.p3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="absolute-value"/>
+                    <XMRef idref="S4.SS1.p3.m3.1"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.SS1.p3.m3.1">η</XMTok>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  </XMWrap>
+                </XMDual>
+                <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, yields higher oracle improvements: <Math mode="inline" tex="+73.4" text="+ 73.4" xml:id="S4.SS1.p3.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="73.4" role="NUMBER">73.4</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> for Low-mid and <Math mode="inline" tex="+86.3" text="+ 86.3" xml:id="S4.SS1.p3.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="86.3" role="NUMBER">86.3</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> for High-mid. Split-half cross-validation (oracle selected on odd-numbered episodes, evaluated on even) confirmed that 74–92% of the oracle advantage reflects genuine per-network heterogeneity, not overfitting to noise. Under ceiling-corrected normalisation (gain as fraction of available headroom), High-mid networks capture 87% of their improvement room and Near-perfect 78%, indicating that oracle plasticity nearly saturates the performance gap.</p>
+      </para>
+      <para xml:id="S4.SS1.p4">
+        <p>The magnitude of oracle gains enables <emph font="italic">stratum transitions</emph>: under per-network tuning, a majority of High-mid and Near-perfect networks reach the Perfect stratum (<Math mode="inline" tex="r\geq 475" text="r &gt;= 475" xml:id="S4.SS1.p4.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than-or-equals" name="geq" role="RELOP">≥</XMTok>
+                <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                <XMTok meaning="475" role="NUMBER">475</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), suggesting that plasticity can close the gap between “competent but imperfect” and “fully functional” controllers—a qualitative shift in behaviour, not merely a marginal improvement.</p>
+      </para>
+      <para xml:id="S4.SS1.p5">
+        <p>However, plasticity carries asymmetric risk. Harm rates increase with baseline competence: 1.3% (Weak), 18.5% (Low-mid), 42.0% (High-mid), 48.5% (Near-perfect). The worst-case configurations (<Math mode="inline" tex="\eta&gt;0" text="eta &gt; 0" xml:id="S4.SS1.p5.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="\lambda=0" text="lambda = 0" xml:id="S4.SS1.p5.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) produce severe degradation, with mean normalised harm of <Math mode="inline" tex="-0.17" text="- 0.17" xml:id="S4.SS1.p5.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                <XMTok meaning="0.17" role="NUMBER">0.17</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> to <Math mode="inline" tex="-0.24" text="- 0.24" xml:id="S4.SS1.p5.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                <XMTok meaning="0.24" role="NUMBER">0.24</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> (<Math mode="inline" tex="-85" text="- 85" xml:id="S4.SS1.p5.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                <XMTok meaning="85" role="NUMBER">85</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> to <Math mode="inline" tex="-120" text="- 120" xml:id="S4.SS1.p5.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                <XMTok meaning="120" role="NUMBER">120</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> raw reward points) for competent strata. This asymmetry—where the networks most likely to benefit are also most vulnerable to harm—further motivates per-network parameter selection over fixed configurations.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="autoref">subsection 4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=". ">4.2</tag>Anti-Hebbian Dominance</title>
+      <toctitle><tag close=" ">4.2</tag>Anti-Hebbian Dominance</toctitle>
+      <figure inlist="lof" labels="LABEL:fig:heatmap" placement="t" xml:id="S4.F2">
+        <tags>
+          <tag>Figure 2</tag>
+          <tag role="autoref">Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Figure 2</tag>
+        </tags>
+        <graphics candidates="figures/heatmap_high_mid.pdf" class="ltx_centering" graphic="figures/heatmap_high_mid.pdf" options="width=433.62pt" xml:id="S4.F2.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">2</tag>CartPole High-mid stratum: mean <Math mode="inline" tex="\Delta r" text="Delta * r" xml:id="S4.F2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok name="Delta" role="UNKNOWN">Δ</XMTok>
+                <XMTok font="italic" role="UNKNOWN">r</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> across the <Math mode="inline" tex="\eta\times\lambda" text="eta * lambda" xml:id="S4.F2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> grid (248-point extended grid). Anti-Hebbian (<Math mode="inline" tex="\eta&lt;0" text="eta less 0" xml:id="S4.F2.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) with moderate decay (<Math mode="inline" tex="\lambda=0.01" text="lambda = 0.01" xml:id="S4.F2.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) yields the best results. Hebbian (<Math mode="inline" tex="\eta&gt;0" text="eta &gt; 0" xml:id="S4.F2.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) is consistently harmful.</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 2</tag>CartPole High-mid stratum: mean <Math mode="inline" tex="\Delta r" text="Delta * r" xml:id="S4.F2.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok name="Delta" role="UNKNOWN">Δ</XMTok>
+                <XMTok font="italic" role="UNKNOWN">r</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> across the <Math mode="inline" tex="\eta\times\lambda" text="eta * lambda" xml:id="S4.F2.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> grid (248-point extended grid). Anti-Hebbian (<Math mode="inline" tex="\eta&lt;0" text="eta less 0" xml:id="S4.F2.m8">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) with moderate decay (<Math mode="inline" tex="\lambda=0.01" text="lambda = 0.01" xml:id="S4.F2.m9">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) yields the best results. Hebbian (<Math mode="inline" tex="\eta&gt;0" text="eta &gt; 0" xml:id="S4.F2.m10">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) is consistently harmful.</caption>
+      </figure>
+      <figure inlist="lof" labels="LABEL:fig:cohens_d" placement="t" xml:id="S4.F3">
+        <tags>
+          <tag>Figure 3</tag>
+          <tag role="autoref">Figure 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Figure 3</tag>
+        </tags>
+        <graphics candidates="figures/cohens_d.pdf" class="ltx_centering" graphic="figures/cohens_d.pdf" options="width=433.62pt" xml:id="S4.F3.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">3</tag>CartPole: Cohen’s <Math mode="inline" tex="d" text="d" xml:id="S4.F3.m1">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            </XMath>
+          </Math> (anti-Hebbian <Math mode="inline" tex="-" text="-" xml:id="S4.F3.m2">
+            <XMath>
+              <XMTok meaning="minus" role="ADDOP">-</XMTok>
+            </XMath>
+          </Math> Hebbian) by stratum. Anti-Hebbian significantly outperforms Hebbian for competent strata (<Math mode="inline" tex="d=0.53" text="d = 0.53" xml:id="S4.F3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.53" role="NUMBER">0.53</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>–<Math mode="inline" tex="0.64" text="0.64" xml:id="S4.F3.m4">
+            <XMath>
+              <XMTok meaning="0.64" role="NUMBER">0.64</XMTok>
+            </XMath>
+          </Math>, all <Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.F3.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). The effect reverses for Weak and Perfect networks with small magnitudes.</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 3</tag>CartPole: Cohen’s <Math mode="inline" tex="d" text="d" xml:id="S4.F3.m6">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            </XMath>
+          </Math> (anti-Hebbian <Math mode="inline" tex="-" text="-" xml:id="S4.F3.m7">
+            <XMath>
+              <XMTok meaning="minus" role="ADDOP">-</XMTok>
+            </XMath>
+          </Math> Hebbian) by stratum. Anti-Hebbian significantly outperforms Hebbian for competent strata (<Math mode="inline" tex="d=0.53" text="d = 0.53" xml:id="S4.F3.m8">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.53" role="NUMBER">0.53</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>–<Math mode="inline" tex="0.64" text="0.64" xml:id="S4.F3.m9">
+            <XMath>
+              <XMTok meaning="0.64" role="NUMBER">0.64</XMTok>
+            </XMath>
+          </Math>, all <Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.F3.m10">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). The effect reverses for Weak and Perfect networks with small magnitudes.</caption>
+      </figure>
+      <para xml:id="S4.SS2.p1">
+        <p>Anti-Hebbian plasticity (<Math mode="inline" tex="\eta&lt;0" text="eta less 0" xml:id="S4.SS2.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) significantly outperforms Hebbian (<Math mode="inline" tex="\eta&gt;0" text="eta &gt; 0" xml:id="S4.SS2.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) for all competent strata (Figure <ref labelref="LABEL:fig:cohens_d"/>). On the extended 248-point grid, the effect is substantial: Cohen’s <Math mode="inline" tex="d=0.53" text="d = 0.53" xml:id="S4.SS2.p1.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.53" role="NUMBER">0.53</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> for Low-mid, <Math mode="inline" tex="d=0.64" text="d = 0.64" xml:id="S4.SS2.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.64" role="NUMBER">0.64</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> for High-mid, and <Math mode="inline" tex="d=0.56" text="d = 0.56" xml:id="S4.SS2.p1.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.56" role="NUMBER">0.56</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> for Near-perfect (all <Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.SS2.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). The effect reverses for Weak (<Math mode="inline" tex="d=-0.14" text="d = - 0.14" xml:id="S4.SS2.p1.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok meaning="0.14" role="NUMBER">0.14</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>) and Perfect (<Math mode="inline" tex="d=-0.07" text="d = - 0.07" xml:id="S4.SS2.p1.m8">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok meaning="0.07" role="NUMBER">0.07</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>) networks, though with small absolute magnitudes.</p>
+      </para>
+      <para xml:id="S4.SS2.p2">
+        <p>Kruskal-Wallis variance decomposition on the extended parameter grid <cite class="ltx_citemacro_citep">(<bibref bibrefs="derrac2011practical" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> reveals that learning rate (<Math mode="inline" tex="\eta" text="eta" xml:id="S4.SS2.p2.m1">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math>) explains 22–35% of variance in competent strata (<Math mode="inline" tex="\varepsilon^{2}=H/(N{-}1)" text="varepsilon ^ 2 = H / (N - 1)" xml:id="S4.SS2.p2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMApp>
+                  <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" name="varepsilon" role="UNKNOWN">ε</XMTok>
+                  <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                </XMApp>
+                <XMApp>
+                  <XMTok meaning="divide" role="MULOP">/</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">H</XMTok>
+                  <XMDual>
+                    <XMRef idref="S4.SS2.p2.m2.1"/>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S4.SS2.p2.m2.1">
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                        <XMTok meaning="1" role="NUMBER">1</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>), while decay (<Math mode="inline" tex="\lambda" text="lambda" xml:id="S4.SS2.p2.m3">
+            <XMath>
+              <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+            </XMath>
+          </Math>) explains less than 5%. This indicates that <emph font="italic">the sign and magnitude of <Math mode="inline" tex="\eta" text="eta" xml:id="S4.SS2.p2.m4">
+              <XMath>
+                <XMTok name="eta" role="UNKNOWN">η</XMTok>
+              </XMath>
+            </Math> is the critical design choice</emph>, while decay acts primarily as a safety mechanism. The sweet spot of <Math mode="inline" tex="\lambda=0.01" text="lambda = 0.01" xml:id="S4.SS2.p2.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> reduces harm rates by 3–8<Math mode="inline" tex="\times" text="*" xml:id="S4.SS2.p2.m6">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> compared to <Math mode="inline" tex="\lambda=0" text="lambda = 0" xml:id="S4.SS2.p2.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> with minimal reduction in peak benefit.</p>
+      </para>
+      <para xml:id="S4.SS2.p3">
+        <p>What drives the anti-Hebbian advantage? We tested two mechanistic hypotheses. First, that anti-Hebbian plasticity acts as a decorrelation mechanism; we found no relationship between initial weight magnitude and anti-Hebbian preference (<Math mode="inline" tex="p=0.56" text="p = 0.56" xml:id="S4.SS2.p3.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.56" role="NUMBER">0.56</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, Mann-Whitney). Second, that Hebbian updates overshoot by reinforcing existing correlations too aggressively; correlational evidence is consistent: networks whose optimal <Math mode="inline" tex="\eta" text="eta" xml:id="S4.SS2.p3.m2">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> is positive (Hebbian) exhibit 2.6<Math mode="inline" tex="\times" text="*" xml:id="S4.SS2.p3.m3">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> larger per-step weight changes than anti-Hebbian-preferring networks (<Math mode="inline" tex="p&lt;10^{-25}" text="p less 10 ^ (- 25)" xml:id="S4.SS2.p3.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMApp>
+                  <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                  <XMTok meaning="10" role="NUMBER">10</XMTok>
+                  <XMApp>
+                    <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                    <XMTok fontsize="70%" meaning="25" role="NUMBER">25</XMTok>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>; per-stratum <Math mode="inline" tex="d=0.34" text="d = 0.34" xml:id="S4.SS2.p3.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.34" role="NUMBER">0.34</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>–<Math mode="inline" tex="0.87" text="0.87" xml:id="S4.SS2.p3.m6">
+            <XMath>
+              <XMTok meaning="0.87" role="NUMBER">0.87</XMTok>
+            </XMath>
+          </Math>). The lowest weight-change quintile shows 93% anti-Hebbian preference versus 64% in the highest quintile. While not dispositive, this pattern is consistent with <emph font="italic">magnitude moderation</emph>—anti-Hebbian updates counteract co-activation rather than amplifying it, preventing the runaway weight growth that makes Hebbian updates harmful for competent networks.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:adaptation" xml:id="S4.SS3">
+      <tags>
+        <tag>4.3</tag>
+        <tag role="autoref">subsection 4.3</tag>
+        <tag role="refnum">4.3</tag>
+        <tag role="typerefnum">§4.3</tag>
+      </tags>
+      <title><tag close=". ">4.3</tag>Within-Lifetime Adaptation</title>
+      <toctitle><tag close=" ">4.3</tag>Within-Lifetime Adaptation</toctitle>
+      <para xml:id="S4.SS3.p1">
+        <p>To test whether plasticity can serve a qualitatively different role than static fine-tuning—genuine adaptation to changed dynamics—we evaluated 2,362 non-Weak networks on two non-stationary CartPole variants where physics change abruptly at timestep 200: pole mass <Math mode="inline" tex="\times" text="*" xml:id="S4.SS3.p1.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math>10 and gravity <Math mode="inline" tex="\times" text="*" xml:id="S4.SS3.p1.m2">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math>2.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:adaptation" placement="t" xml:id="S4.F4">
+        <tags>
+          <tag>Figure 4</tag>
+          <tag role="autoref">Figure 4</tag>
+          <tag role="refnum">4</tag>
+          <tag role="typerefnum">Figure 4</tag>
+        </tags>
+        <graphics candidates="figures/adaptation_premium_cross_variant.pdf" class="ltx_centering" graphic="figures/adaptation_premium_cross_variant.pdf" options="width=433.62pt" xml:id="S4.F4.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">4</tag>CartPole adaptation premium (non-stationary plasticity benefit minus static plasticity benefit) for two perturbation types. Gravity-2<Math mode="inline" tex="\times" text="*" xml:id="S4.F4.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> yields significant positive premiums for competent strata (***<Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.F4.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), indicating genuine adaptation beyond static fine-tuning. Heavy-pole shows near-zero premiums (n.s.).</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 4</tag>CartPole adaptation premium (non-stationary plasticity benefit minus static plasticity benefit) for two perturbation types. Gravity-2<Math mode="inline" tex="\times" text="*" xml:id="S4.F4.m3">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> yields significant positive premiums for competent strata (***<Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.F4.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), indicating genuine adaptation beyond static fine-tuning. Heavy-pole shows near-zero premiums (n.s.).</caption>
+      </figure>
+      <para xml:id="S4.SS3.p2">
+        <p>Under both variants, 88–90% of High-mid networks benefit from plasticity in Phase 2 (post-perturbation). The gravity-2<Math mode="inline" tex="\times" text="*" xml:id="S4.SS3.p2.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> variant yields a significant <emph font="italic">adaptation premium</emph> (non-stationary benefit minus static benefit): <Math mode="inline" tex="+8.8" text="+ 8.8" xml:id="S4.SS3.p2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="8.8" role="NUMBER">8.8</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> to <Math mode="inline" tex="+18.7" text="+ 18.7" xml:id="S4.SS3.p2.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="18.7" role="NUMBER">18.7</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> mean reward for competent strata (<Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.SS3.p2.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, Wilcoxon; Figure <ref labelref="LABEL:fig:adaptation"/>), while heavy-pole shows near-zero premiums. Weight-change dynamics differ accordingly: under gravity-2<Math mode="inline" tex="\times" text="*" xml:id="S4.SS3.p2.m5">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math>, mean <Math mode="inline" tex="|\Delta w|" text="absolute-value@(Delta * w)" xml:id="S4.SS3.p2.m6">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="absolute-value"/>
+                  <XMRef idref="S4.SS3.p2.m6.1"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  <XMApp xml:id="S4.SS3.p2.m6.1">
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMTok name="Delta" role="UNKNOWN">Δ</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">w</XMTok>
+                  </XMApp>
+                  <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> increases post-switch (ratio 1.13), consistent with active adaptation; under heavy-pole, it decreases (ratio 0.82–0.93), suggesting robustness rather than new adaptation.</p>
+      </para>
+      <para xml:id="S4.SS3.p3">
+        <p><text font="bold">Causal confirmation via OFF<Math mode="inline" tex="\to" text="to" xml:id="S4.SS3.p3.m1">
+              <XMath>
+                <XMTok font="medium" name="to" role="ARROW">→</XMTok>
+              </XMath>
+            </Math>ON.</text> To isolate adaptation from robustness, we disabled plasticity during Phase 1 and enabled it only at the switch point. OFF<Math mode="inline" tex="\to" text="to" xml:id="S4.SS3.p3.m2">
+            <XMath>
+              <XMTok name="to" role="ARROW">→</XMTok>
+            </XMath>
+          </Math>ON retains 66–69% of the always-on benefit: 84–86% of High-mid networks still improve, with oracle gains of <Math mode="inline" tex="+53.9" text="+ 53.9" xml:id="S4.SS3.p3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="53.9" role="NUMBER">53.9</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> (heavy-pole) and <Math mode="inline" tex="+59.9" text="+ 59.9" xml:id="S4.SS3.p3.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="59.9" role="NUMBER">59.9</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> (gravity-2<Math mode="inline" tex="\times" text="*" xml:id="S4.SS3.p3.m5">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math>), representing <emph font="italic">pure</emph> within-lifetime adaptation. A dose-response experiment varying switch time (100–400 steps) under heavy-pole confirms: benefit scales monotonically with post-switch duration (Spearman <Math mode="inline" tex="\rho=1.0" text="rho = 1.0" xml:id="S4.SS3.p3.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="rho" role="UNKNOWN">ρ</XMTok>
+                <XMTok meaning="1.0" role="NUMBER">1.0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, all strata), from <Math mode="inline" tex="+6.1" text="+ 6.1" xml:id="S4.SS3.p3.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="6.1" role="NUMBER">6.1</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> at 100 steps to <Math mode="inline" tex="+74.2" text="+ 74.2" xml:id="S4.SS3.p3.m8">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMTok meaning="74.2" role="NUMBER">74.2</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> at 400.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:acrobot" xml:id="S4.SS4">
+      <tags>
+        <tag>4.4</tag>
+        <tag role="autoref">subsection 4.4</tag>
+        <tag role="refnum">4.4</tag>
+        <tag role="typerefnum">§4.4</tag>
+      </tags>
+      <title><tag close=". ">4.4</tag>Replication on Acrobot</title>
+      <toctitle><tag close=" ">4.4</tag>Replication on Acrobot</toctitle>
+      <para xml:id="S4.SS4.p1">
+        <p>To test whether these findings generalise beyond CartPole, we repeated the analysis on Acrobot-v1, a harder control task with 6-dimensional observations and 3 discrete actions. We sampled 5,000 random genomes on a <Math mode="inline" tex="20\times 20" text="20 * 20" xml:id="S4.SS4.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">×</XMTok>
+                <XMTok meaning="20" role="NUMBER">20</XMTok>
+                <XMTok meaning="20" role="NUMBER">20</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> developmental grid; 89.7% were non-functional, leaving 513 networks across four performance strata, of which 87 (1.7%) meet Gymnasium’s solved threshold. Under per-network oracle tuning across a combined parameter grid (coarse 22-point + extended micro-<Math mode="inline" tex="\eta" text="eta" xml:id="S4.SS4.p1.m2">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> dense sweep), 93–97% of networks per stratum improve with plasticity (Table <ref labelref="LABEL:tab:acrobot"/>). Acrobot requires substantially smaller learning rates than CartPole: the optimal <Math mode="inline" tex="|\eta|" text="absolute-value@(eta)" xml:id="S4.SS4.p1.m3">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="absolute-value"/>
+                  <XMRef idref="S4.SS4.p1.m3.1"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.SS4.p1.m3.1">η</XMTok>
+                  <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> is <Math mode="inline" tex="10^{-4}" text="10 ^ (- 4)" xml:id="S4.SS4.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+                <XMApp>
+                  <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok fontsize="70%" meaning="4" role="NUMBER">4</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>–<Math mode="inline" tex="10^{-3}" text="10 ^ (- 3)" xml:id="S4.SS4.p1.m5">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                <XMTok meaning="10" role="NUMBER">10</XMTok>
+                <XMApp>
+                  <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok fontsize="70%" meaning="3" role="NUMBER">3</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math> with high decay (<Math mode="inline" tex="\lambda=0.05" text="lambda = 0.05" xml:id="S4.SS4.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>–<Math mode="inline" tex="0.1" text="0.1" xml:id="S4.SS4.p1.m7">
+            <XMath>
+              <XMTok meaning="0.1" role="NUMBER">0.1</XMTok>
+            </XMath>
+          </Math>), roughly 10–100<Math mode="inline" tex="\times" text="*" xml:id="S4.SS4.p1.m8">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> smaller than CartPole’s sweet spot. Yet regret under any fixed parameter is 100%: no single <Math mode="inline" tex="(\eta,\lambda)" text="open-interval@(eta, lambda)" xml:id="S4.SS4.p1.m9">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="open-interval"/>
+                  <XMRef idref="S4.SS4.p1.m9.1"/>
+                  <XMRef idref="S4.SS4.p1.m9.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.SS4.p1.m9.1">η</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" name="lambda" role="UNKNOWN" xml:id="S4.SS4.p1.m9.2">λ</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> improves the average network, even on the extended grid. Plasticity is beneficial but entirely topology-dependent.</p>
+      </para>
+      <para xml:id="S4.SS4.p2">
+        <p>The anti-Hebbian picture is more nuanced on Acrobot (Table <ref labelref="LABEL:tab:acrobot"/>). Cohen’s <Math mode="inline" tex="d" text="d" xml:id="S4.SS4.p2.m1">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            </XMath>
+          </Math> favours anti-Hebbian across all strata (<Math mode="inline" tex="d=0.09" text="d = 0.09" xml:id="S4.SS4.p2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.09" role="NUMBER">0.09</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>–<Math mode="inline" tex="0.48" text="0.48" xml:id="S4.SS4.p2.m3">
+            <XMath>
+              <XMTok meaning="0.48" role="NUMBER">0.48</XMTok>
+            </XMath>
+          </Math>), but the per-network optimal <Math mode="inline" tex="\eta" text="eta" xml:id="S4.SS4.p2.m4">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> splits roughly evenly between signs (151 anti-Hebbian vs 185 Hebbian). Under non-stationarity (2<Math mode="inline" tex="\times" text="*" xml:id="S4.SS4.p2.m5">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> lower-link mass at step 50) with the combined grid, 87–96% of networks per stratum benefit from per-network oracle plasticity—again with 100% regret under any fixed setting. Plasticity accelerates solving across all strata (Figure <ref labelref="LABEL:fig:acrobot_survival"/>): the fraction of unsolved episodes at step 300 drops from 66% to 40% (High-mid) and from 31% to 18% (Near-perfect) compared to the no-plasticity baseline. These results show that the development-plasticity interaction is not benchmark-specific: topology-dependent plasticity holds on a task with richer dynamics, though the non-stationary benefit requires per-network tuning on the current grid.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:acrobot" placement="t" xml:id="S4.T2">
+        <tags>
+          <tag>Table 2</tag>
+          <tag role="autoref">Table 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Table 2</tag>
+        </tags>
+        <toccaption><tag close=" ">2</tag>Acrobot-v1 plasticity characterisation. % Impr.: per-network oracle improvement rate on the combined grid (coarse + micro-<Math mode="inline" tex="\eta" text="eta" xml:id="S4.T2.m1">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math>). Cohen’s <Math mode="inline" tex="d" text="d" xml:id="S4.T2.m2">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            </XMath>
+          </Math>: anti-Hebbian vs Hebbian (coarse grid). NS: non-stationary oracle rate (combined grid). Regret is 100% under any fixed <Math mode="inline" tex="(\eta,\lambda)" text="open-interval@(eta, lambda)" xml:id="S4.T2.m3">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="open-interval"/>
+                  <XMRef idref="S4.T2.m3.1"/>
+                  <XMRef idref="S4.T2.m3.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.T2.m3.1">η</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" name="lambda" role="UNKNOWN" xml:id="S4.T2.m3.2">λ</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>.</toccaption>
+        <caption><tag close=". ">Table 2</tag>Acrobot-v1 plasticity characterisation. % Impr.: per-network oracle improvement rate on the combined grid (coarse + micro-<Math mode="inline" tex="\eta" text="eta" xml:id="S4.T2.m4">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math>). Cohen’s <Math mode="inline" tex="d" text="d" xml:id="S4.T2.m5">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            </XMath>
+          </Math>: anti-Hebbian vs Hebbian (coarse grid). NS: non-stationary oracle rate (combined grid). Regret is 100% under any fixed <Math mode="inline" tex="(\eta,\lambda)" text="open-interval@(eta, lambda)" xml:id="S4.T2.m6">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="open-interval"/>
+                  <XMRef idref="S4.T2.m6.1"/>
+                  <XMRef idref="S4.T2.m6.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S4.T2.m6.1">η</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" name="lambda" role="UNKNOWN" xml:id="S4.T2.m6.2">λ</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>.</caption>
+        <tabular class="ltx_guessed_headers" vattach="middle">
+          <tbody>
+            <tr>
+              <td align="left" border="tt" thead="row"><text fontsize="90%">Stratum</text></td>
+              <td align="right" border="tt" thead="row"><Math mode="inline" tex="N" text="N" xml:id="S4.T2.m7">
+                  <XMath>
+                    <XMTok font="italic" fontsize="90%" role="UNKNOWN">N</XMTok>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="tt"><text fontsize="90%">% Impr.</text></td>
+              <td align="right" border="tt"><text fontsize="90%">Cohen’s </text><Math mode="inline" tex="d" text="d" xml:id="S4.T2.m8">
+                  <XMath>
+                    <XMTok font="italic" fontsize="90%" role="UNKNOWN">d</XMTok>
+                  </XMath>
+                </Math></td>
+              <td align="right" border="tt"><text fontsize="90%">NS % Helped</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t" thead="row"><text fontsize="90%">Low-mid</text></td>
+              <td align="right" border="t" thead="row"><text fontsize="90%">71</text></td>
+              <td align="right" border="t"><text fontsize="90%">95.8%</text></td>
+              <td align="right" border="t"><Math mode="inline" tex="+0.48" text="+ 0.48" xml:id="S4.T2.m9">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="0.48" role="NUMBER">0.48</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math><text fontsize="90%">***</text></td>
+              <td align="right" border="t"><text fontsize="90%">88.7%</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="90%">High-mid</text></td>
+              <td align="right" thead="row"><text fontsize="90%">74</text></td>
+              <td align="right"><text fontsize="90%">93.2%</text></td>
+              <td align="right"><Math mode="inline" tex="+0.31" text="+ 0.31" xml:id="S4.T2.m10">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="0.31" role="NUMBER">0.31</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math><text fontsize="90%">***</text></td>
+              <td align="right"><text fontsize="90%">95.9%</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="90%">Near-perf.</text></td>
+              <td align="right" thead="row"><text fontsize="90%">281</text></td>
+              <td align="right"><text fontsize="90%">93.6%</text></td>
+              <td align="right"><Math mode="inline" tex="+0.15" text="+ 0.15" xml:id="S4.T2.m11">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="0.15" role="NUMBER">0.15</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math><text fontsize="90%">***</text></td>
+              <td align="right"><text fontsize="90%">86.8%</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="90%">Perfect</text></td>
+              <td align="right" thead="row"><text fontsize="90%">87</text></td>
+              <td align="right"><text fontsize="90%">96.6%</text></td>
+              <td align="right"><Math mode="inline" tex="+0.09" text="+ 0.09" xml:id="S4.T2.m12">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="90%" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok fontsize="90%" meaning="0.09" role="NUMBER">0.09</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math><text fontsize="90%">*</text></td>
+              <td align="right"><text fontsize="90%">95.4%</text></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td align="left" border="tt" colspan="5" thead="row"><text fontsize="80%">***<Math mode="inline" tex="p&lt;0.001" text="p less 0.001" xml:id="S4.T2.m13">
+                    <XMath>
+                      <XMApp>
+                        <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                        <XMTok meaning="0.001" role="NUMBER">0.001</XMTok>
+                      </XMApp>
+                    </XMath>
+                  </Math>, *<Math mode="inline" tex="p&lt;0.05" text="p less 0.05" xml:id="S4.T2.m14">
+                    <XMath>
+                      <XMApp>
+                        <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                        <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+                      </XMApp>
+                    </XMath>
+                  </Math></text></td>
+            </tr>
+          </tfoot>
+        </tabular>
+      </table>
+      <figure inlist="lof" labels="LABEL:fig:acrobot_survival" placement="t" xml:id="S4.F5">
+        <tags>
+          <tag>Figure 5</tag>
+          <tag role="autoref">Figure 5</tag>
+          <tag role="refnum">5</tag>
+          <tag role="typerefnum">Figure 5</tag>
+        </tags>
+        <graphics candidates="figures/acrobot_survival.pdf" class="ltx_centering" graphic="figures/acrobot_survival.pdf" options="width=433.62pt" xml:id="S4.F5.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">5</tag>Acrobot fraction of episodes unsolved over time under non-stationarity (2<Math mode="inline" tex="\times" text="*" xml:id="S4.F5.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> link mass at step 50). Solid: per-network oracle plasticity; dashed: no plasticity. Lower is better. Oracle plasticity accelerates solving across all strata—most visibly for High-mid and Near-perfect, where the unsolved fraction at step 300 drops from 66%/31% (no plasticity) to 40%/18% (oracle plasticity).</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 5</tag>Acrobot fraction of episodes unsolved over time under non-stationarity (2<Math mode="inline" tex="\times" text="*" xml:id="S4.F5.m2">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> link mass at step 50). Solid: per-network oracle plasticity; dashed: no plasticity. Lower is better. Oracle plasticity accelerates solving across all strata—most visibly for High-mid and Near-perfect, where the unsolved fraction at step 300 drops from 66%/31% (no plasticity) to 40%/18% (oracle plasticity).</caption>
+      </figure>
+<!--  %% ============================================================ -->    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:evolution" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=". ">5</tag>Evolutionary Validation and Controls</title>
+    <toctitle><tag close=" ">5</tag>Evolutionary Validation and Controls</toctitle>
+    <subsection inlist="toc" labels="LABEL:sec:coevol_results" xml:id="S5.SS1">
+      <tags>
+        <tag>5.1</tag>
+        <tag role="autoref">subsection 5.1</tag>
+        <tag role="refnum">5.1</tag>
+        <tag role="typerefnum">§5.1</tag>
+      </tags>
+      <title><tag close=". ">5.1</tag>Co-Evolution Recovers Characterisation Findings</title>
+      <toctitle><tag close=" ">5.1</tag>Co-Evolution Recovers Characterisation Findings</toctitle>
+      <para xml:id="S5.SS1.p1">
+        <p>On CartPole, all three conditions converge to perfect fitness (reward 500) within 1–2 generations—the benchmark is too easy to differentiate conditions on final fitness (<Math mode="inline" tex="p=1.0" text="p = 1.0" xml:id="S5.SS1.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="1.0" role="NUMBER">1.0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, Mann-Whitney). However, the evolved plasticity parameters reveal a clear signal. Starting from a uniform prior over <Math mode="inline" tex="[-0.5,+0.5]" text="closed-interval@(- 0.5, + 0.5)" xml:id="S5.SS1.p1.m2">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="closed-interval"/>
+                  <XMRef idref="S5.SS1.p1.m2.1"/>
+                  <XMRef idref="S5.SS1.p1.m2.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">[</XMTok>
+                  <XMApp xml:id="S5.SS1.p1.m2.1">
+                    <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                    <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S5.SS1.p1.m2.2">
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMTok meaning="0.5" role="NUMBER">0.5</XMTok>
+                  </XMApp>
+                  <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>, <text font="bold">21/30 (70%) of Condition C runs evolve negative <Math mode="inline" tex="\eta" text="eta" xml:id="S5.SS1.p1.m3">
+              <XMath>
+                <XMTok font="medium italic" name="eta" role="UNKNOWN">η</XMTok>
+              </XMath>
+            </Math></text> (binomial sign test <Math mode="inline" tex="p=0.043" text="p = 0.043" xml:id="S5.SS1.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.043" role="NUMBER">0.043</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), with median evolved <Math mode="inline" tex="\eta=-0.117" text="eta = - 0.117" xml:id="S5.SS1.p1.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok meaning="0.117" role="NUMBER">0.117</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math> and population-mean <Math mode="inline" tex="\eta" text="eta" xml:id="S5.SS1.p1.m6">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> drifting below zero within <Math mode="inline" tex="\sim" text="similar-to" xml:id="S5.SS1.p1.m7">
+            <XMath>
+              <XMTok meaning="similar-to" name="sim" role="RELOP">∼</XMTok>
+            </XMath>
+          </Math>10 generations (Figure <ref labelref="LABEL:fig:eta_evolution"/>). Evolution independently discovers anti-Hebbian dominance. Co-evolution also produces sparser networks than no-plasticity evolution (median 277 vs 328 connections, <Math mode="inline" tex="p=0.10" text="p = 0.10" xml:id="S5.SS1.p1.m8">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.10" role="NUMBER">0.10</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, Mann-Whitney; neuron count identical at 100). The trend is stronger against fixed-plasticity evolution (277 vs 357, <Math mode="inline" tex="p=0.004" text="p = 0.004" xml:id="S5.SS1.p1.m9">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.004" role="NUMBER">0.004</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), hinting at a Baldwin-like effect where lifetime plasticity relaxes structural requirements.</p>
+      </para>
+      <para xml:id="S5.SS1.p2">
+        <p>On static Acrobot, no condition breaks through the architectural ceiling: all plateau at fitness <Math mode="inline" tex="\approx 0.84" text="absent approximately-equals 0.84" xml:id="S5.SS1.p2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="approximately-equals" name="approx" role="RELOP">≈</XMTok>
+                <XMTok meaning="absent"/>
+                <XMTok meaning="0.84" role="NUMBER">0.84</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> (reward <Math mode="inline" tex="\approx-78" text="absent approximately-equals - 78" xml:id="S5.SS1.p2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="approximately-equals" name="approx" role="RELOP">≈</XMTok>
+                <XMTok meaning="absent"/>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok meaning="78" role="NUMBER">78</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>), with all 90 runs in the High-mid stratum (<Math mode="inline" tex="p\geq 0.72" text="p &gt;= 0.72" xml:id="S5.SS1.p2.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than-or-equals" name="geq" role="RELOP">≥</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.72" role="NUMBER">0.72</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, all pairwise comparisons). The critical finding is in the evolved <Math mode="inline" tex="\eta" text="eta" xml:id="S5.SS1.p2.m4">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> distribution, which is <text font="bold">qualitatively different from CartPole</text>: median <Math mode="inline" tex="\eta=-0.0045" text="eta = - 0.0045" xml:id="S5.SS1.p2.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok meaning="0.0045" role="NUMBER">0.0045</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>, mean <Math mode="inline" tex="\approx 0" text="absent approximately-equals 0" xml:id="S5.SS1.p2.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="approximately-equals" name="approx" role="RELOP">≈</XMTok>
+                <XMTok meaning="absent"/>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, with 18/30 (60%) negative (<Math mode="inline" tex="p=0.36" text="p = 0.36" xml:id="S5.SS1.p2.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.36" role="NUMBER">0.36</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, n.s.). Evolved <Math mode="inline" tex="|\eta|" text="absolute-value@(eta)" xml:id="S5.SS1.p2.m8">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="absolute-value"/>
+                  <XMRef idref="S5.SS1.p2.m8.1"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  <XMTok font="italic" name="eta" role="UNKNOWN" xml:id="S5.SS1.p2.m8.1">η</XMTok>
+                  <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> clusters in <Math mode="inline" tex="[10^{-3},5\times 10^{-2}]" text="closed-interval@(10 ^ (- 3), 5 * 10 ^ (- 2))" xml:id="S5.SS1.p2.m9">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="closed-interval"/>
+                  <XMRef idref="S5.SS1.p2.m9.1"/>
+                  <XMRef idref="S5.SS1.p2.m9.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">[</XMTok>
+                  <XMApp xml:id="S5.SS1.p2.m9.1">
+                    <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                    <XMTok meaning="10" role="NUMBER">10</XMTok>
+                    <XMApp>
+                      <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok fontsize="70%" meaning="3" role="NUMBER">3</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S5.SS1.p2.m9.2">
+                    <XMTok meaning="times" role="MULOP">×</XMTok>
+                    <XMTok meaning="5" role="NUMBER">5</XMTok>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="10" role="NUMBER">10</XMTok>
+                      <XMApp>
+                        <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>—the Acrobot sweet spot from the characterisation (Section <ref labelref="LABEL:sec:acrobot"/>). The cross-task contrast is itself informative: evolution finds different answers for different tasks, exactly as the characterisation predicts.</p>
+      </para>
+      <para xml:id="S5.SS1.p3">
+        <p>Under non-stationarity (2<Math mode="inline" tex="\times" text="*" xml:id="S5.SS1.p3.m1">
+            <XMath>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> lower-link mass at step 50), co-evolution is <text font="bold">counterproductive</text>: Condition C (median fitness 0.775) is marginally worse than Condition A (0.786; <Math mode="inline" tex="d=0.60" text="d = 0.60" xml:id="S5.SS1.p3.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.60" role="NUMBER">0.60</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="p=0.033" text="p = 0.033" xml:id="S5.SS1.p3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.033" role="NUMBER">0.033</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> uncorrected, <Math mode="inline" tex="p=0.10" text="p = 0.10" xml:id="S5.SS1.p3.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning="0.10" role="NUMBER">0.10</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> after Bonferroni) and converges <Math mode="inline" tex="3\times" xml:id="S5.SS1.p3.m5">
+            <XMath>
+              <XMTok meaning="3" role="NUMBER">3</XMTok>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> slower (median generation 10 vs 3 to reach fitness 0.75). The larger search space (56 vs 54 parameters) slows exploration without compensating fitness gains. The GA finds topologies that handle the perturbation through structure alone—Condition A matches Condition B—confirming that evolutionary architecture search absorbs non-stationarity without needing plasticity.
+<!--  %**** main˙arxiv.tex Line 300 **** --></p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:eta_evolution" placement="t" xml:id="S5.F6">
+        <tags>
+          <tag>Figure 6</tag>
+          <tag role="autoref">Figure 6</tag>
+          <tag role="refnum">6</tag>
+          <tag role="typerefnum">Figure 6</tag>
+        </tags>
+        <graphics candidates="figures/eta_evolution.pdf" class="ltx_centering" graphic="figures/eta_evolution.pdf" options="width=433.62pt" xml:id="S5.F6.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">6</tag>Co-evolution (Condition C) evolved <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m1">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> over 200 generations on CartPole (top) and Acrobot (bottom). Left: best individual’s <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m2">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math>; right: population mean <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m3">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> (median <Math mode="inline" tex="\pm" text="plus-or-minus" xml:id="S5.F6.m4">
+            <XMath>
+              <XMTok meaning="plus-or-minus" name="pm" role="ADDOP">±</XMTok>
+            </XMath>
+          </Math> IQR across 30 runs). CartPole: strong anti-Hebbian drift (<Math mode="inline" tex="\eta&lt;0" text="eta less 0" xml:id="S5.F6.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). Acrobot: <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m6">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> hovers near zero with mixed signs, matching the characterisation finding.</toccaption>
+        <caption class="ltx_centering"><tag close=". ">Figure 6</tag>Co-evolution (Condition C) evolved <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m7">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> over 200 generations on CartPole (top) and Acrobot (bottom). Left: best individual’s <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m8">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math>; right: population mean <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m9">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> (median <Math mode="inline" tex="\pm" text="plus-or-minus" xml:id="S5.F6.m10">
+            <XMath>
+              <XMTok meaning="plus-or-minus" name="pm" role="ADDOP">±</XMTok>
+            </XMath>
+          </Math> IQR across 30 runs). CartPole: strong anti-Hebbian drift (<Math mode="inline" tex="\eta&lt;0" text="eta less 0" xml:id="S5.F6.m11">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+                <XMTok meaning="0" role="NUMBER">0</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). Acrobot: <Math mode="inline" tex="\eta" text="eta" xml:id="S5.F6.m12">
+            <XMath>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+            </XMath>
+          </Math> hovers near zero with mixed signs, matching the characterisation finding.</caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:random_results" xml:id="S5.SS2">
+      <tags>
+        <tag>5.2</tag>
+        <tag role="autoref">subsection 5.2</tag>
+        <tag role="refnum">5.2</tag>
+        <tag role="typerefnum">§5.2</tag>
+      </tags>
+      <title><tag close=". ">5.2</tag>Random-RNN Control</title>
+      <toctitle><tag close=" ">5.2</tag>Random-RNN Control</toctitle>
+      <para xml:id="S5.SS2.p1">
+        <p>The random-RNN control (Section <ref labelref="LABEL:sec:random_rnn_design"/>) yields three results that disambiguate developmental from generic network effects.</p>
+      </para>
+      <para xml:id="S5.SS2.p2">
+        <p><text font="bold">Developmental competence advantage.</text> Of 11,810 random RNNs matched to competent MorphoNAS topologies, only 65 (0.56%) are themselves competent (Low-mid: 17, High-mid: 18, Near-perfect: 4, Perfect: 26), compared to MorphoNAS’s 4.7%—an <Math mode="inline" tex="8.4\times" xml:id="S5.SS2.p2.m1">
+            <XMath>
+              <XMTok meaning="8.4" role="NUMBER">8.4</XMTok>
+              <XMTok meaning="times" role="MULOP">×</XMTok>
+            </XMath>
+          </Math> difference. Morphogenetic development provides a genuine structural inductive bias beyond topology statistics alone.</p>
+      </para>
+      <para xml:id="S5.SS2.p3">
+        <p><text font="bold">Anti-Hebbian dominance is generic.</text> Anti-Hebbian plasticity dominates for competent random RNNs <emph font="italic">even more strongly</emph> than for MorphoNAS networks: Cohen’s <Math mode="inline" tex="d=1.67" text="d = 1.67" xml:id="S5.SS2.p3.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="1.67" role="NUMBER">1.67</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> [95% bootstrap CI: 1.57, 1.78] for High-mid and <Math mode="inline" tex="d=1.79" text="d = 1.79" xml:id="S5.SS2.p3.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="1.79" role="NUMBER">1.79</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> [1.69, 1.90] for Low-mid, vs <Math mode="inline" tex="d=0.64" text="d = 0.64" xml:id="S5.SS2.p3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.64" role="NUMBER">0.64</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> and <Math mode="inline" tex="d=0.53" text="d = 0.53" xml:id="S5.SS2.p3.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                <XMTok meaning="0.53" role="NUMBER">0.53</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> for MorphoNAS. The magnitude-moderation mechanism operates regardless of how the network was wired; anti-Hebbian dominance is a property of small recurrent networks on CartPole, not of developmental topology specifically.</p>
+      </para>
+      <para xml:id="S5.SS2.p4">
+        <p><text font="bold">Topology-dependence <emph font="italic">is</emph> developmental-specific.</text> Regret under fixed parameters is substantially higher for MorphoNAS networks: 86% (High-mid) vs 40% for random RNNs, and 89% (Near-perfect) vs 14%. Morphogenetic development creates more diverse topology-plasticity interactions, making per-network tuning—or co-evolution—more important for developmental systems than for random architectures.</p>
+      </para>
+<!--  %% ============================================================ -->    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:discussion" xml:id="S6">
+    <tags>
+      <tag>6</tag>
+      <tag role="autoref">section 6</tag>
+      <tag role="refnum">6</tag>
+      <tag role="typerefnum">§6</tag>
+    </tags>
+    <title><tag close=". ">6</tag>Discussion and Conclusion</title>
+    <toctitle><tag close=" ">6</tag>Discussion and Conclusion</toctitle>
+    <para xml:id="S6.p1">
+      <p>The combination of characterisation, co-evolutionary validation, and random-RNN control allows us to separate general from developmental-specific findings with unusual precision.</p>
+    </para>
+<!--  %**** main˙arxiv.tex Line 325 **** -->    <para xml:id="S6.p2">
+      <p><text font="bold">Separating general from developmental-specific findings.</text> The random-RNN control (Section <ref labelref="LABEL:sec:random_results"/>) resolves a question that the characterisation alone could not answer. Anti-Hebbian dominance turns out to be a generic property of small recurrent networks—the magnitude-moderation mechanism operates regardless of wiring origin. This recontextualises the characterisation finding: practitioners should default to anti-Hebbian plasticity not because of anything specific to developmental topology, but because it prevents runaway weight growth in any small RNN. By contrast, the <emph font="italic">degree</emph> of topology-dependence is genuinely developmental: the <Math mode="inline" tex="2" text="2" xml:id="S6.p2.m1">
+          <XMath>
+            <XMTok meaning="2" role="NUMBER">2</XMTok>
+          </XMath>
+        </Math>–<Math mode="inline" tex="6\times" xml:id="S6.p2.m2">
+          <XMath>
+            <XMTok meaning="6" role="NUMBER">6</XMTok>
+            <XMTok meaning="times" role="MULOP">×</XMTok>
+          </XMath>
+        </Math> higher regret for MorphoNAS networks means that morphogenetic development creates a uniquely diverse phenotype space where per-network tuning (or co-evolution) is far more important than for random architectures.</p>
+    </para>
+    <para xml:id="S6.p3">
+      <p><text font="bold">Co-evolution recovers characterisation patterns but does not improve fitness.</text> On no benchmark or condition does co-evolution improve fitness over no-plasticity evolution (Section <ref labelref="LABEL:sec:coevol_results"/>). Under non-stationarity, co-evolution is marginally <emph font="italic">worse</emph> (<Math mode="inline" tex="d=0.60" text="d = 0.60" xml:id="S6.p3.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+              <XMTok meaning="0.60" role="NUMBER">0.60</XMTok>
+            </XMApp>
+          </XMath>
+        </Math>): the two extra parameters slow convergence without payoff, because the GA finds topologies robust to the perturbation through structure alone. This reinforces a central finding: <emph font="italic">topology is the primary determinant of performance</emph>—plasticity improves a given topology (characterisation) but does not help the evolutionary search for topology. The scientific contribution is methodological: evolution independently recovers the characterisation findings (anti-Hebbian on CartPole, mixed-sign near-zero on Acrobot, correct <Math mode="inline" tex="\eta" text="eta" xml:id="S6.p3.m2">
+          <XMath>
+            <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+          </XMath>
+        </Math> scale) without prior knowledge. The <Math mode="inline" tex="8.4\times" xml:id="S6.p3.m3">
+          <XMath>
+            <XMTok meaning="8.4" role="NUMBER">8.4</XMTok>
+            <XMTok meaning="times" role="MULOP">×</XMTok>
+          </XMath>
+        </Math> developmental competence advantage (Section <ref labelref="LABEL:sec:random_results"/>) further underscores that reaction-diffusion development provides structural inductive bias beyond topology statistics alone.</p>
+    </para>
+    <para xml:id="S6.p4">
+      <p><text font="bold">Implications for evolving self-organisation.</text> Our findings connect structural self-organisation (development) with functional self-organisation (plasticity) through evolution. In NDP <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2023ndp" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> and HyperNCA <cite class="ltx_citemacro_citep">(<bibref bibrefs="najarro2022hypernca" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, development is driven by learned update rules; Plantec et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="plantec2024evolving" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> showed that structural plasticity can extend development into the lifetime. Our results demonstrate that even simple synaptic plasticity provides substantial benefits on top of morphogenetic development, and that evolutionary optimisation can discover the appropriate plasticity parameters for each task. The sparser architectures evolved under co-evolution on CartPole (277 vs 357 connections compared to fixed-plasticity evolution, <Math mode="inline" tex="p=0.004" text="p = 0.004" xml:id="S6.p4.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+              <XMTok meaning="0.004" role="NUMBER">0.004</XMTok>
+            </XMApp>
+          </XMath>
+        </Math>; Section <ref labelref="LABEL:sec:coevol_results"/>) suggest a Baldwin-like effect where lifetime plasticity relaxes the structural requirements on the genome—a direction worth pursuing on harder benchmarks.</p>
+    </para>
+    <para xml:id="S6.p5">
+      <p><text font="bold">Practical guidelines.</text> (1) Default to anti-Hebbian plasticity (<Math mode="inline" tex="\eta&lt;0" text="eta less 0" xml:id="S6.p5.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+              <XMTok font="italic" name="eta" role="UNKNOWN">η</XMTok>
+              <XMTok meaning="0" role="NUMBER">0</XMTok>
+            </XMApp>
+          </XMath>
+        </Math>) with moderate decay (<Math mode="inline" tex="\lambda\approx 0.01" text="lambda approximately-equals 0.01" xml:id="S6.p5.m2">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="approximately-equals" name="approx" role="RELOP">≈</XMTok>
+              <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+              <XMTok meaning="0.01" role="NUMBER">0.01</XMTok>
+            </XMApp>
+          </XMath>
+        </Math>)—this is both the characterisation recommendation and what evolution discovers independently. (2) Invest in per-network parameter tuning: regret under fixed parameters is 52–100% for MorphoNAS networks, far higher than for random architectures. (3) When targeting non-stationary environments, the OFF<Math mode="inline" tex="\to" text="to" xml:id="S6.p5.m3">
+          <XMath>
+            <XMTok name="to" role="ARROW">→</XMTok>
+          </XMath>
+        </Math>ON protocol shows that adaptation alone accounts for 66–69% of the total benefit.</p>
+    </para>
+    <para xml:id="S6.p6">
+      <p><text font="bold">Limitations.</text> Both benchmarks are classic control tasks; generalisation to continuous-action or high-dimensional environments remains open. Co-evolution never outperforms no-plasticity evolution, and is marginally counterproductive under non-stationarity—a stronger test would use a benchmark where the GA cannot find robust topologies within 200 generations, forcing reliance on within-lifetime adaptation. The random-RNN sample is small (65 competent networks), and the weight distribution differs from MorphoNAS (uniform vs distance-dependent), introducing a potential confound. The plasticity rule (Eq. <ref labelref="LABEL:eq:hebb"/>) is deliberately simple; richer mechanisms <cite class="ltx_citemacro_citep">(<bibref bibrefs="soltoggio2018born" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> may interact differently with developmental topologies.</p>
+    </para>
+    <para xml:id="S6.p7">
+      <p><text font="bold">Broader context.</text> Zador <cite class="ltx_citemacro_citep">(<bibref bibrefs="zador2019critique" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> argued that biological brains leverage both genomic encoding and environmental interaction. Shuvaev et al. <cite class="ltx_citemacro_citep">(<bibref bibrefs="shuvaev2024encoding" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> confirmed this computationally, showing that small genomic networks can compress weight matrices by orders of magnitude while retaining substantial task performance. Our findings extend this picture with empirical evidence: the morphogenetic genome provides the compressed architectural scaffold (with an <Math mode="inline" tex="8.4\times" xml:id="S6.p7.m1">
+          <XMath>
+            <XMTok meaning="8.4" role="NUMBER">8.4</XMTok>
+            <XMTok meaning="times" role="MULOP">×</XMTok>
+          </XMath>
+        </Math> competence advantage over random wiring), plasticity provides within-lifetime adaptation, and evolution can discover appropriate plasticity parameters for each task. Across all experiments, the primary determinant of performance remains the developmental topology itself.</p>
+    </para>
+    <acknowledgements name="Acknowledgements">
+AI-assisted tools (Claude, Anthropic) were used to write and debug experimental and analysis code under author direction, and to edit and polish the manuscript text. All scientific decisions—including experimental design, data interpretation, and conclusions—are the authors’ own. Source code and data are available at <ref class="ltx_url" font="typewriter" href="https://github.com/ukma-morphonas-lab/MorphoNAS-PL">https://github.com/ukma-morphonas-lab/MorphoNAS-PL</ref>.
+</acknowledgements>
+<!--  %%% Bibliography inlined from main.bbl for arXiv compatibility -->  </section>
+  <bibliography xml:id="bib">
+    <title>References</title>
+    <biblist>
+      <bibitem xml:id="bib.bib1">
+        <tags>
+          <tag role="number">1</tag>
+          <tag role="refnum">(1)</tag>
+        </tags>
+        <bibblock>      <!--  %**** main˙arxiv.tex Line 350 **** -->  
+
+
+
+</bibblock>
+      </bibitem>
+      <bibitem key="derrac2011practical" xml:id="bib.bib2">
+        <tags>
+          <tag role="number">2</tag>
+          <tag role="year">2011</tag>
+          <tag role="authors">Derrac et al.</tag>
+          <tag role="refnum">Derrac et al. (2011)</tag>
+          <tag role="key">derrac2011practical</tag>
+        </tags>
+        <bibblock>
+Joaquín Derrac,
+Salvador García, Daniel Molina,
+and Francisco Herrera. 2011.
+</bibblock>
+        <bibblock>A practical tutorial on the use of nonparametric
+statistical tests as a methodology for comparing evolutionary and swarm
+intelligence algorithms.
+</bibblock>
+        <bibblock><emph font="italic">Swarm and Evolutionary Computation</emph>
+1, 1 (2011),
+3–18.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1016/j.swevo.2011.02.002">doi:10.1016/j.swevo.2011.02.002</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="garcianunez2025time" xml:id="bib.bib3">
+        <tags>
+          <tag role="number">3</tag>
+          <tag role="year">2025</tag>
+          <tag role="authors">García Núñez et al.</tag>
+          <tag role="refnum">García Núñez et al. (2025)</tag>
+          <tag role="key">garcianunez2025time</tag>
+        </tags>
+        <bibblock>
+D<!--  %**** main˙arxiv.tex Line 375 **** -->aniel García Núñez,
+Fergal Stapleton, and Edgar
+Galván. 2025.
+</bibblock>
+        <bibblock>Time-Modulated Hebbian Learning for Classic
+Control Tasks. In <emph font="italic">GECCO ’25 Companion: Proceedings
+of the Genetic and Evolutionary Computation Conference Companion</emph>.
+ACM, 2119–2126.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1145/3712255.3734322">doi:10.1145/3712255.3734322</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="glybovets2026morphonas" xml:id="bib.bib4">
+        <tags>
+          <tag role="number">4</tag>
+          <tag role="year">2026</tag>
+          <tag role="authors">Glybovets and Medvid</tag>
+          <tag role="refnum">Glybovets and Medvid (2026)</tag>
+          <tag role="key">glybovets2026morphonas</tag>
+        </tags>
+        <bibblock>
+Mykola Glybovets and
+Sergii Medvid. 2026.
+</bibblock>
+        <bibblock>MorphoNAS: Embryogenic Neural Architecture Search
+Through Morphogen-Guided Development.
+</bibblock>
+        <bibblock><emph font="italic">Kibernetyka i Systemnyj Analiz (Cybernetics
+and Systems Analysis)</emph> 62, 2
+(2026).
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.34229/KCA2522-9664.26.2.3">doi:10.34229/KCA2522-9664.26.2.3</ref>
+</bibblock>
+        <bibblock>Preprint: arXiv:2507.13785.
+<!--  %**** main˙arxiv.tex Line 400 **** --></bibblock>
+      </bibitem>
+      <bibitem key="hebb1949organization" xml:id="bib.bib5">
+        <tags>
+          <tag role="number">5</tag>
+          <tag role="year">1949</tag>
+          <tag role="authors">Hebb</tag>
+          <tag role="refnum">Hebb (1949)</tag>
+          <tag role="key">hebb1949organization</tag>
+        </tags>
+        <bibblock>
+Donald O Hebb.
+1949.
+</bibblock>
+        <bibblock><emph font="italic">The Organization of Behavior: A
+Neuropsychological Theory</emph>.
+</bibblock>
+        <bibblock>Wiley.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="mordvintsev2020growing" xml:id="bib.bib6">
+        <tags>
+          <tag role="number">6</tag>
+          <tag role="year">2020</tag>
+          <tag role="authors">Mordvintsev et al.</tag>
+          <tag role="refnum">Mordvintsev et al. (2020)</tag>
+          <tag role="key">mordvintsev2020growing</tag>
+        </tags>
+        <bibblock>
+Alexander Mordvintsev,
+Ettore Randazzo, Eyvind Niklasson, and
+Michael Levin. 2020.
+</bibblock>
+        <bibblock>Growing Neural Cellular Automata.
+</bibblock>
+        <bibblock><emph font="italic">Distill</emph> 5,
+2 (2020), e23.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.23915/distill.00023">doi:10.23915/distill.00023</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="najarro2020meta" xml:id="bib.bib7">
+        <tags>
+          <tag role="number">7</tag>
+          <tag role="year">2020</tag>
+          <tag role="authors">Najarro and Risi</tag>
+          <tag role="refnum">Najarro and Risi (2020)</tag>
+          <tag role="key">najarro2020meta</tag>
+        </tags>
+        <bibblock>
+E<!--  %**** main˙arxiv.tex Line 425 **** -->lias Najarro and
+Sebastian Risi. 2020.
+</bibblock>
+        <bibblock>Meta-Learning through Hebbian Plasticity in Random
+Networks. In <emph font="italic">Advances in Neural Information
+Processing Systems</emph>, Vol. 33.
+20719–20731.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="najarro2022hypernca" xml:id="bib.bib8">
+        <tags>
+          <tag role="number">8</tag>
+          <tag role="year">2022</tag>
+          <tag role="authors">Najarro et al.</tag>
+          <tag role="refnum">Najarro et al. (2022)</tag>
+          <tag role="key">najarro2022hypernca</tag>
+        </tags>
+        <bibblock>
+Elias Najarro, Shyam
+Sudhakaran, Claire Glanois, and
+Sebastian Risi. 2022.
+</bibblock>
+        <bibblock>HyperNCA: Growing Developmental Networks with
+Neural Cellular Automata. In <emph font="italic">From Cells to
+Societies: Collective Learning Across Scales (ICLR 2022 Workshop)</emph>.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="najarro2023ndp" xml:id="bib.bib9">
+        <tags>
+          <tag role="number">9</tag>
+          <tag role="year">2023</tag>
+          <tag role="authors">Najarro et al.</tag>
+          <tag role="refnum">Najarro et al. (2023)</tag>
+          <tag role="key">najarro2023ndp</tag>
+        </tags>
+        <bibblock>
+Elias Najarro, Shyam
+Sudhakaran, and Sebastian Risi.
+2023.
+</bibblock>
+        <bibblock>T<!--  %**** main˙arxiv.tex Line 450 **** -->owards Self-Assembling Artificial Neural Networks
+through Neural Developmental Programs. In
+<emph font="italic">Proceedings of the 2023 Artificial Life Conference
+(ALIFE)</emph>, Vol. 35. MIT Press,
+80.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1162/isal_a_00693">doi:10.1162/isal_a_00693</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="nisioti2024growing" xml:id="bib.bib10">
+        <tags>
+          <tag role="number">10</tag>
+          <tag role="year">2024</tag>
+          <tag role="authors">Nisioti et al.</tag>
+          <tag role="refnum">Nisioti et al. (2024)</tag>
+          <tag role="key">nisioti2024growing</tag>
+        </tags>
+        <bibblock>
+Eleni Nisioti, Erwan
+Plantec, Milton Montero, Joachim Winther
+Pedersen, and Sebastian Risi.
+2024.
+</bibblock>
+        <bibblock>Growing Artificial Neural Networks for Control: the
+Role of Neuronal Diversity. In <emph font="italic">GECCO ’24
+Companion: Proceedings of the Genetic and Evolutionary Computation Conference
+Companion</emph>. ACM, 175–178.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1145/3638530.3654356">doi:10.1145/3638530.3654356</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="palm2021testing" xml:id="bib.bib11">
+        <tags>
+          <tag role="number">11</tag>
+          <tag role="year">2021</tag>
+          <tag role="authors">Palm et al.</tag>
+          <tag role="refnum">Palm et al. (2021)</tag>
+          <tag role="key">palm2021testing</tag>
+        </tags>
+        <bibblock>
+R<!--  %**** main˙arxiv.tex Line 475 **** -->asmus Berg Palm, Elias
+Najarro, and Sebastian Risi.
+2021.
+</bibblock>
+        <bibblock>Testing the Genomic Bottleneck Hypothesis in
+Hebbian Meta-Learning. In <emph font="italic">Proceedings of Machine
+Learning Research</emph>, Vol. 148. 100–110.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="plantec2024evolving" xml:id="bib.bib12">
+        <tags>
+          <tag role="number">12</tag>
+          <tag role="year">2024</tag>
+          <tag role="authors">Plantec et al.</tag>
+          <tag role="refnum">Plantec et al. (2024)</tag>
+          <tag role="key">plantec2024evolving</tag>
+        </tags>
+        <bibblock>
+Erwan Plantec,
+Joachim Winther Pedersen, Milton Llera
+Montero, Eleni Nisioti, and Sebastian
+Risi. 2024.
+</bibblock>
+        <bibblock>Evolving Self-Assembling Neural Networks: From
+Spontaneous Activity to Experience-Dependent Learning. In
+<emph font="italic">Proceedings of the 2024 Conference on Artificial
+Life</emph>. MIT Press.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="shuvaev2024encoding" xml:id="bib.bib13">
+        <tags>
+          <tag role="number">13</tag>
+          <tag role="year">2024</tag>
+          <tag role="authors">Shuvaev et al.</tag>
+          <tag role="refnum">Shuvaev et al. (2024)</tag>
+          <tag role="key">shuvaev2024encoding</tag>
+        </tags>
+        <bibblock>
+S<!--  %**** main˙arxiv.tex Line 500 **** -->ergey Shuvaev, Divyansha
+Lachi, Alexei Koulakov, and Anthony
+Zador. 2024.
+</bibblock>
+        <bibblock>Encoding innate ability through a genomic
+bottleneck.
+</bibblock>
+        <bibblock><emph font="italic">Proceedings of the National Academy of
+Sciences</emph> 121, 38
+(2024), e2409160121.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1073/pnas.2409160121">doi:10.1073/pnas.2409160121</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="soltoggio2018born" xml:id="bib.bib14">
+        <tags>
+          <tag role="number">14</tag>
+          <tag role="year">2018</tag>
+          <tag role="authors">Soltoggio et al.</tag>
+          <tag role="refnum">Soltoggio et al. (2018)</tag>
+          <tag role="key">soltoggio2018born</tag>
+        </tags>
+        <bibblock>
+Andrea Soltoggio,
+Kenneth O Stanley, and Sebastian Risi.
+2018.
+</bibblock>
+        <bibblock>Born to learn: the inspiration, progress, and
+future of evolved plastic artificial neural networks.
+</bibblock>
+        <bibblock><emph font="italic">Neural Networks</emph> 108
+(2018), 48–67.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1016/j.neunet.2018.07.013">doi:10.1016/j.neunet.2018.07.013</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="stanley2009hypercube" xml:id="bib.bib15">
+        <tags>
+          <tag role="number">15</tag>
+          <tag role="year">2009</tag>
+          <tag role="authors">Stanley et al.</tag>
+          <tag role="refnum">Stanley et al. (2009)</tag>
+          <tag role="key">stanley2009hypercube</tag>
+        </tags>
+        <bibblock>
+<!--  %**** main˙arxiv.tex Line 525 **** -->Kenneth O Stanley, David B
+D’Ambrosio, and Jason Gauci.
+2009.
+</bibblock>
+        <bibblock>A Hypercube-Based Encoding for Evolving Large-Scale
+Neural Networks.
+</bibblock>
+        <bibblock><emph font="italic">Artificial Life</emph> 15,
+2 (2009), 185–212.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="stanley2002evolving" xml:id="bib.bib16">
+        <tags>
+          <tag role="number">16</tag>
+          <tag role="year">2002</tag>
+          <tag role="authors">Stanley and Miikkulainen</tag>
+          <tag role="refnum">Stanley and Miikkulainen (2002)</tag>
+          <tag role="key">stanley2002evolving</tag>
+        </tags>
+        <bibblock>
+Kenneth O Stanley and
+Risto Miikkulainen. 2002.
+</bibblock>
+        <bibblock>Evolving Neural Networks through Augmenting
+Topologies.
+</bibblock>
+        <bibblock><emph font="italic">Evolutionary Computation</emph>
+10, 2 (2002),
+99–127.
+</bibblock>
+        <bibblock/>
+      </bibitem>
+      <bibitem key="towers2024gymnasium" xml:id="bib.bib17">
+        <tags>
+          <tag role="number">17</tag>
+          <tag role="year">2024</tag>
+          <tag role="authors">Towers et al.</tag>
+          <tag role="refnum">Towers et al. (2024)</tag>
+          <tag role="key">towers2024gymnasium</tag>
+        </tags>
+        <bibblock>
+M<!--  %**** main˙arxiv.tex Line 550 **** -->ark Towers, Ariel
+Kwiatkowski, Jordan Terry, John U Balis,
+Gianluca De Cola, Tristan Deleu,
+Manuel Goulão, Andreas Kallinteris,
+Arjun KG, Markus Krimmel,
+Rodrigo Perez-Vicente, Andrea Pierré,
+Sander Schulhoff, Jun Jet Tai,
+Andrew Tan, and Omar G Younis.
+2024.
+</bibblock>
+        <bibblock><emph font="italic">Gymnasium</emph>.
+</bibblock>
+        <bibblock>
+<ref class="ltx_url" font="typewriter" href="https://github.com/Farama-Foundation/Gymnasium">https://github.com/Farama-Foundation/Gymnasium</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="turing1952chemical" xml:id="bib.bib18">
+        <tags>
+          <tag role="number">18</tag>
+          <tag role="year">1952</tag>
+          <tag role="authors">Turing</tag>
+          <tag role="refnum">Turing (1952)</tag>
+          <tag role="key">turing1952chemical</tag>
+        </tags>
+        <bibblock>
+Alan M Turing.
+1952.
+</bibblock>
+        <bibblock>The Chemical Basis of Morphogenesis.
+</bibblock>
+        <bibblock><emph font="italic">Philosophical Transactions of the Royal
+Society of London. Series B, Biological Sciences</emph> 237,
+641 (1952), 37–72.
+</bibblock>
+        <bibblock><!--  %**** main˙arxiv.tex Line 575 **** --><ref class="ltx_href" href="https://doi.org/10.1098/rstb.1952.0012">doi:10.1098/rstb.1952.0012</ref>
+</bibblock>
+      </bibitem>
+      <bibitem key="zador2019critique" xml:id="bib.bib19">
+        <tags>
+          <tag role="number">19</tag>
+          <tag role="year">2019</tag>
+          <tag role="authors">Zador</tag>
+          <tag role="refnum">Zador (2019)</tag>
+          <tag role="key">zador2019critique</tag>
+        </tags>
+        <bibblock>
+Anthony M Zador.
+2019.
+</bibblock>
+        <bibblock>A critique of pure learning and what artificial
+neural networks can learn from animal brains.
+</bibblock>
+        <bibblock><emph font="italic">Nature Communications</emph> 10,
+1 (2019), 3770.
+</bibblock>
+        <bibblock><ref class="ltx_href" href="https://doi.org/10.1038/s41467-019-11786-6">doi:10.1038/s41467-019-11786-6</ref>
+</bibblock>
+      </bibitem>
+    </biblist>
+  </bibliography>
+</document>

@@ -1,0 +1,121 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "EGauthorGuidelines-eurovis26-full.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "EG.bbx"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "dfT1pcr.fd"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "dfT1phv.fd"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "dfT1ptm.fd"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eg-alpha-doi.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eg-alpha.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "egWebLnk.dtx"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "egbibsample.bib"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "eurovis2026.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/aff-part-to-whole.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/anatomy-croissant-pow.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/anatomy-croissant.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/fig-posteriors.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/hypotheses-table.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/interedge-interpolation-shorter.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/interedge-interpolation.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/interpolation.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/interpolationshorter.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/pdf-affordances-task.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/qdp-affordances.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/qual-heatmap-yb.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/stimuli-overview-col.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/stimuli-overview.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/teaser-1.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/teaser.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "figs/why-squish.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "readme.txt"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage - Science Replication</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8f9fa;
+        }
+        header {
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 1.3rem; }
+        header a { color: #7ec8e3; text-decoration: none; font-size: 0.85rem; }
+        main { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; }
+        .actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        .btn-primary { background: #1a1a2e; color: white; }
+        .btn-primary:hover { background: #16213e; }
+        .btn-green { background: #27ae60; color: white; }
+        .btn-green:hover { background: #219a52; }
+        .btn-blue { background: #2e86c1; color: white; }
+        .btn-blue:hover { background: #2874a6; }
+        .btn-red { background: #c0392b; color: white; }
+        .btn-red:hover { background: #a93226; }
+        .btn-sm { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+        .topic-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topic-info h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .topic-info .meta { color: #666; font-size: 0.85rem; }
+        .topic-actions { display: flex; gap: 0.5rem; align-items: center; }
+        .status-msg {
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+        .status-msg.show { display: block; }
+        .status-success { background: #d4edda; color: #155724; }
+        .stats { color: #555; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Manage Topics</h1>
+        <div>
+            <a href="/" target="_blank">View Site</a>
+            &nbsp;|&nbsp;
+            <a href="{% url 'manage_logout' %}">Logout</a>
+        </div>
+    </header>
+    <main>
+        <div id="status" class="status-msg"></div>
+
+        <div class="stats">{{ total_papers }} paper{{ total_papers|pluralize }} across {{ topics|length }} topic{{ topics|length|pluralize }}</div>
+
+        <div class="actions">
+            <a href="{% url 'manage_topic_add' %}" class="btn btn-primary">Add Topic</a>
+            <button onclick="scrapeAll()" class="btn btn-green">Scrape All Topics</button>
+            <button onclick="generateSite()" class="btn btn-blue">Regenerate Site</button>
+        </div>
+
+        {% for topic in topics %}
+        <div class="topic-card">
+            <div class="topic-info">
+                <h3>{{ topic.name }}</h3>
+                <div class="meta">
+                    Search: <code>{{ topic.search_terms }}</code> &mdash;
+                    {{ topic.papers.count }} paper{{ topic.papers.count|pluralize }}
+                </div>
+            </div>
+            <div class="topic-actions">
+                <button onclick="scrapeTopic('{{ topic.slug }}')" class="btn btn-green btn-sm">Scrape</button>
+                <a href="{% url 'manage_topic_edit' topic.slug %}" class="btn btn-primary btn-sm">Edit</a>
+                <form method="post" action="{% url 'manage_topic_delete' topic.slug %}" style="display:inline;"
+                      onsubmit="return confirm('Delete {{ topic.name }} and all its papers?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-red btn-sm">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <p style="color: #666;">No topics yet. Click "Add Topic" to get started.</p>
+        {% endfor %}
+    </main>
+
+    <script>
+        function showStatus(msg, type) {
+            const el = document.getElementById('status');
+            el.textContent = msg;
+            el.className = 'status-msg show status-' + type;
+            setTimeout(() => el.className = 'status-msg', 5000);
+        }
+
+        function getCookie(name) {
+            const value = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return value ? value.pop() : '';
+        }
+
+        function postAction(url, body) {
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: body || '',
+            }).then(r => r.json());
+        }
+
+        function scrapeAll() {
+            showStatus('Starting scrape for all topics...', 'success');
+            postAction('{% url "manage_scrape" %}')
+                .then(data => showStatus(data.status || data.error, data.error ? 'error' : 'success'));
+        }
+
+        function scrapeTopic(slug) {
+            showStatus('Starting scrape for ' + slug + '...', 'success');
+            postAction('{% url "manage_scrape" %}', 'topic=' + slug)
+                .then(data => showStatus(data.status || data.error, data.error ? 'error' : 'success'));
+        }
+
+        function generateSite() {
+            showStatus('Regenerating static site...', 'success');
+            postAction('{% url "manage_generate" %}')
+                .then(data => showStatus(data.status || data.error, data.error ? 'error' : 'success'));
+        }
+    </script>
+</body>
+</html>

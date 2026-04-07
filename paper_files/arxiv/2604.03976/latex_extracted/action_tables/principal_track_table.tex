@@ -1,0 +1,45 @@
+% -------------------------------
+% Table C: Principal track (fund-moving; underwriting optional)
+% -------------------------------
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{3.5cm}p{2.2cm}p{4.4cm}p{3.5cm}}
+\hline
+\textbf{Action} & \textbf{Sender} & \textbf{Required fields} & \textbf{Effect} \\
+\hline
+\texttt{RequestUW} & Business agent &
+\texttt{\{job\_id, agreement\_hash, coverage\_request\}} &
+Initiates underwriting review \\
+\texttt{UWDecision} & Underwriter &
+\texttt{\{job\_id, agreement\_hash, approve/reject, premium, collateral\_required?\}} &
+Opens underwriting path or enables override/cancellation \\
+\texttt{PayPremium} & Requestor (human) &
+\texttt{\{job\_id, agreement\_hash, premium, premium\_ref, signature\}} &
+Adopts underwriting coverage \\
+\texttt{LockCollateral}; \texttt{RefuseCollateral} & Business agent &
+\texttt{\{job\_id, agreement\_hash, amount?, collateral\_ref?, signature\}} &
+Locks collateral or escalates to override \\
+\texttt{OverrideDecision} & Human authority &
+\texttt{\{job\_id, agreement\_hash, proceed/cancel, signature\}} &
+Explicitly accepts full pre-execution risk or terminates \\
+\texttt{ApproveRelease} & Requestor-side signer &
+\texttt{\{job\_id, agreement\_hash, signature\}} &
+Contributes requestor-side approval for principal release \\
+\texttt{ReleasePrincipal} & Settlement layer &
+\texttt{\{job\_id, agreement\_hash, approvals, transfer\_ref\}} &
+Releases execution principal when authorization predicate holds \\
+\texttt{SubmitExecutionEvidence} & Business agent &
+\texttt{\{job\_id, agreement\_hash, exec\_evidence\_ref, signature\}} &
+Emits execution-evidence signal; enables evaluation \\
+\texttt{UnwindPreExecution} &
+Settlement layer &
+\{\texttt{job\_id}, \texttt{agreement\_hash}, premium\_refund\_ref?, collateral\_unlock\_ref?\} &
+Unwinds pre-execution commitments when cancelled before principal release \\
+\hline
+\end{tabular}
+\caption{\textsc{ARS} actions for the principal track in fund-moving jobs.}
+\label{tab:arp-actions-principal}
+\end{table}

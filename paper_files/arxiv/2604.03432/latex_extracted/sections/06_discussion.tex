@@ -1,0 +1,10 @@
+While YANA demonstrates significant potential for bridging the neuromorphic simulation-to-hardware gap, several limitations and opportunities for improvement warrant discussion.
+
+\newpage\noindent\textbf{Limited Layer Type Support:}
+At the time of this work's experiments, \textit{YANA deploy} could only map feed forward layers onto YANA. However, many practical \ac{SNN} applications benefit from layers that exploit weight reuse patterns, such as convolutional layers. YANA's architecture fundamentally supports weight reuse and future development will extend the software framework to support convolutional layers and other structured connectivity patterns.
+\\
+\textbf{Event-Driven Power Efficiency Validation:}
+While event-driven processing is a fundamental design principle of YANA, the actual power savings achieved through this approach on FPGA hardware have yet to be empirically demonstrated. Power efficiency represents a major argument for the Neuromorphic Advantage, and quantifying it is crucial for validating YANA's effectiveness. Future work will conduct detailed power characterization studies using load-dependent power saving strategies such as clock gating and SRAM sleep modes.
+\\
+\textbf{Scalability and Many-Core Deployment:}
+The current evaluation focuses on an experimental deployment of YANA with an input (multicast), hidden and output core. However, YANA is designed with scalability in mind, and future research will investigate parallel processing speedups and input event rate improvements when YANA is deployed as a many-core architecture. This will involve deploying YANA in a \ac{NoC} setup to enable inter-core communication and exploring load balancing strategies for distributing \ac{SNN} processing across multiple cores.

@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.03203/latex_extracted"?>
+<!--  %PR3DICTR arXiv LaTeX template --><!--  %Converted from manuscript draft --><!--  %NOTE: Add your figure files to ./figures and update author metadata before submission. --><?latexml class="article" options="11pt"?>
+<?latexml package="arxiv"?>
+<!--  %“usepackage[ --><!--  %backend=biber, --><!--  %style=numeric, --><!--  %sorting=none, --><!--  %giveninits=true, --><!--  %doi=true, --><!--  %url=true, --><!--  %isbn=false, --><!--  %% maxbibnames=6, --><!--  %% minbibnames=6, --><!--  %eprint=false --><!--  %]–biblatex˝ --><!--  %“addbibresource–pr3dictr˙bib.bib˝ --><!--  %“usepackage[numbers,sort&amp;compress]–natbib˝ --><!--  %“bibliographystyle–unsrtnat˝ --><!--  %“usepackage[numbers,sort&amp;compress]–natbib˝ --><!--  %**** main.tex Line 25 **** --><?latexml package="doi"?>
+<!--  %% arXiv-friendly packages --><!--  %“usepackage[utf8]–inputenc˝ --><?latexml package="fontenc" options="T1"?>
+<?latexml package="lmodern"?>
+<?latexml package="microtype"?>
+<?latexml package="geometry"?>
+<?latexml package="graphicx"?>
+<?latexml package="booktabs"?>
+<?latexml package="longtable"?>
+<?latexml package="array"?>
+<?latexml package="multirow"?>
+<?latexml package="tabularx"?>
+<?latexml package="amsmath,amssymb"?>
+<?latexml package="hyperref"?>
+<?latexml package="xcolor"?>
+<?latexml package="enumitem"?>
+<?latexml package="caption"?>
+<?latexml package="float"?>
+<?latexml package="url"?>
+<?latexml package="subcaption"?>
+<?latexml package="ragged2e"?>
+<!--  %No-hyphen␣paragraph␣column,␣top-aligned --><!--  %If␣you␣also␣use␣vertically␣centered␣m-columns: --><!--  %DEFINE␣THE␣PAGE␣HEADERS --><?latexml package="fancyhdr"?>
+<!--  %\cfoot{\thepage} --><!--  %\renewcommand{\thefootnote}{\fnsymbol{footnote}} --><!--  %\makeatletter --><!--  %****␣main.tex␣Line␣75␣**** --><!--  %\def\@fnsymbol#1{\ensuremath{\ifcase#1\or --><!--  %\dagger\or --><!--  %\ddagger\or --><!--  %\mathsection\or --><!--  %\mathparagraph\or --><!--  %\|\or --><!--  %**\or --><!--  %\dagger\dagger\or --><!--  %\ddagger\ddagger --><!--  %\else\@ctrerr\fi}} --><!--  %\makeatother --><!--  %****␣main.tex␣Line␣100␣**** --><?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line" prefix="dcterms: http://purl.org/dc/terms/">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title><text font="bold">PR<text color="#00FFFF">3D</text>ICTR</text>: A modular AI framework for medical 3D image-based detection and outcome prediction</title>
+  <creator role="author">
+    <personname>
+Daniel C. MacRae,  Luuk van der Hoek<note mark="1" role="footnotemark" xml:id="footnotex1"><tags>
+          <tag>1</tag>
+          <tag role="autoref">footnote 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">footnote 1</tag>
+        </tags></note>,  Robert van der Wal,  Suzanne P.M. de Vette,  <break/>Hendrike Neh,  Baoqiang Ma,  Peter M.A. van Ooijen,  Lisanne V. van Dijk <break/>
+<text fontsize="90%">Department of Radiation Oncology, <break/>University Medical Center Groningen, <break/>University of Groningen, <break/>Groningen, the Netherlands
+</text></personname>
+    <contact role="thanks">These authors contributed equally to this work</contact>
+  </creator>
+  <date role="creation"/>
+  <abstract name="Abstract">
+    <p>Three-dimensional medical image data and computer-aided decision making, particularly using deep learning, are becoming increasingly important in the medical field. To aid in these developments we introduce <text font="bold">PR3DICTR</text>: <text font="bold">P</text>latform for <text font="bold">R</text>esearch in <text font="bold">3D</text> <text font="bold">I</text>mage <text font="bold">C</text>lassification and s<text font="bold">T</text>andardised t<text font="bold">R</text>aining. Built using community-standard distributions (PyTorch and MONAI), PR3DICTR provides an open-access, flexible and convenient framework for prediction model development, with an explicit focus on classification using three-dimensional medical image data. By combining modular design principles and standardization, it aims to alleviate developmental burden whilst retaining adjustability. It provides users with a wealth of pre-established functionality, for instance in model architecture design options, hyper-parameter solutions and training methodologies, but still gives users the opportunity and freedom to “plug in” their own solutions or modules. PR3DICTR can be applied to any binary or event-based three-dimensional classification task and can work with as little as two lines of code.</p>
+  </abstract>
+<!--  %****␣main.tex␣Line␣125␣**** -->  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <para xml:id="S1.p1">
+      <p>In recent years, three-dimensional (3D) multi-modal medical imaging has become increasingly important for diagnosis and treatment of patients <cite class="ltx_citemacro_cite">[<bibref bibrefs="Rong2024" separator="," yyseparator=","/>]</cite>. These scans provide both anatomical and functional information that can guide treatment selection and predict outcomes such as survival, risk of (surgical) complications or treatment failure <cite class="ltx_citemacro_cite">[<bibref bibrefs="Vagvala2022,Saba2025" separator="," yyseparator=","/>]</cite>. While clinicians traditionally rely on guidelines built on discrete clinical variables (e.g., TNM staging) and semantic or manually derived imaging features (e.g., “hypo-dense lesions” or aortic diameter measurements), advanced image processing and artificial intelligence (AI) now enable automated extraction of features directly from full 3D scans <cite class="ltx_citemacro_cite">[<bibref bibrefs="Aiello2019,vanGalen2025,Huang2024,Erasmus2023,Wehbe2024" separator="," yyseparator=","/>]</cite>. Deep learning (DL) models, such as convolutional neural networks (CNNs, Figure <ref labelref="LABEL:fig:workflow_binary"/>) and transformers, have shown great potential for capturing intricate patterns in medical imaging data and associating them with clinical outcomes <cite class="ltx_citemacro_cite">[<bibref bibrefs="Huang2024,Wehbe2024" separator="," yyseparator=","/>]</cite>. However, their development often requires substantial computational resources and technical expertise, leading to diverse and often non-standardized workflows both across and even within research groups <cite class="ltx_citemacro_cite">[<bibref bibrefs="Pati2023" separator="," yyseparator=","/>]</cite>. Consequently, there remains a need for simple, standardized, and modular tools that make working with 3D image-based deep learning model development more accessible.</p>
+    </para>
+    <figure inlist="lof" labels="LABEL:fig:workflow_binary" placement="H" xml:id="S1.F1">
+      <tags>
+        <tag><text fontsize="90%">Figure 1</text></tag>
+        <tag role="autoref">Figure 1</tag>
+        <tag role="refnum">1</tag>
+        <tag role="typerefnum">Figure 1</tag>
+      </tags>
+      <graphics candidates="Figures/Figure_1.png" class="ltx_centering" graphic="Figures/Figure_1.png" options="width=390.258pt" xml:id="S1.F1.g1"/>
+      <toccaption class="ltx_centering"><tag close=" ">1</tag>Example of a binary classification deep learning model workflow using 3D medical imaging.</toccaption>
+      <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 1</text></tag><text fontsize="90%">Example of a binary classification deep learning model workflow using 3D medical imaging.</text></caption>
+    </figure>
+    <para xml:id="S1.p2">
+      <p>When researchers begin developing machine learning or deep learning models in Python, a wide range of frameworks are available. For maximum flexibility, PyTorch offers a powerful foundation and the tools to develop diverse deep learning applications, from large language models to financial forecasting models <cite class="ltx_citemacro_cite">[<bibref bibrefs="Paszke2019" separator="," yyseparator=","/>]</cite>. Within the medical imaging domain, the Medical Open Network for Artificial Intelligence (MONAI) builds on PyTorch to provide specialized tools for 2D and 3D medical data, while maintaining much of PyTorch’s flexibility <cite class="ltx_citemacro_cite">[<bibref bibrefs="Cardoso2022" separator="," yyseparator=","/>]</cite>. In contrast, no-code frameworks such as Ludwig allow users to define models via configuration files rather than custom code, specifying inputs, architectures, and outputs directly <cite class="ltx_citemacro_cite">[<bibref bibrefs="Molino2019" separator="," yyseparator=","/>]</cite>. Overall, existing solutions tend to be either too broad to be readily applied to specific medical imaging classification tasks or too narrowly focused to be adaptable to the requirements of individual outcome prediction models. There remains a need for a balanced framework that combines simplicity, modularity, and standardization for classification modelling with 3D medical data.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>We address these needs in the development of a framework that offers high modularity while retaining simplicity and standardization for deep learning (DL) development projects based on 3D medical imaging data: the PR3DICTR framework (<text font="bold">P</text>latform for <text font="bold">R</text>esearch in <text font="bold">3D</text> <text font="bold">I</text>mage <text font="bold">C</text>lassification and s<text font="bold">T</text>andardised tRaining). Through standardizing crucial tasks such as data loading, model training, hyper-parameter optimisation, and model evaluation, we aim to alleviate the development burden and increase consistency for and between scientists.</p>
+    </para>
+    <para xml:id="S1.p4">
+      <p>Additionally, the framework incorporates standard solutions for common medical data challenges, including missing value and imbalance handling, regularization using 3D image augmentation, and multi-modality imaging with optional input-specific preprocessing together with tabular data integration. Built in a modular fashion using standard PyTorch and MONAI components, the framework enables users to replace or extend individual workflow elements (such as custom image feature extractors) while providing an end-to-end solution for 3D medical image model development and evaluation that can be readily adapted to new prediction tasks.</p>
+    </para>
+<!--  %****␣main.tex␣Line␣150␣**** -->    <para xml:id="S1.p5">
+      <p>This paper describes the PR3DICTR framework and its application in an open-source dataset.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>Methods</title>
+    <para xml:id="S2.p1">
+      <p>The overall PR3DICTR workflow is depicted in Figure <ref labelref="LABEL:fig:overall_workflow"/>. The pipeline encompasses 1) data preprocessing, 2) image standardisation, 3) data organisation, 4) configuration setup, 5) model training, and 6) evaluation. These steps are described in detail in the following subsections. The complete code for PR3DICTR can be found at <ref class="ltx_url" font="typewriter" href="https://github.com/DLinRadiotherapyUMCG/PR3DICTR">https://github.com/DLinRadiotherapyUMCG/PR3DICTR</ref>.</p>
+    </para>
+    <figure inlist="lof" labels="LABEL:fig:overall_workflow" placement="H" xml:id="S2.F2">
+      <tags>
+        <tag><text fontsize="90%">Figure 2</text></tag>
+        <tag role="autoref">Figure 2</tag>
+        <tag role="refnum">2</tag>
+        <tag role="typerefnum">Figure 2</tag>
+      </tags>
+      <graphics candidates="Figures/Figure_2.png" class="ltx_centering" graphic="Figures/Figure_2.png" options="width=411.939pt" xml:id="S2.F2.g1"/>
+      <toccaption class="ltx_centering"><tag close=" ">2</tag>Overall PR3DICTR workflow. An example notebook for steps 1–3 can be found in the repository, and another notebook demonstrates steps 4–6.</toccaption>
+      <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 2</text></tag><text fontsize="90%">Overall PR3DICTR workflow. An example notebook for steps 1–3 can be found in the repository, and another notebook demonstrates steps 4–6.</text></caption>
+    </figure>
+    <subsection inlist="toc" xml:id="S2.SS1">
+      <tags>
+        <tag>2.1</tag>
+        <tag role="autoref">subsection 2.1</tag>
+        <tag role="refnum">2.1</tag>
+        <tag role="typerefnum">§2.1</tag>
+      </tags>
+      <title><tag close=" ">2.1</tag>Prerequisite: Data curation</title>
+      <para xml:id="S2.SS1.p1">
+        <p>Medical imaging data is highly varied, with a multitude of modalities (CT, PET, MRI, radiation dose, etc.), where each individual image modality usually has a different number of slices, intensity ranges and resolution. Deep-learning models typically require a consistent 3D input with fixed dimensions and intensities for effective training and inference.</p>
+      </para>
+      <para xml:id="S2.SS1.p2">
+        <p>Within this technical note, we distinguish between (1) dataset curation, which converts raw DICOM data into structured NumPy datasets, and (2) input preprocessing, which prepares curated data for model training via cropping, value clipping and normalization. The PR3DICTR framework includes only the latter and assumes that users have already curated their data into a (semi) standardized format, which is outlined in Figure <ref labelref="LABEL:fig:data_curation"/>.</p>
+      </para>
+      <para xml:id="S2.SS1.p3">
+        <p>Data curation consists of three steps:</p>
+        <enumerate xml:id="S2.I1">
+          <item xml:id="S2.I1.i1">
+            <tags>
+              <tag>1.</tag>
+              <tag role="autoref">item 1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">item 1</tag>
+            </tags>
+            <para xml:id="S2.I1.i1.p1">
+              <p><text font="bold">Preprocess clinical/tabular data (Figure <ref labelref="LABEL:fig:overall_workflow"/>, step 1).</text> The PR3DICTR framework requires a CSV file containing clinical data and endpoints for each patient. Three standardised columns are mandatory: <text font="typewriter">PatientID</text> (linking clinical and imaging data), <text font="typewriter">Split</text> (either <text font="typewriter">train_val</text> or <text font="typewriter">test</text>, indicating the set), and at least one column containing labels with which to train the model. Missing labels can be indicated using a missing indicator, for which the default is <text font="typewriter">-1</text>. During model training and evaluation, any endpoints set to <text font="typewriter">-1</text> will be ignored (for instance when calculating the loss or evaluation metrics). Furthermore, the CSV file can contain any tabular features to include as a model input (e.g. patient age). <break/></p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i2">
+            <tags>
+              <tag>2.</tag>
+              <tag role="autoref">item 2</tag>
+              <tag role="refnum">2</tag>
+              <tag role="typerefnum">item 2</tag>
+            </tags>
+            <para xml:id="S2.I1.i2.p1">
+              <p><text font="bold">Standardise 3D input data (Figure <ref labelref="LABEL:fig:overall_workflow"/>, step 2).</text> The PR3DICTR framework has two requirements for any 3D volumetric data to be used as model input. First, all volumetric data must be of the same dimension (i.e., size). Secondly, volume data is required to be stored as NumPy (<text font="typewriter">.npy</text>) files. It is also recommended in this step to crop the volumetric data to the same field-of-view (for example, so that CTs and MRIs for each patient are spatially aligned). <break/></p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i3">
+            <tags>
+              <tag>3.</tag>
+              <tag role="autoref">item 3</tag>
+              <tag role="refnum">3</tag>
+              <tag role="typerefnum">item 3</tag>
+            </tags>
+            <para xml:id="S2.I1.i3.p1">
+              <p><text font="bold">Save data into directory structure (Figure <ref labelref="LABEL:fig:overall_workflow"/>, step 3).</text> Once the volumetric data is prepared, it needs to be stored in a fixed folder structure based on the <text font="typewriter">PatientID</text>s. One main data folder should contain subfolders, one per <text font="typewriter">PatientID</text> in the dataset; these subfolders should then contain the volume data named per volume (for instance <text font="typewriter">data/PatientID001/PET.npy</text>, <text font="typewriter">data/PatientID001/CT.npy</text>, …), as illustrated in Figure <ref labelref="LABEL:fig:data_curation"/>. <break/></p>
+            </para>
+          </item>
+        </enumerate>
+<!--  %****␣main.tex␣Line␣175␣**** -->      </para>
+      <figure inlist="lof" labels="LABEL:fig:data_curation" placement="ht" xml:id="S2.F3">
+        <tags>
+          <tag><text fontsize="90%">Figure 3</text></tag>
+          <tag role="autoref">Figure 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Figure 3</tag>
+        </tags>
+        <graphics candidates="Figures/Figure_3.png" class="ltx_centering" graphic="Figures/Figure_3.png" options="width=325.215pt" xml:id="S2.F3.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">3</tag>Schematic of a data pre-processing pipeline for preparing datasets to be used in the PR3DICTR framework.</toccaption>
+        <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 3</text></tag><text fontsize="90%">Schematic of a data pre-processing pipeline for preparing datasets to be used in the PR3DICTR framework.</text></caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS2">
+      <tags>
+        <tag>2.2</tag>
+        <tag role="autoref">subsection 2.2</tag>
+        <tag role="refnum">2.2</tag>
+        <tag role="typerefnum">§2.2</tag>
+      </tags>
+      <title><tag close=" ">2.2</tag>Modularity</title>
+      <para xml:id="S2.SS2.p1">
+        <p>PR3DICTR is designed with a modular nature, allowing each component—data loading, model architecture, K-fold cross-validation and training, and evaluation—to be used independently or in combination for different research experiments. This flexible design enables researchers to swap, extend, or customize individual modules without affecting the rest of the pipeline, supporting rapid prototyping, reproducibility, and exploration of new methodologies. In the following subsections, we describe the main categories of modules in more detail.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS3">
+      <tags>
+        <tag>2.3</tag>
+        <tag role="autoref">subsection 2.3</tag>
+        <tag role="refnum">2.3</tag>
+        <tag role="typerefnum">§2.3</tag>
+      </tags>
+      <title><tag close=" ">2.3</tag>Framework &amp; user interaction</title>
+      <para xml:id="S2.SS3.p1">
+        <p>One of the aims of PR3DICTR is to simplify the development process for new 3D deep learning–based solutions to volume-based medical problems. This simplification is achieved primarily using configuration files (“configs”). When starting a new project, users prepare their dataset and a corresponding config file (Figure <ref labelref="LABEL:fig:overall_workflow"/>, step 4). Subsequently, only two lines of code are required: one to load the config and one to execute the experiment. The config is passed through the model training pipeline as a dictionary and contains all parameters required for training and evaluation.</p>
+      </para>
+      <para xml:id="S2.SS3.p2">
+        <p>The config file serves as the central hub for defining every aspect of the model definition and training setup, allowing users to modify hyperparameters and other settings with ease. Among other elements (see Table <ref labelref="LABEL:tab:options"/>), it specifies optional model input image preprocessing steps, data augmentations, model architecture and size, training hyperparameters, and evaluation metrics.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:code_flow" placement="ht" xml:id="S2.F4">
+        <tags>
+          <tag><text fontsize="90%">Figure 4</text></tag>
+          <tag role="autoref">Figure 4</tag>
+          <tag role="refnum">4</tag>
+          <tag role="typerefnum">Figure 4</tag>
+        </tags>
+<!--  %****␣main.tex␣Line␣200␣**** -->        <graphics candidates="Figures/Figure_4.png" class="ltx_centering" graphic="Figures/Figure_4.png" options="width=390.258pt" xml:id="S2.F4.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">4</tag>Code flow diagram of the PR3DICTR framework.</toccaption>
+        <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 4</text></tag><text fontsize="90%">Code flow diagram of the PR3DICTR framework.</text></caption>
+      </figure>
+      <para xml:id="S2.SS3.p3">
+        <p>Within the configuration system, PR3DICTR employs a Base Config (Figure <ref labelref="LABEL:fig:code_flow"/>), which provides default values for all possible parameters and acts as a general template. This ensures that users do not need to redefine every parameter for each new project, needing only to make a project-specific config. For example, a user who wishes to change only the model architecture can simply define that parameter in the project config, while the preprocessing and augmentation settings remain as specified in the Base Config.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS4">
+      <tags>
+        <tag>2.4</tag>
+        <tag role="autoref">subsection 2.4</tag>
+        <tag role="refnum">2.4</tag>
+        <tag role="typerefnum">§2.4</tag>
+      </tags>
+      <title><tag close=" ">2.4</tag>The PR3DICTR architecture</title>
+      <para xml:id="S2.SS4.p1">
+        <p>Models trained within the PR3DICTR framework consist of two main modules: an image encoder and an output module (Figure <ref labelref="LABEL:fig:architecture"/>). The image encoder serves as the backbone of the model, responsible for extracting image features from the input data. Through the configuration file, users can select the encoder architecture, such as a ResNet or DenseNet, from the currently implemented options (Table <ref labelref="LABEL:tab:options"/>). The encoder processes all input image modalities simultaneously. When multiple 3D modalities are provided (e.g., CT and PET), they are stacked along the channel dimension. Consequently, the model input tensor has the shape <Math mode="inline" tex="[B,C,H,W,D]" text="list@(B, C, H, W, D)" xml:id="S2.SS4.p1.m1">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="list"/>
+                  <XMRef idref="S2.SS4.p1.m1.1"/>
+                  <XMRef idref="S2.SS4.p1.m1.2"/>
+                  <XMRef idref="S2.SS4.p1.m1.3"/>
+                  <XMRef idref="S2.SS4.p1.m1.4"/>
+                  <XMRef idref="S2.SS4.p1.m1.5"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">[</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS4.p1.m1.1">B</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS4.p1.m1.2">C</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS4.p1.m1.3">H</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS4.p1.m1.4">W</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS4.p1.m1.5">D</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">]</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>, where <Math mode="inline" tex="B" text="B" xml:id="S2.SS4.p1.m2">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">B</XMTok>
+            </XMath>
+          </Math> denotes the batch size, <Math mode="inline" tex="C" text="C" xml:id="S2.SS4.p1.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">C</XMTok>
+            </XMath>
+          </Math> the number of channels (equal to the number of input modalities per patient), and <Math mode="inline" tex="H" text="H" xml:id="S2.SS4.p1.m4">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">H</XMTok>
+            </XMath>
+          </Math>, <Math mode="inline" tex="W" text="W" xml:id="S2.SS4.p1.m5">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">W</XMTok>
+            </XMath>
+          </Math>, and <Math mode="inline" tex="D" text="D" xml:id="S2.SS4.p1.m6">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">D</XMTok>
+            </XMath>
+          </Math> the height, width, and depth of the images, respectively.</p>
+      </para>
+      <para xml:id="S2.SS4.p2">
+        <p>The resulting feature map is then passed to the output module, which integrates the extracted image features with clinical (tabular) data via fully connected linear layers or by a ViT. This module is also highly configurable through the config file—for example, users can specify the number of linear layers, the layer at which clinical features are concatenated, and the dropout rate. The output module further supports multi-label classification. As demonstrated with two classes in Figure <ref labelref="LABEL:fig:architecture"/>, for each label (class) defined in the config, a corresponding output head is created. Each output head can comprise an independent set of linear layers, enabling label-specific representations that are not shared across outputs.</p>
+      </para>
+      <para xml:id="S2.SS4.p3">
+        <p>When only clinical features serve as input, model training can be performed using a multilayer perceptron (MLP). Hence, no image types should be specified in the config. Subsequently, the image feature encoder module will be empty. The MLP inherits the settings of the output module, except that the layers used to process image features are removed, enabling straightforward training with tabular inputs only.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:architecture" placement="H" xml:id="S2.F5">
+        <tags>
+          <tag><text fontsize="90%">Figure 5</text></tag>
+          <tag role="autoref">Figure 5</tag>
+          <tag role="refnum">5</tag>
+          <tag role="typerefnum">Figure 5</tag>
+        </tags>
+        <graphics candidates="Figures/Figure_5.png" class="ltx_centering" graphic="Figures/Figure_5.png" options="width=390.258pt" xml:id="S2.F5.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">5</tag>Outline of the classification model framework in PR3DICTR, for a hypothetical 2-label classification task.</toccaption>
+        <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 5</text></tag><text fontsize="90%">Outline of the classification model framework in PR3DICTR, for a hypothetical 2-label classification task.</text></caption>
+      </figure>
+<!--  %****␣main.tex␣Line␣225␣**** -->      <table inlist="lot" labels="LABEL:tab:options" xml:id="S2.T1">
+        <tags>
+          <tag><text fontsize="90%">Table 1</text></tag>
+          <tag role="autoref"><text fontsize="90%">Table 1</text></tag>
+          <tag role="refnum"><text fontsize="90%">1</text></tag>
+          <tag role="typerefnum"><text fontsize="90%">Table 1</text></tag>
+        </tags>
+        <caption fontsize="90%"><tag close=": ">Table 1</tag>Main options within the PR3DICTR framework modules.</caption>
+        <toccaption><tag close=" "><text fontsize="90%">1</text></tag><text fontsize="90%">Main options within the PR3DICTR framework modules.</text></toccaption>
+        <tabular>
+          <thead>
+            <tr>
+              <td align="justify" thead="column" width="69.4pt"/>
+              <td align="justify" thead="column" width="78.1pt"/>
+              <td align="justify" thead="column" width="251.5pt"/>
+            </tr>
+            <tr>
+              <td align="justify" border="tt" thead="column" width="69.4pt"><text class="ltx_align_left ltx_wrap" font="bold" fontsize="90%">Type</text></td>
+              <td align="justify" border="tt" thead="column" width="78.1pt"><text class="ltx_align_left ltx_wrap" font="bold" fontsize="90%">Options</text></td>
+              <td align="justify" border="tt" thead="column" width="251.5pt"><text class="ltx_align_left ltx_wrap" font="bold" fontsize="90%">Notes</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Image modalities</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">CT</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Standard planning or diagnostic CT used as anatomical input.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">PET</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Functional metabolic imaging; often co-registered with CT.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Radiation dose</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">3D dose distribution map, used in radiotherapy settings.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Segmentations</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Binary or multi-class masks for organs or targets; used as additional spatial priors.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">MRI</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Multi-sequence (T1, T2, etc.) structural or functional MRI.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Other</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Any additional volumetric image (e.g. perfusion, ADC, or synthetic images) can be added to the PR3DICTR framework.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Dataset types</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Standard</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Loads data directly from the disk on each epoch. Slowest for model training but consumes the least memory.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Cache</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Caches pre-processed (all non-random transforms) data in memory for faster training. Reduces epoch loading time but requires sufficient RAM.</text><!--  %****␣main.tex␣Line␣250␣**** --></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">SmartCache</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">A user-defined fraction of the dataset is cached in RAM rather than the whole dataset, balancing speed and memory usage.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Persistent</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Similar to CacheDataset, but caches deterministically transformed data on disk rather than in RAM.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Input preprocessing</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Value clipping and normalisation</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Clips the values of the image inputs to a range </text><Math class="ltx_align_left" mode="inline" tex="[a_{\min},a_{\max}]" text="closed-interval@(a _ minimum, a _ maximum)" xml:id="S2.T1.m1">
+                  <XMath>
+                    <XMDual>
+                      <XMApp>
+                        <XMTok meaning="closed-interval"/>
+                        <XMRef idref="S2.T1.m1.1"/>
+                        <XMRef idref="S2.T1.m1.2"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMTok fontsize="90%" role="OPEN" stretchy="false">[</XMTok>
+                        <XMApp xml:id="S2.T1.m1.1">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" fontsize="90%" role="UNKNOWN">a</XMTok>
+                          <XMTok fontsize="63%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="90%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S2.T1.m1.2">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" fontsize="90%" role="UNKNOWN">a</XMTok>
+                          <XMTok fontsize="63%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="90%" role="CLOSE" stretchy="false">]</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                  </XMath>
+                </Math><text fontsize="90%"> and normalises it to </text><Math class="ltx_align_left" mode="inline" tex="[b_{\min},b_{\max}]" text="closed-interval@(b _ minimum, b _ maximum)" xml:id="S2.T1.m2">
+                  <XMath>
+                    <XMDual>
+                      <XMApp>
+                        <XMTok meaning="closed-interval"/>
+                        <XMRef idref="S2.T1.m2.1"/>
+                        <XMRef idref="S2.T1.m2.2"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMTok fontsize="90%" role="OPEN" stretchy="false">[</XMTok>
+                        <XMApp xml:id="S2.T1.m2.1">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" fontsize="90%" role="UNKNOWN">b</XMTok>
+                          <XMTok fontsize="63%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="90%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S2.T1.m2.2">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" fontsize="90%" role="UNKNOWN">b</XMTok>
+                          <XMTok fontsize="63%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="90%" role="CLOSE" stretchy="false">]</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                  </XMath>
+                </Math><text fontsize="90%">. Example: CT clipped to [-200, 400] HU and normalised to [0,1].</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Value mapping</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Intended for categorical structures (e.g. organ contours). Allows selected structures to be assigned specific values while all others are set to 0.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Cropping</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Crops the image, using the centre point of the volume, to a fixed size.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Random transforms</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Cropping</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Randomly crops the images to a fixed size, using different centre-points.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Flipping</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Flips the 3D images horizontally (X axis), with a fixed probability of 50%.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Affine transformation</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Includes translation, scaling, and shear; preserves spatial relationships.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Rotation</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Random 3D rotation around multiple axes.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Noise</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Adds Gaussian noise to simulate acquisition variability.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">MixUp</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Uses the MixUp algorithm </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Zhang2018" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%"> to mix input-label pairs during training to improve generalisability and calibration.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Label types</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Binary</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Standard binary classification (e.g., yes/no).</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Event</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Time-to-event or survival endpoints. Requires two label columns, e.g. </text><text class="ltx_align_left" font="typewriter" fontsize="90%">X_event</text><text fontsize="90%"> and </text><text class="ltx_align_left" font="typewriter" fontsize="90%">X_{unit}</text><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Models</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">CNN</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Generic convolutional backbone for volumetric data. Number of layers and feature maps can be defined in the config.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ResNet</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Residual network for efficient gradient flow </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="He2015" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">. Sizes: ResNet-10, 18, 34, 50, 101, 152, and 200.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">DenseNet</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Dense connectivity for compact yet expressive feature extraction </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Huang2018" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">. Sizes: 121, 169, 201, and 264.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">EfficientNetV2</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Compact, high-performance CNN architecture using progressive scaling and fused convolutions </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Tan2021" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">. Variants: XS, S, M, L, XL.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ConvNeXt</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Modernised CNN with transformer-like design. Supports 3D ConvNeXt tiny, small, base, large, and xlarge.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ViT</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Vision Transformer operating directly on image patches </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Dosovitskiy2021" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">TransRP</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Hybrid CNN-ViT architecture where the CNN can be any of the other CNN-based architectures </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Ma2023" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">MLP</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Multilayer perceptron using only clinical features and no imaging features.</text><!--  %****␣main.tex␣Line␣275␣**** --></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Output module</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">N shared layers</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Number of shared linear layers following the flattening layer.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">N endpoint layers</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Number of non-shared linear layers per output head.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">N clinical layers</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Number of linear layers applied to clinical features before concatenation.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Clinical layers position</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Index of the shared linear layer at which clinical features are concatenated.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Linear layer sizes</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Size of each shared, endpoint, and clinical layer.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Loss functions</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">BCE</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Binary cross-entropy for standard classification.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Focal</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Down-weights easy examples; handles class imbalance.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Hill</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Hill loss for smooth probabilistic calibration in imbalanced settings.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ASL</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Asymmetric loss variant improving recall on minority classes.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">NLL</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Negative log-likelihood for survival/time-to-event models.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Optimisers</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Adam</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Adaptive moment estimation; strong general-purpose choice </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Kingma2017" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">AdamW</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Adam with decoupled weight decay for better regularisation </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Loshchilov2019" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">AdaBound</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Transitions from adaptive to SGD behaviour during training </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Luo2019" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">SGD</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Stochastic gradient descent; strong baseline with momentum.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Scheduler</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Cosine</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Cosine annealing schedule for smooth learning-rate decay.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Step</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Reduces the learning rate by a fixed factor at predefined intervals.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Plateau</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Lowers the learning rate when a monitored metric stops improving.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">None</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Uses a fixed learning rate throughout training.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Evaluation metrics</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">AUC</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Area under the ROC curve; threshold-independent classifier performance.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Accuracy</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Fraction of correct predictions at a fixed threshold or a Youden-J-derived threshold.</text><!--  %****␣main.tex␣Line␣300␣**** --></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">C-index</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Concordance index for survival/time-to-event predictions.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">F1-score</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Harmonic mean of precision and recall.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Precision</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Proportion of predicted positives that are true.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Recall</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Proportion of true positives correctly predicted.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ACE</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Adaptive calibration error </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Nixon2020" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ECE</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Expected calibration error </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Nixon2020" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">MCE</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Maximum calibration error </text><cite class="ltx_align_left ltx_citemacro_cite"><text fontsize="90%">[</text><bibref bibrefs="Nixon2020" separator="," yyseparator=","/><text fontsize="90%">]</text></cite><text fontsize="90%">.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Brier score</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Mean squared error of probabilistic predictions.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="t" width="69.4pt"><text fontsize="90%">Visualisations</text></td>
+              <td align="justify" border="t" width="78.1pt"><text fontsize="90%">Calibration plot</text></td>
+              <td align="justify" border="t" width="251.5pt"><text fontsize="90%">Plots predicted vs. observed probabilities for equal-frequency bins.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Reliability plot</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Similar to calibration plots, but uses fixed-width bins.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Confusion matrix</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Summarises TP, FP, FN, and TN counts.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">ROC curve</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Plots TPR vs. FPR across thresholds.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" width="69.4pt"/>
+              <td align="justify" width="78.1pt"><text fontsize="90%">Kaplan–Meier curve</text></td>
+              <td align="justify" width="251.5pt"><text fontsize="90%">Visualises survival probabilities across groups for event-based endpoints.</text></td>
+            </tr>
+            <tr>
+              <td align="justify" border="bb" width="69.4pt"/>
+              <td align="justify" border="bb" width="78.1pt"/>
+              <td align="justify" border="bb" width="251.5pt"/>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS5">
+      <tags>
+        <tag>2.5</tag>
+        <tag role="autoref">subsection 2.5</tag>
+        <tag role="refnum">2.5</tag>
+        <tag role="typerefnum">§2.5</tag>
+      </tags>
+      <title><tag close=" ">2.5</tag>Dataset, loaders and augmentation</title>
+      <para xml:id="S2.SS5.p1">
+        <p>A key component of the PR3DICTR framework is the data handling module, which manages dataset loading and data augmentation.</p>
+      </para>
+      <para xml:id="S2.SS5.p2">
+        <p>Image data augmentation in PR3DICTR occurs in two stages: deterministic and non-deterministic transforms. Deterministic transforms include all input preprocessing operations required to convert image files into model-ready inputs, such as cropping, windowing and scaling, the latter two of which can be specified per input channel (e.g. HU range for CT scans or SUV for PET scans). For segmentation data it is also possible to remap class values, for which a required intensity per segmentation needs to be given. This can be used to give more weight to certain structures. These deterministic transforms are applied consistently across all dataset splits. Non-deterministic transforms, by contrast, introduce stochastic variation and are typically applied only to the training set. They include operations such as random flipping, rotation, and the MixUp algorithm (see Table <ref labelref="LABEL:tab:options"/> for all options).</p>
+      </para>
+<!--  %****␣main.tex␣Line␣325␣**** -->      <para xml:id="S2.SS5.p3">
+        <p>Based on the configuration settings, the framework constructs a dataloader using one of four available MONAI Dataset interfaces, selected according to the user’s computational and hardware requirements (Table <ref labelref="LABEL:tab:options"/>). For example, the CacheDataset typically results in the shortest training epoch times but may require a very high amount of RAM when the training set consists of many large 3D images. In addition, the PR3DICTR dataloader includes a convenient <text font="typewriter">get_patient()</text> function, enabling retrieval of a specific patient’s data via their patient ID. This functionality is particularly useful for post hoc analyses and debugging.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS6">
+      <tags>
+        <tag>2.6</tag>
+        <tag role="autoref">subsection 2.6</tag>
+        <tag role="refnum">2.6</tag>
+        <tag role="typerefnum">§2.6</tag>
+      </tags>
+      <title><tag close=" ">2.6</tag>Training, hyperparameter optimization and experiments</title>
+      <para xml:id="S2.SS6.p1">
+        <p>As indicated in Figure <ref labelref="LABEL:fig:overall_workflow"/> (step 5), model training in PR3DICTR can be performed in two modes: a standard training mode or an experiment-based optimization mode. In the standard mode, a single K-fold cross-validation is conducted using the hyperparameters defined in the configuration file. The number of folds (<Math mode="inline" tex="K" text="K" xml:id="S2.SS6.p1.m1">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">K</XMTok>
+            </XMath>
+          </Math>) and the clinical variables used for stratified sampling are both configurable, ensuring balanced data splits across folds. This approach provides robust model evaluation while maintaining flexibility for different dataset characteristics and project requirements. For computational efficiency during the modelling exploration phase, users may also choose to train on only a subset of the generated folds—for example, running models on two or three of five folds—while still maintaining consistent fold definitions and reproducibility.</p>
+      </para>
+      <para xml:id="S2.SS6.p2">
+        <p>In the experiment-based mode, PR3DICTR integrates Optuna to perform automated hyperparameter optimization <cite class="ltx_citemacro_cite">[<bibref bibrefs="Akiba2019" separator="," yyseparator=","/>]</cite>. Optuna provides a search algorithm to automatically conduct hyperparameter space optimization, leading to converging optimisation rather than extensive grid search. Each experiment corresponds to one Optuna optimization run and consists of multiple trials, with each trial representing a unique combination of hyperparameters proposed by the search algorithm. Within each trial, PR3DICTR performs a complete K-fold cross-validation, identical in structure to the standard mode. The performance metrics from all folds are then aggregated to compute the trial’s objective value, which Optuna uses to guide subsequent trials toward improved hyperparameter configurations.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS7">
+      <tags>
+        <tag>2.7</tag>
+        <tag role="autoref">subsection 2.7</tag>
+        <tag role="refnum">2.7</tag>
+        <tag role="typerefnum">§2.7</tag>
+      </tags>
+      <title><tag close=" ">2.7</tag>Model training evaluation</title>
+      <para xml:id="S2.SS7.p1">
+        <p>For each fold of every trial within an experiment setup, a set of evaluation and logging files are stored. This includes a copy of the config, saved as a YAML file which enables quick recall of the settings used for the given model instance, as well as the model weights (optional), model predictions on all patients, and CSV files and plots for the model evaluation on the training and validation cohorts.</p>
+      </para>
+      <para xml:id="S2.SS7.p2">
+        <p>A set of standardised evaluation metrics and visualisation techniques are built into the PR3DICTR framework. These include a mix of classification and calibration metrics for both binary and event-based labels, as well as different visualisations of model performance. These metrics and visualisations are listed in Table <ref labelref="LABEL:tab:options"/> and are computed or plotted for each label class separately.</p>
+      </para>
+      <para xml:id="S2.SS7.p3">
+        <p>During training, Weights &amp; Biases (W&amp;B) integration provides automatic experiment tracking and visualization. Each fold within each trial is logged independently, including the loss and metrics on the training and validation set for each epoch. This enables detailed performance monitoring across folds, trials, and experiments, facilitating transparent comparisons and reproducible research.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS8">
+      <tags>
+        <tag>2.8</tag>
+        <tag role="autoref">subsection 2.8</tag>
+        <tag role="refnum">2.8</tag>
+        <tag role="typerefnum">§2.8</tag>
+      </tags>
+      <title><tag close=" ">2.8</tag>Model evaluation on the test set</title>
+      <para xml:id="S2.SS8.p1">
+        <p>For final evaluation on the test set (Figure <ref labelref="LABEL:fig:overall_workflow"/>, step 6), the PR3DICTR framework incorporates a post-hoc evaluation function, which retrieves the model weights from the folders saved during training, and runs a pass over the test set. The results on the test set are saved using the same evaluation metrics and visualisations as the train and validation set and are saved per fold (i.e. per model) as well as for the ensemble predictions. The choice to design the evaluation function in a post-hoc manner also facilitates simplified validation of final or existing deep learning models on external test sets; the same function can be applied over datasets from multiple different centres.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>Example use case</title>
+    <para xml:id="S3.p1">
+      <p>As an example, the PR3DICTR framework was trained and evaluated on a sex classification task on a newly retrieved dataset from The Cancer Imaging Archive: the NSCLC-Radiomics database by Aerts et al. <cite class="ltx_citemacro_cite">[<bibref bibrefs="Aerts2014" separator="," yyseparator=","/>]</cite>. Two example Jupyter notebooks are provided: one introduces the data preprocessing required (Figure <ref labelref="LABEL:fig:overall_workflow"/>, steps 1–3), and the other walks users through developing a model using the PR3DICTR framework (Figure <ref labelref="LABEL:fig:overall_workflow"/>, steps 4–6). The data consisted of thorax CT scans, segmentation masks of the lungs, and a CSV containing tabular data. The model used was the default ResNet model (ResNet-10) implemented in PR3DICTR and was able to produce a nearly perfect distinction between the sexes in the test set, with decent calibration. The example notebooks can be found at <ref class="ltx_url" font="typewriter" href="https://github.com/DLinRadiotherapyUMCG/PR3DICTR/tree/main/notebooks/01_LearningExamples">https://github.com/DLinRadiotherapyUMCG/PR3DICTR/tree/main/notebooks/01_LearningExamples</ref>.</p>
+    </para>
+<!--  %****␣main.tex␣Line␣350␣**** -->    <figure inlist="lof" labels="LABEL:fig:example_results" placement="htbp" xml:id="S3.F6">
+      <tags>
+        <tag><text fontsize="90%">Figure 6</text></tag>
+        <tag role="autoref">Figure 6</tag>
+        <tag role="refnum">6</tag>
+        <tag role="typerefnum">Figure 6</tag>
+      </tags>
+      <figure align="center" placement="b" xml:id="S3.F6.fig1">
+        <graphics candidates="Figures/Figure_6a.png" graphic="Figures/Figure_6a.png" options="width=433.62pt" xml:id="S3.F6.g1"/>
+<!--  %\caption{Left} -->      </figure>
+      <figure align="center" placement="b" xml:id="S3.F6.fig2">
+        <graphics candidates="Figures/Figure_6b.png" graphic="Figures/Figure_6b.png" options="width=433.62pt" xml:id="S3.F6.g2"/>
+<!--  %\caption{Right} -->      </figure>
+      <toccaption class="ltx_centering"><tag close=" ">6</tag>Confusion matrix and calibration plot for the sex prediction model produced using the PR3DICTR framework on the NSCLC-Radiomics database.</toccaption>
+      <caption class="ltx_centering"><tag close=": "><text fontsize="90%">Figure 6</text></tag><text fontsize="90%">Confusion matrix and calibration plot for the sex prediction model produced using the PR3DICTR framework on the NSCLC-Radiomics database.</text></caption>
+    </figure>
+  </section>
+  <section inlist="toc" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Discussion</title>
+    <para xml:id="S4.p1">
+      <p>The PR3DICTR framework has been developed to help streamline and standardize model development across a wide range of prediction and classification tasks based on 3D medical imaging, while being built with a highly modular design. By utilizing a user-adjustable configuration file, the framework enables straightforward customization of model parameters and hyperparameter tuning to suit specific tasks. Comprehensive guidelines for data preparation are provided to ensure compatibility and ease of use. A diverse set of model architectures, training, and evaluation options have been integrated into the modular design, allowing each model to be tailored precisely to its intended application. This flexibility positions the PR3DICTR framework as a robust and adaptable tool for research in deep learning classification applications using 3D medical imaging.</p>
+    </para>
+    <para xml:id="S4.p2">
+      <p>Simplification, accessible usability, and adaptability were central objectives in the development of the PR3DICTR framework. The framework eliminates the need to re-implement models from scratch for each new experiment, maintaining a consistent structure while allowing flexible modifications. Irrelevant components are abstracted away from the user, while configurable elements are integrated into configuration files. This design enables users with theoretical understanding to select options—such as model architectures, loss functions or optimization strategies—without needing to implement them manually, while still allowing for the option of adaptation when desired. Best performing models are automatically saved, and key performance metrics are readily accessible via structured CSV files and visualizations. Integration with Weights &amp; Biases facilitates experiment tracking and real-time monitoring of model training. Additionally, the inclusion of Optuna enables automated hyperparameter optimization within user-specified ranges, further streamlining the model development process. Collectively, these features contribute to a highly accessible and efficient workflow.
+<!--  %****␣main.tex␣Line␣375␣**** --></p>
+    </para>
+    <para xml:id="S4.p3">
+      <p>Operational standardization was another key aim of our framework, aimed at promoting transparency and repeatability in scientific research. By employing a consistent pipeline across experiments and potentially across related research projects within an organization, the framework ensures that methodological choices are clearly documented and easily traceable. Each trained model is accompanied by a saved configuration file, enabling transparency to replicate model training by the original researcher, collaborators, or external reviewers if needed. Evaluation metrics are automatically computed upon model completion and stored in a standardized format, facilitating reliable and straightforward comparisons across experiments. This emphasis on reproducibility and consistency strengthens the framework’s utility in rigorous research environments.</p>
+    </para>
+    <para xml:id="S4.p4">
+      <p>Modularity is the final foundational principle addressed by the PR3DICTR framework. The framework is organized into separate, interchangeable modules, enabling broad applicability across diverse tasks. Users can select which modules to include via a configuration file. For example, they can specify multiple input channels to enable multi-modal modelling with CT and PET scans or restrict the model to a single modality if desired. Different model architectures are also available, allowing both convolutional and transformer-based architectures to be integrated seamlessly. Furthermore, the PR3DICTR framework facilitates the fusion of tabular data within image models, further enhancing the multi-modality of trained models, and the ability to train non-image models (i.e. MLPs). Unlike frameworks such as MONAI, data loaders and training functions are pre-implemented, requiring users only to adjust key parameters, such as the number of cross-validation folds or epochs for early stopping. Model evaluation is similarly flexible, with a comprehensive set of methods available so users can choose the most appropriate metrics and visualisations for their application. Together, these features highlight the versatility and modularity of the PR3DICTR framework, making it adaptable to a wide range of modelling scenarios.</p>
+    </para>
+    <para xml:id="S4.p5">
+      <p>The PR3DICTR framework has been the result of our research focuses on developing deep learning–based normal tissue complication probability (NTCP) and outcome prediction models for radiotherapy using three-dimensional data, including 3D CT images, radiation dose distributions, and organ-at-risk contours. Within this setting, the PR3DICTR framework has been built towards standardization to improve the consistency and continency between projects. Prior to its adoption, our research group relied on multiple separate—albeit conceptually similar—implementations of deep learning (DL) NTCP model training code, for example in the development of DL xerostomia <cite class="ltx_citemacro_cite">[<bibref bibrefs="Chu2025" separator="," yyseparator=","/>]</cite> and DL dysphagia <cite class="ltx_citemacro_cite">[<bibref bibrefs="deVette2025" separator="," yyseparator=","/>]</cite> models. By adopting PR3DICTR as the basis for our ongoing work, we have been able to standardise model development pipelines across a wide range of applications, thereby reducing implementation-driven variability and facilitating more reliable comparisons between models, endpoints, and disease sites. This standardisation has enabled, for instance, the use of identical data-loading, training, and evaluation code across head and neck as well as lung cancer datasets, requiring only minimal changes to model configuration files. The config-driven design further improves transparency and reproducibility – for the researcher themselves as between researchers – by explicitly documenting all experiment-specific choices and enabling straightforward replication of models across projects. Moreover, the flexibility of these configuration files allows seamless switching between binary classification tasks, such as xerostomia <cite class="ltx_citemacro_cite">[<bibref bibrefs="Chu2025" separator="," yyseparator=","/>]</cite> and dysphagia <cite class="ltx_citemacro_cite">[<bibref bibrefs="deVette2025" separator="," yyseparator=","/>]</cite> prediction, and multi-endpoint models, including a multi-toxicity NTCP model <cite class="ltx_citemacro_cite">[<bibref bibrefs="MacRae2026" separator="," yyseparator=","/>]</cite>, while retaining the same core training and evaluation framework. As a result, methodological developments—such as architectural modifications, loss functions, or training strategies—can be rapidly propagated across projects without reimplementation. Finally, the modular design of PR3DICTR has provided a robust foundation for extending the framework with case-specific components, such as the incorporation of uncertainty quantification methods for DL NTCP models <cite class="ltx_citemacro_cite">[<bibref bibrefs="MacRae2025" separator="," yyseparator=","/>]</cite>, implemented as extensions to the core pipeline rather than standalone codebases. While the initial effort required to refactor legacy implementations into a unified framework was non-trivial, this was offset by substantial gains in maintainability, extensibility, and scalability, demonstrating that PR3DICTOR serves not only as a unifying framework for existing DL NTCP models but also as a foundation for future methodological development.</p>
+    </para>
+    <para xml:id="S4.p6">
+      <p>While the proposed framework introduces a modular and standardized approach to deep learning model development, certain challenges remain unaddressed. One notable limitation is the exact reproducibility of results. Although reproducibility was prioritized by saving detailed configuration files that include architecture specifications and hyperparameters for each model, minor discrepancies may still occur due to differences in hardware and floating-point rounding errors. These factors can lead to slight deviations in outcomes even when models are trained using identical configurations. Importantly, not all steps in the modelling pipeline can or should be fully standardised. In particular, pre-processing and post-processing often involve data-specific decisions that depend on the dataset, imaging protocol, endpoint, and clinical context. Although some of these choices may be partly arbitrary, they remain an important part of the modelling process and require careful consideration by the user. PR3DICTR standardises the overall framework and implementation structure, but does not eliminate the need for critical judgement in dataset-specific methodological choices. Furthermore, this framework does not aim to redefine the process or accessibility of DL model creation. Instead, it offers a streamlined and flexible structure that promotes consistency and reusability. We acknowledge that user preferences vary; some may favour highly abstracted, low-code environments, while others prefer granular control through code. Nevertheless, we believe this framework strikes a balance that appeals to a broad range of researchers, particularly those with a solid understanding of DL principles, who seek to accelerate model development without sacrificing transparency or flexibility.</p>
+    </para>
+    <para xml:id="S4.p7">
+      <p>Additional features are currently under development to enhance the framework’s capabilities. Multi-class classification can enable more complex prediction tasks and could be implemented as an extension of the existing single-class classification options, leveraging the modular architecture of the framework. Emerging research areas, such as model uncertainty quantification, will also be integrated in the near future. In clinical settings, quantifying uncertainty can support more informed decision-making and facilitate performance monitoring. Furthermore, visualization techniques, including attention maps, will be incorporated to improve interpretability and model transparency. Finally, we would like to extend reproducibility and standardisation through semi-automatic generation of model cards <cite class="ltx_citemacro_cite">[<bibref bibrefs="Barragn-Montero2025" separator="," yyseparator=","/>]</cite>, which report the primary information related to the training of models developed within PR3DICTR (e.g. hyperparameters, cohort sizes, etc.). Further potential additions include GUI components, including an interface to easily set up the config files. These advancements aim to strengthen the framework’s applicability across diverse domains and promote more robust, explainable AI solutions.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=" ">5</tag>Conclusion</title>
+    <para xml:id="S5.p1">
+      <p>The PR3DICTR-framework offers a modular, standardized, and user-friendly solution for developing 3D medical image-based deep learning models in prediction, detection or other classification tasks, streamlining both experimentation and reproducibility. Its design balances flexibility with simplicity, enabling researchers to efficiently build and evaluate models without sacrificing transparency or control. Ongoing enhancements, including support for multi-class classification, uncertainty estimation, and interpretability tools, aim to further expand its utility across diverse research and clinical applications.</p>
+    </para>
+<!--  %\section*{Acknowledgements} 
+     %TODO:␣Add␣acknowledgements
+     %\section*{Author␣contributions}
+     %%␣TODO:␣Add␣author␣contributions␣(e.g.,␣CRediT␣taxonomy)
+     %\printbibliography
+     %\bibliographystyle{unsrtnat}
+     %\bibliographystyle{ieeetr}
+     %****␣main.tex␣Line␣400␣****
+     %\bibliography{pr3dictr_bib}-->  </section>
+  <bibliography bibstyle="IEEEtran" citestyle="numbers" files="pr3dictr_bib" xml:id="bib">
+    <title>References</title>
+  </bibliography>
+<!--  %\bibliographystyle{unsrt} 
+     %\bibliography{pr3dictr_bib}-->  <rdf about="" content="D.C. MacRae, L. van der Hoek, R. van der Wal, S.P.M. de Vette, H. Neh, B. Ma, P.M.A. van Ooijen, L.V. van Dijk&#10;" property="dcterms:creator"/>
+  <rdf about="" content="PR3DICTR: Modular AI framework for medical 3D image-based detection and outcome prediction" property="dcterms:title"/>
+</document>

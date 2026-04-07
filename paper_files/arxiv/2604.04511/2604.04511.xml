@@ -1,0 +1,2306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.04511/latex_extracted"?>
+<!--  %This is samplepaper.tex, a sample chapter demonstrating the --><!--  %LLNCS macro package for Springer Computer Science proceedings; --><!--  %Version 2.21 of 2022/01/12 --><!--  %ADNI: n=200 --><!--  %Mammo: n=50 -¿ X --><?latexml class="llncs" options="runningheads"?>
+<?latexml package="fontenc" options="T1"?>
+<?latexml package="booktabs"?>
+<?latexml package="makecell"?>
+<?latexml package="amsmath"?>
+<?latexml package="graphicx"?>
+<?latexml package="url"?>
+<?latexml package="comment"?>
+<?latexml package="hyperref" options="hidelinks"?>
+<!--  %****␣main.tex␣Line␣25␣**** --><!--  %Used␣for␣displaying␣a␣sample␣figure.␣If␣possible,␣figure␣files␣should --><!--  %be␣included␣in␣EPS␣format. --><!--  %If␣you␣use␣the␣hyperref␣package,␣please␣uncomment␣the␣following␣two␣lines --><!--  %to␣display␣URLs␣in␣blue␣roman␣font␣according␣to␣Springer’s␣eBook␣style: --><!--  %\usepackage{color} --><!--  %\renewcommand\UrlFont{\color{blue}\rmfamily} --><!--  %\urlstyle{rm} --><?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>MedROI: Codec-Agnostic Region of Interest-Centric Compression for Medical Images</title>
+  <creator role="author">
+    <personname>Jiwon Kim<ERROR class="undefined">\orcidID</ERROR>0009-0000-0777-0305 </personname>
+    <contact role="institute">1Princeton University, Princeton NJ 08544, USA </contact>
+    <contact role="emailmark">1</contact>
+    <contact role="institute">ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany<break/><note mark="3" role="email">{abc,lncs}@uni-heidelberg.de</note></contact>
+    <contact role="institute">Division of Computer Engineering,
+Hankuk University of Foreign Studies, Yongin, Republic of Korea </contact>
+    <contact role="institute">Department of Computer Science and Engineering,
+Hankuk University of Foreign Studies, Seoul, Republic of Korea <break/><note mark="2" role="email">{harryy5981, ijang}@hufs.ac.kr</note>
+</contact>
+  </creator>
+  <creator before="  " role="author">
+    <personname>Ikbeom Jang<ERROR class="undefined">\orcidID</ERROR>0000-0002-6901-983X</personname>
+    <contact role="thanks">Corresponding author.</contact>
+    <contact role="institute">1Princeton University, Princeton NJ 08544, USA </contact>
+    <contact role="emailmark">1</contact>
+    <contact role="institute">2Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
+<break/><ref class="ltx_url" font="typewriter" href="http://www.springer.com/gp/computer-science/lncs">http://www.springer.com/gp/computer-science/lncs</ref> </contact>
+    <contact role="email">2lncs@springer.com</contact>
+    <contact role="institute">ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany<break/><note mark="3" role="email">{abc,lncs}@uni-heidelberg.de</note></contact>
+    <contact role="institute">Division of Computer Engineering,
+Hankuk University of Foreign Studies, Yongin, Republic of Korea </contact>
+    <contact role="institute">Department of Computer Science and Engineering,
+Hankuk University of Foreign Studies, Seoul, Republic of Korea <break/><note mark="2" role="email">{harryy5981, ijang}@hufs.ac.kr</note>
+</contact>
+  </creator>
+  <abstract name="Abstract">
+    <p>Medical imaging archives are growing rapidly in both size and resolution, making efficient compression increasingly important for storage and data transfer. Most existing codecs compress full images/volumes (including non-diagnostic background) or apply differential ROI coding that still preserves background bits. We propose <text font="italic">MedROI</text>, a codec-agnostic, plug-and-play ROI-centric framework that discards background voxels prior to compression. MedROI extracts a tight tissue bounding box via lightweight intensity-based thresholding and stores a fixed 54-byte metadata record to enable spatial restoration during decompression. The cropped ROI is then compressed using any existing 2D or 3D codec without architectural modifications or retraining.
+We evaluate MedROI on 200 T1-weighted brain MRI volumes from ADNI using 6 codec configurations spanning conventional codecs (JPEG2000 2D/3D, HEIF) and neural compressors (LIC_TCM, TCM+AuxT, BCM-Net, SirenMRI). MedROI yields statistically significant improvements in compression ratio and encoding/decoding time for most configurations (two-sided <text font="italic">t</text>-test with multiple-comparison correction), while maintaining comparable reconstruction quality when measured within the ROI; HEIF is the primary exception in compression-ratio gains. For example, on JPEG2000-2D (lv3), MedROI improves CR from 20.35 to 27.37 while reducing average compression time from 1.701 s to 1.380 s. Code is available at <ref class="ltx_url" font="typewriter" href="https://github.com/labhai/MedROI">https://github.com/labhai/MedROI</ref>.</p>
+<!--  %****␣main.tex␣Line␣75␣**** -->  </abstract>
+  <keywords name="Keywords">Medical image compression Region of interest Codec-agnostic framework Brain MRI Mammography</keywords>
+<!--  %If␣the␣paper␣title␣is␣too␣long␣for␣the␣running␣head,␣you␣can␣set 
+     %an␣abbreviated␣paper␣title␣here
+     %First␣names␣are␣abbreviated␣in␣the␣running␣head.
+     %If␣there␣are␣more␣than␣two␣authors,␣’et␣al.’␣is␣used.
+     %****␣main.tex␣Line␣50␣****
+     %typeset␣the␣header␣of␣the␣contribution
+     %본␣연구의␣강점
+     %다양한␣medical␣image␣processing␣분야에서␣image␣compression␣연구␣비교적␣underexplored␣이다.␣우리는␣이␣갭을␣채우겠다.
+     %압축률과␣압축시간␣모두␣개선함.
+     %codec-agnostic.␣plug-and-play
+     %Medical␣image␣compression␣remains␣underexplored;␣however,␣it␣is␣becoming␣increasingly␣important␣as␣dataset␣size␣and␣image␣resolution␣increase.␣Existing␣compression␣methods␣either␣process␣entire␣images/volumes␣(including␣the␣backgrounds)␣or␣use␣differential␣compression␣that␣still␣retains␣background␣data.
+     %We␣propose␣MedROI,␣a␣codec-agnostic␣region-of-interest␣(ROI)␣framework␣that␣focuses␣on␣the␣ROI␣containing␣tissue␣and␣assumes␣the␣background␣contains␣no␣information.␣We␣evaluate␣this␣framework␣on␣11␣existing␣image␣compression␣algorithms,␣demonstrating␣broad␣applicability␣across␣2D␣and␣3D␣image␣codecs.
+     %Experiments␣on␣brain␣MRI␣data␣from␣200␣subjects␣reveal␣that␣MedROI␣achieves␣a␣significantly␣higher␣compression␣ratio␣(CR)␣and␣significantly␣decreased␣compression␣and␣decompression␣times,␣with␣minimal-to-no␣degradation␣in␣image␣quality␣within␣the␣ROI␣in␣most␣codecs.␣For␣example,␣CR␣increases␣from␣20.4␣to␣27.4␣while␣compression␣time␣reduces␣from␣1.7␣to␣1.4␣seconds␣on␣average␣when␣applied␣to␣JPEG2000-lv3.
+     %This␣work␣establishes␣MedROI␣as␣a␣practical␣plug-and-play␣solution␣for␣storing␣and␣transferring␣large␣medical␣image␣datasets.␣Code␣is␣available␣at␣\url{https://github.com/labhai/MedROI}.-->  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <para xml:id="S1.p1">
+      <p>Medical imaging has become indispensable in modern healthcare, with data volumes experiencing rapid and continuous growth. An analysis of MICCAI conference proceedings from 2011 to 2019 shows that median dataset sizes increased by a factor of 3–10 depending on imaging modality, with annual growth rates of 21–31% <cite class="ltx_citemacro_cite">[<bibref bibrefs="Kiryati2021" separator="," yyseparator=","/>]</cite>. Among these modalities, brain MRI is particularly storage-intensive due to its high-resolution 3D volumetric nature, highlighting the need for efficient compression strategies.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>This growth in medical imaging volume poses significant economic and operational challenges for clinical institutions. Compression techniques must preserve diagnostically relevant details while maintaining clinically acceptable quality <cite class="ltx_citemacro_cite">[<bibref bibrefs="Tong2025" separator="," yyseparator=","/>]</cite>,<cite class="ltx_citemacro_cite">[<bibref bibrefs="Ig2017" separator="," yyseparator=","/>]</cite>. However, brain MRI volumes include large non-diagnostic background regions that contribute little to clinical interpretation but account for substantial storage overhead.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>Existing medical image compression research follows two dominant directions. Conventional full-volume compression methods apply uniform compression across the entire 3D volume using codecs such as JPEG2000 <cite class="ltx_citemacro_cite">[<bibref bibrefs="jpeg" separator="," yyseparator=","/>]</cite> or more recent neural compression models including TCM <cite class="ltx_citemacro_cite">[<bibref bibrefs="tcm" separator="," yyseparator=","/>]</cite> and BCM-Net <cite class="ltx_citemacro_cite">[<bibref bibrefs="bcm" separator="," yyseparator=","/>]</cite>. These methods process all voxels indiscriminately, allocating computational and storage resources to both tissue and empty background regions.</p>
+    </para>
+    <para xml:id="S1.p4">
+      <p>Alternatively, Region-of-Interest (ROI) based differential compression has been explored in recent work, <cite class="ltx_citemacro_cite">[<bibref bibrefs="Li2025" separator="," yyseparator=","/>]</cite>, <cite class="ltx_citemacro_cite">[<bibref bibrefs="Tong2025" separator="," yyseparator=","/>]</cite>. These methods preserve ROIs with lossless or high-quality compression while applying aggressive lossy compression to the background. For example, wavelet-based differential techniques <cite class="ltx_citemacro_cite">[<bibref bibrefs="Rosaline2024" separator="," yyseparator=","/>]</cite> maintain quality in tissue regions while compressing surrounding areas at lower bitrates. Nevertheless, these methods still retain background data in compressed form, resulting in unnecessary storage usage for non-diagnostic regions.</p>
+    </para>
+    <para xml:id="S1.p5">
+      <p>Both approaches, however, present opportunities for further storage optimization. Full-volume methods allocate compression resources uniformly across the entire volume regardless of clinical relevance, while differential ROI approaches still retain background data in compressed form. In clinical workflows where only tissue-containing regions are diagnostically necessary, complete removal of background voxels prior to compression offers a more storage-efficient alternative.</p>
+    </para>
+    <para xml:id="S1.p6">
+      <p>To address these limitations, we propose MedROI, a codec-agnostic ROI-based compression framework (fig. <ref labelref="LABEL:fig:method"/>) that extracts compact bounding boxes surrounding brain tissue, effectively eliminating background regions prior to compression. The framework stores lightweight metadata (54 bytes) sufficient for spatial reconstruction and applies compression exclusively to tissue-containing voxels. Importantly, MedROI integrates seamlessly with conventional codecs, 3D volumetric methods, and 2D neural compression models without requiring architectural modifications, enabling easy deployment across diverse clinical environments. The contributions of this work are threefold:</p>
+      <itemize xml:id="S1.I1">
+        <item xml:id="S1.I1.i1">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">1st item</tag>
+          </tags>
+          <para xml:id="S1.I1.i1.p1">
+            <p>We introduce MedROI, a generalizable ROI-based compression framework applicable to diverse compression algorithms spanning conventional codecs, 3D volumetric methods, and 2D neural networks.</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i2">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">2nd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i2.p1">
+            <p>We present a systematic evaluation across six compression algorithms (JPEG2000 3D/2D, SirenMRI, HEIF, BCM-Net, TCM, TCM+AuxT) on the ADNI brain MRI dataset, showing that MedROI provides consistent compression gains across both conventional and neural codecs.</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i3">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">3rd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i3.p1">
+            <p>We demonstrate that combining MedROI with the TCM neural codec achieves 81.3:1 compression ratio while maintaining clinically acceptable image quality.</p>
+          </para>
+        </item>
+      </itemize>
+    </para>
+<!--  %****␣main.tex␣Line␣100␣**** -->  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>Related Work</title>
+    <subsection inlist="toc" xml:id="S2.SS1">
+      <tags>
+        <tag>2.1</tag>
+        <tag role="autoref">subsection 2.1</tag>
+        <tag role="refnum">2.1</tag>
+        <tag role="typerefnum">§2.1</tag>
+      </tags>
+      <title><tag close=" ">2.1</tag>Medical Image Compression</title>
+      <paragraph inlist="toc" xml:id="S2.SS1.SSS0.Px1">
+        <title/>
+        <para xml:id="S2.SS1.SSS0.Px1.p1">
+          <p>Medical image compression methods can be categorized based on their dimensionality. 3D volumetric approaches process entire volumes to exploit inter-slice correlations. JPEG2000 3D extends the standard JPEG2000 codec to 3D wavelet transforms, enabling compression across spatial dimensions. SirenMRI [siren] leverages sinusoidal activation networks to learn continuous implicit representations of 3D MRI volumes, demonstrating effective compression while preserving structural continuity.</p>
+        </para>
+      </paragraph>
+      <paragraph inlist="toc" xml:id="S2.SS1.SSS0.Px2">
+        <title/>
+        <para xml:id="S2.SS1.SSS0.Px2.p1">
+          <p>2D compression methods process medical images slice-by-slice. Conventional codecs include JPEG2000 2D <cite class="ltx_citemacro_cite">[<bibref bibrefs="jpeg" separator="," yyseparator=","/>]</cite> and HEIF <cite class="ltx_citemacro_cite">[<bibref bibrefs="heif" separator="," yyseparator=","/>]</cite>, which are widely adopted standard-based approaches. Recent deep learning methods have achieved state-of-the-art performance, including TCM <cite class="ltx_citemacro_cite">[<bibref bibrefs="tcm" separator="," yyseparator=","/>]</cite>, which combines transformer-based context modeling with CNN encoders for learned image compression, TCM+AuxT <cite class="ltx_citemacro_cite">[<bibref bibrefs="tcm+auxt" separator="," yyseparator=","/>]</cite>, which introduces disentangled training with auxiliary transformers to improve rate-distortion performance and BCM-Net <cite class="ltx_citemacro_cite">[<bibref bibrefs="bcm" separator="," yyseparator=","/>]</cite>, which applies bilateral context modeling to enhance 3D medical image compression through improved 2D slice processing.</p>
+        </para>
+      </paragraph>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS2">
+      <tags>
+        <tag>2.2</tag>
+        <tag role="autoref">subsection 2.2</tag>
+        <tag role="refnum">2.2</tag>
+        <tag role="typerefnum">§2.2</tag>
+      </tags>
+      <title><tag close=" ">2.2</tag>ROI-based Compression</title>
+      <para xml:id="S2.SS2.p1">
+        <p>Prior work on ROI-based compression has primarily focused on differential compression strategies, where diagnostically important regions receive higher quality encoding while background regions are compressed at lower rates <cite class="ltx_citemacro_cite">[<bibref bibrefs="Ting2015" separator="," yyseparator=","/>]</cite>, <cite class="ltx_citemacro_cite">[<bibref bibrefs="Li2025" separator="," yyseparator=","/>]</cite>. JPEG2000 provides built-in ROI modes such as Maxshift and scaling-based encoding <cite class="ltx_citemacro_cite">[<bibref bibrefs="jpeg" separator="," yyseparator=","/>]</cite>. However, these approaches retain background information at reduced quality, limiting potential compression gains. Unlike prior methods that apply differential quality, our MedROI framework completely removes background regions, enabling a fundamentally different compression paradigm. This approach has not been systematically explored across diverse compression algorithms, particularly regarding algorithm-dependent effectiveness.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS3">
+      <tags>
+        <tag>2.3</tag>
+        <tag role="autoref">subsection 2.3</tag>
+        <tag role="refnum">2.3</tag>
+        <tag role="typerefnum">§2.3</tag>
+      </tags>
+      <title><tag close=" ">2.3</tag>Quality Requirements for Medical Images</title>
+      <para xml:id="S2.SS3.p1">
+        <p>Quality assessment in medical image compression requires balancing compression efficiency with diagnostic utility. Recent studies have demonstrated that lossy compression with PSNR values ranging from 30 to 42 dB is acceptable for various medical imaging tasks <cite class="ltx_citemacro_cite">[<bibref bibrefs="Shei2025" separator="," yyseparator=","/>]</cite>and PSNR values around 30 dB are commonly used as a practical reference point for visually and diagnostically meaningful reconstructions <cite class="ltx_citemacro_cite">[<bibref bibrefs="Prakash2021" separator="," yyseparator=","/>]</cite>, <cite class="ltx_citemacro_cite">[<bibref bibrefs="Baiee2024" separator="," yyseparator=","/>]</cite>. Professional organizations provide varying recommendations for brain imaging: the German Roentgen Society suggests 5:1 compression for brain CT, while the Royal College of Radiologists recommends 5:1 for MRI <cite class="ltx_citemacro_cite">[<bibref bibrefs="Liu2017" separator="," yyseparator=","/>]</cite>. These guidelines reflect the diagnostic importance of neuroimaging, though specific PSNR thresholds vary by application. In this work, we adopt a PSNR of 30 dB or higher as our quality criterion, consistent with recent literature.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>Methods</title>
+    <subsection inlist="toc" xml:id="S3.SS1">
+      <tags>
+        <tag>3.1</tag>
+        <tag role="autoref">subsection 3.1</tag>
+        <tag role="refnum">3.1</tag>
+        <tag role="typerefnum">§3.1</tag>
+      </tags>
+      <title><tag close=" ">3.1</tag>ROI Extraction</title>
+      <subsubsection inlist="toc" xml:id="S3.SS1.SSS1">
+        <tags>
+          <tag>3.1.1</tag>
+          <tag role="autoref">subsubsection 3.1.1</tag>
+          <tag role="refnum">3.1.1</tag>
+          <tag role="typerefnum">§3.1.1</tag>
+        </tags>
+        <title><tag close=" ">3.1.1</tag>Preprocessing and Thresholding</title>
+        <para xml:id="S3.SS1.SSS1.p1">
+          <p>We extracted brain regions from MRI volumes using an intensity-based thresholding strategy. For each volume, we first computed the mean intensity of all non-zero voxels, denoted as <Math mode="inline" tex="\Omega_{\mathrm{nz}}" text="Omega _ nz" xml:id="S3.SS1.SSS1.p1.m1">
+              <XMath>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMTok name="Omega" role="UNKNOWN">Ω</XMTok>
+                  <XMTok fontsize="70%" role="UNKNOWN">nz</XMTok>
+                </XMApp>
+              </XMath>
+            </Math>, and defined the threshold <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS1.SSS1.p1.m2">
+              <XMath>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+              </XMath>
+            </Math> as:</p>
+          <equation xml:id="S3.Ex1">
+            <Math mode="display" tex="\tau=\frac{1}{|\Omega_{\mathrm{nz}}|}\sum_{x\in\Omega_{\mathrm{nz}}}I(x)." text="tau = (1 / absolute-value@(Omega _ nz)) * (sum _ (x element-of Omega _ nz))@(I * x)" xml:id="S3.Ex1.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex1.m1.3"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex1.m1.3">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                          <XMTok meaning="1" role="NUMBER">1</XMTok>
+                          <XMDual>
+                            <XMApp>
+                              <XMTok meaning="absolute-value"/>
+                              <XMRef idref="S3.Ex1.m1.1"/>
+                            </XMApp>
+                            <XMWrap>
+                              <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                              <XMApp xml:id="S3.Ex1.m1.1">
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                                <XMTok name="Omega" role="UNKNOWN">Ω</XMTok>
+                                <XMTok fontsize="70%" role="UNKNOWN">nz</XMTok>
+                              </XMApp>
+                              <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                        <XMApp>
+                          <XMApp scriptpos="mid">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                            <XMTok mathstyle="display" meaning="sum" role="SUMOP" scriptpos="mid">∑</XMTok>
+                            <XMApp>
+                              <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                                <XMTok fontsize="70%" name="Omega" role="UNKNOWN">Ω</XMTok>
+                                <XMTok fontsize="50%" role="UNKNOWN">nz</XMTok>
+                              </XMApp>
+                            </XMApp>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                            <XMDual>
+                              <XMRef idref="S3.Ex1.m1.2"/>
+                              <XMWrap>
+                                <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                <XMTok font="italic" role="UNKNOWN" xml:id="S3.Ex1.m1.2">x</XMTok>
+                                <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                              </XMWrap>
+                            </XMDual>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PERIOD">.</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+        </para>
+        <para xml:id="S3.SS1.SSS1.p2">
+          <p>Voxels with intensities greater than or equal to this threshold were classified as brain tissue, forming the set:</p>
+          <equation xml:id="S3.Ex2">
+            <Math mode="display" tex="S=\{\,x\mid I(x)\geq\tau\,\}." text="S = conditional-set@(x, I * x &gt;= tau)" xml:id="S3.Ex2.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex2.m1.3"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex2.m1.3">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="conditional-set"/>
+                          <XMRef idref="S3.Ex2.m1.2"/>
+                          <XMRef idref="S3.Ex2.m1.3.1"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" rpadding="1.7pt" stretchy="false">{</XMTok>
+                          <XMTok font="italic" role="UNKNOWN" xml:id="S3.Ex2.m1.2">x</XMTok>
+                          <XMTok name="mid" role="VERTBAR">∣</XMTok>
+                          <XMApp xml:id="S3.Ex2.m1.3.1">
+                            <XMTok meaning="greater-than-or-equals" name="geq" role="RELOP">≥</XMTok>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                              <XMDual>
+                                <XMRef idref="S3.Ex2.m1.1"/>
+                                <XMWrap>
+                                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.Ex2.m1.1">x</XMTok>
+                                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                            <XMTok font="italic" name="tau" role="UNKNOWN" rpadding="1.7pt">τ</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">}</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                    <XMTok role="PERIOD">.</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+        </para>
+        <para xml:id="S3.SS1.SSS1.p3">
+          <p>A 3D axis-aligned bounding box <Math mode="inline" tex="\mathcal{B}=(x_{\min},x_{\max},y_{\min},y_{\max},z_{\min},z_{\max})" text="B = vector@(x _ minimum, x _ maximum, y _ minimum, y _ maximum, z _ minimum, z _ maximum)" xml:id="S3.SS1.SSS1.p3.m1">
+              <XMath>
+                <XMApp>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+                  <XMDual>
+                    <XMApp>
+                      <XMTok meaning="vector"/>
+                      <XMRef idref="S3.SS1.SSS1.p3.m1.1"/>
+                      <XMRef idref="S3.SS1.SSS1.p3.m1.2"/>
+                      <XMRef idref="S3.SS1.SSS1.p3.m1.3"/>
+                      <XMRef idref="S3.SS1.SSS1.p3.m1.4"/>
+                      <XMRef idref="S3.SS1.SSS1.p3.m1.5"/>
+                      <XMRef idref="S3.SS1.SSS1.p3.m1.6"/>
+                    </XMApp>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S3.SS1.SSS1.p3.m1.1">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                      </XMApp>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMApp xml:id="S3.SS1.SSS1.p3.m1.2">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                      </XMApp>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMApp xml:id="S3.SS1.SSS1.p3.m1.3">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                        <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                      </XMApp>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMApp xml:id="S3.SS1.SSS1.p3.m1.4">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                        <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                      </XMApp>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMApp xml:id="S3.SS1.SSS1.p3.m1.5">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                        <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                      </XMApp>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMApp xml:id="S3.SS1.SSS1.p3.m1.6">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                        <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                </XMApp>
+              </XMath>
+            </Math> was then computed by taking the minimum and maximum coordinates over all elements in <Math mode="inline" tex="S" text="S" xml:id="S3.SS1.SSS1.p3.m2">
+              <XMath>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+              </XMath>
+            </Math>:</p>
+          <equation xml:id="S3.Ex3">
+            <Math mode="display" tex="x_{\min}=\min_{x\in S}x_{x},\quad x_{\max}=\max_{x\in S}x_{x}," text="formulae@(x _ minimum = (minimum _ (x element-of S))@(x _ x), x _ maximum = (maximum _ (x element-of S))@(x _ x))" xml:id="S3.Ex3.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex3.m1.1"/>
+                  <XMWrap>
+                    <XMDual xml:id="S3.Ex3.m1.1">
+                      <XMApp>
+                        <XMTok meaning="formulae"/>
+                        <XMRef idref="S3.Ex3.m1.1.1"/>
+                        <XMRef idref="S3.Ex3.m1.1.2"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMApp xml:id="S3.Ex3.m1.1.1">
+                          <XMTok meaning="equals" role="RELOP">=</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                            <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok meaning="minimum" role="OPFUNCTION" scriptpos="mid">min</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                        <XMApp xml:id="S3.Ex3.m1.1.2">
+                          <XMTok meaning="equals" role="RELOP">=</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                            <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok meaning="maximum" role="OPFUNCTION" scriptpos="mid">max</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                      </XMWrap>
+                    </XMDual>
+                    <XMTok role="PUNCT">,</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+          <equation xml:id="S3.Ex4">
+            <Math mode="display" tex="y_{\min}=\min_{x\in S}x_{y},\quad y_{\max}=\max_{x\in S}x_{y}," text="formulae@(y _ minimum = (minimum _ (x element-of S))@(x _ y), y _ maximum = (maximum _ (x element-of S))@(x _ y))" xml:id="S3.Ex4.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex4.m1.1"/>
+                  <XMWrap>
+                    <XMDual xml:id="S3.Ex4.m1.1">
+                      <XMApp>
+                        <XMTok meaning="formulae"/>
+                        <XMRef idref="S3.Ex4.m1.1.1"/>
+                        <XMRef idref="S3.Ex4.m1.1.2"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMApp xml:id="S3.Ex4.m1.1.1">
+                          <XMTok meaning="equals" role="RELOP">=</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                            <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok meaning="minimum" role="OPFUNCTION" scriptpos="mid">min</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                        <XMApp xml:id="S3.Ex4.m1.1.2">
+                          <XMTok meaning="equals" role="RELOP">=</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                            <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok meaning="maximum" role="OPFUNCTION" scriptpos="mid">max</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                      </XMWrap>
+                    </XMDual>
+                    <XMTok role="PUNCT">,</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+<!--  %****␣main.tex␣Line␣125␣**** -->          <equation xml:id="S3.Ex5">
+            <Math mode="display" tex="z_{\min}=\min_{x\in S}x_{z},\quad z_{\max}=\max_{x\in S}x_{z}." text="formulae@(z _ minimum = (minimum _ (x element-of S))@(x _ z), z _ maximum = (maximum _ (x element-of S))@(x _ z))" xml:id="S3.Ex5.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex5.m1.1"/>
+                  <XMWrap>
+                    <XMDual xml:id="S3.Ex5.m1.1">
+                      <XMApp>
+                        <XMTok meaning="formulae"/>
+                        <XMRef idref="S3.Ex5.m1.1.1"/>
+                        <XMRef idref="S3.Ex5.m1.1.2"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMApp xml:id="S3.Ex5.m1.1.1">
+                          <XMTok meaning="equals" role="RELOP">=</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                            <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok meaning="minimum" role="OPFUNCTION" scriptpos="mid">min</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">z</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                        <XMApp xml:id="S3.Ex5.m1.1.2">
+                          <XMTok meaning="equals" role="RELOP">=</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                            <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok meaning="maximum" role="OPFUNCTION" scriptpos="mid">max</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">S</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">z</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                      </XMWrap>
+                    </XMDual>
+                    <XMTok role="PERIOD">.</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+        </para>
+        <para xml:id="S3.SS1.SSS1.p4">
+          <p>To ensure complete brain coverage, we applied adaptive padding when the initial bounding box showed potential tissue loss. Specifically, if it misses more than 0.2% of the brain tissue (miss rate &gt; 0.002), we expanded <Math mode="inline" tex="\mathcal{B}" text="B" xml:id="S3.SS1.SSS1.p4.m1">
+              <XMath>
+                <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+              </XMath>
+            </Math> by 3 pixels in all directions:</p>
+          <equation xml:id="S3.Ex6">
+            <Math mode="display" tex="\mathcal{B}_{\text{padded}}=(x_{\min}-3,x_{\max}+3,y_{\min}-3,y_{\max}+3,z_{%&#10;\min}-3,z_{\max}+3)." text="B _ [padded] = vector@(x _ minimum - 3, x _ maximum + 3, y _ minimum - 3, y _ maximum + 3, z _ minimum - 3, z _ maximum + 3)" xml:id="S3.Ex6.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex6.m1.1"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex6.m1.1">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+                        <XMText><text fontsize="70%">padded</text></XMText>
+                      </XMApp>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="vector"/>
+                          <XMRef idref="S3.Ex6.m1.1.1"/>
+                          <XMRef idref="S3.Ex6.m1.1.2"/>
+                          <XMRef idref="S3.Ex6.m1.1.3"/>
+                          <XMRef idref="S3.Ex6.m1.1.4"/>
+                          <XMRef idref="S3.Ex6.m1.1.5"/>
+                          <XMRef idref="S3.Ex6.m1.1.6"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp xml:id="S3.Ex6.m1.1.1">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                            </XMApp>
+                            <XMTok meaning="3" role="NUMBER">3</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.Ex6.m1.1.2">
+                            <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                              <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                            </XMApp>
+                            <XMTok meaning="3" role="NUMBER">3</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.Ex6.m1.1.3">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                              <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                            </XMApp>
+                            <XMTok meaning="3" role="NUMBER">3</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.Ex6.m1.1.4">
+                            <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                              <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                            </XMApp>
+                            <XMTok meaning="3" role="NUMBER">3</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.Ex6.m1.1.5">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                              <XMTok fontsize="70%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                            </XMApp>
+                            <XMTok meaning="3" role="NUMBER">3</XMTok>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                          <XMApp xml:id="S3.Ex6.m1.1.6">
+                            <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                              <XMTok fontsize="70%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                            </XMApp>
+                            <XMTok meaning="3" role="NUMBER">3</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                    <XMTok role="PERIOD">.</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+        </para>
+        <para xml:id="S3.SS1.SSS1.p5">
+          <p>This conservative strategy achieved an average miss rate of <Math mode="inline" tex="7.92\times 10^{-6}" text="7.92 * 10 ^ (- 6)" xml:id="S3.SS1.SSS1.p5.m1">
+              <XMath>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">×</XMTok>
+                  <XMTok meaning="7.92" role="NUMBER">7.92</XMTok>
+                  <XMApp>
+                    <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                    <XMTok meaning="10" role="NUMBER">10</XMTok>
+                    <XMApp>
+                      <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok fontsize="70%" meaning="6" role="NUMBER">6</XMTok>
+                    </XMApp>
+                  </XMApp>
+                </XMApp>
+              </XMath>
+            </Math>
+(<Math mode="inline" tex="0.0008\%" text="0.0008percent" xml:id="S3.SS1.SSS1.p5.m2">
+              <XMath>
+                <XMApp>
+                  <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                  <XMTok meaning="0.0008" role="NUMBER">0.0008</XMTok>
+                </XMApp>
+              </XMath>
+            </Math>), with a maximum miss rate of <Math mode="inline" tex="0.021" text="0.021" xml:id="S3.SS1.SSS1.p5.m3">
+              <XMath>
+                <XMTok meaning="0.021" role="NUMBER">0.021</XMTok>
+              </XMath>
+            </Math> (<Math mode="inline" tex="2.1\%" text="2.1percent" xml:id="S3.SS1.SSS1.p5.m4">
+              <XMath>
+                <XMApp>
+                  <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                  <XMTok meaning="2.1" role="NUMBER">2.1</XMTok>
+                </XMApp>
+              </XMath>
+            </Math>) in the
+worst case.</p>
+        </para>
+<!--  %*3D␣brain␣visualizations␣generated␣using␣Nano␣Banana␣for␣illustration␣purposes. -->      </subsubsection>
+      <subsubsection inlist="toc" labels="LABEL:sec:roi_metadata" xml:id="S3.SS1.SSS2">
+        <tags>
+          <tag>3.1.2</tag>
+          <tag role="autoref">subsubsection 3.1.2</tag>
+          <tag role="refnum">3.1.2</tag>
+          <tag role="typerefnum">§3.1.2</tag>
+        </tags>
+        <title><tag close=" ">3.1.2</tag>Metadata Design</title>
+        <para xml:id="S3.SS1.SSS2.p1">
+          <p>To enable reconstruction of the full-volume image from compressed ROI data,
+we design a fixed-length metadata structure <Math mode="inline" tex="M" text="M" xml:id="S3.SS1.SSS2.p1.m1">
+              <XMath>
+                <XMTok font="italic" role="UNKNOWN">M</XMTok>
+              </XMath>
+            </Math> with a total size of 54 bytes.
+This metadata encodes the spatial location of the ROI and the geometric
+information of the original volume, and consists of three components.
+The type, size, and role of each component are summarized in
+Table <ref labelref="LABEL:tab:metadata"/>.</p>
+        </para>
+        <para xml:id="S3.SS1.SSS2.p2">
+          <p>Since all images in the ADNI dataset have spatial dimensions smaller than
+256 voxels along each axis, spatial coordinates and original volume dimensions
+are stored as int16 to minimize storage overhead. For the affine transformation,
+only the rotation–scaling component is stored using float32 to preserve
+sufficient numerical precision. The translation component is implicitly
+<!--  %****␣main.tex␣Line␣150␣**** -->recoverable from the bounding box coordinates and the original volume shape,
+thereby avoiding redundant storage.</p>
+        </para>
+        <para xml:id="S3.SS1.SSS2.p3">
+          <p>This 54-byte metadata overhead is included in ROI mode compression
+calculations, as detailed in Section <ref labelref="LABEL:sec:MedROI_framework"/>.</p>
+        </para>
+        <table inlist="lot" labels="LABEL:tab:metadata" placement="t" xml:id="S3.T1">
+          <tags>
+            <tag><text fontsize="80%">Table 1</text></tag>
+            <tag role="autoref"><text fontsize="80%">Table 1</text></tag>
+            <tag role="refnum"><text fontsize="80%">1</text></tag>
+            <tag role="typerefnum"><text fontsize="80%">Table 1</text></tag>
+          </tags>
+          <toccaption class="ltx_centering"><tag close=" "><text fontsize="80%">1</text></tag><text fontsize="80%">Metadata structure for ROI-based reconstruction.</text></toccaption>
+          <caption class="ltx_centering" fontsize="80%"><tag close=": ">Table 1</tag>Metadata structure for ROI-based reconstruction.</caption>
+          <tabular class="ltx_centering" vattach="middle">
+            <tr>
+              <td align="left" border="tt"><text font="bold" fontsize="80%">Component</text></td>
+              <td align="left" border="tt"><text font="bold" fontsize="80%">Fields</text></td>
+              <td align="left" border="tt"><text font="bold" fontsize="80%">Type</text></td>
+              <td align="left" border="tt"><text font="bold" fontsize="80%">Size (bytes)</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">Bounding Box</text></td>
+              <td align="left" border="t"><Math mode="inline" tex="\left(x_{\min},x_{\max},y_{\min},y_{\max},z_{\min},z_{\max}\right)" text="vector@(x _ minimum, x _ maximum, y _ minimum, y _ maximum, z _ minimum, z _ maximum)" xml:id="S3.T1.m1">
+                  <XMath>
+                    <XMDual>
+                      <XMApp>
+                        <XMTok meaning="vector"/>
+                        <XMRef idref="S3.T1.m1.1"/>
+                        <XMRef idref="S3.T1.m1.2"/>
+                        <XMRef idref="S3.T1.m1.3"/>
+                        <XMRef idref="S3.T1.m1.4"/>
+                        <XMRef idref="S3.T1.m1.5"/>
+                        <XMRef idref="S3.T1.m1.6"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMTok fontsize="80%" role="OPEN" stretchy="true">(</XMTok>
+                        <XMApp xml:id="S3.T1.m1.1">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" fontsize="80%" role="UNKNOWN">x</XMTok>
+                          <XMTok fontsize="56%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S3.T1.m1.2">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" fontsize="80%" role="UNKNOWN">x</XMTok>
+                          <XMTok fontsize="56%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S3.T1.m1.3">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" fontsize="80%" role="UNKNOWN">y</XMTok>
+                          <XMTok fontsize="56%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S3.T1.m1.4">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" fontsize="80%" role="UNKNOWN">y</XMTok>
+                          <XMTok fontsize="56%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S3.T1.m1.5">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" fontsize="80%" role="UNKNOWN">z</XMTok>
+                          <XMTok fontsize="56%" meaning="minimum" role="OPFUNCTION" scriptpos="post">min</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMApp xml:id="S3.T1.m1.6">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" fontsize="80%" role="UNKNOWN">z</XMTok>
+                          <XMTok fontsize="56%" meaning="maximum" role="OPFUNCTION" scriptpos="post">max</XMTok>
+                        </XMApp>
+                        <XMTok fontsize="80%" role="CLOSE" stretchy="true">)</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                  </XMath>
+                </Math></td>
+              <td align="left" border="t"><text fontsize="80%">int16</text></td>
+              <td align="left" border="t"><text fontsize="80%">12</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">Original Shape</text></td>
+              <td align="left"><Math mode="inline" tex="(W,H,D)" text="vector@(W, H, D)" xml:id="S3.T1.m2">
+                  <XMath>
+                    <XMDual>
+                      <XMApp>
+                        <XMTok meaning="vector"/>
+                        <XMRef idref="S3.T1.m2.1"/>
+                        <XMRef idref="S3.T1.m2.2"/>
+                        <XMRef idref="S3.T1.m2.3"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMTok fontsize="80%" role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" fontsize="80%" role="UNKNOWN" xml:id="S3.T1.m2.1">W</XMTok>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMTok font="italic" fontsize="80%" role="UNKNOWN" xml:id="S3.T1.m2.2">H</XMTok>
+                        <XMTok fontsize="80%" role="PUNCT">,</XMTok>
+                        <XMTok font="italic" fontsize="80%" role="UNKNOWN" xml:id="S3.T1.m2.3">D</XMTok>
+                        <XMTok fontsize="80%" role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                  </XMath>
+                </Math></td>
+              <td align="left"><text fontsize="80%">int16</text></td>
+              <td align="left"><text fontsize="80%">6</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">Affine Matrix</text></td>
+              <td align="left"><Math mode="inline" tex="3\times 3" text="3 * 3" xml:id="S3.T1.m3">
+                  <XMath>
+                    <XMApp>
+                      <XMTok fontsize="80%" meaning="times" role="MULOP">×</XMTok>
+                      <XMTok fontsize="80%" meaning="3" role="NUMBER">3</XMTok>
+                      <XMTok fontsize="80%" meaning="3" role="NUMBER">3</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math><text fontsize="80%"> rotation–scaling submatrix</text></td>
+              <td align="left"><text fontsize="80%">float32</text></td>
+              <td align="left"><text fontsize="80%">36</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="bb t"><text font="bold" fontsize="80%">Total</text></td>
+              <td align="left" border="bb t"><text fontsize="80%">–</text></td>
+              <td align="left" border="bb t"><text fontsize="80%">–</text></td>
+              <td align="left" border="bb t"><text font="bold" fontsize="80%">54</text></td>
+            </tr>
+          </tabular>
+        </table>
+      </subsubsection>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS2">
+      <tags>
+        <tag>3.2</tag>
+        <tag role="autoref">subsection 3.2</tag>
+        <tag role="refnum">3.2</tag>
+        <tag role="typerefnum">§3.2</tag>
+      </tags>
+      <title><tag close=" ">3.2</tag>Compression Methods</title>
+      <subsubsection inlist="toc" labels="LABEL:sec:MedROI_framework" xml:id="S3.SS2.SSS1">
+        <tags>
+          <tag>3.2.1</tag>
+          <tag role="autoref">subsubsection 3.2.1</tag>
+          <tag role="refnum">3.2.1</tag>
+          <tag role="typerefnum">§3.2.1</tag>
+        </tags>
+        <title><tag close=" ">3.2.1</tag>MedROI Framework</title>
+        <para xml:id="S3.SS2.SSS1.p1">
+          <p>We propose MedROI (ROI-Centric Medical Image Compression), a selective compression framework that applies
+standard compression algorithms exclusively to anatomically relevant
+regions while completely eliminating the background. Unlike conventional ROI-based methods that compress background at reduced quality, MedROI
+discards non-tissue regions entirely, storing only the cropped brain
+volume and the 54-byte metadata structure <Math mode="inline" tex="M" text="M" xml:id="S3.SS2.SSS1.p1.m1">
+              <XMath>
+                <XMTok font="italic" role="UNKNOWN">M</XMTok>
+              </XMath>
+            </Math> defined in Section  <ref labelref="LABEL:sec:roi_metadata"/>. The compression pipeline proceeds as follows:</p>
+          <enumerate xml:id="S3.I1">
+            <item xml:id="S3.I1.i1">
+              <tags>
+                <tag>1.</tag>
+                <tag role="autoref">item 1</tag>
+                <tag role="refnum">1</tag>
+                <tag role="typerefnum">item 1</tag>
+              </tags>
+              <para xml:id="S3.I1.i1.p1">
+                <p>Extract ROI bounding box <Math mode="inline" tex="\mathcal{B}" text="B" xml:id="S3.I1.i1.p1.m1">
+                    <XMath>
+                      <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+                    </XMath>
+                  </Math> via intensity-based
+thresholding (Section 3.1.1)</p>
+              </para>
+            </item>
+            <item xml:id="S3.I1.i2">
+              <tags>
+                <tag>2.</tag>
+                <tag role="autoref">item 2</tag>
+                <tag role="refnum">2</tag>
+                <tag role="typerefnum">item 2</tag>
+              </tags>
+              <para xml:id="S3.I1.i2.p1">
+                <p>Generate metadata <Math mode="inline" tex="M" text="M" xml:id="S3.I1.i2.p1.m1">
+                    <XMath>
+                      <XMTok font="italic" role="UNKNOWN">M</XMTok>
+                    </XMath>
+                  </Math> encoding <Math mode="inline" tex="\mathcal{B}" text="B" xml:id="S3.I1.i2.p1.m2">
+                    <XMath>
+                      <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+                    </XMath>
+                  </Math>, original volume
+dimensions, and affine matrix</p>
+              </para>
+            </item>
+            <item xml:id="S3.I1.i3">
+              <tags>
+                <tag>3.</tag>
+                <tag role="autoref">item 3</tag>
+                <tag role="refnum">3</tag>
+                <tag role="typerefnum">item 3</tag>
+              </tags>
+              <para xml:id="S3.I1.i3.p1">
+                <p>Crop the volume to <Math mode="inline" tex="\mathcal{B}" text="B" xml:id="S3.I1.i3.p1.m1">
+                    <XMath>
+                      <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+                    </XMath>
+                  </Math>, discarding all background voxels</p>
+              </para>
+            </item>
+            <item xml:id="S3.I1.i4">
+              <tags>
+                <tag>4.</tag>
+                <tag role="autoref">item 4</tag>
+                <tag role="refnum">4</tag>
+                <tag role="typerefnum">item 4</tag>
+              </tags>
+              <para xml:id="S3.I1.i4.p1">
+                <p>Extract 2D axial slices from the cropped volume</p>
+              </para>
+            </item>
+            <item xml:id="S3.I1.i5">
+              <tags>
+                <tag>5.</tag>
+                <tag role="autoref">item 5</tag>
+                <tag role="refnum">5</tag>
+                <tag role="typerefnum">item 5</tag>
+              </tags>
+              <para xml:id="S3.I1.i5.p1">
+                <p>Compress each slice independently using the target codec
+(LIC_TCM in our baseline experiments)</p>
+              </para>
+            </item>
+          </enumerate>
+        </para>
+<!--  %****␣main.tex␣Line␣200␣**** -->        <para xml:id="S3.SS2.SSS1.p2">
+          <p>During reconstruction, the decompressed slices are placed back into a
+zero-filled volume of the original dimensions using the spatial
+information stored in <Math mode="inline" tex="M" text="M" xml:id="S3.SS2.SSS1.p2.m1">
+              <XMath>
+                <XMTok font="italic" role="UNKNOWN">M</XMTok>
+              </XMath>
+            </Math>.</p>
+        </para>
+        <figure inlist="lof" labels="LABEL:fig:method" placement="!htb" xml:id="S3.F1">
+          <tags>
+            <tag>Figure 1</tag>
+            <tag role="autoref">Figure 1</tag>
+            <tag role="refnum">1</tag>
+            <tag role="typerefnum">Figure 1</tag>
+          </tags>
+          <graphics candidates="figure2.png" class="ltx_centering" graphic="figure2.png" options="width=377.2494pt" xml:id="S3.F1.g1"/>
+          <p align="center"><text fontsize="90%" width="433.6pt">(a) MedROI Flowchart for 2D Images</text>
+<graphics candidates="figure1.png" graphic="figure1.png" options="width=377.2494pt" xml:id="S3.F1.g2"/>
+<text fontsize="90%" width="433.6pt">(b) MedROI Flowchart for 3D Volume</text></p>
+          <toccaption class="ltx_centering"><tag close=" ">1</tag>ROI-centric medical image compression. (a) 2D slice-wise compression pipeline: individual axial slices are extracted from the cropped volume and compressed/reconstructed independently. (b) 3D volumetric compression pipeline: ROI extraction, metadata generation, and volume-level codec compression/reconstruction. Both pipelines use metadata M (54 bytes) storing bounding box coordinates, original volume dimensions, and affine matrix for spatial restoration during decompression. </toccaption>
+          <caption class="ltx_centering"><tag close=": ">Figure 1</tag>ROI-centric medical image compression. (a) 2D slice-wise compression pipeline: individual axial slices are extracted from the cropped volume and compressed/reconstructed independently. (b) 3D volumetric compression pipeline: ROI extraction, metadata generation, and volume-level codec compression/reconstruction. Both pipelines use metadata M (54 bytes) storing bounding box coordinates, original volume dimensions, and affine matrix for spatial restoration during decompression. </caption>
+        </figure>
+        <para xml:id="S3.SS2.SSS1.p3">
+          <p><text font="bold">Compression modes.</text> We compare two modes:</p>
+        </para>
+        <para xml:id="S3.SS2.SSS1.p4">
+          <p><text font="italic">Full-volume mode:</text> The entire MRI volume is compressed without
+ROI extraction. The compressed size and compression ratio are:</p>
+        </para>
+        <para xml:id="S3.SS2.SSS1.p5">
+          <equation xml:id="S3.Ex7">
+            <Math mode="display" tex="|\text{Compressed}_{\text{full}}|=\sum_{i=1}^{N_{\text{slices}}}|\text{LIC\_%&#10;TCM}(S_{i})|," text="absolute-value@([Compressed] _ [full]) = ((sum _ (i = 1)) ^ (N _ [slices]))@(absolute-value@([LIC_TCM] * S _ i))" xml:id="S3.Ex7.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex7.m1.1"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex7.m1.1">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="absolute-value"/>
+                          <XMRef idref="S3.Ex7.m1.1.1"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          <XMApp xml:id="S3.Ex7.m1.1.1">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMText>Compressed</XMText>
+                            <XMText><text fontsize="70%">full</text></XMText>
+                          </XMApp>
+                          <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                      <XMApp>
+                        <XMApp scriptpos="mid">
+                          <XMTok role="SUPERSCRIPTOP" scriptpos="mid1"/>
+                          <XMApp scriptpos="mid">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                            <XMTok mathstyle="display" meaning="sum" role="SUMOP" scriptpos="mid">∑</XMTok>
+                            <XMApp>
+                              <XMTok fontsize="70%" meaning="equals" role="RELOP">=</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                              <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                            </XMApp>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">N</XMTok>
+                            <XMText><text fontsize="50%">slices</text></XMText>
+                          </XMApp>
+                        </XMApp>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.Ex7.m1.1.2"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMApp xml:id="S3.Ex7.m1.1.2">
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMText>LIC_TCM</XMText>
+                              <XMDual>
+                                <XMRef idref="S3.Ex7.m1.1.2.1"/>
+                                <XMWrap>
+                                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                  <XMApp xml:id="S3.Ex7.m1.1.2.1">
+                                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                                    <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                  </XMApp>
+                                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+          <equation xml:id="S3.Ex8">
+            <Math mode="display" tex="\text{CR}_{\text{full}}=\frac{|\text{Original File}|}{|\text{Compressed}_{%&#10;\text{full}}|}." text="[CR] _ [full] = absolute-value@([Original File]) / absolute-value@([Compressed] _ [full])" xml:id="S3.Ex8.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex8.m1.3"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex8.m1.3">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMText>CR</XMText>
+                        <XMText><text fontsize="70%">full</text></XMText>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.Ex8.m1.1"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMText xml:id="S3.Ex8.m1.1">Original File</XMText>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.Ex8.m1.2"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMApp xml:id="S3.Ex8.m1.2">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMText>Compressed</XMText>
+                              <XMText><text fontsize="70%">full</text></XMText>
+                            </XMApp>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PERIOD">.</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+          <p><text font="italic">ROI mode:</text> Only the cropped region <Math mode="inline" tex="\mathcal{B}" text="B" xml:id="S3.SS2.SSS1.p5.m1">
+              <XMath>
+                <XMTok font="caligraphic" role="UNKNOWN">B</XMTok>
+              </XMath>
+            </Math> is compressed, including the 54-byte metadata overhead:</p>
+          <equation xml:id="S3.Ex9">
+            <Math mode="display" tex="|\text{Compressed}_{\text{ROI}}|=\sum_{i=1}^{N_{\text{ROI}}}|\text{LIC\_TCM}(S%&#10;_{i}^{\text{ROI}})|+|M|," text="absolute-value@([Compressed] _ [ROI]) = ((sum _ (i = 1)) ^ (N _ [ROI]))@(absolute-value@([LIC_TCM] * (S _ i) ^ [ROI])) + absolute-value@(M)" xml:id="S3.Ex9.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex9.m1.2"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex9.m1.2">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMDual>
+                        <XMApp>
+                          <XMTok meaning="absolute-value"/>
+                          <XMRef idref="S3.Ex9.m1.2.1"/>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          <XMApp xml:id="S3.Ex9.m1.2.1">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMText>Compressed</XMText>
+                            <XMText><text fontsize="70%">ROI</text></XMText>
+                          </XMApp>
+                          <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                      <XMApp>
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMApp>
+                          <XMApp scriptpos="mid">
+                            <XMTok role="SUPERSCRIPTOP" scriptpos="mid1"/>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid1"/>
+                              <XMTok mathstyle="display" meaning="sum" role="SUMOP" scriptpos="mid">∑</XMTok>
+                              <XMApp>
+                                <XMTok fontsize="70%" meaning="equals" role="RELOP">=</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">N</XMTok>
+                              <XMText><text fontsize="50%">ROI</text></XMText>
+                            </XMApp>
+                          </XMApp>
+                          <XMDual>
+                            <XMApp>
+                              <XMTok meaning="absolute-value"/>
+                              <XMRef idref="S3.Ex9.m1.2.2"/>
+                            </XMApp>
+                            <XMWrap>
+                              <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                              <XMApp xml:id="S3.Ex9.m1.2.2">
+                                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                                <XMText>LIC_TCM</XMText>
+                                <XMDual>
+                                  <XMRef idref="S3.Ex9.m1.2.2.1"/>
+                                  <XMWrap>
+                                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                    <XMApp xml:id="S3.Ex9.m1.2.2.1">
+                                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                                      <XMApp>
+                                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                                        <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                      </XMApp>
+                                      <XMText><text fontsize="70%">ROI</text></XMText>
+                                    </XMApp>
+                                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                  </XMWrap>
+                                </XMDual>
+                              </XMApp>
+                              <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.Ex9.m1.1"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMTok font="italic" role="UNKNOWN" xml:id="S3.Ex9.m1.1">M</XMTok>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+          <equation xml:id="S3.Ex10">
+            <Math mode="display" tex="\text{CR}_{\text{ROI}}=\frac{|\text{Original File}|}{|\text{Compressed}_{\text%&#10;{ROI}}|}." text="[CR] _ [ROI] = absolute-value@([Original File]) / absolute-value@([Compressed] _ [ROI])" xml:id="S3.Ex10.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S3.Ex10.m1.3"/>
+                  <XMWrap>
+                    <XMApp xml:id="S3.Ex10.m1.3">
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMText>CR</XMText>
+                        <XMText><text fontsize="70%">ROI</text></XMText>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.Ex10.m1.1"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMText xml:id="S3.Ex10.m1.1">Original File</XMText>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="absolute-value"/>
+                            <XMRef idref="S3.Ex10.m1.2"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                            <XMApp xml:id="S3.Ex10.m1.2">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMText>Compressed</XMText>
+                              <XMText><text fontsize="70%">ROI</text></XMText>
+                            </XMApp>
+                            <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="PERIOD">.</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>
+          </equation>
+        </para>
+        <para xml:id="S3.SS2.SSS1.p6">
+          <p>where <Math mode="inline" tex="|\text{Original File}|" text="absolute-value@([Original File])" xml:id="S3.SS2.SSS1.p6.m1">
+              <XMath>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="absolute-value"/>
+                    <XMRef idref="S3.SS2.SSS1.p6.m1.1"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMText xml:id="S3.SS2.SSS1.p6.m1.1">Original File</XMText>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>, <Math mode="inline" tex="|\text{Compressed}_{\text{full}}|" text="absolute-value@([Compressed] _ [full])" xml:id="S3.SS2.SSS1.p6.m2">
+              <XMath>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="absolute-value"/>
+                    <XMRef idref="S3.SS2.SSS1.p6.m2.1"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMApp xml:id="S3.SS2.SSS1.p6.m2.1">
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMText>Compressed</XMText>
+                      <XMText><text fontsize="70%">full</text></XMText>
+                    </XMApp>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math>, and <Math mode="inline" tex="|\text{Compressed}_{\text{ROI}}|" text="absolute-value@([Compressed] _ [ROI])" xml:id="S3.SS2.SSS1.p6.m3">
+              <XMath>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="absolute-value"/>
+                    <XMRef idref="S3.SS2.SSS1.p6.m3.1"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMApp xml:id="S3.SS2.SSS1.p6.m3.1">
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMText>Compressed</XMText>
+                      <XMText><text fontsize="70%">ROI</text></XMText>
+                    </XMApp>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math> represent the number of bytes of the entropy-coded bitstreams produced by each codec in memory. The compressed size is measured from the serialized encoded representation, including all metadata overhead.</p>
+        </para>
+<!--  %****␣main.tex␣Line␣225␣**** -->        <para xml:id="S3.SS2.SSS1.p7">
+          <p>MedROI is algorithm-agnostic and applicable to any compression codec.
+We evaluate the framework across nine methods, including conventional
+codecs (JPEG2000, HEIF), 2D neural networks (LIC_TCM, HIFIC, BCM-Net, and 3D volumetric compression (SirenMRI), with detailed
+results in Section  <ref labelref="LABEL:results"/>.</p>
+        </para>
+      </subsubsection>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS3">
+      <tags>
+        <tag>3.3</tag>
+        <tag role="autoref">subsection 3.3</tag>
+        <tag role="refnum">3.3</tag>
+        <tag role="typerefnum">§3.3</tag>
+      </tags>
+      <title><tag close=" ">3.3</tag>Experimental Setup</title>
+      <subsubsection inlist="toc" xml:id="S3.SS3.SSS1">
+        <tags>
+          <tag>3.3.1</tag>
+          <tag role="autoref">subsubsection 3.3.1</tag>
+          <tag role="refnum">3.3.1</tag>
+          <tag role="typerefnum">§3.3.1</tag>
+        </tags>
+        <title><tag close=" ">3.3.1</tag>Dataset</title>
+        <para xml:id="S3.SS3.SSS1.p1">
+          <p>We evaluate MedROI on the ADNI dataset <cite class="ltx_citemacro_cite">[<bibref bibrefs="ADNI" separator="," yyseparator=","/>]</cite>, consisting of 200 T1-weighted brain MRI scans in NIfTI format. Volume dimensions vary across subjects, bounded by approximately <Math mode="inline" tex="256\times 256\times 256" text="256 * 256 * 256" xml:id="S3.SS3.SSS1.p1.m1">
+              <XMath>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">×</XMTok>
+                  <XMTok meaning="256" role="NUMBER">256</XMTok>
+                  <XMTok meaning="256" role="NUMBER">256</XMTok>
+                  <XMTok meaning="256" role="NUMBER">256</XMTok>
+                </XMApp>
+              </XMath>
+            </Math> voxels. Since we employ pre-trained compression models without domain-specific fine-tuning, we use all 200 subjects as the test set.
+For 2D compression methods, grayscale axial slices are extracted along the <Math mode="inline" tex="z" text="z" xml:id="S3.SS3.SSS1.p1.m2">
+              <XMath>
+                <XMTok font="italic" role="UNKNOWN">z</XMTok>
+              </XMath>
+            </Math>-axis and preprocessed according to each model’s requirements (e.g., normalization, channel conversion).</p>
+        </para>
+      </subsubsection>
+      <subsubsection inlist="toc" xml:id="S3.SS3.SSS2">
+        <tags>
+          <tag>3.3.2</tag>
+          <tag role="autoref">subsubsection 3.3.2</tag>
+          <tag role="refnum">3.3.2</tag>
+          <tag role="typerefnum">§3.3.2</tag>
+        </tags>
+        <title><tag close=" ">3.3.2</tag>Compression Codecs Evaluated</title>
+        <para xml:id="S3.SS3.SSS2.p1">
+          <p>We evaluate MedROI across seven compression algorithms spanning three categories: conventional codec, 2D neural compression, and 3d volumetric neural compression.</p>
+        </para>
+        <para class="ltx_noindent" xml:id="S3.SS3.SSS2.p2">
+          <p>Conventional codecs:</p>
+          <itemize xml:id="S3.I2">
+            <item xml:id="S3.I2.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I2.i1.p1">
+                <p>JPEG2000: Wavelet-based codec with three quality levels (low/medium/high corresponding to bitrates 100/20/5). It supports both 2D and 3D image compression.</p>
+              </para>
+            </item>
+            <item xml:id="S3.I2.i2">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">2nd item</tag>
+              </tags>
+              <para xml:id="S3.I2.i2.p1">
+                <p>HEIF: HEVC-based image format with five quality levels (quality parameters: 20/40/60/80/95). We evaluated two levels: 20 and 60 (level 1 and 3)</p>
+              </para>
+            </item>
+          </itemize>
+        </para>
+        <para class="ltx_noindent" xml:id="S3.SS3.SSS2.p3">
+          <p>2D neural compression:</p>
+          <itemize xml:id="S3.I3">
+<!--  %****␣main.tex␣Line␣250␣**** -->            <item xml:id="S3.I3.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I3.i1.p1">
+                <p>BCM-Net <cite class="ltx_citemacro_cite">[<bibref bibrefs="bcm" separator="," yyseparator=","/>]</cite>: CNN-based model pre-trained on TARBIT dataset</p>
+              </para>
+            </item>
+            <item xml:id="S3.I3.i2">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">2nd item</tag>
+              </tags>
+              <para xml:id="S3.I3.i2.p1">
+                <p>TCM+AuxT <cite class="ltx_citemacro_cite">[<bibref bibrefs="tcm+auxt" separator="," yyseparator=","/>]</cite>: Enhanced TCM with auxiliary transformer, using checkpoint <text font="typewriter">model_auxt_0035.pth.tar</text></p>
+              </para>
+            </item>
+            <item xml:id="S3.I3.i3">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">3rd item</tag>
+              </tags>
+              <para xml:id="S3.I3.i3.p1">
+                <p>LIC_TCM <cite class="ltx_citemacro_cite">[<bibref bibrefs="tcm" separator="," yyseparator=","/>]</cite>: Transformer-based codec with <Math mode="inline" tex="\lambda=0.0035" text="lambda = 0.0035" xml:id="S3.I3.i3.p1.m1">
+                    <XMath>
+                      <XMApp>
+                        <XMTok meaning="equals" role="RELOP">=</XMTok>
+                        <XMTok font="italic" name="lambda" role="UNKNOWN">λ</XMTok>
+                        <XMTok meaning="0.0035" role="NUMBER">0.0035</XMTok>
+                      </XMApp>
+                    </XMath>
+                  </Math>, <Math mode="inline" tex="N=64" text="N = 64" xml:id="S3.I3.i3.p1.m2">
+                    <XMath>
+                      <XMApp>
+                        <XMTok meaning="equals" role="RELOP">=</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                        <XMTok meaning="64" role="NUMBER">64</XMTok>
+                      </XMApp>
+                    </XMath>
+                  </Math>, <Math mode="inline" tex="M=320" text="M = 320" xml:id="S3.I3.i3.p1.m3">
+                    <XMath>
+                      <XMApp>
+                        <XMTok meaning="equals" role="RELOP">=</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">M</XMTok>
+                        <XMTok meaning="320" role="NUMBER">320</XMTok>
+                      </XMApp>
+                    </XMath>
+                  </Math>, pre-trained on natural images</p>
+              </para>
+            </item>
+          </itemize>
+        </para>
+        <para class="ltx_noindent" xml:id="S3.SS3.SSS2.p4">
+          <p>3D volumetric neural compression:</p>
+          <itemize xml:id="S3.I4">
+            <item xml:id="S3.I4.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I4.i1.p1">
+                <p>SirenMRI <cite class="ltx_citemacro_cite">[<bibref bibrefs="siren" separator="," yyseparator=","/>]</cite>: Implicit neural representation for 3D medical volumes</p>
+              </para>
+            </item>
+          </itemize>
+<!--  %\vspace{-0.11cm} -->        </para>
+      </subsubsection>
+      <subsubsection inlist="toc" xml:id="S3.SS3.SSS3">
+        <tags>
+          <tag>3.3.3</tag>
+          <tag role="autoref">subsubsection 3.3.3</tag>
+          <tag role="refnum">3.3.3</tag>
+          <tag role="typerefnum">§3.3.3</tag>
+        </tags>
+        <title><tag close=" ">3.3.3</tag>Implementation Details</title>
+        <para xml:id="S3.SS3.SSS3.p1">
+          <p>All methods used pre-trained checkpoints in the official codes without fine-tuning on medical data. For 2D methods, axial slices are compressed independently with arithmetic/entropy coding enabled. Experiments used Python 3.12.3 with model-specific dependencies as specified in the official repository.
+Experiments were primarily conducted on an NVIDIA RTX 4090 (24GB VRAM). Only the SirenMRI codec was evaluated on an NVIDIA H200 NVL (141GB VRAM) due to its high memory requirements.</p>
+        </para>
+      </subsubsection>
+      <subsubsection inlist="toc" labels="LABEL:results" xml:id="S3.SS3.SSS4">
+        <tags>
+          <tag>3.3.4</tag>
+          <tag role="autoref">subsubsection 3.3.4</tag>
+          <tag role="refnum">3.3.4</tag>
+          <tag role="typerefnum">§3.3.4</tag>
+        </tags>
+        <title><tag close=" ">3.3.4</tag>Evaluation Metrics</title>
+        <para xml:id="S3.SS3.SSS4.p1">
+          <p>We measured compression efficiency, reconstruction quality, and computational cost for each compression method with and without the MedROI approach.
+Because we were not interested in the background and replaced it with zeros, image quality was measured within the ROI for MedROI. Statistical significance testing was performed on compression ratio and compression/decompression time. A two-sided <text font="italic">t</text>-test was used, and multiple comparison correction was performed.</p>
+        </para>
+<!--  %****␣main.tex␣Line␣275␣**** -->        <para class="ltx_noindent" xml:id="S3.SS3.SSS4.p2">
+          <p>Compression efficiency</p>
+          <itemize xml:id="S3.I5">
+            <item xml:id="S3.I5.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I5.i1.p1">
+                <p>Compression Ratio (CR): Defined in Section 3.2.2, computed as the ratio of original file size to compressed size (including 54-byte metadata overhead for ROI mode)</p>
+              </para>
+            </item>
+            <item xml:id="S3.I5.i2">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">2nd item</tag>
+              </tags>
+              <para xml:id="S3.I5.i2.p1">
+                <p>Bits Per Pixel (BPP): Defined as total compressed bits divided by the number of voxels in the 3D volume</p>
+              </para>
+            </item>
+          </itemize>
+        </para>
+        <para class="ltx_noindent" xml:id="S3.SS3.SSS4.p3">
+          <p>Reconstruction quality</p>
+          <itemize xml:id="S3.I6">
+            <item xml:id="S3.I6.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I6.i1.p1">
+                <p>Peak Signal-to-Noise Ratio (PSNR, dB): For 2D methods, PSNR is computed per slice and averaged across the volume. For 3D methods, it is computed on the entire volume.</p>
+              </para>
+            </item>
+            <item xml:id="S3.I6.i2">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">2nd item</tag>
+              </tags>
+              <para xml:id="S3.I6.i2.p1">
+                <p>Structural Similarity Index (SSIM): Perceptual similarity metric on a scale of 0 to 1, averaged using the same approach as PSNR.</p>
+              </para>
+            </item>
+          </itemize>
+        </para>
+        <para class="ltx_noindent" xml:id="S3.SS3.SSS4.p4">
+          <p>Computational cost:</p>
+          <itemize xml:id="S3.I7">
+            <item xml:id="S3.I7.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I7.i1.p1">
+                <p>Compression time (s): Total time to encode all slices/volume. For the MedROI mode, this includes the time required for ROI extraction (thresholding and bounding box detection).</p>
+              </para>
+            </item>
+            <item xml:id="S3.I7.i2">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">2nd item</tag>
+              </tags>
+              <para xml:id="S3.I7.i2.p1">
+                <p>Decompression time (s): Total time to decode all slices/volume.</p>
+              </para>
+            </item>
+          </itemize>
+        </para>
+<!--  %****␣main.tex␣Line␣300␣**** -->      </subsubsection>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Results</title>
+    <para xml:id="S4.p1">
+      <p>MedROI achieves a significantly higher compression ratio and significantly decreased compression and decompression times (<Math mode="inline" tex="p^{*}&lt;0.05" text="p ^ * less 0.05" xml:id="S4.p1.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+              <XMApp>
+                <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok fontsize="70%" meaning="times" role="MULOP">*</XMTok>
+              </XMApp>
+              <XMTok meaning="0.05" role="NUMBER">0.05</XMTok>
+            </XMApp>
+          </XMath>
+        </Math>), with minimal-to-no degradation in image quality within the ROI in most codecs, except HEIF. Compression efficiency, reconstruction quality, and computational cost for each codec with and without the MedROI approach are summarized in Table 2 and 3.</p>
+    </para>
+    <subsection inlist="toc" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="autoref">subsection 4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=" ">4.1</tag>Compression Performance</title>
+      <paragraph inlist="toc" labels="LABEL:sec:compression_performance" xml:id="S4.SS1.SSS0.Px1">
+        <title>2D compression methods.</title>
+        <para xml:id="S4.SS1.SSS0.Px1.p1">
+          <p>MedROI consistently improves compression efficiency across most 2D codecs while simultaneously reducing both compression and decompression times.
+Neural codecs benefit particularly strongly from the MedROI framework: TCM achieves the highest absolute compression ratio, while TCM+AuxT and BCM-Net exhibit large relative gains, indicating that background removal significantly improves the efficiency of learned image representations.
+JPEG2000 also shows clear compression gains at multiple quality levels, confirming that MedROI is effective beyond neural models.
+HEIF is the only exception, showing marginal change, likely due to its internally optimized intra-frame coding structure.</p>
+        </para>
+        <table inlist="lot" labels="LABEL:tab:compression_results" placement="!bht" xml:id="S4.T2">
+          <tags>
+            <tag><text fontsize="80%">Table 2</text></tag>
+            <tag role="autoref"><text fontsize="80%">Table 2</text></tag>
+            <tag role="refnum"><text fontsize="80%">2</text></tag>
+            <tag role="typerefnum"><text fontsize="80%">Table 2</text></tag>
+          </tags>
+          <tabular class="ltx_centering" vattach="middle">
+            <tr>
+              <td align="left" border="tt"><text font="bold" fontsize="80%">Model</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">Full/ROI</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">CR</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">BPP</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">PSNR</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">SSIM</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">Comp.(s)</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">Decomp.(s)</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">JPEG2000 lv3</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">20.35</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.395</text></td>
+              <td align="center" border="t"><text fontsize="80%">33.03</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.852</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.701</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.350</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">JPEG2000 lv3</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">27.37</text></td>
+              <td align="center"><text fontsize="80%">0.397</text></td>
+              <td align="center"><text fontsize="80%">30.73</text></td>
+              <td align="center"><text fontsize="80%">0.859</text></td>
+              <td align="center"><text fontsize="80%">1.380</text></td>
+              <td align="center"><text fontsize="80%">0.265</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">JPEG2000 lv5</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">5.165</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.567</text></td>
+              <td align="center" border="t"><text fontsize="80%">45.14</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.969</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.722</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.734</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">JPEG2000 lv5</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">6.875</text></td>
+              <td align="center"><text fontsize="80%">1.582</text></td>
+              <td align="center"><text fontsize="80%">41.65</text></td>
+              <td align="center"><text fontsize="80%">0.964</text></td>
+              <td align="center"><text fontsize="80%">1.398</text></td>
+              <td align="center"><text fontsize="80%">0.565</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">HEIF lv1</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">39.38</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.241</text></td>
+              <td align="center" border="t"><text fontsize="80%">29.38</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.842</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.059</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.5e-3</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">HEIF lv1</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">38.54</text></td>
+              <td align="center"><text fontsize="80%">0.219</text></td>
+              <td align="center"><text fontsize="80%">29.25</text></td>
+              <td align="center"><text fontsize="80%">0.857</text></td>
+              <td align="center"><text fontsize="80%">0.054</text></td>
+              <td align="center"><text fontsize="80%">1.4e-3</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">HEIF lv3</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">5.907</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.924</text></td>
+              <td align="center" border="t"><text fontsize="80%">45.74</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.992</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.112</text></td>
+              <td align="center" border="t"><text fontsize="80%">2.9e-3</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">HEIF lv3</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">5.450</text></td>
+              <td align="center"><text fontsize="80%">1.650</text></td>
+              <td align="center"><text fontsize="80%">44.94</text></td>
+              <td align="center"><text fontsize="80%">0.990</text></td>
+              <td align="center"><text fontsize="80%">0.106</text></td>
+              <td align="center"><text fontsize="80%">2.7e-3</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">TCM+AuxT</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">39.67</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.216</text></td>
+              <td align="center" border="t"><text fontsize="80%">31.10</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.858</text></td>
+              <td align="center" border="t"><text fontsize="80%">19.80</text></td>
+              <td align="center" border="t"><text fontsize="80%">21.46</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">TCM+AuxT</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">56.75</text></td>
+              <td align="center"><text fontsize="80%">0.144</text></td>
+              <td align="center"><text fontsize="80%">31.18</text></td>
+              <td align="center"><text fontsize="80%">0.875</text></td>
+              <td align="center"><text fontsize="80%">18.00</text></td>
+              <td align="center"><text fontsize="80%">19.46</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">TCM</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">79.37</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.105</text></td>
+              <td align="center" border="t"><text fontsize="80%">37.59</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.903</text></td>
+              <td align="center" border="t"><text fontsize="80%">20.56</text></td>
+              <td align="center" border="t"><text fontsize="80%">21.41</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">TCM</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">81.31</text></td>
+              <td align="center"><text fontsize="80%">0.102</text></td>
+              <td align="center"><text fontsize="80%">30.89</text></td>
+              <td align="center"><text fontsize="80%">0.849</text></td>
+              <td align="center"><text fontsize="80%">17.84</text></td>
+              <td align="center"><text fontsize="80%">18.60</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">BCM-Net</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.35</text></td>
+              <td align="center" border="t"><text fontsize="80%">11.96</text></td>
+              <td align="center" border="t"><text fontsize="80%">97.34</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.000</text></td>
+              <td align="center" border="t"><text fontsize="80%">410.0</text></td>
+              <td align="center" border="t"><text fontsize="80%">15.06</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="bb"><text fontsize="80%">BCM-Net</text></td>
+              <td align="center" border="bb"><text fontsize="80%">ROI</text></td>
+              <td align="center" border="bb"><text fontsize="80%">3.55</text></td>
+              <td align="center" border="bb"><text fontsize="80%">9.313</text></td>
+              <td align="center" border="bb"><text fontsize="80%">97.07</text></td>
+              <td align="center" border="bb"><text fontsize="80%">1.000</text></td>
+              <td align="center" border="bb"><text fontsize="80%">388.2</text></td>
+              <td align="center" border="bb"><text fontsize="80%">9.062</text></td>
+            </tr>
+          </tabular>
+<!--  %****␣main.tex␣Line␣350␣**** -->          <toccaption class="ltx_centering"><tag close=" "><text fontsize="80%">2</text></tag><text fontsize="80%">Average performance of 2D image compression methods with and without the MedROI approach. Compression and Decompression times are in seconds. comp.=compression time, decomp.=decompression time, CR=compression ratio, BPP=bits per pixel.</text></toccaption>
+          <caption class="ltx_centering" fontsize="80%"><tag close=": ">Table 2</tag>Average performance of 2D image compression methods with and without the MedROI approach. Compression and Decompression times are in seconds. comp.=compression time, decomp.=decompression time, CR=compression ratio, BPP=bits per pixel.</caption>
+        </table>
+        <table inlist="lot" labels="LABEL:tab:3d_compression_results" placement="!htb" xml:id="S4.T3">
+          <tags>
+            <tag><text fontsize="80%">Table 3</text></tag>
+            <tag role="autoref"><text fontsize="80%">Table 3</text></tag>
+            <tag role="refnum"><text fontsize="80%">3</text></tag>
+            <tag role="typerefnum"><text fontsize="80%">Table 3</text></tag>
+          </tags>
+          <tabular class="ltx_centering" vattach="middle">
+            <tr>
+              <td align="left" border="tt"><text font="bold" fontsize="80%">Model</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">Full/ROI</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">CR</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">BPP</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">PSNR</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">SSIM</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">Comp.(s)</text></td>
+              <td align="center" border="tt"><text font="bold" fontsize="80%">Decomp.(s)</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">JPEG2000 lv1</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">2.095</text></td>
+              <td align="center" border="t"><text fontsize="80%">4.058</text></td>
+              <td align="center" border="t"><text fontsize="80%">53.20</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.993</text></td>
+              <td align="center" border="t"><text fontsize="80%">9.106</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.013</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">JPEG2000 lv1</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">2.316</text></td>
+              <td align="center"><text fontsize="80%">3.621</text></td>
+              <td align="center"><text fontsize="80%">52.38</text></td>
+              <td align="center"><text fontsize="80%">0.994</text></td>
+              <td align="center"><text fontsize="80%">6.729</text></td>
+              <td align="center"><text fontsize="80%">0.233</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">JPEG2000 lv3</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">4.758</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.755</text></td>
+              <td align="center" border="t"><text fontsize="80%">47.06</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.981</text></td>
+              <td align="center" border="t"><text fontsize="80%">5.898</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.023</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">JPEG2000 lv3</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">4.979</text></td>
+              <td align="center"><text fontsize="80%">1.676</text></td>
+              <td align="center"><text fontsize="80%">46.09</text></td>
+              <td align="center"><text fontsize="80%">0.983</text></td>
+              <td align="center"><text fontsize="80%">5.913</text></td>
+              <td align="center"><text fontsize="80%">0.213</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">JPEG2000 lv5</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">13.63</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.615</text></td>
+              <td align="center" border="t"><text fontsize="80%">38.72</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.953</text></td>
+              <td align="center" border="t"><text fontsize="80%">2.742</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.009</text></td>
+            </tr>
+            <tr>
+              <td align="left"><text fontsize="80%">JPEG2000 lv5</text></td>
+              <td align="center"><text fontsize="80%">ROI</text></td>
+              <td align="center"><text fontsize="80%">14.23</text></td>
+              <td align="center"><text fontsize="80%">0.591</text></td>
+              <td align="center"><text fontsize="80%">37.49</text></td>
+              <td align="center"><text fontsize="80%">0.949</text></td>
+              <td align="center"><text fontsize="80%">2.446</text></td>
+              <td align="center"><text fontsize="80%">0.204</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="t"><text fontsize="80%">SirenMRI</text></td>
+              <td align="center" border="t"><text fontsize="80%">Full</text></td>
+              <td align="center" border="t"><text fontsize="80%">176.8</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.365</text></td>
+              <td align="center" border="t"><text fontsize="80%">31.74</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.696</text></td>
+              <td align="center" border="t"><text fontsize="80%">720.7</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.000</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="bb"><text fontsize="80%">SirenMRI</text></td>
+              <td align="center" border="bb"><text fontsize="80%">ROI</text></td>
+              <td align="center" border="bb"><text fontsize="80%">177.8</text></td>
+              <td align="center" border="bb"><text fontsize="80%">0.364</text></td>
+              <td align="center" border="bb"><text fontsize="80%">32.08</text></td>
+              <td align="center" border="bb"><text fontsize="80%">0.780</text></td>
+              <td align="center" border="bb"><text fontsize="80%">540.6</text></td>
+              <td align="center" border="bb"><text fontsize="80%">1.310</text></td>
+            </tr>
+          </tabular>
+          <toccaption class="ltx_centering"><tag close=" "><text fontsize="80%">3</text></tag><text fontsize="80%">Average performance of 3D image compression methods evaluated with and without the MedROI approach. Total compression and decompression times are reported in seconds. comp.=compression time, decomp.=decompression time, CR=compression ratio, BPP=bits per pixel.</text></toccaption>
+          <caption class="ltx_centering" fontsize="80%"><tag close=": ">Table 3</tag>Average performance of 3D image compression methods evaluated with and without the MedROI approach. Total compression and decompression times are reported in seconds. comp.=compression time, decomp.=decompression time, CR=compression ratio, BPP=bits per pixel.</caption>
+        </table>
+      </paragraph>
+      <paragraph inlist="toc" xml:id="S4.SS1.SSS0.Px2">
+        <title>3D volumetric neural compression.</title>
+        <para xml:id="S4.SS1.SSS0.Px2.p1">
+          <p>MedROI exhibits a significantly higher compression ratio across all 3D codecs. Also, it shows significantly reduced compression and decompression times across all codecs.
+The neural implicit model SirenMRI achieves extremely high compression ratios, and MedROI further enhances its efficiency by removing non-informative background regions, leading to additional bitrate reduction and substantial speedups.
+Wavelet-based JPEG2000 also benefits from MedROI at all quality levels, confirming that ROI-aware volumetric compression is effective for both neural and conventional 3D codecs.</p>
+        </para>
+      </paragraph>
+      <paragraph inlist="toc" xml:id="S4.SS1.SSS0.Px3">
+        <title/>
+        <para xml:id="S4.SS1.SSS0.Px3.p1">
+          <p>Overall, MedROI demonstrates broad effectiveness across different codec architectures, improving compression efficiency and reducing processing times for most evaluated methods. Neural and 2D JPEG2000 methods show substantial CR improvements, while 3D methods demonstrate consistent moderate gains in both compression efficiency and computational performance.</p>
+        </para>
+      </paragraph>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:rd_analysis" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="autoref">subsection 4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=" ">4.2</tag>Rate–Distortion Analysis</title>
+<!--  %****␣main.tex␣Line␣400␣**** -->      <figure inlist="lof" labels="LABEL:fig:psnr_vs_cr" placement="!bht" xml:id="S4.F2">
+        <tags>
+          <tag>Figure 2</tag>
+          <tag role="autoref">Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Figure 2</tag>
+        </tags>
+        <graphics candidates="psnr_vs_cr_all.png" class="ltx_centering" graphic="psnr_vs_cr_all.png" options="width=411.939pt" xml:id="S4.F2.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">2</tag>Rate-distortion performance of evaluated compression methods on the ADNI dataset. Each point represents the average PSNR and compression ratio across 200 brain MRI volumes. Solid markers indicate full-volume compression, while hollow markers represent ROI-based compression.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 2</tag>Rate-distortion performance of evaluated compression methods on the ADNI dataset. Each point represents the average PSNR and compression ratio across 200 brain MRI volumes. Solid markers indicate full-volume compression, while hollow markers represent ROI-based compression.</caption>
+      </figure>
+      <para xml:id="S4.SS2.p1">
+        <p>Figure <ref labelref="LABEL:fig:psnr_vs_cr"/> illustrates the rate–distortion characteristics across all evaluated methods, demonstrating that ROI compression consistently achieves higher compression ratios than full-volume compression while maintaining comparable reconstruction quality. Across nearly all methods, the ROI curves (hollow markers) shift rightward relative to their full-volume counterparts (filled markers), indicating improved compression efficiency.</p>
+      </para>
+      <para xml:id="S4.SS2.p2">
+        <p>The evaluated methods occupy three distinct operating regimes in the PSNR–CR space. BCM-Net and HEIF operate in the high-quality region (PSNR <Math mode="inline" tex="&gt;" text="&gt;" xml:id="S4.SS2.p2.m1">
+            <XMath>
+              <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+            </XMath>
+          </Math> 65 dB) with relatively low CR, JPEG2000 variants cover the moderate range (PSNR 30–55 dB, CR 2–30), and neural methods TCM and TCM+AuxT achieve high compression ratios (CR <Math mode="inline" tex="&gt;" text="&gt;" xml:id="S4.SS2.p2.m2">
+            <XMath>
+              <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+            </XMath>
+          </Math> 40) at moderate quality levels.</p>
+      </para>
+      <para xml:id="S4.SS2.p3">
+        <p>The magnitude of improvement varies by algorithm architecture. Neural compression methods (TCM, TCM+AuxT, BCM-Net) show substantial rightward shifts, with 2D JPEG2000 exhibiting similar behavior. HEIF represents the only exception, where ROI and full-volume curves nearly overlap, showing minimal change in compression performance.</p>
+      </para>
+<!--  %\vspace{-0.2cm} -->      <subsubsection inlist="toc" labels="LABEL:sec:visual_quality" xml:id="S4.SS2.SSS1">
+        <tags>
+          <tag>4.2.1</tag>
+          <tag role="autoref">subsubsection 4.2.1</tag>
+          <tag role="refnum">4.2.1</tag>
+          <tag role="typerefnum">§4.2.1</tag>
+        </tags>
+        <title><tag close=" ">4.2.1</tag>Visual Quality Assessment</title>
+        <figure inlist="lof" labels="LABEL:fig:visual_comparison" placement="!bht" xml:id="S4.F3">
+          <tags>
+            <tag>Figure 3</tag>
+            <tag role="autoref">Figure 3</tag>
+            <tag role="refnum">3</tag>
+            <tag role="typerefnum">Figure 3</tag>
+          </tags>
+          <graphics candidates="visual_comparison.png" class="ltx_centering" graphic="visual_comparison.png" options="width=325.215pt" xml:id="S4.F3.g1"/>
+          <toccaption class="ltx_centering"><tag close=" ">3</tag>Qualitative comparison of Full vs ROI compression results. Visual comparison of reconstruction quality across different compression methods on subject 002_S_0413 (slice 128). Rows 1-2 show Full and ROI compression for 3D codecs (SirenMRI, JPEG2000-3D Lv3) and 2D conventional codec (JPEG2000-2D Lv3), while rows 3-4 display 2D neural compression codec (BCM-Net, TCM, TCM+AuxT) and HEIF Lv3. Ground truth is shown in the leftmost column, with the ROI bounding box (white rectangle) indicating the cropped region.</toccaption>
+          <caption class="ltx_centering"><tag close=": ">Figure 3</tag>Qualitative comparison of Full vs ROI compression results. Visual comparison of reconstruction quality across different compression methods on subject 002_S_0413 (slice 128). Rows 1-2 show Full and ROI compression for 3D codecs (SirenMRI, JPEG2000-3D Lv3) and 2D conventional codec (JPEG2000-2D Lv3), while rows 3-4 display 2D neural compression codec (BCM-Net, TCM, TCM+AuxT) and HEIF Lv3. Ground truth is shown in the leftmost column, with the ROI bounding box (white rectangle) indicating the cropped region.</caption>
+        </figure>
+<!--  %****␣main.tex␣Line␣425␣**** -->        <para xml:id="S4.SS2.SSS1.p1">
+          <p>The results of the sample reconstruction across different codecs are presented in Figure <ref labelref="LABEL:fig:visual_comparison"/>.
+3D compression methods (SirenMRI, JPEG2000-3D) produce smooth reconstructions preserving overall brain structure. 2D methods show varied characteristics: JPEG2000-2D and HEIF show high visual fidelity, while neural methods (BCM-Net, TCM, TCM+AuxT) preserve fine anatomical details. BCM-Net produces near-lossless quality closely matching the ground truth. Visual inspection shows that most algorithms produce similar reconstruction quality between full and ROI modes.</p>
+        </para>
+      </subsubsection>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=" ">5</tag>Discussion &amp; Conclusion</title>
+<!--  %전체적인␣결과␣요약 -->    <subsection inlist="toc" xml:id="S5.SS1">
+      <tags>
+        <tag>5.1</tag>
+        <tag role="autoref">subsection 5.1</tag>
+        <tag role="refnum">5.1</tag>
+        <tag role="typerefnum">§5.1</tag>
+      </tags>
+      <title><tag close=" ">5.1</tag>Compression Efficiency and Performance Gains</title>
+      <para xml:id="S5.SS1.p1">
+        <p>The MedROI framework demonstrates substantial performance improvements across most evaluated compression algorithms. By removing non-diagnostic background regions, MedROI reduces the number of voxels requiring compression, leading to improvements in compression ratios, encoding time, and decoding time across diverse algorithm architectures.</p>
+      </para>
+      <para xml:id="S5.SS1.p2">
+        <p>Across evaluated methods, the framework consistently improves both compression efficiency and computational cost. Neural compression methods show substantial compression ratio gains, while conventional codecs demonstrate moderate but consistent improvements. Processing time reductions occur universally due to the decreased volume size requiring compression and decompression operations.</p>
+      </para>
+<!--  %잘나온␣모델&amp;개선이␣없는␣모델␣설명(이유) -->    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS2">
+      <tags>
+        <tag>5.2</tag>
+        <tag role="autoref">subsection 5.2</tag>
+        <tag role="refnum">5.2</tag>
+        <tag role="typerefnum">§5.2</tag>
+      </tags>
+      <title><tag close=" ">5.2</tag>Algorithm-Specific Effectiveness</title>
+      <paragraph inlist="toc" xml:id="S5.SS2.SSS0.Px1">
+        <title>Performance across algorithm types.</title>
+        <para xml:id="S5.SS2.SSS0.Px1.p1">
+          <p>Among 2D neural compression methods, TCM+AuxT achieves compression ratio improvement from 39.67 to 56.75 while reducing compression time from 19.80s to 18.00s and decompression time from 21.46s to 19.46s. BCM-Net demonstrates compression ratio increase from 1.35 to 3.55 with decompression time reduction from 15.06s to 9.062s. TCM maintains the highest absolute compression ratio of 81.31 (from 79.37) while reducing compression time from 20.56s to 17.84s and decompression time from 21.41s to 18.60s. Conventional 2D JPEG2000 shows consistent improvements, with level 3 achieving compression ratio increase from 20.35 to 27.37 alongside compression time reduction from 1.701s to 1.380s and decompression time from 0.350s to 0.265s.</p>
+        </para>
+        <para xml:id="S5.SS2.SSS0.Px1.p2">
+          <p>For 3D volumetric methods, SirenMRI achieves compression time reduction from 720.7s to 540.6s while maintaining compression ratio from 176.8 to 177.8. JPEG2000 3D shows improvements across all quality levels, with level 5 increasing compression ratio from 13.63 to 14.23 while reducing compression time from 2.742s to 2.446s and decompression time from 1.009s to 0.204s.</p>
+        </para>
+        <para xml:id="S5.SS2.SSS0.Px1.p3">
+          <p>These improvements stem from algorithm-specific characteristics. Neural networks learn data-dependent compression strategies sensitive to input distribution, and ROI cropping presents networks with concentrated anatomical content while eliminating spatially uniform background regions that consume encoding capacity. 2D JPEG2000’s wavelet decomposition benefits from processing only tissue regions where transform coefficients encode meaningful anatomical variations. For 3D methods, processing smaller volumes reduces computational operations required by both volumetric wavelet decomposition and implicit neural representations.</p>
+        </para>
+      </paragraph>
+      <paragraph inlist="toc" xml:id="S5.SS2.SSS0.Px2">
+        <title>Framework versatility.</title>
+        <para xml:id="S5.SS2.SSS0.Px2.p1">
+          <p>While HEIF shows limited compression ratio improvement (level 1: 39.38<Math mode="inline" tex="\rightarrow" text="rightarrow" xml:id="S5.SS2.SSS0.Px2.p1.m1">
+              <XMath>
+                <XMTok name="rightarrow" role="ARROW">→</XMTok>
+              </XMath>
+            </Math>38.54, level 3: 5.907<Math mode="inline" tex="\rightarrow" text="rightarrow" xml:id="S5.SS2.SSS0.Px2.p1.m2">
+              <XMath>
+                <XMTok name="rightarrow" role="ARROW">→</XMTok>
+              </XMath>
+            </Math>5.450), it still benefits from reduced processing times. HEIF, based on HEVC/H.265, employs prediction and transform coding strategies optimized for natural images containing uniform regions. Hannuksela et al. demonstrated that HEVC achieves 97% bit rate reduction for content where the majority of the scene remains static <cite class="ltx_citemacro_cite">[<bibref bibrefs="Hannuksela2015" separator="," yyseparator=","/>]</cite>, indicating that uniform background regions require minimal bitrate. ROI cropping removes these efficiently-encoded regions, limiting compression ratio improvements. Nevertheless, the framework demonstrates effectiveness across the majority of evaluated algorithms, establishing MedROI as a versatile ROI-centric compression framework applicable to diverse compression architectures without requiring method-specific modifications.
+<!--  %****␣main.tex␣Line␣450␣**** --></p>
+        </para>
+      </paragraph>
+    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS3">
+      <tags>
+        <tag>5.3</tag>
+        <tag role="autoref">subsection 5.3</tag>
+        <tag role="refnum">5.3</tag>
+        <tag role="typerefnum">§5.3</tag>
+      </tags>
+      <title><tag close=" ">5.3</tag>Practical Applications</title>
+      <para xml:id="S5.SS3.p1">
+        <p>The continued growth of medical imaging data creates substantial challenges for research data management and distribution. Large-scale neuroimaging studies generate terabyte-scale datasets that must be stored, maintained, and shared across research institutions. Moreover, improved comprassion ratios substntially reduce data tranfer overhead, enabling faster and more efficient sharing of large imaging datasets in multi-center collaborations and public research repositories worldwide.</p>
+      </para>
+      <para xml:id="S5.SS3.p2">
+        <p>MedROI addresses these challenges through high compression efficiency and reduced processing times. For example, combining the framework with TCM on the ADNI dataset (200 volumes, 4.4GB) achieves 81.3:1 compression ratio while reducing compression time from 20.56s to 17.84s and decompression time from 21.41s to 18.60s per volume. Such compression efficiency and computational performance improvements directly translate to reduced storage infrastructure costs and faster data processing workflows.</p>
+      </para>
+<!--  %mammo␣실험내용 -->      <para xml:id="S5.SS3.p3">
+        <p>We conducted a small pilot using an additional dataset, INbreast (a different modality and anatomy
+<cite class="ltx_citemacro_cite">[<bibref bibrefs="mammo" separator="," yyseparator=","/>]</cite>, to assess whether MedROI effects persist beyond ADNI. Mammogram data from 15 participants were evaluated using the TCM and JPEG2000 2D codecs. TCM exhibited a 75.7% increase in CR, JPEG2000 lv1 and lv3 a 74.6% increase, and JPEG2000 lv5 a 44.9% increase. Compression and decompression times decreased significantly in all cases.</p>
+      </para>
+      <para xml:id="S5.SS3.p4">
+        <p>The framework’s codec-agnostic design enables deployment across diverse institutional environments with varying computational resources and existing compression infrastructure. Institutions can select compression algorithms matching their specific requirements–whether prioritizing maximum compression efficiency with neural methods or computational simplicity with conventional codecs–while consistently benefiting from the MedROI framework.</p>
+      </para>
+<!--  %한계점␣:␣다른␣데이터셋␣실험␣X,␣ROI␣method,␣임상적␣증명필요 -->    </subsection>
+    <subsection inlist="toc" xml:id="S5.SS4">
+      <tags>
+        <tag>5.4</tag>
+        <tag role="autoref">subsection 5.4</tag>
+        <tag role="refnum">5.4</tag>
+        <tag role="typerefnum">§5.4</tag>
+      </tags>
+      <title><tag close=" ">5.4</tag>Limitations &amp; Future Work</title>
+      <para xml:id="S5.SS4.p1">
+        <p>This study has several limitations that should be acknowledged. First, we evaluate MedROI primarily on the ADNI brain MRI dataset consisting of T1-weighted scans. Only a small pilot study using additional mammography data was conducted to assess generalizability. An extensive evaluation on diverse organs and modalities remains necessary to establish broader applicability.</p>
+      </para>
+      <para xml:id="S5.SS4.p2">
+        <p>Also, our quality assessment relies on PSNR and SSIM metrics. While PSNR &gt; 30 dB serves as an established quality threshold for medical imaging, these metrics do not directly measure diagnostic utility. Clinical validation studies involving diagnostic accuracy assessment would provide more direct evidence of the framework’s suitability for clinical deployment.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:discussion_conclusion" xml:id="S5.SS5">
+      <tags>
+        <tag>5.5</tag>
+        <tag role="autoref">subsection 5.5</tag>
+        <tag role="refnum">5.5</tag>
+        <tag role="typerefnum">§5.5</tag>
+      </tags>
+      <title><tag close=" ">5.5</tag>Conclusion</title>
+      <para xml:id="S5.SS5.p1">
+        <p>We presented MedROI, a codec-agnostic ROI-centric framework for medical image compression that removes non-diagnostic background prior to encoding and stores only a fixed 54-byte metadata record for spatial restoration. MedROI was evaluated across 6 codec configurations spanning conventional codecs and neural compressors. Across most configurations, it yields statistically significant gains in compression ratio and consistently reduces both compression and decompression time, while maintaining comparable reconstruction quality. Overall, MedROI offers a practical plug-and-play strategy for storing and transferring large medical imaging datasets without modifying existing codecs. Future work will extend validation to additional anatomies and modalities, investigate more robust ROI extraction beyond global thresholding, and incorporate task- or clinician-centered evaluation of diagnostic fidelity.</p>
+      </para>
+<!--  %****␣main.tex␣Line␣475␣**** 
+     %__␣Bibliography␣__
+     %BibTeX␣users␣should␣specify␣bibliography␣style␣’splncs04’.
+     %References␣will␣then␣be␣sorted␣and␣formatted␣in␣the␣correct␣style.
+     %\bibliographystyle{splncs04}
+     %\bibliography{mybibliography}-->    </subsection>
+  </section>
+  <bibliography xml:id="bib">
+    <title>References</title>
+    <biblist>
+      <bibitem key="Kiryati2021" xml:id="bib.bib1">
+        <tags>
+          <tag>[1]</tag>
+          <tag role="autoref">1</tag>
+          <tag role="refnum">1</tag>
+        </tags>
+        <bibblock>
+Kiryati, N., Landau, Y.: Dataset growth in medical image analysis research. Journal of Imaging 7(8), 155 (2021)
+</bibblock>
+      </bibitem>
+      <bibitem key="Tong2025" xml:id="bib.bib2">
+        <tags>
+          <tag>[2]</tag>
+          <tag role="autoref">2</tag>
+          <tag role="refnum">2</tag>
+        </tags>
+        <bibblock>
+Tong, G., Liu, S., Lv, Y., Pei, H., Fan, F.-L.: A survey on medical image compression: from traditional to learning-based. arXiv preprint arXiv:2507.10615 (2025)
+<!--  %****␣main.tex␣Line␣500␣**** --></bibblock>
+      </bibitem>
+      <bibitem key="Ig2017" xml:id="bib.bib3">
+        <tags>
+          <tag>[3]</tag>
+          <tag role="autoref">3</tag>
+          <tag role="refnum">3</tag>
+        </tags>
+        <bibblock>
+National Electrical Manufacturers Association: Digital imaging and communications in medicine (DICOM) standard. NEMA PS3 / ISO 12052, Rosslyn, VA, USA (2017)
+</bibblock>
+      </bibitem>
+      <bibitem key="Baiee2024" xml:id="bib.bib4">
+        <tags>
+          <tag>[4]</tag>
+          <tag role="autoref">4</tag>
+          <tag role="refnum">4</tag>
+        </tags>
+        <bibblock>
+Baiee, S.H., AL-Assadi, T.A.: Deep learning-based model for medical image compression. Journal of Intelligent Systems and Internet of Things 13(2), 192–201 (2024)
+</bibblock>
+      </bibitem>
+      <bibitem key="Shei2025" xml:id="bib.bib5">
+        <tags>
+          <tag>[5]</tag>
+          <tag role="autoref">5</tag>
+          <tag role="refnum">5</tag>
+        </tags>
+        <bibblock>
+Sheibanifard, A., Yu, H., Ruan, Z., Zhang, J.J.: An end-to-end implicit neural representation architecture for medical volume data. PLOS ONE 20(1), e0314944 (2025)
+</bibblock>
+      </bibitem>
+      <bibitem key="Liu2017" xml:id="bib.bib6">
+        <tags>
+          <tag>[6]</tag>
+          <tag role="autoref">6</tag>
+          <tag role="refnum">6</tag>
+        </tags>
+        <bibblock>
+Liu, F., Hernandez-Cabronero, M., Sanchez, V., Marcellin, M.W., Bilgin, A.: The current role of image compression standards in medical imaging. Information (Basel) 8(4), 131 (2017)
+</bibblock>
+      </bibitem>
+      <bibitem key="Prakash2021" xml:id="bib.bib7">
+        <tags>
+          <tag>[7]</tag>
+          <tag role="autoref">7</tag>
+          <tag role="refnum">7</tag>
+        </tags>
+        <bibblock>
+Prakash Tunga P., Singh, V.: Compression of MRI brain images based on automatic extraction of tumor region. International Journal of Electrical and Computer Engineering 11(5), 3964–3976 (2021)
+</bibblock>
+      </bibitem>
+      <bibitem key="bcm" xml:id="bib.bib8">
+        <tags>
+          <tag>[8]</tag>
+          <tag role="autoref">8</tag>
+          <tag role="refnum">8</tag>
+        </tags>
+        <bibblock>
+Liu, X., Wang, M., Wang, S., Kwong, S.: Bilateral Context Modeling for Residual Coding in Lossless 3D Medical Image Compression. IEEE Transactions on Image Processing 33, 2502–2513 (2024)
+</bibblock>
+      </bibitem>
+      <bibitem key="siren" xml:id="bib.bib9">
+        <tags>
+          <tag>[9]</tag>
+          <tag role="autoref">9</tag>
+          <tag role="refnum">9</tag>
+        </tags>
+        <bibblock>
+Mancini, M., Jones, D.K., Palombo, M.: Lossy compression of multidimensional medical images using sinusoidal activation networks: an evaluation study. Lecture Notes in Computer Science (or if arXiv only) arXiv preprint arXiv:2208.01602 (2022)
+</bibblock>
+      </bibitem>
+      <bibitem key="tcm+auxt" xml:id="bib.bib10">
+        <tags>
+          <tag>[10]</tag>
+          <tag role="autoref">10</tag>
+          <tag role="refnum">10</tag>
+        </tags>
+        <bibblock>
+Li, H., Li, S., Dai, W., Cao, M., Kan, N., Li, C., Zou, J., Xiong, H.: On disentangled training for nonlinear transform in learned image compression. In: Proceedings of the International Conference on Learning Representations (ICLR) (2025) / arXiv preprint arXiv:2501.13751 (2025)
+<!--  %****␣main.tex␣Line␣525␣**** --></bibblock>
+      </bibitem>
+      <bibitem key="tcm" xml:id="bib.bib11">
+        <tags>
+          <tag>[11]</tag>
+          <tag role="autoref">11</tag>
+          <tag role="refnum">11</tag>
+        </tags>
+        <bibblock>
+Liu, J., Sun, H., Katto, J.: Learned Image Compression With Mixed Transformer-CNN Architectures. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 14388–14397 (2023)
+</bibblock>
+      </bibitem>
+      <bibitem key="Li2025" xml:id="bib.bib12">
+        <tags>
+          <tag>[12]</tag>
+          <tag role="autoref">12</tag>
+          <tag role="refnum">12</tag>
+        </tags>
+        <bibblock>
+Li, S., Lu, J., Hu, Y., Mattos, L.S., Li, Z.: Towards scalable medical image compression using hybrid model analysis. Journal of Big Data 12(1), 45 (2025)
+</bibblock>
+      </bibitem>
+      <bibitem key="Rosaline2024" xml:id="bib.bib13">
+        <tags>
+          <tag>[13]</tag>
+          <tag role="autoref">13</tag>
+          <tag role="refnum">13</tag>
+        </tags>
+        <bibblock>
+Rosaline, S., Paulraj, D.: A novel approach for ROI based medical image compression using lifting wavelets. In: Proceedings of the 7th International Conference on Inventive Computation Technologies (ICICT), pp. 2077–2082 (2024)
+</bibblock>
+      </bibitem>
+      <bibitem key="jpeg" xml:id="bib.bib14">
+        <tags>
+          <tag>[14]</tag>
+          <tag role="autoref">14</tag>
+          <tag role="refnum">14</tag>
+        </tags>
+        <bibblock>
+Marcellin, M.W., Gormish, M.J., Bilgin, A., Boliek, M.P.: An overview of JPEG-2000. Proceedings of the Data Compression Conference, pp. 523–541 (2000)
+</bibblock>
+      </bibitem>
+      <bibitem key="Ting2015" xml:id="bib.bib15">
+        <tags>
+          <tag>[15]</tag>
+          <tag role="autoref">15</tag>
+          <tag role="refnum">15</tag>
+        </tags>
+        <bibblock>
+Ting, L.S., Weng, D.Y.F., Manap, N.B.A.: A novel approach for arbitrary-shape ROI compression of medical images using principal component analysis (PCA). Trends in Applied Sciences Research 10(1), 68 (2015)
+</bibblock>
+      </bibitem>
+      <bibitem key="heif" xml:id="bib.bib16">
+        <tags>
+          <tag>[16]</tag>
+          <tag role="autoref">16</tag>
+          <tag role="refnum">16</tag>
+        </tags>
+        <bibblock>
+International Organization for Standardization. (2017). ISO/IEC 23008-12: High Efficiency Image File Format (HEIF). ISO.
+</bibblock>
+      </bibitem>
+      <bibitem key="Hannuksela2015" xml:id="bib.bib17">
+        <tags>
+          <tag>[17]</tag>
+          <tag role="autoref">17</tag>
+          <tag role="refnum">17</tag>
+        </tags>
+        <bibblock>
+Hannuksela, M.M., Lainema, J., Malamal Vadakital, V.K.: The High Efficiency Image File Format Standard. IEEE Signal Processing Magazine 32(4), 150-156 (2015)
+</bibblock>
+      </bibitem>
+      <bibitem key="ADNI" xml:id="bib.bib18">
+        <tags>
+          <tag>[18]</tag>
+          <tag role="autoref">18</tag>
+          <tag role="refnum">18</tag>
+        </tags>
+        <bibblock>
+Jack, C.R., Bernstein, M.A., Fox, N.C., et al.: The Alzheimer’s Disease
+Neuroimaging Initiative (ADNI): MRI methods. Journal of Magnetic Resonance
+Imaging 27(4), 685-691 (2008)
+<!--  %****␣main.tex␣Line␣550␣**** --></bibblock>
+      </bibitem>
+      <bibitem key="mammo" xml:id="bib.bib19">
+        <tags>
+          <tag>[19]</tag>
+          <tag role="autoref">19</tag>
+          <tag role="refnum">19</tag>
+        </tags>
+        <bibblock>
+Ramanathan, S.P.: INbreast dataset. Kaggle (2020). https://www.kaggle
+.com/datasets/ramanathansp20/inbreast-dataset (accessed Jan 13, 2026)
+</bibblock>
+      </bibitem>
+    </biblist>
+  </bibliography>
+</document>

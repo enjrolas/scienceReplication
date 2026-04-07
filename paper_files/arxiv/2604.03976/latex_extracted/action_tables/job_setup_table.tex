@@ -1,0 +1,32 @@
+% -------------------------------
+% Table A: Job setup
+% -------------------------------
+\begin{table}[!ht]
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{3.3cm}p{2.2cm}p{4.4cm}p{3.5cm}}
+\hline
+\textbf{Action} & \textbf{Sender} & \textbf{Required fields} & \textbf{Effect} \\
+\hline
+\texttt{SubmitRequest} & Requestor &
+\texttt{\{job\_id, task\_spec, fee\_terms, principal\_terms?\}} &
+Creates job; enters \texttt{REQUEST} \\
+\texttt{AcceptRequest}; \texttt{RejectRequest} & Business agent &
+\texttt{\{job\_id, decision, reason?\}} &
+Accept $\rightarrow$ \texttt{NEGOTIATION}; reject $\rightarrow$ \texttt{CANCELLED} \\
+\texttt{ProposeAgreement} & Either party &
+\texttt{\{job\_id, agreement\_draft\}} &
+Updates draft terms \\
+\texttt{SignAgreement} & Requestor / Business agent &
+\texttt{\{job\_id, agreement\_hash\}} &
+Both signatures bind $\mathcal{A}$; enter \texttt{TRANSACTION} \\
+\texttt{CancelJob} & Either party &
+\texttt{\{job\_id, agreement\_hash, reason, signature\}} &
+Transitions to \texttt{CANCELLED} if permitted by $\mathcal{A}$ \\
+\hline
+\end{tabular}
+\caption{\textsc{ARS} actions for job creation and agreement binding.}
+\label{tab:arp-actions-setup}
+\end{table}

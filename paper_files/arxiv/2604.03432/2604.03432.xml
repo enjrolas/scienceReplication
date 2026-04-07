@@ -1,0 +1,1521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.03432/latex_extracted"?>
+<?latexml class="llncs" options="runningheads"?>
+<?latexml package="fontenc" options="T1"?>
+<?latexml package="booktabs"?>
+<?latexml package="graphicx"?>
+<?latexml package="ifsym" options="misc"?>
+<?latexml package="acronym" options="nolist"?>
+<?latexml package="babel" options="english"?>
+<?latexml package="randtext"?>
+<?latexml package="algorithm"?>
+<?latexml package="algpseudocode"?>
+<?latexml package="xcolor"?>
+<?latexml package="rotating"?>
+<?latexml package="cite"?>
+<?latexml package="multirow"?>
+<?latexml package="multicol"?>
+<?latexml package="booktabs"?>
+<?latexml package="threeparttable"?>
+<?latexml package="graphicx"?>
+<?latexml package="nicefrac"?>
+<?latexml package="amsmath"?>
+<?latexml package="standalone" options="mode=buildnew"?>
+<?latexml package="pgfplots"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title xml:lang="en">YANA: Bridging the Neuromorphic Simulation-to-Hardware Gap</title>
+  <creator role="author" xml:lang="en">
+    <personname>
+Brian Pachideh (<ERROR class="undefined">\Letter</ERROR>)</personname>
+    <contact role="institute">1
+FZI Research Center for Information Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">1{pachideh, nitzsche, neher, pazmino}@fzi.de</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Sven Nitzsche </personname>
+    <contact role="institute">1
+FZI Research Center for Information Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">1{pachideh, nitzsche, neher, pazmino}@fzi.de</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Moritz Neher </personname>
+    <contact role="institute">1
+FZI Research Center for Information Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">1{pachideh, nitzsche, neher, pazmino}@fzi.de</contact>
+    <contact role="institute">2Infineon Technologies, Dresden, Germany <break/>
+</contact>
+    <contact role="email">2{jann.krausse, carmen.weigelt, klaus.knobloch}@infineon.com</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Jann Krausse </personname>
+    <contact role="institute">2Infineon Technologies, Dresden, Germany <break/>
+</contact>
+    <contact role="email">2{jann.krausse, carmen.weigelt, klaus.knobloch}@infineon.com</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Carmen Weigelt </personname>
+    <contact role="institute">2Infineon Technologies, Dresden, Germany <break/>
+</contact>
+    <contact role="email">2{jann.krausse, carmen.weigelt, klaus.knobloch}@infineon.com</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Klaus Knobloch </personname>
+    <contact role="institute">2Infineon Technologies, Dresden, Germany <break/>
+</contact>
+    <contact role="email">2{jann.krausse, carmen.weigelt, klaus.knobloch}@infineon.com</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Victor Pazmino Betancourt </personname>
+    <contact role="institute">1
+FZI Research Center for Information Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">1{pachideh, nitzsche, neher, pazmino}@fzi.de</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <creator before="  " role="author" xml:lang="en">
+    <personname>Juergen Becker
+</personname>
+    <contact role="institute">1
+FZI Research Center for Information Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">1{pachideh, nitzsche, neher, pazmino}@fzi.de</contact>
+    <contact role="institute">3Karlsruhe Institute of Technology, Karlsruhe, Germany <break/>
+</contact>
+    <contact role="email">3becker@kit.edu</contact>
+  </creator>
+  <abstract name="Abstract" xml:lang="en">
+    <p>Spiking Neural Networks (SNNs) promise significant advantages over conventional Artificial Neural Networks (ANNs) for applications requiring real-time processing of temporally sparse data streams under strict power constraints – a concept known as the Neuromorphic Advantage. However, the limited availability of neuromorphic hardware creates a substantial simulation-to-hardware gap that impedes algorithmic innovation, hardware-software co-design, and the development of mature open-source ecosystems. To address this challenge, we introduce Yet Another Neuromorphic Accelerator (YANA), an FPGA-based digital SNN accelerator designed to bridge this gap by providing an accessible hardware and software framework for neuromorphic computing.
+YANA implements a five-stage, event-driven processing pipeline that fully exploits temporal and spatial sparsity while supporting arbitrary SNN topologies through point-to-point neuron connections. The architecture features an input preprocessing scheme that maintains steady event processing at one event per cycle without buffer overflow risks, and implements hardware-efficient event-driven neuron updates using lookup tables for leak calculations. We demonstrate YANA’s sparsity exploitation capabilities through experiments on the Spiking Heidelberg Digits dataset, showing near-linear scaling of inference time with both spatial and temporal sparsity levels. Deployed on the accessible AMD Kria KR260 platform, a single YANA core utilizes 740 LUTs, 918 registers, 7 BRAMS and 24 URAMs, supporting up to <Math mode="inline" tex="2^{17}" text="2 ^ 17" xml:id="m1">
+        <XMath>
+          <XMApp>
+            <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+            <XMTok meaning="2" role="NUMBER">2</XMTok>
+            <XMTok fontsize="70%" meaning="17" role="NUMBER">17</XMTok>
+          </XMApp>
+        </XMath>
+      </Math> synapses and <Math mode="inline" tex="2^{10}" text="2 ^ 10" xml:id="m2">
+        <XMath>
+          <XMApp>
+            <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+            <XMTok meaning="2" role="NUMBER">2</XMTok>
+            <XMTok fontsize="70%" meaning="10" role="NUMBER">10</XMTok>
+          </XMApp>
+        </XMath>
+      </Math> neurons. We release the YANA framework as an open-source project, providing an end-to-end solution for training, optimizing, and deploying SNNs that integrates with existing neuromorphic computing tools through the Neuromorphic Intermediate Representation (NIR).</p>
+  </abstract>
+  <keywords name="Keywords" xml:lang="en">neuromorphic computing spiking neural networks fpga event-driven hardware hardware accelerator embedded computing systems</keywords>
+  <ERROR class="undefined">\pgfplotsset</ERROR>
+  <para xml:id="p1">
+    <p>compat=1.18
+
+<text xml:lang="en">
+
+
+
+<!--  %****␣paper.tex␣Line␣25␣**** --></text></p>
+  </para>
+  <glossary class="ltx_acronym" lists="acronym" xml:lang="en">
+    <glossarylist>
+      <glossaryentry key="ANN" xml:id="id1">
+        <glossaryphrase key="ANN" role="label">ANN</glossaryphrase>
+        <glossaryphrase key="ANN" role="short">ANN</glossaryphrase>
+        <glossaryphrase key="Artificial Neuronal Network" role="long">Artificial Neuronal Network</glossaryphrase>
+        <glossaryphrase key="Artificial Neuronal Network" role="definition">Artificial Neuronal Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="AE" xml:id="id2">
+        <glossaryphrase key="AE" role="label">AE</glossaryphrase>
+        <glossaryphrase key="AE" role="short">AE</glossaryphrase>
+        <glossaryphrase key="Auto-Encoder" role="long">Auto-Encoder</glossaryphrase>
+        <glossaryphrase key="Auto-Encoder" role="definition">Auto-Encoder</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="CNN" xml:id="id3">
+        <glossaryphrase key="CNN" role="label">CNN</glossaryphrase>
+        <glossaryphrase key="CNN" role="short">CNN</glossaryphrase>
+        <glossaryphrase key="Convolutional Neural Network" role="long">Convolutional Neural Network</glossaryphrase>
+        <glossaryphrase key="Convolutional Neural Network" role="definition">Convolutional Neural Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="DNN" xml:id="id4">
+        <glossaryphrase key="DNN" role="label">DNN</glossaryphrase>
+        <glossaryphrase key="DNN" role="short">DNN</glossaryphrase>
+        <glossaryphrase key="Deep Neural Network" role="long">Deep Neural Network</glossaryphrase>
+        <glossaryphrase key="Deep Neural Network" role="definition">Deep Neural Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LSTM" xml:id="id5">
+        <glossaryphrase key="LSTM" role="label">LSTM</glossaryphrase>
+        <glossaryphrase key="LSTM" role="short">LSTM</glossaryphrase>
+        <glossaryphrase key="Long Short-Term Memory" role="long">Long Short-Term Memory</glossaryphrase>
+        <glossaryphrase key="Long Short-Term Memory" role="definition">Long Short-Term Memory</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="RNN" xml:id="id6">
+        <glossaryphrase key="RNN" role="label">RNN</glossaryphrase>
+        <glossaryphrase key="RNN" role="short">RNN</glossaryphrase>
+        <glossaryphrase key="Reccurent Neural Network" role="long">Reccurent Neural Network</glossaryphrase>
+        <glossaryphrase key="Reccurent Neural Network" role="definition">Reccurent Neural Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="NN" xml:id="id7">
+        <glossaryphrase key="NN" role="label">NN</glossaryphrase>
+        <glossaryphrase key="NN" role="short">NN</glossaryphrase>
+        <glossaryphrase key="Neural Network" role="long">Neural Network</glossaryphrase>
+        <glossaryphrase key="Neural Network" role="definition">Neural Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="ML" xml:id="id8">
+        <glossaryphrase key="ML" role="label">ML</glossaryphrase>
+        <glossaryphrase key="ML" role="short">ML</glossaryphrase>
+        <glossaryphrase key="Machine Learning" role="long">Machine Learning</glossaryphrase>
+        <glossaryphrase key="Machine Learning" role="definition">Machine Learning</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="DL" xml:id="id9">
+        <glossaryphrase key="DL" role="label">DL</glossaryphrase>
+        <glossaryphrase key="DL" role="short">DL</glossaryphrase>
+        <glossaryphrase key="Deep Learning" role="long">Deep Learning</glossaryphrase>
+        <glossaryphrase key="Deep Learning" role="definition">Deep Learning</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="AI" xml:id="id10">
+        <glossaryphrase key="AI" role="label">AI</glossaryphrase>
+        <glossaryphrase key="AI" role="short">AI</glossaryphrase>
+        <glossaryphrase key="artificial intelligence" role="long">artificial intelligence</glossaryphrase>
+        <glossaryphrase key="artificial intelligence" role="definition">artificial intelligence</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="DFT" xml:id="id11">
+        <glossaryphrase key="DFT" role="label">DFT</glossaryphrase>
+        <glossaryphrase key="DFT" role="short">DFT</glossaryphrase>
+        <glossaryphrase key="Discrete Fourier Transform" role="long">Discrete Fourier Transform</glossaryphrase>
+        <glossaryphrase key="Discrete Fourier Transform" role="definition">Discrete Fourier Transform</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="FFT" xml:id="id12">
+        <glossaryphrase key="FFT" role="label">FFT</glossaryphrase>
+        <glossaryphrase key="FFT" role="short">FFT</glossaryphrase>
+        <glossaryphrase key="Fast Fourier Transform" role="long">Fast Fourier Transform</glossaryphrase>
+        <glossaryphrase key="Fast Fourier Transform" role="definition">Fast Fourier Transform</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="STFT" xml:id="id13">
+        <glossaryphrase key="STFT" role="label">STFT</glossaryphrase>
+        <glossaryphrase key="STFT" role="short">STFT</glossaryphrase>
+        <glossaryphrase key="Short-Time Fourier transform" role="long">Short-Time Fourier transform</glossaryphrase>
+        <glossaryphrase key="Short-Time Fourier transform" role="definition">Short-Time Fourier transform</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="BPTT" xml:id="id14">
+        <glossaryphrase key="BPTT" role="label">BPTT</glossaryphrase>
+        <glossaryphrase key="BPTT" role="short">BPTT</glossaryphrase>
+        <glossaryphrase key="Backpropagation Through Time" role="long">Backpropagation Through Time</glossaryphrase>
+        <glossaryphrase key="Backpropagation Through Time" role="definition">Backpropagation Through Time</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="BP" xml:id="id15">
+        <glossaryphrase key="BP" role="label">BP</glossaryphrase>
+        <glossaryphrase key="BP" role="short">BP</glossaryphrase>
+        <glossaryphrase key="Backpropagation" role="long">Backpropagation</glossaryphrase>
+        <glossaryphrase key="Backpropagation" role="definition">Backpropagation</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LMD" xml:id="id16">
+        <glossaryphrase key="LMD" role="label">LMD</glossaryphrase>
+        <glossaryphrase key="LMD" role="short">LMD</glossaryphrase>
+        <glossaryphrase key="Local Mean Decomposition" role="long">Local Mean Decomposition</glossaryphrase>
+        <glossaryphrase key="Local Mean Decomposition" role="definition">Local Mean Decomposition</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="GRF" xml:id="id17">
+        <glossaryphrase key="GRF" role="label">GRF</glossaryphrase>
+        <glossaryphrase key="GRF" role="short">GRF</glossaryphrase>
+        <glossaryphrase key="Gaussian Receptive Field" role="long">Gaussian Receptive Field</glossaryphrase>
+        <glossaryphrase key="Gaussian Receptive Field" role="definition">Gaussian Receptive Field</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="TTFS" xml:id="id18">
+        <glossaryphrase key="TTFS" role="label">TTFS</glossaryphrase>
+        <glossaryphrase key="TTFS" role="short">TTFS</glossaryphrase>
+        <glossaryphrase key="Time-to-First-Spike" role="long">Time-to-First-Spike</glossaryphrase>
+        <glossaryphrase key="Time-to-First-Spike" role="definition">Time-to-First-Spike</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="PCA" xml:id="id19">
+        <glossaryphrase key="PCA" role="label">PCA</glossaryphrase>
+        <glossaryphrase key="PCA" role="short">PCA</glossaryphrase>
+        <glossaryphrase key="Principal component analysis" role="long">Principal component analysis</glossaryphrase>
+        <glossaryphrase key="Principal component analysis" role="definition">Principal component analysis</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="FPGA" xml:id="id20">
+        <glossaryphrase key="FPGA" role="label">FPGA</glossaryphrase>
+        <glossaryphrase key="FPGA" role="short">FPGA</glossaryphrase>
+        <glossaryphrase key="field-programmable gate array" role="long">field-programmable gate array</glossaryphrase>
+        <glossaryphrase key="field-programmable gate array" role="definition">field-programmable gate array</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="US+" xml:id="id21">
+        <glossaryphrase key="US+" role="label">US+</glossaryphrase>
+        <glossaryphrase key="US+" role="short">US+</glossaryphrase>
+        <glossaryphrase key="UltraScale+" role="long">UltraScale+</glossaryphrase>
+        <glossaryphrase key="UltraScale+" role="definition">UltraScale+</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="SoC" xml:id="id22">
+        <glossaryphrase key="SoC" role="label">SoC</glossaryphrase>
+        <glossaryphrase key="SoC" role="short">SoC</glossaryphrase>
+        <glossaryphrase key="system on chip" role="long">system on chip</glossaryphrase>
+        <glossaryphrase key="system on chip" role="definition">system on chip</glossaryphrase>
+      </glossaryentry>
+<!--  %****␣acronyms.tex␣Line␣25␣**** -->      <glossaryentry key="NoC" xml:id="id23">
+        <glossaryphrase key="NoC" role="label">NoC</glossaryphrase>
+        <glossaryphrase key="NoC" role="short">NoC</glossaryphrase>
+        <glossaryphrase key="network on chip" role="long">network on chip</glossaryphrase>
+        <glossaryphrase key="network on chip" role="definition">network on chip</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="SoM" xml:id="id24">
+        <glossaryphrase key="SoM" role="label">SoM</glossaryphrase>
+        <glossaryphrase key="SoM" role="short">SoM</glossaryphrase>
+        <glossaryphrase key="system on module" role="long">system on module</glossaryphrase>
+        <glossaryphrase key="system on module" role="definition">system on module</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LSb" xml:id="id25">
+        <glossaryphrase key="LSb" role="label">LSb</glossaryphrase>
+        <glossaryphrase key="LSb" role="short">LSb</glossaryphrase>
+        <glossaryphrase key="least significant bit" role="long">least significant bit</glossaryphrase>
+        <glossaryphrase key="least significant bit" role="definition">least significant bit</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="PL" xml:id="id26">
+        <glossaryphrase key="PL" role="label">PL</glossaryphrase>
+        <glossaryphrase key="PL" role="short">PL</glossaryphrase>
+        <glossaryphrase key="programmable logic" role="long">programmable logic</glossaryphrase>
+        <glossaryphrase key="programmable logic" role="definition">programmable logic</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="PS" xml:id="id27">
+        <glossaryphrase key="PS" role="label">PS</glossaryphrase>
+        <glossaryphrase key="PS" role="short">PS</glossaryphrase>
+        <glossaryphrase key="processing system" role="long">processing system</glossaryphrase>
+        <glossaryphrase key="processing system" role="definition">processing system</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="RTL" xml:id="id28">
+        <glossaryphrase key="RTL" role="label">RTL</glossaryphrase>
+        <glossaryphrase key="RTL" role="short">RTL</glossaryphrase>
+        <glossaryphrase key="register transfer level" role="long">register transfer level</glossaryphrase>
+        <glossaryphrase key="register transfer level" role="definition">register transfer level</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="CU" xml:id="id29">
+        <glossaryphrase key="CU" role="label">CU</glossaryphrase>
+        <glossaryphrase key="CU" role="short">CU</glossaryphrase>
+        <glossaryphrase key="control unit" role="long">control unit</glossaryphrase>
+        <glossaryphrase key="control unit" role="definition">control unit</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LUT" xml:id="id30">
+        <glossaryphrase key="LUT" role="label">LUT</glossaryphrase>
+        <glossaryphrase key="LUT" role="short">LUT</glossaryphrase>
+        <glossaryphrase key="lookup table" role="long">lookup table</glossaryphrase>
+        <glossaryphrase key="lookup table" role="definition">lookup table</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="NC" xml:id="id31">
+        <glossaryphrase key="NC" role="label">NC</glossaryphrase>
+        <glossaryphrase key="NC" role="short">NC</glossaryphrase>
+        <glossaryphrase key="Neuromorphic Computing" role="long">Neuromorphic Computing</glossaryphrase>
+        <glossaryphrase key="Neuromorphic Computing" role="definition">Neuromorphic Computing</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="SNN" xml:id="id32">
+        <glossaryphrase key="SNN" role="label">SNN</glossaryphrase>
+        <glossaryphrase key="SNN" role="short">SNN</glossaryphrase>
+        <glossaryphrase key="Spiking Neural Network" role="long">Spiking Neural Network</glossaryphrase>
+        <glossaryphrase key="Spiking Neural Network" role="definition">Spiking Neural Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LSNN" xml:id="id33">
+        <glossaryphrase key="LSNN" role="label">LSNN</glossaryphrase>
+        <glossaryphrase key="LSNN" role="short">LSNN</glossaryphrase>
+        <glossaryphrase key="Long Short-Term Spiking Neural Network" role="long">Long Short-Term Spiking Neural Network</glossaryphrase>
+        <glossaryphrase key="Long Short-Term Spiking Neural Network" role="definition">Long Short-Term Spiking Neural Network</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LIF" xml:id="id34">
+        <glossaryphrase key="LIF" role="label">LIF</glossaryphrase>
+        <glossaryphrase key="LIF" role="short">LIF</glossaryphrase>
+        <glossaryphrase key="Leaky Integrate-and-Fire" role="long">Leaky Integrate-and-Fire</glossaryphrase>
+        <glossaryphrase key="Leaky Integrate-and-Fire" role="definition">Leaky Integrate-and-Fire</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="IF" xml:id="id35">
+        <glossaryphrase key="IF" role="label">IF</glossaryphrase>
+        <glossaryphrase key="IF" role="short">IF</glossaryphrase>
+        <glossaryphrase key="Integrate-and-Fire" role="long">Integrate-and-Fire</glossaryphrase>
+        <glossaryphrase key="Integrate-and-Fire" role="definition">Integrate-and-Fire</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="LI" xml:id="id36">
+        <glossaryphrase key="LI" role="label">LI</glossaryphrase>
+        <glossaryphrase key="LI" role="short">LI</glossaryphrase>
+        <glossaryphrase key="Leaky Integrate" role="long">Leaky Integrate</glossaryphrase>
+        <glossaryphrase key="Leaky Integrate" role="definition">Leaky Integrate</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="ALIF" xml:id="id37">
+        <glossaryphrase key="ALIF" role="label">ALIF</glossaryphrase>
+        <glossaryphrase key="ALIF" role="short">ALIF</glossaryphrase>
+        <glossaryphrase key="Adaptive Leaky Integrate-and-Fire" role="long">Adaptive Leaky Integrate-and-Fire</glossaryphrase>
+        <glossaryphrase key="Adaptive Leaky Integrate-and-Fire" role="definition">Adaptive Leaky Integrate-and-Fire</glossaryphrase>
+      </glossaryentry>
+      <glossaryentry key="adex" xml:id="id38">
+        <glossaryphrase key="AdEx" role="label">AdEx</glossaryphrase>
+        <glossaryphrase key="AdEx" role="short">AdEx</glossaryphrase>
+        <glossaryphrase key="adaptive exponential integrate-and-fire" role="long">adaptive exponential integrate-and-fire</glossaryphrase>
+        <glossaryphrase key="adaptive exponential integrate-and-fire" role="definition">adaptive exponential integrate-and-fire</glossaryphrase>
+      </glossaryentry>
+    </glossarylist>
+  </glossary>
+  <section inlist="toc" xml:id="S1" xml:lang="en">
+    <tags>
+      <tag>1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <subsubsection inlist="toc" xml:id="S1.SS0.SSS1">
+      <tags>
+        <tag>1.0.1</tag>
+        <tag role="refnum">1.0.1</tag>
+        <tag role="typerefnum">§1.0.1</tag>
+      </tags>
+      <title><tag close=" ">1.0.1</tag>On the Promises of the Neuromorphic Advantage.</title>
+      <para xml:id="S1.SS0.SSS1.p1">
+        <p><glossaryref inlist="acronym" key="NC" show="long"/> (<glossaryref inlist="acronym" key="NC" show="short"/>) and <glossaryref inlist="acronym" key="SNN" show="long-plural"/> hold the promise of improving over conventional <glossaryref inlist="acronym" key="ANN" show="long-plural"/> in certain AI applications that require real-time processing of temporally sparse data streams, especially under strict power constraints <cite class="ltx_citemacro_cite">[<bibref bibrefs="bos_sub-mw_2022,shrestha_efficient_2024" separator="," yyseparator=","/>]</cite>. This concept is broadly referred to as the <text font="italic">Neuromorphic Advantage</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="diamond_comparing_2016,aimone_provable_2021,kudithipudi_neuromorphic_2025" separator="," yyseparator=","/>]</cite>. The expected advantage is rooted in algorithmic properties inherent to <glossaryref inlist="acronym" key="SNN" show="short-plural"/>, such as the sparsity in neuronal activations and connectivity, spatially and temporally sparse spike input encoding or increased expressivity through brain-inspired features like synaptic delays or some forms of online adaptivity.</p>
+      </para>
+    </subsubsection>
+    <subsubsection inlist="toc" xml:id="S1.SS0.SSS2">
+      <tags>
+        <tag>1.0.2</tag>
+        <tag role="refnum">1.0.2</tag>
+        <tag role="typerefnum">§1.0.2</tag>
+      </tags>
+      <title><tag close=" ">1.0.2</tag>The Neuromorphic Simulation-to-Hardware Gap.</title>
+      <para xml:id="S1.SS0.SSS2.p1">
+        <p>To realize the advantage, SNNs need to be deployed on neuromorphic hardware platforms which exploit the aforementioned algorithmic properties via its hardware architecture and SNN-specific processing elements.
+Architectural features that support SNNs include event-driven computation, massive parallelism, co-location of memory and processing (reducing the von Neumann bottleneck), inherent scalability, and novel mixed signal or asynchronous digital circuit designs <cite class="ltx_citemacro_cite">[<bibref bibrefs="richter_dynap-se2_2024,hoppner_spinnaker_2022,davies_taking_2021" separator="," yyseparator=","/>]</cite>.
+Despite the compelling promise of <glossaryref inlist="acronym" key="NC" show="short"/>, the practical and widespread realization of the Neuromorphic Advantage faces hurdles due to the limited availability and accessibility of event-driven neuromorphic accelerators. This scarcity creates a <text font="italic">simulation-to-hardware gap</text>: while many innovative <glossaryref inlist="acronym" key="SNN" show="short"/> algorithms and <glossaryref inlist="acronym" key="NC" show="short"/> concepts demonstrate considerable promise in simulated environments, their empirical validation, performance characterization, and iterative refinement on actual neuromorphic hardware are severely constrained. This gap, in turn, impedes:</p>
+        <itemize xml:id="S1.I1">
+          <item xml:id="S1.I1.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S1.I1.i1.p1">
+              <p><text font="bold">HW/SW Co-Design Cycle:</text> The feedback loop, where insights from hardware performance inform algorithmic refinement and new hardware designs <cite class="ltx_citemacro_cite">[<bibref bibrefs="kudithipudi_neuromorphic_2025" separator="," yyseparator=","/>]</cite>.</p>
+            </para>
+          </item>
+          <item xml:id="S1.I1.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S1.I1.i2.p1">
+              <p><text font="bold">Algorithmic Innovation:</text> Without access to real hardware, the exploration of novel SNN architectures, training methods, and optimization techniques is often limited to theoretical constructs or simulations that may not translate well to physical devices.</p>
+            </para>
+          </item>
+          <item xml:id="S1.I1.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S1.I1.i3.p1">
+              <p><text font="bold">Open-Source Ecosystem Maturation:</text> A robust open-source software ecosystem lowers the entry barrier to neuromorphic research and development. Without broad access to neuromorphic hardware, the neuromorphic equivalents to programming models, compilers, and interoperable APIs cannot mature effectively <cite class="ltx_citemacro_cite">[<bibref bibrefs="muir_road_2025" separator="," yyseparator=","/>]</cite>.</p>
+            </para>
+          </item>
+          <item xml:id="S1.I1.i4">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">4th item</tag>
+            </tags>
+            <para xml:id="S1.I1.i4.p1">
+              <p><text font="bold">Hardware-Grounded Benchmarking:</text> Establishing clear, fair, and widely accepted benchmarks that assess performance on actual neuromorphic hardware (rather than just simulation) becomes exceedingly difficult, making objective comparisons between approaches challenging <cite class="ltx_citemacro_cite">[<bibref bibrefs="yik_neurobench_2025" separator="," yyseparator=","/>]</cite>.</p>
+            </para>
+          </item>
+        </itemize>
+      </para>
+    </subsubsection>
+    <subsubsection inlist="toc" xml:id="S1.SS0.SSS3">
+      <tags>
+        <tag>1.0.3</tag>
+        <tag role="refnum">1.0.3</tag>
+        <tag role="typerefnum">§1.0.3</tag>
+      </tags>
+      <title><tag close=" ">1.0.3</tag>Related Work.</title>
+      <para xml:id="S1.SS0.SSS3.p1">
+        <p>Over several decades of neuromorphic hardware acceleration research, the field has recently reached integration levels of billions of neurons and synapses on a single chip. The recent review by Kudithipudi et al. <cite class="ltx_citemacro_cite">[<bibref bibrefs="kudithipudi_neuromorphic_2025" separator="," yyseparator=","/>]</cite> provides a comprehensive overview of the different architectures of neuromorphic accelerators. However, almost all of these systems remain unavailable to the public, serving to close the simulation-to-hardware gap for only a small number of researchers and developers. While a few systems are commercially available, they are heavily constrained in their programmability to meet strict power and area requirements for commercial viability. To properly close the simulation-to-hardware gap and enable rapid innovation in the public research space, we believe it is necessary to provide an open-source framework that allows the development of neuromorphic hardware accelerators that are both programmable and accessible to a broad community.
+Recent related work addresses the acceleration of  <glossaryref inlist="acronym" key="DL" show="long"/> (<glossaryref inlist="acronym" key="DL" show="short"/>) programmed <glossaryref inlist="acronym" key="SNN" show="short-plural"/> onto <glossaryref inlist="acronym" key="FPGA" show="long-plural"/>, backed by open-source code repositories including  <glossaryref inlist="acronym" key="RTL" show="long"/> (<glossaryref inlist="acronym" key="RTL" show="short"/>) descriptions and integration with one <glossaryref inlist="acronym" key="DL" show="short"/> training library out of the neuromorphic open-source ecosystem <cite class="ltx_citemacro_cite">[<bibref bibrefs="leone_syntzulu_2025,carpegna_spiker_2024,saulquin_modnef_2025" separator="," yyseparator=","/>]</cite>.
+At first glance, these works appear to provide a solution to the simulation-to-hardware gap, as they enable the deployment of <glossaryref inlist="acronym" key="SNN" show="short"/> models onto <glossaryref inlist="acronym" key="FPGA" show="short"/> platforms. However, these existing hardware architectures primarily support <glossaryref inlist="acronym" key="SNN" show="short"/> graphs that are constrained by the layered, sequential connectivity patterns inherent to conventional <glossaryref inlist="acronym" key="DL" show="short"/> programming models, making them inadequately prepared for arbitrary, highly recurrent <glossaryref inlist="acronym" key="SNN" show="short"/> graphs that may emerge from future neuromorphic programming paradigms. Furthermore, the aforementioned accelerators implement clock-driven updating mechanisms rather than event-driven processing, limiting their ability to exploit both spatial and temporal sparsity inherent in <glossaryref inlist="acronym" key="SNN" show="short"/> computations.
+Overall, there is a lack of open-source, event-driven neuromorphic accelerators that are designed to support arbitrary <glossaryref inlist="acronym" key="SNN" show="short"/> graphs and that can be used to close the simulation-to-hardware gap. This gap hinders the development of neuromorphic hardware accelerators that can fully exploit the Neuromorphic Advantage.</p>
+      </para>
+    </subsubsection>
+    <subsubsection inlist="toc" xml:id="S1.SS0.SSS4">
+      <tags>
+        <tag>1.0.4</tag>
+        <tag role="refnum">1.0.4</tag>
+        <tag role="typerefnum">§1.0.4</tag>
+      </tags>
+      <title><tag close=" ">1.0.4</tag>Our Contribution.</title>
+      <para xml:id="S1.SS0.SSS4.p1">
+        <p>To address the availability of event-driven, open-source frameworks that provide <glossaryref inlist="acronym" key="SNN" show="short"/> acceleration and thus bridge the simulation-to-hardware gap, we introduce Yet Another Neuromorphic Accelerator (YANA). YANA is an FPGA-based digital SNN accelerator that processes and communicates event-by-event, fully exploiting sparsity in activations, SNN connectivity, and event packet transfer.
+YANA leverages the near-memory computing paradigm and its architecture supports the acceleration of arbitrary SNN graphs, providing flexibility beyond the structures commonly found in the <glossaryref inlist="acronym" key="DL" show="short"/> programming model.</p>
+      </para>
+      <para xml:id="S1.SS0.SSS4.p2">
+        <p>We present hardware resource utilization metrics for a single YANA core and this work’s experimental prototype. We also demonstrate how YANA’s event-driven architecture can exploit temporal and spatial sparsity to reduce inference latency by deploying a suite of <glossaryref inlist="acronym" key="SNN" show="short-plural"/> with varying pruning levels and input sparsities on the Spiking Heidelberg Digits (SHD) <cite class="ltx_citemacro_cite">[<bibref bibrefs="cramer_heidelberg_2022" separator="," yyseparator=","/>]</cite> dataset.
+<!--  %****␣02_introduction.tex␣Line␣25␣**** --></p>
+      </para>
+      <para xml:id="S1.SS0.SSS4.p3">
+        <p>Furthermore, we release the first public open-source version of the YANA framework for the training, optimization, and deployment of SNNs onto a single YANA core.
+<note mark="1" role="footnote" xml:id="footnotex1"><tags>
+              <tag>1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">footnote 1</tag>
+            </tags>https://github.com/pachideh/yana-prototype</note></p>
+      </para>
+    </subsubsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:yana_hw_accelerator" xml:id="S2" xml:lang="en">
+    <tags>
+      <tag>2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>YANA Hardware Accelerator</title>
+    <subsection inlist="toc" xml:id="S2.SS1">
+      <tags>
+        <tag>2.1</tag>
+        <tag role="refnum">2.1</tag>
+        <tag role="typerefnum">§2.1</tag>
+      </tags>
+      <title><tag close=" ">2.1</tag>YANA Core Architecture</title>
+      <para xml:id="S2.SS1.p1">
+        <p>YANA is a digital <glossaryref inlist="acronym" key="SNN" show="short"/> emulator, as all of its logic and memory resources are dedicated either to implementing neurosynaptic operations or to transporting events. Furthermore, YANA is an event-driven processor; it only processes events once they arrive and is otherwise idle. It implements a near-memory processing pipeline that encapsulates multiple neurons and synapses. The neurons and synapses share the same processing logic within the core in time-multiplexed fashion, which reduces resource utilization <cite class="ltx_citemacro_cite">[<bibref bibrefs="frenkel_bottom-up_2023" separator="," yyseparator=","/>]</cite>. Furthermore, processing and communication resources operate concurrently – neuron state updates, spike emission and spike transport all occur in parallel within a timestep.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:YANA-core-block-diagram" xml:id="S2.F1">
+        <tags>
+          <tag>Figure 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Figure 1</tag>
+        </tags>
+        <p align="center"><text width="433.6pt"><graphics candidates="media/YANA_core_block_diagram.pdf" graphic="media/YANA_core_block_diagram.pdf" options="width=411.939pt" xml:id="S2.F1.g1"/></text></p>
+        <toccaption class="ltx_centering"><tag close=" ">1</tag>High-level block diagram of the YANA core.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 1</tag>High-level block diagram of the YANA core.</caption>
+      </figure>
+      <para xml:id="S2.SS1.p2">
+        <p>The core’s processing pipeline consists of five main stages as depicted in Figure <ref labelref="LABEL:YANA-core-block-diagram"/>. The stages are briefly described as follows:</p>
+        <itemize xml:id="S2.I1">
+          <item xml:id="S2.I1.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S2.I1.i1.p1">
+              <p><text font="bold">Input Stage (RX):</text>
+The input stage receives events from two possible stream sources, either from the external interconnect or from the core’s internal feedback path.</p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S2.I1.i2.p1">
+              <p><text font="bold">Synapse Stage:</text>
+The synapse stage preprocesses input events on arrival. The preprocessing results in pre-synaptic weight sums for each neuron, which are stored in dedicated BRAMs. The synapse stage also tracks which neurons have received at least one event in the current timestep, storing this information in the Hot Neurons FIFO.</p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S2.I1.i3.p1">
+              <p><text font="bold">Neuron Stage:</text>
+The neuron stage updates the states of all hot neurons and queues spiking neurons for spike emission in the axon stage. It currently implements a Forward-Euler  <glossaryref inlist="acronym" key="LIF" show="long"/> (<glossaryref inlist="acronym" key="LIF" show="short"/>) neuron model, through which state updates caused by leak can be deferred to the arrival time of the next event.</p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i4">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">4th item</tag>
+            </tags>
+            <para xml:id="S2.I1.i4.p1">
+              <p><text font="bold">Axon Stage:</text>
+In the axon stage, each spiking neuron triggers the loading and emission of its associated list of post-synaptic events. The amount of post-synaptic connections is programmed per-neuron in a mapping table.</p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i5">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">5th item</tag>
+            </tags>
+            <para xml:id="S2.I1.i5.p1">
+              <p><text font="bold">Output Stage (TX):</text>
+For each emitted event, the output stage checks whether the event is destined for a synapse within the core or for an external destination, branching it to the internal feedback path or the external interconnect, respectively.</p>
+            </para>
+          </item>
+        </itemize>
+      </para>
+      <para class="ltx_noindent" xml:id="S2.SS1.p3">
+        <p>The following sections detail key aspects of YANA’s implementation:
+<break/><!--  %****␣03_yana_architecture.tex␣Line␣25␣**** --><text font="bold">Timestep Progression Scheme:</text>
+The core operates in discrete timesteps and derives the progression of timesteps from its input event workload. Each stage in the processing pipeline sets a load-dependent idle signal that is read by the core’s local control logic. Once the whole pipeline is idle, the control logic sets the signal <Math mode="inline" tex="core_{done}" text="c * o * r * e _ (d * o * n * e)" xml:id="S2.SS1.p3.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                <XMTok font="italic" role="UNKNOWN">o</XMTok>
+                <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                  <XMApp>
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">d</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">o</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">n</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">e</XMTok>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>, which signifies that the core is ready to progress to the next timestep.
+Ultimately, an external layer of control logic is responsible for progressing the core’s input signal <Math mode="inline" tex="timestep" text="t * i * m * e * s * t * e * p" xml:id="S2.SS1.p3.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                <XMTok font="italic" role="UNKNOWN">m</XMTok>
+                <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                <XMTok font="italic" role="UNKNOWN">s</XMTok>
+                <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, depicted in Figure <ref labelref="LABEL:YANA-core-block-diagram"/>.
+In this work’s evaluation, we implement timestep progression logic for the use case of processing neuromorphic datasets. Dedicated control logic reads timestamps from the dataset sample’s events and progresses the timestep
+accordingly, without any downtime related to elapsed wall time; depending on the workload, this enables faster-than-realtime processing.
+<break/><text font="bold">Input Event Preprocessing Scheme:</text>
+The discretization of timesteps in <glossaryref inlist="acronym" key="SNN" show="short-plural"/> requires that each event is assigned to a specific timestep for processing. YANA’s synapse stage preprocesses arriving
+input events to completely avoid raw input event buffering while maintaining a steady input rate of <Math mode="inline" tex="1\nicefrac{{\text{event}}}{{\text{cycle}}}" text="1 * ([event] / [cycle])" xml:id="S2.SS1.p3.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok meaning="1" role="NUMBER">1</XMTok>
+                <XMApp>
+                  <XMTok meaning="divide" role="MULOP" stretchy="true">/</XMTok>
+                  <XMText>event</XMText>
+                  <XMText>cycle</XMText>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>. As events arrive, the synapse stage continuously integrates the associated weights into per-neuron weight sums. A weight sum represents the total (unleaked) input current that will be added to the respective neuron’s membrane potential in
+the next timestep.
+<break/><text font="bold">Event-driven Neuron Updates:</text>
+YANA updates neuron states only once they are <text font="italic">hot</text>, that is, once they have received at least one event in the current timestep. This applies both to integrating input currents and to processing continuous leak dynamics. To this end, the neuron stage implements the forward Euler solution of the <glossaryref inlist="acronym" key="LIF" show="short"/> neuron model:</p>
+        <equation labels="LABEL:eq:lif_update" xml:id="S2.E1">
+          <tags>
+            <tag>(1)</tag>
+            <tag role="refnum">1</tag>
+          </tags>
+          <Math mode="display" tex="\tilde{u}(t+n)=u(t)\cdot\left(1-\frac{1}{\tau_{\text{mem}}}\right)^{n}+\frac{1%&#10;}{\tau_{\text{mem}}}\cdot i(t)" text="tilde@(u) * (t + n) = (u * t) cdot (1 - 1 / tau _ [mem]) ^ n + ((1 / tau _ [mem]) cdot i) * t" xml:id="S2.E1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMApp>
+                    <XMTok name="tilde" role="OVERACCENT" stretchy="false">~</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                  </XMApp>
+                  <XMDual>
+                    <XMRef idref="S2.E1.m1.3"/>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S2.E1.m1.3">
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                </XMApp>
+                <XMApp>
+                  <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                  <XMApp>
+                    <XMTok name="cdot" role="MULOP">⋅</XMTok>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                      <XMDual>
+                        <XMRef idref="S2.E1.m1.1"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMTok font="italic" role="UNKNOWN" xml:id="S2.E1.m1.1">t</XMTok>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMDual>
+                        <XMRef idref="S2.E1.m1.4"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="true">(</XMTok>
+                          <XMApp xml:id="S2.E1.m1.4">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMTok meaning="1" role="NUMBER">1</XMTok>
+                            <XMApp>
+                              <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                              <XMTok meaning="1" role="NUMBER">1</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post3"/>
+                                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                                <XMText><text fontsize="70%">mem</text></XMText>
+                              </XMApp>
+                            </XMApp>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="true">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">n</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMApp>
+                      <XMTok name="cdot" role="MULOP">⋅</XMTok>
+                      <XMApp>
+                        <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                        <XMTok meaning="1" role="NUMBER">1</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                          <XMText><text fontsize="70%">mem</text></XMText>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMDual>
+                      <XMRef idref="S2.E1.m1.2"/>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" role="UNKNOWN" xml:id="S2.E1.m1.2">t</XMTok>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>
+        </equation>
+        <equation labels="LABEL:eq:lif_spike_condition" xml:id="S2.E2">
+          <tags>
+            <tag>(2)</tag>
+            <tag role="refnum">2</tag>
+          </tags>
+          <Math mode="display" tex="u(t+n)=\begin{cases}\tilde{u}(t+n)&amp;\text{if }\tilde{u}(t+n)\leq u_{\text{th}}%&#10;\\&#10;0&amp;\text{if }\tilde{u}(t+n)&gt;u_{\text{th}}\text{ (spike occurs)}\\&#10;0&amp;\text{if }n&gt;n_{\text{max}}\text{ (round to 0)}\\&#10;\end{cases}" text="u * (t + n) = cases@(tilde@(u) * (t + n), [if ] * tilde@(u) * (t + n) less= u _ [th], 0, [if ] * tilde@(u) * (t + n) &gt; u _ [th] * [ (spike occurs)], 0, [if ] * n &gt; n _ [max] * [ (round to 0)])" xml:id="S2.E2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                  <XMDual>
+                    <XMRef idref="S2.E2.m1.7"/>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S2.E2.m1.7">
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                </XMApp>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="cases"/>
+                    <XMRef idref="S2.E2.m1.1"/>
+                    <XMRef idref="S2.E2.m1.2"/>
+                    <XMRef idref="S2.E2.m1.3"/>
+                    <XMRef idref="S2.E2.m1.4"/>
+                    <XMRef idref="S2.E2.m1.5"/>
+                    <XMRef idref="S2.E2.m1.6"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="true">{</XMTok>
+                    <XMArray>
+                      <XMRow>
+                        <XMCell align="left">
+                          <XMApp xml:id="S2.E2.m1.1">
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok name="tilde" role="OVERACCENT" stretchy="false">~</XMTok>
+                              <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                            </XMApp>
+                            <XMDual>
+                              <XMRef idref="S2.E2.m1.1.1"/>
+                              <XMWrap>
+                                <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                <XMApp xml:id="S2.E2.m1.1.1">
+                                  <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                                  <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                                  <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                                </XMApp>
+                                <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                              </XMWrap>
+                            </XMDual>
+                          </XMApp>
+                        </XMCell>
+                        <XMCell align="left">
+                          <XMApp xml:id="S2.E2.m1.2">
+                            <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMText>if </XMText>
+                              <XMApp>
+                                <XMTok name="tilde" role="OVERACCENT" stretchy="false">~</XMTok>
+                                <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                              </XMApp>
+                              <XMDual>
+                                <XMRef idref="S2.E2.m1.2.1"/>
+                                <XMWrap>
+                                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                  <XMApp xml:id="S2.E2.m1.2.1">
+                                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                                    <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                                    <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                                  </XMApp>
+                                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post6"/>
+                              <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                              <XMText><text fontsize="70%">th</text></XMText>
+                            </XMApp>
+                          </XMApp>
+                        </XMCell>
+                      </XMRow>
+                      <XMRow>
+                        <XMCell align="left">
+                          <XMTok meaning="0" role="NUMBER" xml:id="S2.E2.m1.3">0</XMTok>
+                        </XMCell>
+                        <XMCell align="left">
+                          <XMApp xml:id="S2.E2.m1.4">
+                            <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMText>if </XMText>
+                              <XMApp>
+                                <XMTok name="tilde" role="OVERACCENT" stretchy="false">~</XMTok>
+                                <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                              </XMApp>
+                              <XMDual>
+                                <XMRef idref="S2.E2.m1.4.1"/>
+                                <XMWrap>
+                                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                  <XMApp xml:id="S2.E2.m1.4.1">
+                                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                                    <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                                    <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                                  </XMApp>
+                                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post6"/>
+                                <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                                <XMText><text fontsize="70%">th</text></XMText>
+                              </XMApp>
+                              <XMText> (spike occurs)</XMText>
+                            </XMApp>
+                          </XMApp>
+                        </XMCell>
+                      </XMRow>
+                      <XMRow>
+                        <XMCell align="left">
+                          <XMTok meaning="0" role="NUMBER" xml:id="S2.E2.m1.5">0</XMTok>
+                        </XMCell>
+                        <XMCell align="left">
+                          <XMApp xml:id="S2.E2.m1.6">
+                            <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMText>if </XMText>
+                              <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post6"/>
+                                <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                                <XMText><text fontsize="70%">max</text></XMText>
+                              </XMApp>
+                              <XMText> (round to 0)</XMText>
+                            </XMApp>
+                          </XMApp>
+                        </XMCell>
+                      </XMRow>
+                    </XMArray>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>
+        </equation>
+<!--  %****␣03_yana_architecture.tex␣Line␣50␣**** -->        <p>In the equations, <Math mode="inline" tex="u(t)" text="u * t" xml:id="S2.SS1.p3.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                <XMDual>
+                  <XMRef idref="S2.SS1.p3.m4.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS1.p3.m4.1">t</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> is the neuron’s membrane potential at timestep <Math mode="inline" tex="t" text="t" xml:id="S2.SS1.p3.m5">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">t</XMTok>
+            </XMath>
+          </Math>, <Math mode="inline" tex="I(t)" text="I * t" xml:id="S2.SS1.p3.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                <XMDual>
+                  <XMRef idref="S2.SS1.p3.m6.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S2.SS1.p3.m6.1">t</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> is the neuron’s input current at timestep <Math mode="inline" tex="t" text="t" xml:id="S2.SS1.p3.m7">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">t</XMTok>
+            </XMath>
+          </Math>, and <Math mode="inline" tex="\tau_{\text{mem}}" text="tau _ [mem]" xml:id="S2.SS1.p3.m8">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                <XMText><text fontsize="70%">mem</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math> is the membrane time constant. The parameter <Math mode="inline" tex="n" text="n" xml:id="S2.SS1.p3.m9">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">n</XMTok>
+            </XMath>
+          </Math> represents the number of timesteps that have passed since the last update of the neuron’s state. <Math mode="inline" tex="\tilde{u}(t+n)" text="tilde@(u) * (t + n)" xml:id="S2.SS1.p3.m10">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMApp>
+                  <XMTok name="tilde" role="OVERACCENT" stretchy="false">~</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                </XMApp>
+                <XMDual>
+                  <XMRef idref="S2.SS1.p3.m10.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S2.SS1.p3.m10.1">
+                      <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> is a temporary variable that holds the result of the leak and input current integration. In YANA, the equations are fully implemented using fixed-point arithmetic.</p>
+      </para>
+      <para xml:id="S2.SS1.p4">
+        <p>Note that only the leak term <Math mode="inline" tex="(1-\nicefrac{{1}}{{\tau_{\text{mem}}}})^{n}" text="(1 - 1 / tau _ [mem]) ^ n" xml:id="S2.SS1.p4.m1">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                <XMDual>
+                  <XMRef idref="S2.SS1.p4.m1.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S2.SS1.p4.m1.1">
+                      <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok meaning="1" role="NUMBER">1</XMTok>
+                      <XMApp>
+                        <XMTok meaning="divide" role="MULOP" stretchy="true">/</XMTok>
+                        <XMTok meaning="1" role="NUMBER">1</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                          <XMText><text fontsize="70%">mem</text></XMText>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+                <XMTok fontsize="70%" role="UNKNOWN">n</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> depends on the time that has passed since the last neuron update. To efficiently implement this calculation, the neuron stage uses a  <glossaryref inlist="acronym" key="LUT" show="long"/> (<glossaryref inlist="acronym" key="LUT" show="short"/>) with precalculated solutions to this term for <Math mode="inline" tex="n_{\text{max}}" text="n _ [max]" xml:id="S2.SS1.p4.m2">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                <XMText><text fontsize="70%">max</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math> entries, thereby eliminating the need to calculate the power function in hardware. If more than <Math mode="inline" tex="n_{\text{max}}" text="n _ [max]" xml:id="S2.SS1.p4.m3">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                <XMText><text fontsize="70%">max</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math> timesteps have passed since the last update, the neuron’s membrane potential is rounded to 0 as shown in the second equation.</p>
+      </para>
+      <para xml:id="S2.SS1.p5">
+        <p>To support these deferred neuron updates, the neuron stage also maintains a record of the last access-timestamp for each neuron. This enables the core to calculate the number of elapsed timesteps <Math mode="inline" tex="n" text="n" xml:id="S2.SS1.p5.m1">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">n</XMTok>
+            </XMath>
+          </Math> when a neuron becomes hot, ensuring the correct application of the leak dynamics.
+<break/><text font="bold">Support for Arbitrary SNN Graphs:</text>
+YANA supports arbitrary SNN graphs by implementing point-to-point connections between pairs of neurons in its hardware architecture. The core maintains both pre-synaptic and post-synaptic information in separate memory structures. Pre-synaptic weights are stored in the synapse stage and accessed during event preprocessing, while post-synaptic destinations (dest.) are stored in connection tables accessed by the axon stage. Each outgoing connection is encoded as an event packet with the format:</p>
+        <equation xml:id="S2.Ex1">
+          <text class="ltx_markedasmath">[ Dest. Core <Math mode="inline" tex="(2bit)" text="2 * b * i * t" xml:id="S2.Ex1.m1.m1">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S2.Ex1.m1.m1.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S2.Ex1.m1.m1.1">
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math> | Dest. Neuron <Math mode="inline" tex="(10bit)" text="10 * b * i * t" xml:id="S2.Ex1.m1.m2">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S2.Ex1.m1.m2.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S2.Ex1.m1.m2.1">
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok meaning="10" role="NUMBER">10</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math> | Dest. Synapse <Math mode="inline" tex="(17bit)" text="17 * b * i * t" xml:id="S2.Ex1.m1.m3">
+              <XMath>
+                <XMDual>
+                  <XMRef idref="S2.Ex1.m1.m3.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S2.Ex1.m1.m3.1">
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok meaning="17" role="NUMBER">17</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">t</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMath>
+            </Math> ]</text>
+        </equation>
+        <p>Since each event packet specifically addresses both target neuron and synapse, a single pre-synaptic weight in the synapse stage can be referenced by multiple connections, enabling native support for weight reuse and arbitrary pruning techniques.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS2">
+      <tags>
+        <tag>2.2</tag>
+        <tag role="refnum">2.2</tag>
+        <tag role="typerefnum">§2.2</tag>
+      </tags>
+      <title><tag close=" ">2.2</tag>System on Chip FPGA Integration</title>
+      <figure inlist="lof" labels="LABEL:fig:exp_setup" placement="t" xml:id="S2.F2">
+        <tags>
+          <tag>Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Figure 2</tag>
+        </tags>
+        <graphics candidates="media/YANA_experimental_setup.pdf" class="ltx_centering" graphic="media/YANA_experimental_setup.pdf" options="width=303.534pt" xml:id="S2.F2.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">2</tag>
+YANA architecture integration complete with AXI4 stream buffers, a control unit and cores for input, hidden and output computations.
+</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 2</tag>
+YANA architecture integration complete with AXI4 stream buffers, a control unit and cores for input, hidden and output computations.
+</caption>
+      </figure>
+      <para xml:id="S2.SS2.p1">
+        <p>In this work, we target the low-cost AMD Kria KR260 Robotics Starter Kit. The KR260 employs an AMD Zynq UltraScale+  <glossaryref inlist="acronym" key="SoC" show="long"/> (<glossaryref inlist="acronym" key="SoC" show="short"/>) FPGA which integrates software execution in its  <glossaryref inlist="acronym" key="PS" show="long"/> (<glossaryref inlist="acronym" key="PS" show="short"/>) and an adaptive FPGA fabric in its  <glossaryref inlist="acronym" key="PL" show="long"/> (<glossaryref inlist="acronym" key="PL" show="short"/>).
+<!--  %****␣03_yana_architecture.tex␣Line␣75␣**** --></p>
+      </para>
+      <para xml:id="S2.SS2.p2">
+        <p>As the YANA core architecture by itself only implements the pipelined data flow, there are additional components necessary in order to make it usable in an experimental setup, as can be seen in Figure <ref labelref="LABEL:fig:exp_setup"/>.
+To control the execution of the accelerator and communicate with the software stack, a  <glossaryref inlist="acronym" key="CU" show="long"/> (<glossaryref inlist="acronym" key="CU" show="short"/>) with a custom command interface is implemented. It keeps track of the global synchronized timestep, decodes and parses incoming commands and maintains an internal state machine to manage the control flow.
+To interface with the accelerator’s <glossaryref inlist="acronym" key="CU" show="short"/>, we instantiate AXI-enabled buffers for the input data, control commands and result output. These are accessible by the KR260’s <glossaryref inlist="acronym" key="PS" show="short"/>, enabling runtime control of the accelerator from software.</p>
+      </para>
+      <para xml:id="S2.SS2.p3">
+        <p>Input events are source encoded, only containing information about the source input neuron and the timestep in which the input spike occurred. To multi-cast these input events to the destination encoded format expected by the hidden <glossaryref inlist="acronym" key="LIF" show="short"/> core, an input multi-cast core is integrated. Analogously, an output core containing  <glossaryref inlist="acronym" key="LI" show="long"/> (<glossaryref inlist="acronym" key="LI" show="short"/>) neurons integrates all spikes coming from the hidden core. Upon request, it returns the integrated neuron potential back to the <glossaryref inlist="acronym" key="PS" show="short"/> through the output buffer.</p>
+      </para>
+      <para xml:id="S2.SS2.p4">
+        <p>We use the previously mentioned dataset sample execution mode for the experiments conducted in this work, which involves loading entire samples into the input buffers of the accelerator and executing them as fast as possible until all input is processed.
+After the execution of one sample finishes, the data path including any stateful memories is reset in preparation for the next sample.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS3">
+      <tags>
+        <tag>2.3</tag>
+        <tag role="refnum">2.3</tag>
+        <tag role="typerefnum">§2.3</tag>
+      </tags>
+      <title><tag close=" ">2.3</tag>FPGA Resource Utilization</title>
+      <para xml:id="S2.SS3.p1">
+        <p>Table <ref labelref="LABEL:tab:resource-utilization"/> summarizes the resource utilization of a single YANA core and of the aforementioned experimental deployment on the KR260’s <glossaryref inlist="acronym" key="PL" show="short"/>.
+Our experimental deployment of YANA on the KR260 utilizes URAMs for storage of synaptic weights and event packets.
+Synaptic parameters utilize the largest share of parameter storage in most applications; thus, URAMs are preferred over BRAMs to store them, if available.
+Beyond FPGA resource utilization metrics, the table also specifies the resulting storage limits for mappable SNN parameters. YANA’s <glossaryref inlist="acronym" key="RTL" show="short"/> design is thoroughly parameterized, and the <glossaryref inlist="acronym" key="SNN" show="short"/>-parameter storage limits are a result of configuring the desired number of synapses and neurons per core pre-synthesis, according to which synthesis infers the required amount of BRAM and URAM resources. Note that our experimental deployment of YANA in this work does not target application specific <glossaryref inlist="acronym" key="PL" show="short"/>-memory resource optimization.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:resource-utilization" xml:id="S2.T1">
+        <tags>
+          <tag>Table 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Table 1</tag>
+        </tags>
+        <toccaption class="ltx_centering"><tag close=" ">1</tag>FPGA resource utilization and available parameter storage of YANA core and experimental setup on KR260.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Table 1</tag>FPGA resource utilization and available parameter storage of YANA core and experimental setup on KR260.</caption>
+        <tabular class="ltx_centering ltx_guessed_headers" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="tt" rowspan="2" thead="column row"><text font="bold">Descriptor</text></td>
+              <td align="center" border="tt" colspan="5" thead="column"><text font="bold">FPGA Resources</text></td>
+              <td align="center" border="tt" colspan="4" thead="column"><text font="bold">Mappable Parameters</text></td>
+            </tr>
+            <tr>
+              <td align="center" border="t" thead="column">LUT</td>
+              <td align="center" border="t" thead="column">Register</td>
+              <td align="center" border="t" thead="column">BRAM<sup>a</sup></td>
+              <td align="center" border="t" thead="column">URAM</td>
+              <td align="center" border="t" thead="column">DSP</td>
+              <td align="center" border="t" thead="column"><Math mode="inline" tex="syn_{input}" text="s * y * n _ (i * n * p * u * t)" xml:id="S2.T1.m1">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">s</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">n</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">p</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">u</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">t</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="t" thead="column"><Math mode="inline" tex="syn_{hidden}" text="s * y * n _ (h * i * d * d * e * n)" xml:id="S2.T1.m2">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">s</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">h</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">d</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">d</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">e</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">n</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="t" thead="column"><Math mode="inline" tex="neur_{hidden}" text="n * e * u * r _ (h * i * d * d * e * n)" xml:id="S2.T1.m3">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">h</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">d</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">d</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">e</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">n</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="t" thead="column"><Math mode="inline" tex="neur_{output}" text="n * e * u * r _ (o * u * t * p * u * t)" xml:id="S2.T1.m4">
+                  <XMath>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">n</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">r</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">o</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">u</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">t</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">p</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">u</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">t</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t" thead="row">YANA Core</td>
+              <td align="center" border="t">740</td>
+              <td align="center" border="t">918</td>
+              <td align="center" border="t">7 (199)</td>
+              <td align="center" border="t">24</td>
+              <td align="center" border="t">2</td>
+              <td align="center" border="t">—</td>
+              <td align="center" border="t"><Math mode="inline" tex="2^{17}" text="2 ^ 17" xml:id="S2.T1.m5">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok fontsize="70%" meaning="17" role="NUMBER">17</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="t"><Math mode="inline" tex="2^{10}" text="2 ^ 10" xml:id="S2.T1.m6">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok fontsize="70%" meaning="10" role="NUMBER">10</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="t">—</td>
+            </tr>
+            <tr>
+              <td align="left" border="bb" thead="row">Deployment<sup>b</sup></td>
+              <td align="center" border="bb">1687</td>
+              <td align="center" border="bb">1817</td>
+              <td align="center" border="bb">13.5 (397.5)</td>
+              <td align="center" border="bb">48</td>
+              <td align="center" border="bb">4</td>
+              <td align="center" border="bb"><Math mode="inline" tex="2^{17}" text="2 ^ 17" xml:id="S2.T1.m7">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok fontsize="70%" meaning="17" role="NUMBER">17</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="bb"><Math mode="inline" tex="2^{17}" text="2 ^ 17" xml:id="S2.T1.m8">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok fontsize="70%" meaning="17" role="NUMBER">17</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="bb"><Math mode="inline" tex="2^{10}" text="2 ^ 10" xml:id="S2.T1.m9">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok fontsize="70%" meaning="10" role="NUMBER">10</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+              <td align="center" border="bb"><Math mode="inline" tex="2^{10}" text="2 ^ 10" xml:id="S2.T1.m10">
+                  <XMath>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok fontsize="70%" meaning="10" role="NUMBER">10</XMTok>
+                    </XMApp>
+                  </XMath>
+                </Math></td>
+            </tr>
+          </tbody>
+        </tabular>
+        <itemize class="ltx_centering" xml:id="S2.I2">
+          <item xml:id="S2.I2.ix1">
+            <tags>
+              <tag><text fontsize="80%">a</text></tag>
+              <tag role="typerefnum"><text fontsize="80%">item a</text></tag>
+            </tags>
+            <para xml:id="S2.I2.ix1.p1">
+              <p><text fontsize="80%">Values in brackets represent estimate when URAMs are unavailable. One URAM corresponds approximately to 8 BRAMs.</text></p>
+            </para>
+          </item>
+          <item xml:id="S2.I2.ix2">
+            <tags>
+              <tag><text fontsize="80%">b</text></tag>
+              <tag role="typerefnum"><text fontsize="80%">item b</text></tag>
+            </tags>
+            <para xml:id="S2.I2.ix2.p1">
+              <p><text fontsize="80%">Excludes AXI IP periphery for integration with PS.</text></p>
+            </para>
+          </item>
+        </itemize>
+      </table>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S3" xml:lang="en">
+    <tags>
+      <tag>3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>YANA Software Framework</title>
+    <para xml:id="S3.p1">
+      <p>When developing any hardware architecture, the accompanying software is the key to making
+it widely usable without large overheads stemming from custom deployment solutions. Especially
+in the <glossaryref inlist="acronym" key="DL" show="short"/> community, there are established tools and workflows that many practitioners
+commonly use to develop their neural networks. Therefore, our goal for the software stack
+supporting YANA is to provide an end-to-end framework that seamlessly integrates with a wide
+range of popular open-source tools for neuromorphic computing.</p>
+    </para>
+    <figure inlist="lof" labels="LABEL:fig:yana-sw-framework" placement="t" xml:id="S3.F3">
+      <tags>
+        <tag>Figure 3</tag>
+        <tag role="refnum">3</tag>
+        <tag role="typerefnum">Figure 3</tag>
+      </tags>
+      <graphics candidates="media/YANA_framework_new.pdf" class="ltx_centering" graphic="media/YANA_framework_new.pdf" options="width=390.258pt" xml:id="S3.F3.g1"/>
+      <toccaption class="ltx_centering"><tag close=" ">3</tag>Overview of the YANA software framework</toccaption>
+      <caption class="ltx_centering"><tag close=": ">Figure 3</tag>Overview of the YANA software framework</caption>
+    </figure>
+    <para xml:id="S3.p2">
+      <p>Notably, we chose the Neuromorphic Intermediate Representation (NIR) <cite class="ltx_citemacro_cite">[<bibref bibrefs="pedersen_neuromorphic_2024" separator="," yyseparator=","/>]</cite>
+as our intermediary format throughout the framework to ensure compatibility with other frameworks for
+neuromorphic computing.
+The YANA software framework aims
+to provide an easy-to-use workflow for hardware-aware training, optimization and deployment <glossaryref inlist="acronym" key="SNN" show="short-plural"/>
+targeting our custom neuromorphic accelerator.
+It consists of three major modules: YANA train, YANA deploy and YANA runtime, as can be seen in Figure <ref labelref="LABEL:fig:yana-sw-framework"/>. The modules are briefly described as follows:
+<break/><text font="bold">YANA train:</text>
+This module facilitates the training of <glossaryref inlist="acronym" key="SNN" show="short-plural"/> for YANA. Currently, it is based
+on the Norse framework <cite class="ltx_citemacro_cite">[<bibref bibrefs="norse2021" separator="," yyseparator=","/>]</cite>, utilizing additional tools like Tonic <cite class="ltx_citemacro_cite">[<bibref bibrefs="lenz_gregor_2021_5079802" separator="," yyseparator=","/>]</cite> and
+PyTorch Lightning <cite class="ltx_citemacro_cite">[<bibref bibrefs="Falcon_PyTorch_Lightning_2019" separator="," yyseparator=","/>]</cite>.
+<!--  %****␣04_yana_framework.tex␣Line␣25␣**** -->Its main addition to Norse is an implementation of YANA’s quantized fixed-point <glossaryref inlist="acronym" key="LIF" show="short"/> neuron that includes the <glossaryref inlist="acronym" key="LUT" show="short"/>-based leak calculation.
+This allows for hardware-aware training, as the quantization effects and <glossaryref inlist="acronym" key="LUT" show="short"/>-based leak can be directly incorporated into the training process.
+Note that the current form of YANA train should be considered
+a reference implementation for supporting the <glossaryref inlist="acronym" key="DL" show="short"/> programming model on YANA and can be easily exchanged for any other training framework that supports exporting to NIR.
+<break/><text font="bold">YANA deploy:</text>
+This module handles the translation of trained SNN models into hardware-deployable configurations through several key steps. First, it parses the NIR graph representation and simulates it using the accelerator’s fixed-point arithmetic to ensure numeric accuracy. The logical network structure is then transformed into an optimized memory layout that maps individual neurons and weights onto the physical hardware resources.
+The module outputs memory configuration files for synapse and routing tables in a custom human-readable format that can be directly loaded onto the accelerator. While currently focusing on dense layers, YANA’s native suport for weight sharing provides the foundation for future support of convolutional operations and other structured connectivity patterns.
+<break/><text font="bold">YANA runtime:</text>
+Unlike the previous modules which run on a host computer, the runtime executes directly on the <glossaryref inlist="acronym" key="SoC" show="short"/> FPGA’s <glossaryref inlist="acronym" key="PS" show="short"/>. It leverages the PYNQ library <cite class="ltx_citemacro_cite">[<bibref bibrefs="advanced_micro_devices_inc_pynq_2024" separator="," yyseparator=","/>]</cite> to interface with AMD AXI IPs implemented in the <glossaryref inlist="acronym" key="PL" show="short"/> fabric. The runtime initializes the accelerator with the memory configuration files created by YANA deploy, loads input spike events, and orchestrates the execution sequence. During inference, it tracks performance metrics like execution latency, timestep count, and memory utilization.
+The current implementation supports sample-based dataset processing, where complete input samples are preloaded into the accelerator’s buffer and processed in batch mode. Future development will introduce stream processing capabilities to enable integration with (event-based) sensors for deployment in real-world scenarios and low-power applications.</p>
+    </para>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:evaluation" xml:id="S4" xml:lang="en">
+    <tags>
+      <tag>4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Evaluation</title>
+    <subsection inlist="toc" labels="LABEL:subsec:experiments" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=" ">4.1</tag>Experiments on Inference Latency Scaling</title>
+      <para xml:id="S4.SS1.p1">
+        <p>In order to test the latency scaling of YANA’s fully event-driven <glossaryref inlist="acronym" key="SNN" show="short-plural"/> acceleration, by using our software framework, we prepare networks and data samples of different spatial and temporal sparsity levels and measure their inference time after deployment on the FPGA.
+For this, we train networks with one hidden layer of 100 <glossaryref inlist="acronym" key="LIF" show="short"/> units on the Spiking Heidelberg Digits (SHD) dataset.
+Subsequently, we gradually increase temporal sparsity levels of the input data by uniformly dropping events. Likewise, we increase the spatial sparsity of the feed-forward layers by pruning certain percentages of weights ranking lowest in magnitude.
+Note that, while we initially trained the networks until convergence to obtain realistic activity patterns, we do not take the accuracy of the networks into account. YANA’s fixed-point <glossaryref inlist="acronym" key="LIF" show="short"/> implementation is numerically stable. Any task accuracy achieved during training in simulation is therefore preserved during inference on YANA.
+In fact, the networks are meant to show the ability of YANA’s architecture to leverage spatial and temporal sparsity for efficiency gains in network execution, rather than serve as a benchmark for optimally solving the SHD task.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=" ">4.2</tag>Results</title>
+      <figure inlist="lof" labels="LABEL:fig:exp_results" placement="t" xml:id="S4.F4">
+        <tags>
+          <tag>Figure 4</tag>
+          <tag role="refnum">4</tag>
+          <tag role="typerefnum">Figure 4</tag>
+        </tags>
+        <graphics candidates="media/results.pdf" class="ltx_centering" graphic="media/results.pdf" options="width=433.62pt" xml:id="S4.F4.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">4</tag>
+Scaling of inference time of <glossaryref inlist="acronym" key="SNN" show="short-plural"/> with different spatial and temporal sparsity levels after deployment on YANA.
+In the case of sweeping <Math mode="inline" tex="S_{\text{spat}}" text="S _ [spat]" xml:id="S4.F4.m1">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMText><text fontsize="70%">spat</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="S_{\text{temp}}" text="S _ [temp]" xml:id="S4.F4.m2">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMText><text fontsize="70%">temp</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math> cannot be fixed and has to be given in a small range, since the pruning level influences hidden layer sparsity, ultimately changing the total <Math mode="inline" tex="S_{\text{temp}}" text="S _ [temp]" xml:id="S4.F4.m3">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMText><text fontsize="70%">temp</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math>.
+</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 4</tag>
+Scaling of inference time of <glossaryref inlist="acronym" key="SNN" show="short-plural"/> with different spatial and temporal sparsity levels after deployment on YANA.
+In the case of sweeping <Math mode="inline" tex="S_{\text{spat}}" text="S _ [spat]" xml:id="S4.F4.m4">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMText><text fontsize="70%">spat</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="S_{\text{temp}}" text="S _ [temp]" xml:id="S4.F4.m5">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMText><text fontsize="70%">temp</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math> cannot be fixed and has to be given in a small range, since the pruning level influences hidden layer sparsity, ultimately changing the total <Math mode="inline" tex="S_{\text{temp}}" text="S _ [temp]" xml:id="S4.F4.m6">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">S</XMTok>
+                <XMText><text fontsize="70%">temp</text></XMText>
+              </XMApp>
+            </XMath>
+          </Math>.
+</caption>
+      </figure>
+      <para xml:id="S4.SS2.p1">
+        <p>Figure <ref labelref="LABEL:fig:exp_results"/> displays the results of the experiments described above. The inference time of the deployed <glossaryref inlist="acronym" key="SNN" show="short-plural"/> is computed as the average of 20 samples executed on the accelerator hardware clocked at 100 MHz.
+It decreases almost linearly with both increasing spatial and temporal sparsity levels of weights and data.
+Since all incoming events are multicast to all connected weights, the total number of events to be processed is given by the sum of non-zero weight counts downstream of each event.
+Therefore, reducing either the number of weights or the number of input events directly impacts the total number of events to be processed, effectively reducing the latency caused by the synapse and axon subcores.
+Additionally, for smaller network sizes and large levels of sparsity, we observe that the inference time plateaus.
+We explain this through ever fewer computation being performed in the synapse and axon cores, emphasizing the static latency ceiling of the neuron sub module and of the core control logic.
+Notably, while recordings in the SHD dataset are predominantly 500ms to 1000ms long, inference times in our experiments range from 16ms to 1ms, demonstrating the speed of YANA’s event-driven processing pipeline. The results showcase the considerable impact of sparsity on inference time, underpinning the importance of spike regularization and pruning techniques in <glossaryref inlist="acronym" key="SNN" show="short"/> application development.</p>
+      </para>
+<!--  %****␣paper.tex␣Line␣50␣**** -->    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5" xml:lang="en">
+    <tags>
+      <tag>5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=" ">5</tag>Discussion &amp; Future Work</title>
+    <para xml:id="S5.p1">
+      <p>While YANA demonstrates significant potential for bridging the neuromorphic simulation-to-hardware gap, several limitations and opportunities for improvement warrant discussion.</p>
+    </para>
+    <pagination role="newpage"/>
+    <para class="ltx_noindent" xml:id="S5.p2">
+      <p><text font="bold">Limited Layer Type Support:</text>
+At the time of this work’s experiments, <text font="italic">YANA deploy</text> could only map feed forward layers onto YANA. However, many practical <glossaryref inlist="acronym" key="SNN" show="short"/> applications benefit from layers that exploit weight reuse patterns, such as convolutional layers. YANA’s architecture fundamentally supports weight reuse and future development will extend the software framework to support convolutional layers and other structured connectivity patterns.
+<break/><text font="bold">Event-Driven Power Efficiency Validation:</text>
+While event-driven processing is a fundamental design principle of YANA, the actual power savings achieved through this approach on FPGA hardware have yet to be empirically demonstrated. Power efficiency represents a major argument for the Neuromorphic Advantage, and quantifying it is crucial for validating YANA’s effectiveness. Future work will conduct detailed power characterization studies using load-dependent power saving strategies such as clock gating and SRAM sleep modes.
+<break/><text font="bold">Scalability and Many-Core Deployment:</text>
+The current evaluation focuses on an experimental deployment of YANA with an input (multicast), hidden and output core. However, YANA is designed with scalability in mind, and future research will investigate parallel processing speedups and input event rate improvements when YANA is deployed as a many-core architecture. This will involve deploying YANA in a  <glossaryref inlist="acronym" key="NoC" show="long"/> (<glossaryref inlist="acronym" key="NoC" show="short"/>) setup to enable inter-core communication and exploring load balancing strategies for distributing <glossaryref inlist="acronym" key="SNN" show="short"/> processing across multiple cores.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S6" xml:lang="en">
+    <tags>
+      <tag>6</tag>
+      <tag role="refnum">6</tag>
+      <tag role="typerefnum">§6</tag>
+    </tags>
+    <title><tag close=" ">6</tag>Conclusion</title>
+    <para xml:id="S6.p1">
+      <p>This work introduces YANA, an open-source neuromorphic accelerator designed to bridge the simulation-to-hardware gap that currently limits the advancement of <glossaryref inlist="acronym" key="SNN" show="short"/> research and development. By providing accessible neuromorphic computing capabilities on affordable FPGA platforms, YANA enables researchers and practitioners to move beyond simulation-only SNN development and validate their algorithms on actual event-driven hardware.</p>
+    </para>
+    <para xml:id="S6.p2">
+      <p>YANA’s architecture demonstrates several key contributions to the neuromorphic computing field. Its event-driven processing pipeline efficiently exploits both temporal and spatial sparsity inherent in SNNs, achieving near-linear scaling of inference time with sparsity levels.
+Furthermore, YANA’s support for arbitrary SNN topologies through point-to-point connections is future proof for the evolving landscape of neuromorphic applications, allowing for flexible network designs that can adapt to various research needs.</p>
+    </para>
+    <para xml:id="S6.p3">
+      <p>Our experimental evaluation on the Spiking Heidelberg Digits dataset validates YANA’s ability to leverage sparsity for performance improvements, while the deployment on the accessible AMD Kria KR260 platform demonstrates practical resource efficiency with manageable hardware requirements. The YANA software framework, from training through deployment, provides a complete solution that integrates with the existing neuromorphic open-source ecosystem.
+As the neuromorphic computing field continues to mature, accessible platforms like YANA will be crucial for translating the promising theoretical advances in SNNs into practical, real-world applications that fully exploit the unique advantages of brain-inspired computing paradigms.</p>
+    </para>
+  </section>
+  <bibliography bibstyle="splncs04" citestyle="numbers" files="references.bib" xml:id="bib" xml:lang="en">
+    <title>References</title>
+  </bibliography>
+</document>

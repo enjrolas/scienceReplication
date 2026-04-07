@@ -29,7 +29,18 @@
       "Bash(curl -s https://sciencereplication.artiswrong.com/)",
       "Bash(cat /etc/apache2/sites-enabled/scienceReplication.artiswrong.com*)",
       "Bash(ls -la /etc/apache2/sites-enabled/*scienceR*)",
-      "Bash(ls -la /etc/apache2/sites-enabled/*science*)"
+      "Bash(ls -la /etc/apache2/sites-enabled/*science*)",
+      "Bash(curl -s https://sciencereplication.artiswrong.com/developmental-psychology/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://127.0.0.1:8001/admin/)",
+      "Bash(systemctl is-active:*)",
+      "Bash(/usr/local/bin/gunicorn sciencereplication.wsgi:application -c gunicorn.conf.py)",
+      "Bash(curl -sv https://sciencereplication.artiswrong.com/admin/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://sciencereplication.artiswrong.com/admin/)",
+      "Bash(curl -s -L -o /dev/null -w \"%{http_code} %{url_effective}\" https://sciencereplication.artiswrong.com/admin/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://sciencereplication.artiswrong.com/manage/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://sciencereplication.artiswrong.com/admin)",
+      "Bash(apt list:*)",
+      "Bash(latexml --VERSION)"
     ]
   }
 }

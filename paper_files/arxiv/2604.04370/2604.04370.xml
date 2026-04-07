@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.04370/latex_extracted"?>
+<!--  %This is samplepaper.tex, a sample chapter demonstrating the --><!--  %LLNCS macro package for Springer Computer Science proceedings; --><!--  %Version 2.21 of 2022/01/12 --><?latexml class="llncs" options="runningheads"?>
+<?latexml package="fontenc" options="T1"?>
+<?latexml package="amsmath"?>
+<?latexml package="graphicx"?>
+<?latexml package="enumitem"?>
+<?latexml package="booktabs"?>
+<?latexml package="hyperref"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>Decoding Student Dialogue: A Multi-Dimensional Comparison and Bias Analysis of Large Language Models as Annotation Tools</title>
+  <creator role="author">
+    <personname>Jie Cao</personname>
+    <contact role="institute">1The University of North Carolina at Chapel Hill, North Carolina, USA</contact>
+    <contact role="emailmark">1</contact>
+  </creator>
+  <creator before="  " role="author">
+    <personname>Zhanxin Hao </personname>
+    <contact role="institute">2Tsinghua University, China<break/><break/><note mark="2" role="email">{zhanxin_hao,yujifan}@tsinghua.edu.cn</note></contact>
+    <contact role="email">2jiecao@unc.edu</contact>
+  </creator>
+  <creator before="  " role="author">
+    <personname>Jifan Yu</personname>
+    <contact role="institute">2Tsinghua University, China<break/><break/><note mark="2" role="email">{zhanxin_hao,yujifan}@tsinghua.edu.cn</note></contact>
+    <contact role="email">2jiecao@unc.edu</contact>
+  </creator>
+  <abstract name="Abstract">
+    <p>Educational dialogue is critical for decoding student learning processes, yet manual annotation remains time-consuming. This study evaluates the efficacy of GPT-5.2 and Gemini-3 using three prompting strategies (few-shot, single-agent, and multi-agent reflection) across diverse subjects, educational levels, and four coding dimensions. Results indicate that while multi-agent prompting achieved the highest accuracy, the results did not reach statistical significance. Accuracy proved highly context-dependent, with significantly higher performance in K-12 datasets compared to university-level data, alongside disciplinary variations within the same educational level. Performance peaked in the affective dimension but remained lowest in the cognitive dimension. Furthermore, analysis revealed four bias patterns: (1) Gemini-3 exhibited a consistent optimistic bias in the affective dimension across all subjects; (2) the cognitive dimension displayed domain-specific directional bias, characterized by systematic underestimation in Mathematics versus overestimation in Psychology; (3) both models are more prone to overestimation than underestimation within the meta-cognitive dimension; and (4) behavioral categories such as question, negotiation, and statements were frequently misclassified. These results underscore the need for context-sensitive deployment and targeted mitigation of directional biases in automated annotation.</p>
+  </abstract>
+  <keywords name="Keywords">Large Language Models Automated Annotation Educational dialogue Bias</keywords>
+<!--  %If␣the␣paper␣title␣is␣too␣long␣for␣the␣running␣head,␣you␣can␣set 
+     %an␣abbreviated␣paper␣title␣here
+     %%
+     %%␣First␣names␣are␣abbreviated␣in␣the␣running␣head.
+     %%␣If␣there␣are␣more␣than␣two␣authors,␣’et␣al.’␣is␣used.
+     %%
+     %\url{http://www.springer.com/gp/computer-science/lncs}␣\and
+     %ABC␣Institute,␣Rupert-Karls-University␣Heidelberg,␣Heidelberg,␣Germany\\
+     %typeset␣the␣header␣of␣the␣contribution
+     %****␣main.tex␣Line␣50␣****-->  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <para xml:id="S1.p1">
+      <p>Educational dialogue is a fundamental vehicle for knowledge exchange, and its quality significantly influences student learning outcomes <cite class="ltx_citemacro_cite">[<bibref bibrefs="muhonen2018quality,howe2019teacher,hao_mapping_2026" separator="," yyseparator=","/>]</cite>. While analyzing these interactions through established frameworks provides deep insights into the learning process <cite class="ltx_citemacro_cite">[<bibref bibrefs="hennessy2016developing" separator="," yyseparator=","/>]</cite>, manual coding remains prohibitively time-consuming <cite class="ltx_citemacro_cite">[<bibref bibrefs="long2024evaluating" separator="," yyseparator=","/>]</cite>. This analytical bottleneck is exacerbated by the proliferation of Large Language Models (LLMs) in education, which has made student-AI interactions ubiquitous <cite class="ltx_citemacro_cite">[<bibref bibrefs="kasneci2023chatgpt" separator="," yyseparator=","/>]</cite>. Consequently, educators now face a massive volume of dialogue data that needs to be analyzed to understand student engagement and inform instruction, necessitating robust, automated approaches.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>Recent studies have already explored the “LLM-as-a-judge” paradigm for automated educational annotation, demonstrating significant potential <cite class="ltx_citemacro_cite">[<bibref bibrefs="long2024evaluating,he2025automated,nguyen2025applying,jiang2025uncovering" separator="," yyseparator=","/>]</cite>. However, reported accuracies vary widely (ranging from 0.6 to 0.9), likely due to differences in prompt engineering, model capabilities, contextual factors, or label complexities <cite class="ltx_citemacro_cite">[<bibref bibrefs="nguyen2025applying,he2025automated" separator="," yyseparator=","/>]</cite>. Furthermore, two critical gaps remain: first, a lack of comprehensive comparison evaluating different prompting methods across varied educational contexts and annotation dimensions (i.e., cognitive); and second, a neglect of inherent annotation biases, which need to be addressed to ensure fair and equitable automated analysis.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>To address these challenges, this study evaluates the capabilities and biases of LLMs (GPT-5.2 and Gemini-3) in annotating student-AI dialogues. We test their performance using a multi-dimensional scheme across varied contexts, comparing three prompting methods: Few-Shot, Single-agent Self-reflection, and Multi-agent Reflection. We propose two Research Questions (RQs):<text font="bold">RQ1:</text> To what extent do prompting methods (few-shot, single-agent, and multi-agent reflection) and contextual factors (educational levels, subjects, and annotation dimensions) influence the accuracy of LLM-based student dialogue annotation? <text font="bold">RQ2:</text> What bias patterns emerge in the LLM-based annotation of student dialogues?</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>Related Work</title>
+    <subsection inlist="toc" xml:id="S2.SS1">
+      <tags>
+        <tag>2.1</tag>
+        <tag role="autoref">subsection 2.1</tag>
+        <tag role="refnum">2.1</tag>
+        <tag role="typerefnum">§2.1</tag>
+      </tags>
+      <title><tag close=" ">2.1</tag>Educational Dialogue and Student-AI Dialogue Interaction</title>
+      <para xml:id="S2.SS1.p1">
+        <p>Grounded in sociocultural theory, educational dialogue is a critical mechanism for knowledge construction and enhancing academic performance <cite class="ltx_citemacro_cite">[<bibref bibrefs="muhonen2017knowledge,howe2019teacher" separator="," yyseparator=","/>]</cite>. As Large Language Models (LLMs) rapidly popularize student-AI interactions through various chatbots and simulated classrooms <cite class="ltx_citemacro_cite">[<bibref bibrefs="nguyen2025reflective,zhang-etal-2025-simulating" separator="," yyseparator=","/>]</cite>, the lack of human instructor oversight makes the automatic monitoring and decoding of these dialogues essential. Previous research primarily applies framework-based content analysis to evaluate these interactions. Studies have investigated verbal behaviors <cite class="ltx_citemacro_cite">[<bibref bibrefs="zhang-etal-2025-simulating" separator="," yyseparator=","/>]</cite>, cognitive strategies for knowledge construction <cite class="ltx_citemacro_cite">[<bibref bibrefs="dang2025human" separator="," yyseparator=","/>]</cite>, and meta-cognitive behaviors related to AI management <cite class="ltx_citemacro_cite">[<bibref bibrefs="edwards2025human" separator="," yyseparator=","/>]</cite>. Additionally, sentiment analysis is employed to assess the socio-emotional dynamics inherent in student-AI dialogues <cite class="ltx_citemacro_cite">[<bibref bibrefs="dang2025human" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS2">
+      <tags>
+        <tag>2.2</tag>
+        <tag role="autoref">subsection 2.2</tag>
+        <tag role="refnum">2.2</tag>
+        <tag role="typerefnum">§2.2</tag>
+      </tags>
+      <title><tag close=" ">2.2</tag>Annotation Based on LLMs and Biases</title>
+      <para xml:id="S2.SS2.p1">
+        <p>LLMs demonstrate significant potential for data annotation across diverse educational levels, subjects, and interactive tasks <cite class="ltx_citemacro_cite">[<bibref bibrefs="hao_mapping_2026,jiang2025uncovering,he2025automated" separator="," yyseparator=","/>]</cite>. However, annotation accuracy varies considerably <cite class="ltx_citemacro_cite">[<bibref bibrefs="jiang2025uncovering" separator="," yyseparator=","/>]</cite>. For example, while GPT-4 achieved high overall agreement with experts in analyzing classroom dialogues, its sub-construct reliability fluctuated widely (Cohen’s Kappa ranging from 0.2 to 0.973) <cite class="ltx_citemacro_cite">[<bibref bibrefs="long2024evaluating" separator="," yyseparator=","/>]</cite>. Such discrepancies stem from differences in models, prompt engineering, and task complexity. The current lack of standardized frameworks necessitates systematic evaluations of LLM performance across various prompting methods and educational contexts to establish a robust understanding of their capabilities. Beyond accuracy, identifying inherent LLM biases is critical for ensuring reliable results. While biases such as human-like cognitive bias (i.e., sequential anchoring bias) in decision-making <cite class="ltx_citemacro_cite">[<bibref bibrefs="echterhoff-etal-2024-cognitive" separator="," yyseparator=","/>]</cite>, political bias (i.e., prefer specific political orientation) in detection tasks <cite class="ltx_citemacro_cite">[<bibref bibrefs="lin-etal-2025-investigating" separator="," yyseparator=","/>]</cite>, verbosity bias ( prefer longer text that exceeded word limits) in evaluation <cite class="ltx_citemacro_cite">[<bibref bibrefs="zheng2023judging,qian2025towards" separator="," yyseparator=","/>]</cite> have been documented in other domains, their specific impact on educational dialogue annotation remains underexplored.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>Methodology</title>
+    <subsection inlist="toc" xml:id="S3.SS1">
+      <tags>
+        <tag>3.1</tag>
+        <tag role="autoref">subsection 3.1</tag>
+        <tag role="refnum">3.1</tag>
+        <tag role="typerefnum">§3.1</tag>
+      </tags>
+      <title><tag close=" ">3.1</tag>Dataset</title>
+      <para xml:id="S3.SS1.p1">
+        <p>Our primary data originates from an online platform where human students interact with AI teachers and peers during slide-based lectures. We collected student utterances from three courses: <text font="bold">Biology (K-12)</text> (Fall 2025; 82 students, 304 utterances), <text font="bold">Introduction to Artificial General Intelligence (AGI, University)</text> (Spring 2024; 305 students, 4008 utterances), and <text font="bold">Psychology (University)</text> (Spring 2025; 288 students, 977 utterances). All data collection procedures were subjected to ethical review by Tsinghua University. Additionally, we incorporated the public <text font="italic">CoMTA</text> dataset <cite class="ltx_citemacro_cite">[<bibref bibrefs="miller2024llm" separator="," yyseparator=","/>]</cite>, featuring K-12 <text font="bold">Mathematics</text> student-AI tutoring conversations. To ensure a balanced evaluation, we randomly sampled 200 student utterances per subject, yielding a final evaluation corpus of 800 utterances (see <ref class="ltx_href" href="https://osf.io/yvhar/overview?view_only=eededcccd433490191439605dd9ebd79">digital appendix</ref><note mark="1" role="footnote" xml:id="footnote1"><tags>
+              <tag>1</tag>
+              <tag role="autoref">footnote 1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">footnote 1</tag>
+            </tags><ref class="ltx_url" font="typewriter" href="https://osf.io/yvhar/overview?view_only=eededcccd433490191439605dd9ebd79">https://osf.io/yvhar/overview?view_only=eededcccd433490191439605dd9ebd79</ref></note> for samples).</p>
+      </para>
+<!--  %****␣main.tex␣Line␣75␣**** -->    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS2">
+      <tags>
+        <tag>3.2</tag>
+        <tag role="autoref">subsection 3.2</tag>
+        <tag role="refnum">3.2</tag>
+        <tag role="typerefnum">§3.2</tag>
+      </tags>
+      <title><tag close=" ">3.2</tag>Annotation Framework and Human Annotation</title>
+      <para xml:id="S3.SS2.p1">
+        <p>To capture the complexity of student learning, we adopted a four-dimensional annotation framework (detailed rubrics are available in our <ref class="ltx_href" href="https://osf.io/yvhar/overview?view_only=eededcccd433490191439605dd9ebd79">digital appendix</ref>):</p>
+        <itemize xml:id="S3.I1">
+          <item xml:id="S3.I1.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S3.I1.i1.p1">
+              <p><text font="bold">Behavioral</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="han2024recipe4u,hao_mapping_2026" separator="," yyseparator=","/>]</cite>: Seven categories (1=<text font="italic">Request</text>, 2= <text font="italic">Question</text>, 3=<text font="italic">Answer</text>, 4=<text font="italic">Negotiation</text>, 5=<text font="italic">Acknowledgment</text>, 6=<text font="italic">Statement</text>, and 7=<text font="italic">Others/Off-task</text>).</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S3.I1.i2.p1">
+              <p><text font="bold">Cognitive</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="bloom1956taxonomy" separator="," yyseparator=","/>]</cite>: Four hierarchical levels (0=<text font="italic">None</text>, 1=<text font="italic">Remembering and Understanding</text>, 2=<text font="italic">Applying</text>, and 3=<text font="italic">Analyzing, Evaluating, and Creating</text>).</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S3.I1.i3.p1">
+              <p><text font="bold">Meta-cognitive</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="zimmerman2002becoming" separator="," yyseparator=","/>]</cite>: Four categories (0=<text font="italic">None</text>, 1=<text font="italic">Planning and Orientation</text>, 2=<text font="italic">Monitoring</text>, and 3=<text font="italic">Reflecting and Evaluating</text>).</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i4">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">4th item</tag>
+            </tags>
+            <para xml:id="S3.I1.i4.p1">
+              <p><text font="bold">Affective</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="liu2025engagement" separator="," yyseparator=","/>]</cite>: Six states (1=<text font="italic">Neutral</text>, 2=<text font="italic">Sense of Accomplishment/Enjoyment</text>, 3=<text font="italic">Curiosity</text>, 4=<text font="italic">Frustration/Confusion</text>, 5=<text font="italic">Anxiety</text>, and 6=<text font="italic">Boredom</text>).</p>
+            </para>
+          </item>
+        </itemize>
+      </para>
+      <para xml:id="S3.SS2.p2">
+        <p>To establish ground truth, two educational researchers annotated the data. Following two training rounds on a subset (<Math mode="inline" tex="N=80" text="N = 80" xml:id="S3.SS2.p2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                <XMTok meaning="80" role="NUMBER">80</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), inter-rater reliability achieved a Cohen’s kappa (<Math mode="inline" tex="\kappa" text="kappa" xml:id="S3.SS2.p2.m2">
+            <XMath>
+              <XMTok font="italic" name="kappa" role="UNKNOWN">κ</XMTok>
+            </XMath>
+          </Math>) <Math mode="inline" tex="&gt;0.8" text="absent &gt; 0.8" xml:id="S3.SS2.p2.m3">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                <XMTok meaning="absent"/>
+                <XMTok meaning="0.8" role="NUMBER">0.8</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> across all dimensions. The full dataset (<Math mode="inline" tex="N=800" text="N = 800" xml:id="S3.SS2.p2.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                <XMTok meaning="800" role="NUMBER">800</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) was independently double-coded, and any remaining disagreements were resolved via consensus discussions with the first author.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS3">
+      <tags>
+        <tag>3.3</tag>
+        <tag role="autoref">subsection 3.3</tag>
+        <tag role="refnum">3.3</tag>
+        <tag role="typerefnum">§3.3</tag>
+      </tags>
+      <title><tag close=" ">3.3</tag>Automated Annotations with LLMs</title>
+      <subsubsection inlist="toc" xml:id="S3.SS3.SSS1">
+        <tags>
+          <tag>3.3.1</tag>
+          <tag role="autoref">subsubsection 3.3.1</tag>
+          <tag role="refnum">3.3.1</tag>
+          <tag role="typerefnum">§3.3.1</tag>
+        </tags>
+        <title><tag close=" ">3.3.1</tag>Model Selection</title>
+        <para xml:id="S3.SS3.SSS1.p1">
+          <p>We selected GPT-5.2 (using official default parameters) and Gemini-3 (Flash) (temperature=0.0, max_output_tokens=1500) as our experimental models. These represent standard, widely accessible tiers prevalent in educational research, allowing us to assess performance most relevant to cost-efficient, large-scale applications rather than relying on “Pro” versions.</p>
+        </para>
+      </subsubsection>
+      <subsubsection inlist="toc" xml:id="S3.SS3.SSS2">
+        <tags>
+          <tag>3.3.2</tag>
+          <tag role="autoref">subsubsection 3.3.2</tag>
+          <tag role="refnum">3.3.2</tag>
+          <tag role="typerefnum">§3.3.2</tag>
+        </tags>
+        <title><tag close=" ">3.3.2</tag>Prompt Engineering Methods</title>
+        <para xml:id="S3.SS3.SSS2.p1">
+          <p>To investigate the impact of prompting strategies, we designed three methods (summarized in Figure <ref labelref="LABEL:fig1"/>; full prompts available in our <ref class="ltx_href" href="https://osf.io/yvhar/overview?view_only=eededcccd433490191439605dd9ebd79">digital appendix</ref>):</p>
+          <itemize xml:id="S3.I2">
+            <item xml:id="S3.I2.i1">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">1st item</tag>
+              </tags>
+              <para xml:id="S3.I2.i1.p1">
+                <p><text font="bold">Few-shot (Baseline)</text>: Assigns an educational data expert persona, provides the detailed rubric, and includes three representative examples.</p>
+              </para>
+            </item>
+            <item xml:id="S3.I2.i2">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">2nd item</tag>
+              </tags>
+              <para xml:id="S3.I2.i2.p1">
+                <p><text font="bold">Single-agent Self-Reflection</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="shinn2023reflexion" separator="," yyseparator=","/>]</cite>: A single agent iteratively generates an initial annotation, self-reflects to identify inconsistencies, and refines its output (Draft <Math mode="inline" tex="\to" text="to" xml:id="S3.I2.i2.p1.m1">
+                    <XMath>
+                      <XMTok name="to" role="ARROW">→</XMTok>
+                    </XMath>
+                  </Math> Self-reflection <Math mode="inline" tex="\to" text="to" xml:id="S3.I2.i2.p1.m2">
+                    <XMath>
+                      <XMTok name="to" role="ARROW">→</XMTok>
+                    </XMath>
+                  </Math> Revision).</p>
+              </para>
+            </item>
+            <item xml:id="S3.I2.i3">
+              <tags>
+                <tag>•</tag>
+                <tag role="autoref">item </tag>
+                <tag role="typerefnum">3rd item</tag>
+              </tags>
+              <para xml:id="S3.I2.i3.p1">
+                <p><text font="bold">Multi-agent Reflection</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="shinn2023reflexion,cao2025first" separator="," yyseparator=","/>]</cite>: A collaborative system utilizing three specialized agents: Agent 1 drafts the initial annotation, Agent 2 provides a structured critique and reflection, and Agent 3 synthesizes this feedback to produce the final output (Draft <Math mode="inline" tex="\to" text="to" xml:id="S3.I2.i3.p1.m1">
+                    <XMath>
+                      <XMTok name="to" role="ARROW">→</XMTok>
+                    </XMath>
+                  </Math> Reflection <Math mode="inline" tex="\to" text="to" xml:id="S3.I2.i3.p1.m2">
+                    <XMath>
+                      <XMTok name="to" role="ARROW">→</XMTok>
+                    </XMath>
+                  </Math> Revision).</p>
+              </para>
+            </item>
+          </itemize>
+        </para>
+        <figure inlist="lof" labels="LABEL:fig1" xml:id="S3.F1">
+          <tags>
+            <tag>Figure 1</tag>
+            <tag role="autoref">Figure 1</tag>
+            <tag role="refnum">1</tag>
+            <tag role="typerefnum">Figure 1</tag>
+          </tags>
+<!--  %****␣main.tex␣Line␣100␣**** -->          <graphics candidates="framework_26.png" class="ltx_centering" graphic="framework_26.png" options="width=260.172pt, trim=0cm 0cm 0cm 0cm, clip=true" xml:id="S3.F1.g1"/>
+          <toccaption class="ltx_centering"><tag close=" ">1</tag>The feature of the three adopted prompt engineering methods</toccaption>
+          <caption class="ltx_centering"><tag close=": ">Figure 1</tag>The feature of the three adopted prompt engineering methods</caption>
+        </figure>
+      </subsubsection>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS4">
+      <tags>
+        <tag>3.4</tag>
+        <tag role="autoref">subsection 3.4</tag>
+        <tag role="refnum">3.4</tag>
+        <tag role="typerefnum">§3.4</tag>
+      </tags>
+      <title><tag close=" ">3.4</tag>Data analysis </title>
+      <para xml:id="S3.SS4.p1">
+        <p>To address <text font="bold">RQ1</text>, we first calculated the overall annotation Accuracy. Due to perfect collinearity between educational level and subject, we employed a two-step Generalized Linear Mixed Model (GLMM) strategy to analyze utterance-level annotation correctness (binary: correct/incorrect). All models included random intercepts for RowID to account for item-level variability. In the first step, we constructed a global GLMM including prompt method, educational level, and annotation dimension as fixed effects (excluding subject), followed by post-hoc pairwise comparisons for these variables. In the second step, we conducted separate subgroup GLMM analyses within each educational level to evaluate subject-specific effects.</p>
+      </para>
+      <para xml:id="S3.SS4.p2">
+        <p>To address <text font="bold">RQ2</text>, we defined several indicators to quantify biases between LLM predictions and human annotations and report the percentage:</p>
+        <itemize xml:id="S3.I3">
+          <item xml:id="S3.I3.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S3.I3.i1.p1">
+              <p><text font="bold">Affective Bias</text>: Affective Optimistic Bias (AOB): The proportion of instances where the predicted affective value was more positive than the human-annotated results (e.g., predicting “Neutral” as “Curiosity”). Affective Pessimistic Bias (APB): The proportion of instances where the predicted sentiment polarity was more negative than the human-annotated results.</p>
+            </para>
+          </item>
+          <item xml:id="S3.I3.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S3.I3.i2.p1">
+              <p><text font="bold">Cognitive Bias</text>: Cognitive Overestimation Bias (COB): The proportion of instances where the predicted cognitive level was at least one unit higher than the human-annotated results; Cognitive Underestimation Bias (CUB): The proportion of instances where the predicted cognitive level was at least one unit lower than the human-annotated results.</p>
+            </para>
+          </item>
+          <item xml:id="S3.I3.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S3.I3.i3.p1">
+              <p><text font="bold">Meta-cognitive Bias</text>: Meta-cognitive Overestimation Bias (MOB): The proportion of instances where non-meta-cognitive behavior was misclassified as a meta-cognitive state. Meta-cognitive Underestimation Bias (MUB): The proportion of instances where meta-cognitive behavior was misclassified as a non-meta-cognitive state.</p>
+            </para>
+          </item>
+          <item xml:id="S3.I3.i4">
+            <tags>
+              <tag>•</tag>
+              <tag role="autoref">item </tag>
+              <tag role="typerefnum">4th item</tag>
+            </tags>
+            <para xml:id="S3.I3.i4.p1">
+              <p><text font="bold">Behavioral Bias</text>: We utilized Sankey diagrams to conduct an exploratory analysis of bias patterns across behavioral categories.</p>
+            </para>
+          </item>
+        </itemize>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig3" xml:id="S3.F2">
+        <tags>
+          <tag>Figure 2</tag>
+          <tag role="autoref">Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Figure 2</tag>
+        </tags>
+        <graphics candidates="RQ1_all_subject.png" class="ltx_centering" graphic="RQ1_all_subject.png" options="width=216.81pt, trim=0cm 0cm 0cm 0cm, clip=true" xml:id="S3.F2.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">2</tag>Annotation accuracy by subjects</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 2</tag>Annotation accuracy by subjects</caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Results</title>
+    <subsection inlist="toc" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="autoref">subsection 4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=" ">4.1</tag>Contextual and Dimensional Variations in Accuracy, but Not Prompting Methods</title>
+      <table inlist="lot" labels="LABEL:tab:model_results" placement="htbp" xml:id="S4.T1">
+        <tags>
+          <tag><text fontsize="90%">Table 1</text></tag>
+          <tag role="autoref"><text fontsize="90%">Table 1</text></tag>
+          <tag role="refnum"><text fontsize="90%">1</text></tag>
+          <tag role="typerefnum"><text fontsize="90%">Table 1</text></tag>
+        </tags>
+<!--  %****␣main.tex␣Line␣125␣**** -->        <toccaption class="ltx_centering"><tag close=" "><text fontsize="90%">1</text></tag><text fontsize="90%">Fixed effects of educational level, dimension on annotation accuracy</text></toccaption>
+        <caption class="ltx_centering" fontsize="90%"><tag close=": ">Table 1</tag>Fixed effects of educational level, dimension on annotation accuracy</caption>
+        <tabular class="ltx_centering ltx_guessed_headers" colsep="5.0pt" vattach="middle">
+          <thead>
+            <tr>
+              <td align="left" border="tt" thead="column row"><text font="bold" fontsize="80%">Variable</text></td>
+              <td align="center" border="tt" thead="column"><text font="bold" fontsize="80%">Estimate</text></td>
+              <td align="center" border="tt" thead="column"><text font="bold" fontsize="80%">Std. Error</text></td>
+              <td align="center" border="tt" thead="column"><Math mode="inline" tex="p" text="p" xml:id="S4.T1.m1">
+                  <XMath>
+                    <XMTok font="italic" fontsize="80%" role="UNKNOWN">p</XMTok>
+                  </XMath>
+                </Math><text font="bold" fontsize="80%">-value</text></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left" border="t" thead="row"><text fontsize="80%">(Intercept)</text></td>
+              <td align="center" border="t"><text fontsize="80%">1.993</text></td>
+              <td align="center" border="t"><text fontsize="80%">0.072</text></td>
+              <td align="center" border="t"><text fontsize="80%">&lt; 0.001 ***</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text font="bold" fontsize="80%">Model (Ref: Gemini-3)</text></td>
+              <td/>
+              <td/>
+              <td/>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="80%">GPT-5.2</text></td>
+              <td align="center"><text fontsize="80%">0.265</text></td>
+              <td align="center"><text fontsize="80%">0.038</text></td>
+              <td align="center"><text fontsize="80%">&lt; 0.001 ***</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text font="bold" fontsize="80%">Method (Ref: Few-shot)</text></td>
+              <td/>
+              <td/>
+              <td/>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="80%">Single-agent Self-reflection</text></td>
+              <td align="center"><text fontsize="80%">0.047</text></td>
+              <td align="center"><text fontsize="80%">0.046</text></td>
+              <td align="center"><text fontsize="80%">0.314</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="80%">Multi-agent Reflection</text></td>
+              <td align="center"><text fontsize="80%">0.071</text></td>
+              <td align="center"><text fontsize="80%">0.047</text></td>
+              <td align="center"><text fontsize="80%">0.127</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text font="bold" fontsize="80%">Educational Level (Ref: K-12)</text></td>
+              <td/>
+              <td/>
+              <td/>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="80%">University</text></td>
+              <td align="center"><Math mode="inline" tex="-" text="-" xml:id="S4.T1.m2">
+                  <XMath>
+                    <XMTok fontsize="80%" meaning="minus" role="ADDOP">-</XMTok>
+                  </XMath>
+                </Math><text fontsize="80%">0.212</text></td>
+              <td align="center"><text fontsize="80%">0.038</text></td>
+              <td align="center"><text fontsize="80%">&lt; 0.001 ***</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text font="bold" fontsize="80%">Dimension (Ref: Affective)</text></td>
+              <td/>
+              <td/>
+              <td/>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="80%">Behavior</text></td>
+              <td align="center"><Math mode="inline" tex="-" text="-" xml:id="S4.T1.m3">
+                  <XMath>
+                    <XMTok fontsize="80%" meaning="minus" role="ADDOP">-</XMTok>
+                  </XMath>
+                </Math><text fontsize="80%">0.487</text></td>
+              <td align="center"><text fontsize="80%">0.058</text></td>
+              <td align="center"><text fontsize="80%">&lt; 0.001 ***</text></td>
+            </tr>
+            <tr>
+              <td align="left" thead="row"><text fontsize="80%">Cognitive</text></td>
+              <td align="center"><Math mode="inline" tex="-" text="-" xml:id="S4.T1.m4">
+                  <XMath>
+                    <XMTok fontsize="80%" meaning="minus" role="ADDOP">-</XMTok>
+                  </XMath>
+                </Math><text fontsize="80%">0.796</text></td>
+              <td align="center"><text fontsize="80%">0.056</text></td>
+              <td align="center"><text fontsize="80%">&lt; 0.001 ***</text></td>
+            </tr>
+            <tr>
+              <td align="left" border="bb" thead="row"><text fontsize="80%">Meta-cognitive</text></td>
+              <td align="center" border="bb"><Math mode="inline" tex="-" text="-" xml:id="S4.T1.m5">
+                  <XMath>
+                    <XMTok fontsize="80%" meaning="minus" role="ADDOP">-</XMTok>
+                  </XMath>
+                </Math><text fontsize="80%">0.518</text></td>
+              <td align="center" border="bb"><text fontsize="80%">0.058</text></td>
+              <td align="center" border="bb"><text fontsize="80%">&lt; 0.001 ***</text></td>
+            </tr>
+          </tbody>
+        </tabular>
+      </table>
+      <para xml:id="S4.SS1.p1">
+        <p>Descriptively, annotation accuracy slightly improved as prompt complexity increased: from the Few-Shot (Gemini-3: 79.2%; GPT-5.2: 82.4%) to Single-Agent (79.5% and 83.4%) and Multi-Agent (79.7% and 83.9%). However, GLMM results (Table <ref labelref="LABEL:tab:model_results"/>) revealed these marginal enhancements were not statistically significant; neither Single-agent Self-reflection (<Math mode="inline" tex="p=.314" text="p = .314" xml:id="S4.SS1.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning=".314" role="NUMBER">.314</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) nor Multi-agent Reflection (<Math mode="inline" tex="p=.127" text="p = .127" xml:id="S4.SS1.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning=".127" role="NUMBER">.127</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>) significantly outperformed the Few-shot. In contrast, contextual factors significantly impacted the likelihood of correct annotation. University-level dialogues proved significantly more difficult to annotate than K-12 dialogues (<Math mode="inline" tex="b=-0.212,p&lt;.001" text="formulae@(b = - 0.212, p less .001)" xml:id="S4.SS1.p1.m3">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="formulae"/>
+                  <XMRef idref="S4.SS1.p1.m3.1"/>
+                  <XMRef idref="S4.SS1.p1.m3.2"/>
+                </XMApp>
+                <XMWrap>
+                  <XMApp xml:id="S4.SS1.p1.m3.1">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                    <XMApp>
+                      <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok meaning="0.212" role="NUMBER">0.212</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMApp xml:id="S4.SS1.p1.m3.2">
+                    <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                    <XMTok meaning=".001" role="NUMBER">.001</XMTok>
+                  </XMApp>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math>). Subgroup analyses within educational levels showed that correctness in Mathematics was significantly lower than in Biology (K-12, <Math mode="inline" tex="p&lt;.001" text="p less .001" xml:id="S4.SS1.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning=".001" role="NUMBER">.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), whereas AGI outperformed Psychology (University, <Math mode="inline" tex="p&lt;.001" text="p less .001" xml:id="S4.SS1.p1.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning=".001" role="NUMBER">.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>). Finally, significant variations emerged across annotation dimensions. Compared to the Affective, models demonstrated significantly lower correctness on Behavioral, Meta-cognitive, and Cognitive dimensions (all <Math mode="inline" tex="p&lt;.001" text="p less .001" xml:id="S4.SS1.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMTok meaning=".001" role="NUMBER">.001</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>), with the Cognitive dimension proving the most challenging (<Math mode="inline" tex="b=-0.796" text="b = - 0.796" xml:id="S4.SS1.p1.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                <XMApp>
+                  <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                  <XMTok meaning="0.796" role="NUMBER">0.796</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math>). Detailed accuracies across dimensions and subjects are illustrated in Figure <ref labelref="LABEL:fig3"/>.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="autoref">subsection 4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=" ">4.2</tag>Annotation Bias</title>
+      <para xml:id="S4.SS2.p1">
+        <p>As illustrated in Figure <ref labelref="LABEL:fig4"/>, we observed distinct bias patterns across the four dimensions:(1)<text font="bold">Affective Bias</text>: Gemini-3 exhibited a substantially higher Affective Optimistic Bias (AOB) than GPT-5.2 across most subjects, frequently over-attributing positive emotions, while their Pessimistic Bias (APB) remained comparable. For example, in Psychology, Gemini-3’s AOB ranged from 9% to 21.5% across prompt methods, compared to GPT-5.2’s 3% to 4.5%. A notable exception occurred in AGI, where GPT-5.2 (Few-shot) showed a higher AOB (30%) than Gemini-3 (20%).
+(2)<text font="bold">Cognitive Bias</text>: Mathematics uniquely suffered from Cognitive Underestimation Bias (CUB) across both models and all prompts, peaking at 26.5% for Gemini-3 (Multi-agent). Conversely, Cognitive Overestimation Bias (COB) was prominent in AGI and Psychology, but remained minimal in the STEM disciplines (Biology and Mathematics).
+(3)<text font="bold">Meta-cognitive Bias</text>: Gemini-3 consistently displayed higher Meta-cognitive Overestimation Bias (MOB), frequently misclassifying non-meta-cognitive utterances. In Psychology, Gemini-3’s MOB ranged from 24% to 26%, vastly exceeding GPT-5.2’s 0.5% to 1%. While GPT-5.2 showed a slightly higher Underestimation Bias (MUB) than Gemini-3, overall MOB rates consistently exceeded MUB rates for both models.
+(4)<text font="bold">Behavioral Bias</text>: LLMs frequently misclassified human-labeled Questions, Negotiations, and Statements. In Mathematics specifically, nuanced interactions caused confusion: Questions were often mislabeled as Negotiations or Acknowledgments, and Negotiations as Requests or Questions (See Sankey diagram in the <ref class="ltx_href" href="https://osf.io/yvhar/overview?view_only=eededcccd433490191439605dd9ebd79">Digital Appendix</ref>). However, the models aligned well with human annotators on explicit categories like Requests and Off-task behaviors.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig4" xml:id="S4.F3">
+        <tags>
+          <tag>Figure 3</tag>
+          <tag role="autoref">Figure 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Figure 3</tag>
+        </tags>
+        <graphics candidates="RQ2_bias.png" class="ltx_centering" graphic="RQ2_bias.png" options="width=433.62pt, trim=0cm 0cm 0cm 0cm, clip=true" xml:id="S4.F3.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">3</tag>The annotation bias (affective, cognitive, meta-cognitive) of LLMs</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 3</tag>The annotation bias (affective, cognitive, meta-cognitive) of LLMs</caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=" ">5</tag>Discussion and Conclusion</title>
+<!--  %****␣main.tex␣Line␣175␣**** -->    <para xml:id="S5.p1">
+      <p>This study evaluates LLMs (Gemini-3 and GPT-5.2) as automated annotators for student-AI educational dialogues. Our results indicate that increasing prompt complexity yielded no statistically significant improvements over the baseline. Consequently, the few-shot approach remains a cost-effective alternative in resource-constrained environments. Crucially, our findings indicate that annotation accuracy is inherently context-dependent and dimension-sensitive, resonating with other studies <cite class="ltx_citemacro_cite">[<bibref bibrefs="jiang2025uncovering" separator="," yyseparator=","/>]</cite>. LLMs performed better on K-12 dialogues than University-level interactions. Performance also varied by subject (e.g., AGI outperformed Psychology), likely due to the epistemological nature of domains like Psychology, where subjective and open-ended knowledge complicates the assessment <cite class="ltx_citemacro_cite">[<bibref bibrefs="zheng2023judging" separator="," yyseparator=","/>]</cite>. We also identified a performance hierarchy across dimensions: LLMs excelled in the affective dimension—consistent with established strengths in sentiment analysis <cite class="ltx_citemacro_cite">[<bibref bibrefs="annan2025evaluating" separator="," yyseparator=","/>]</cite>—but struggled with the cognitive dimension <cite class="ltx_citemacro_cite">[<bibref bibrefs="long2024evaluating,he2025automated" separator="," yyseparator=","/>]</cite>. Moving beyond standard accuracy metrics, this research characterizes systematic biases inherent in LLM annotations, echoing observations in other domains <cite class="ltx_citemacro_cite">[<bibref bibrefs="lin-etal-2025-investigating,echterhoff-etal-2024-cognitive" separator="," yyseparator=","/>]</cite>. Notable patterns included a pronounced AOB in Gemini-3, domain-specific cognitive biases (CUB in Mathematics; COB in Psychology), and a systemic tendency toward MOB in the meta-cognitive dimension. These findings suggest that future prompts need to be tailored to specific models, disciplinary characteristics, and annotation dimensions to effectively mitigate bias. Furthermore, frequent conflation of behavioral categories suggests that single utterances often serve multiple pragmatic functions. Researchers should thus ensure strict mutual exclusivity in taxonomies or adopt multi-label classification frameworks.</p>
+    </para>
+    <para xml:id="S5.p2">
+      <p>In conclusion, while LLMs demonstrate considerable potential for scaling educational dialogue analysis, their reliability is bounded by contextual nuances and systemic biases. Given the limitations in current study, future studies should incorporate more advanced LLMs and evaluate more subjects strictly controlled across educational levels to facilitate a holistic assessment of systematic biases. Furthermore, to effectively mitigate these biases to build a more fair LLM-based annotation, beyond prompt adjustments, further study should pursue targeted model fine-tuning and establish robust human-AI collaborative workflows.</p>
+    </para>
+    <ERROR class="undefined">{credits}</ERROR>
+    <subsubsection inlist="toc" xml:id="S5.SS0.SSS1">
+      <tags>
+        <tag>5.0.1</tag>
+        <tag role="autoref">subsubsection 5.0.1</tag>
+        <tag role="refnum">5.0.1</tag>
+        <tag role="typerefnum">§5.0.1</tag>
+      </tags>
+      <title><tag close=" ">5.0.1</tag>Acknowledgements</title>
+      <para xml:id="S5.SS0.SSS1.p1">
+        <p>This work was supported by the National Natural Science Foundation of China (No.62407027) and the Beijing Educational Science Foundation of the Fourteenth 5-year Planning (BAEA24024).</p>
+      </para>
+<!--  %__␣Bibliography␣__ 
+     %BibTeX␣users␣should␣specify␣bibliography␣style␣’splncs04’.
+     %References␣will␣then␣be␣sorted␣and␣formatted␣in␣the␣correct␣style.-->    </subsubsection>
+  </section>
+  <bibliography bibstyle="splncs04" citestyle="numbers" files="Ref" xml:id="bib">
+    <title>References</title>
+  </bibliography>
+<!--  %\begin{thebibliography}{8} 
+     %\bibitem{ref_article1}
+     %Author,␣F.:␣Article␣title.␣Journal␣\textbf{2}(5),␣99__110␣(2016)
+     %****␣main.tex␣Line␣200␣****
+     %\bibitem{ref_lncs1}
+     %Author,␣F.,␣Author,␣S.:␣Title␣of␣a␣proceedings␣paper.␣In:␣Editor,
+     %F.,␣Editor,␣S.␣(eds.)␣CONFERENCE␣2016,␣LNCS,␣vol.␣9999,␣pp.␣1__13.
+     %Springer,␣Heidelberg␣(2016).␣\doi{10.10007/1234567890}
+     %\bibitem{ref_book1}
+     %Author,␣F.,␣Author,␣S.,␣Author,␣T.:␣Book␣title.␣2nd␣edn.␣Publisher,
+     %Location␣(1999)
+     %\bibitem{ref_proc1}
+     %Author,␣A.-B.:␣Contribution␣title.␣In:␣9th␣International␣Proceedings
+     %on␣Proceedings,␣pp.␣1__2.␣Publisher,␣Location␣(2010)
+     %\bibitem{ref_url1}
+     %LNCS␣Homepage,␣\url{http://www.springer.com/lncs},␣last␣accessed␣2023/10/25
+     %\end{thebibliography}--></document>

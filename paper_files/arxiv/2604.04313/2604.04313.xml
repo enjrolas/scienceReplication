@@ -1,0 +1,1340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.04313/latex_extracted"?>
+<?latexml class="IEEEtran" options="conference"?>
+<!--  %The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out. --><?latexml package="cite"?>
+<?latexml package="amsmath,amssymb,amsfonts"?>
+<?latexml package="algorithmic"?>
+<?latexml package="graphicx"?>
+<?latexml package="textcomp"?>
+<?latexml package="xcolor"?>
+<?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>Convolutional Neural Network and Adversarial Autoencoder in EEG images classification<break/></title>
+  <creator role="author">
+    <personname>
+Albert Nasybullin
+
+</personname>
+    <contact role="affiliation"><text font="italic">Faculty of Computer Science<break/>and Engineering,<break/>Innopolis University<break/></text>Innopolis, Russia<break/>a.nasibullin@innopolis.university</contact>
+  </creator>
+  <creator before="  " role="author">
+    <personname>Semen Kurkin
+
+</personname>
+    <contact role="affiliation"><text font="italic">Neuroscience and Cognitive<break/>Technology Laboratory,<break/>Center for Technologies in Robotics<break/>and Mechatronics Components,<break/>Innopolis University<break/></text>Innopolis, Russia<break/>kurkinsa@gmail.com</contact>
+  </creator>
+  <abstract name="Abstract">
+    <p>In this paper, we consider applying computer vision algorithms for the classification problem one faces in neuroscience during EEG data analysis. Our approach is to apply a combination of computer vision and neural network methods to solve human brain activity classification problems during hand movement. We pre-processed raw EEG signals and generated 2D EEG topograms. Later, we developed supervised and semi-supervised neural networks to classify different motor cortex activities.</p>
+  </abstract>
+  <keywords>
+EEG, Computer Vision, Neural Networks, CNN, GAN
+</keywords>
+<!--  %**** conference˙101719.tex Line 25 **** -->  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>I</tag>
+      <tag role="refnum">I</tag>
+      <tag role="typerefnum">§I</tag>
+    </tags>
+    <title><tag close=" ">I</tag><text font="smallcaps">Introduction</text></title>
+    <para xml:id="S1.p1">
+      <p>Brain signals classification is one of the essential problems in neuroscience <cite class="ltx_citemacro_cite">[<bibref bibrefs="chholak2019phase,kurkin2019machine,Gordleeva2020,kurkin2021oxygen,bukina2021modern,chholak2021event,maksimenko2021effect,kurkin2020system,kurkin2019artificial" separator="," yyseparator=","/>]</cite>. The typical approach for analysis and classification of human brain motor activity collected by EEG are Linear Discriminant Analysis (LDA), Support Vector Machine (SVM), and K-Nearest Neighbors (k-NN) classifier <cite class="ltx_citemacro_cite">[<bibref bibrefs="cha2019analysis,Gordleeva2017,Liburkina2018,Grigorev2020,badarin2020studying" separator="," yyseparator=","/>]</cite>. Neural network-based classification is also widely used. It includes Artificial Neural Networks (ANN), Convolutional Neural Networks (CNN), Deep Neural Networks (DNN), and a lot more <cite class="ltx_citemacro_cite">[<bibref bibrefs="andreev2019synchronization,andreev2021synchronization,ponomarenko2021assessment" separator="," yyseparator=","/>]</cite>.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>In this work, we work with data collected by EEG, using wavelet analysis techniques to generate a dataset of topograms, and implement neural network-based solutions for brain motor activity classification problems.</p>
+    </para>
+<!--  %**** conference˙101719.tex Line 50 **** -->  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>II</tag>
+      <tag role="refnum">II</tag>
+      <tag role="typerefnum">§II</tag>
+    </tags>
+    <title><tag close=" ">II</tag><text font="smallcaps">Data collection and data structure</text></title>
+    <para xml:id="S2.p1">
+      <p>Participants of the experiment were fifteen volunteers. All healthy males at the age from 20 to 45 years. Participants were right-handed, non-smokers, and regularly engage in physical activity. None of the participants has been diagnosed with musculoskeletal or central nervous system diseases or prescribed medication. For the sake of the study, the participants followed a healthy lifestyle for at least 48-hours before the experiment. That includes 8-hours long night rest, abstinence from alcohol, a reasonably limited caffeine consuming and physical exercises.</p>
+    </para>
+    <para xml:id="S2.p2">
+      <p>Before the experiment has begun, all participants were notified about the goals, methods, and possible discomforts of the experiment. The procedure followed Helsinki’s Declaration and was approved by the Ethics Committee of Innopolis University.</p>
+    </para>
+    <subsection inlist="toc" xml:id="S2.SS1">
+      <tags>
+        <tag>II-A</tag>
+        <tag role="refnum">II-A</tag>
+        <tag role="typerefnum">§II-A</tag>
+      </tags>
+      <title><tag close=" ">II-A</tag><text font="italic">Task</text></title>
+      <para xml:id="S2.SS1.p1">
+        <p>The procedure of the experiment is next. The subject comfortably sits in a chair, his hands are on armrests. At the beginning and the end of each participant’s session 3 minutes long background brain activity was recorded. During background recording participants were told try to relax and don not move their hands. Active phase of the experiment includes right or left hand movements, instructions to start movements were provided on a screen. We collected 20 trials of movements for each hand (40 trials in total).</p>
+      </para>
+      <para xml:id="S2.SS1.p2">
+        <p>Every individual trial includes number of phases accompanied with commands on the screen. First, trial starts with attention fixation. There is a signal for participant to prepare for an experiment begins, a bright cross lights up on a black screen for 2 seconds. Second, the cross stays on the screen, left- or right-oriented arrow appears on the top of it for 1.5 seconds. Third, the arrow disappears from the screen and the participant performs left hand movement or right hand movement correspondingly. In the provided experiment the hand movement is bending and unbending of fingers to the center of palm. At the end, there is a rest phase: the cross disappears, a participant is seeing a black screen for 15 seconds and resting before a next command shows up.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS2">
+      <tags>
+        <tag>II-B</tag>
+        <tag role="refnum">II-B</tag>
+        <tag role="typerefnum">§II-B</tag>
+      </tags>
+      <title><tag close=" ">II-B</tag><text font="italic">EEG data acquisition and preprocessing</text></title>
+      <para xml:id="S2.SS2.p1">
+        <p>EEG signals were recorded using the actiCHamp electroencephalograph manufactured by Brain Products, Germany. EEG signals were recorded with 32 channels in accordance with the 10-10 scheme. The ground was located at the site of the Fpz electrode, and the reference electrode was placed behind the right ear. For EEG registration, active Ag/AgCl electrodes ActiCAP were used, which were located on the scalp surface in the sockets of a special EasyCAP cap. To improve signal quality and provide better conductivity, the scalp was pretreated with NuPrep abrasive gel, and then the electrodes were positioned using SuperVisc conductive gel. During the experiment, the conductivity values were monitored at each of the EEG electrodes. Typically, the values were <Math mode="inline" tex="&lt;" text="less" xml:id="S2.SS2.p1.m1">
+            <XMath>
+              <XMTok meaning="less-than" role="RELOP">&lt;</XMTok>
+            </XMath>
+          </Math> 25 k<Math mode="inline" tex="\Omega" text="Omega" xml:id="S2.SS2.p1.m2">
+            <XMath>
+              <XMTok name="Omega" role="UNKNOWN">Ω</XMTok>
+            </XMath>
+          </Math> which is sufficient for the correct operation of active EEG electrodes. The raw EEG signals were sampled at 1000 Hz and filtered by a 50–Hz notch filter by an embedded hardware-software data acquisition complex. Additionally, raw EEG signals were filtered by the 5th-order Butterworth filter with cut-off points at 1 Hz and 100 Hz. Eyes blinking and heartbeat artifacts removal was performed by the Independent Component Analysis (ICA). Data was then inspected manually and corrected for remaining artifacts.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:AA" xml:id="S2.SS3">
+      <tags>
+        <tag>II-C</tag>
+        <tag role="refnum">II-C</tag>
+        <tag role="typerefnum">§II-C</tag>
+      </tags>
+      <title><tag close=" ">II-C</tag><text font="italic">Data processing</text></title>
+      <para xml:id="S2.SS3.p1">
+        <p>After the experiment, we have raw EEG data for 15 human subjects and 20 trials for each human subject.</p>
+      </para>
+      <para xml:id="S2.SS3.p2">
+        <p>The next step is to convert raw EEG data into 2D human scalp topographies and to choose correct samples from data trials. There is no formally verified correct way to do that. In this work, we empirically discovered the next sample selection strategy, which led to satisfying results:</p>
+      </para>
+      <para xml:id="S2.SS3.p3">
+        <itemize xml:id="S2.I1">
+          <item xml:id="S2.I1.i1">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">1st item</tag>
+            </tags>
+            <para xml:id="S2.I1.i1.p1">
+              <p>Chosen frequency is ”mu” (9-11 Hz). ”Mu” frequency was chosen because of the nature of the experiment. It is well known, that ”mu”/”alpha” frequencies are responsible for motor activity.</p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i2">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">2nd item</tag>
+            </tags>
+            <para xml:id="S2.I1.i2.p1">
+              <p>To avoid edge effects, we cut the following intervals out:</p>
+              <itemize xml:id="S2.I1.I1">
+                <item xml:id="S2.I1.i2.i1">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">1st item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i2.i1.p1">
+                    <p>5.0-5.5 seconds,
+<!--  %**** conference˙101719.tex Line 75 **** --></p>
+                  </para>
+                </item>
+                <item xml:id="S2.I1.i2.i2">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">2nd item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i2.i2.p1">
+                    <p>8.5-10.0 seconds.</p>
+                  </para>
+                </item>
+              </itemize>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i3">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">3rd item</tag>
+            </tags>
+            <para xml:id="S2.I1.i3.p1">
+              <p>Time frame 0.0-5.0 seconds was not used. This interval corresponds to the recording of “baseline” activity.</p>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i4">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">4th item</tag>
+            </tags>
+            <para xml:id="S2.I1.i4.p1">
+              <p>To extract the maximum amount of useful data we use “slicing windows” as a strategy to export EEG topographies:</p>
+              <itemize xml:id="S2.I1.I2">
+                <item xml:id="S2.I1.i4.i1">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">1st item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i4.i1.p1">
+                    <p>5.5-7.0 seconds,</p>
+                  </para>
+                </item>
+                <item xml:id="S2.I1.i4.i2">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">2nd item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i4.i2.p1">
+                    <p>6.0-7.5 seconds,</p>
+                  </para>
+                </item>
+                <item xml:id="S2.I1.i4.i3">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">3rd item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i4.i3.p1">
+                    <p>6.5-8.0 seconds,</p>
+                  </para>
+                </item>
+                <item xml:id="S2.I1.i4.i4">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">4th item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i4.i4.p1">
+                    <p>7.0-8.5 seconds.</p>
+                  </para>
+                </item>
+              </itemize>
+            </para>
+          </item>
+          <item xml:id="S2.I1.i5">
+            <tags>
+              <tag>•</tag>
+              <tag role="typerefnum">5th item</tag>
+            </tags>
+            <para xml:id="S2.I1.i5.p1">
+              <p>To double the exported amount of data we use two different baseline procedures:</p>
+              <itemize xml:id="S2.I1.I3">
+                <item xml:id="S2.I1.i5.i1">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">1st item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i5.i1.p1">
+                    <p>“absolute”,</p>
+                  </para>
+                </item>
+                <item xml:id="S2.I1.i5.i2">
+                  <tags>
+                    <tag><text font="bold">–</text></tag>
+                    <tag role="typerefnum">2nd item</tag>
+                  </tags>
+                  <para xml:id="S2.I1.i5.i2.p1">
+                    <p>“relative”.</p>
+                  </para>
+                </item>
+              </itemize>
+            </para>
+          </item>
+        </itemize>
+      </para>
+      <para xml:id="S2.SS3.p4">
+        <p>To generate EEG topographies Matlab’s package FieldTrip Toolbox was used <cite class="ltx_citemacro_cite">[<bibref bibrefs="maris2007nonparametric" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S2.SS4">
+      <tags>
+        <tag>II-D</tag>
+        <tag role="refnum">II-D</tag>
+        <tag role="typerefnum">§II-D</tag>
+      </tags>
+      <title><tag close=" ">II-D</tag><text font="italic">Finalized dataset</text></title>
+      <para xml:id="S2.SS4.p1">
+        <p>The final dataset consists of 939 images and two classes. The resolution of images is 840 by 630 pixels. Dataset structure is represented in Figs. 1 and 2. Approximately data was split in 80/20 proportion. 80<Math mode="inline" tex="\%" text="percent" xml:id="S2.SS4.p1.m1">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math> of images are train set, 20<Math mode="inline" tex="\%" text="percent" xml:id="S2.SS4.p1.m2">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math> of images are test set. The current data split was chosen according to Scaling Law <cite class="ltx_citemacro_cite">[<bibref bibrefs="guyon1997scaling" separator="," yyseparator=","/>]</cite> splits.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:left10" placement="htbp" xml:id="S2.F1">
+        <tags>
+          <tag>Fig. 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Fig. 1</tag>
+        </tags>
+        <p class="ltx_align_center"><graphics candidates="figs/left10.png" graphic="figs/left10.png" options="width=130.086pt" xml:id="S2.F1.g1"/></p>
+<!--  %**** conference˙101719.tex Line 100 **** -->        <toccaption><tag close=" ">1</tag>Left hand-related EEG topography in Mu frequency band.</toccaption>
+        <caption><tag close=": ">Fig. 1</tag>Left hand-related EEG topography in Mu frequency band.</caption>
+      </figure>
+      <figure inlist="lof" labels="LABEL:right200" placement="htbp" xml:id="S2.F2">
+        <tags>
+          <tag>Fig. 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Fig. 2</tag>
+        </tags>
+        <p class="ltx_align_center"><graphics candidates="figs/right200.png" graphic="figs/right200.png" options="width=130.086pt" xml:id="S2.F2.g1"/></p>
+        <toccaption><tag close=" ">2</tag>Right hand-related EEG topography in Mu frequency band.</toccaption>
+        <caption><tag close=": ">Fig. 2</tag>Right hand-related EEG topography in Mu frequency band.</caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>III</tag>
+      <tag role="refnum">III</tag>
+      <tag role="typerefnum">§III</tag>
+    </tags>
+    <title><tag close=" ">III</tag><text font="smallcaps">Convolutional Neural Network (CNN)</text></title>
+    <para xml:id="S3.p1">
+      <p>Input shape for Convolutional Neural Network is 84 by 63 pixels. Reshaped images tended to better quality performance than original images with the same network structure <cite class="ltx_citemacro_cite">[<bibref bibrefs="valueva2020application" separator="," yyseparator=","/>]</cite>. Other parameters of the network were configured empirically during the development.</p>
+    </para>
+    <para xml:id="S3.p2">
+      <p>The current network uses a 5 by 5 kernel. The network contains four convolutional layers with increasing density, four pooling layers with dimensions 2 by 2, three fully connected layers with decreasing density to the number of classes we were looking for.</p>
+    </para>
+    <para xml:id="S3.p3">
+      <p>ReLU (Rectified Linear Unit) was chosen as an activation function. ReLU was selected for the sake of reducing computational expenses and compensating high dimensionality of other parts of the designed network. To the last fully connected layer Softmax activation function was used.
+ReLU activation function is defined as the positive part of its argument. Here, <Math mode="inline" tex="x" text="x" xml:id="S3.p3.m1">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+          </XMath>
+        </Math> is a input of neuron:</p>
+    </para>
+    <para xml:id="S3.p4">
+      <equation xml:id="S3.E1">
+        <tags>
+          <tag>(1)</tag>
+          <tag role="refnum">1</tag>
+        </tags>
+        <Math mode="display" tex="Relu(x)=max(0,x)" text="R * e * l * u * x = m * a * x * open-interval@(0, x)" xml:id="S3.E1.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">R</XMTok>
+                <XMTok font="italic" role="UNKNOWN">e</XMTok>
+                <XMTok font="italic" role="UNKNOWN">l</XMTok>
+                <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                <XMDual>
+                  <XMRef idref="S3.E1.m1.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.E1.m1.1">x</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">m</XMTok>
+                <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="open-interval"/>
+                    <XMRef idref="S3.E1.m1.2"/>
+                    <XMRef idref="S3.E1.m1.3"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok meaning="0" role="NUMBER" xml:id="S3.E1.m1.2">0</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.E1.m1.3">x</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMApp>
+          </XMath>
+        </Math>
+      </equation>
+    </para>
+    <para xml:id="S3.p5">
+      <p>SoftMax is commonly used as an activation function for the last layer of Artificial Neural Networks (ANN). SoftMax uses Luce’s choice axiom and normalizes the output of the network to a probability distribution over predicted output classes. Input of SoftMax is a vector <Math mode="inline" tex="x" text="x" xml:id="S3.p5.m1">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+          </XMath>
+        </Math> of <Math mode="inline" tex="K" text="K" xml:id="S3.p5.m2">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">K</XMTok>
+          </XMath>
+        </Math> amount of real numbers:</p>
+    </para>
+<!--  %**** conference˙101719.tex Line 125 **** -->    <para xml:id="S3.p6">
+      <equation xml:id="S3.E2">
+        <tags>
+          <tag>(2)</tag>
+          <tag role="refnum">2</tag>
+        </tags>
+        <Math mode="display" tex="\text{Softmax}(x_{i})=\frac{\exp(x_{i})}{\sum_{j}^{K}\exp(x_{j})}" text="[Softmax] * x _ i = exponential@(x _ i) / ((sum _ j) ^ K)@(exponential@(x _ j))" xml:id="S3.E2.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMText>Softmax</XMText>
+                <XMDual>
+                  <XMRef idref="S3.E2.m1.5"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S3.E2.m1.5">
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+              <XMApp>
+                <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                <XMDual>
+                  <XMApp>
+                    <XMRef idref="S3.E2.m1.1"/>
+                    <XMRef idref="S3.E2.m1.2"/>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.E2.m1.1">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S3.E2.m1.2">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMApp>
+                </XMDual>
+                <XMApp>
+                  <XMApp>
+                    <XMTok role="SUPERSCRIPTOP" scriptpos="post2"/>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                      <XMTok mathstyle="text" meaning="sum" role="SUMOP" scriptpos="post">∑</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                    </XMApp>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">K</XMTok>
+                  </XMApp>
+                  <XMDual>
+                    <XMApp>
+                      <XMRef idref="S3.E2.m1.3"/>
+                      <XMRef idref="S3.E2.m1.4"/>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.E2.m1.3">exp</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMApp xml:id="S3.E2.m1.4">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">j</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                    </XMApp>
+                  </XMDual>
+                </XMApp>
+              </XMApp>
+            </XMApp>
+          </XMath>
+        </Math>
+      </equation>
+    </para>
+    <subsection inlist="toc" xml:id="S3.SS1">
+      <tags>
+        <tag>III-A</tag>
+        <tag role="refnum">III-A</tag>
+        <tag role="typerefnum">§III-A</tag>
+      </tags>
+      <title><tag close=" ">III-A</tag><text font="italic">Results</text></title>
+      <para xml:id="S3.SS1.p1">
+        <p>Convolutional Neural Network performance is satisfying for our classification problem. Supervised learning on just 10 epochs reaches an accuracy of 93,75<Math mode="inline" tex="\%" text="percent" xml:id="S3.SS1.p1.m1">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math>. Algorithm performance on a larger number of epochs is unpredictable but a bigger size train dataset may lead to better performance.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:CNNacc" placement="htbp" xml:id="S3.F3">
+        <tags>
+          <tag>Fig. 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Fig. 3</tag>
+        </tags>
+        <p class="ltx_align_center"><graphics candidates="figs/CNNacc.png" graphic="figs/CNNacc.png" options="width=173.448pt" xml:id="S3.F3.g1"/></p>
+        <toccaption><tag close=" ">3</tag>The CNN’s accuracy is satisfying. The network reaches accuracy over 90<Math mode="inline" tex="\%" text="percent" xml:id="S3.F3.m1">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math>even on small-scale data.</toccaption>
+        <caption><tag close=": ">Fig. 3</tag>The CNN’s accuracy is satisfying. The network reaches accuracy over 90<Math mode="inline" tex="\%" text="percent" xml:id="S3.F3.m2">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math>even on small-scale data.</caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S4">
+    <tags>
+      <tag>IV</tag>
+      <tag role="refnum">IV</tag>
+      <tag role="typerefnum">§IV</tag>
+    </tags>
+    <title><tag close=" ">IV</tag><text font="smallcaps">Semi-supervised Adversarial Autoencoder (AAE)</text></title>
+    <para xml:id="S4.p1">
+      <p>The main idea of GAN-based methods is a competition between two objects: a generator <Math mode="inline" tex="G" text="G" xml:id="S4.p1.m1">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">G</XMTok>
+          </XMath>
+        </Math> and a discriminator <Math mode="inline" tex="D" text="D" xml:id="S4.p1.m2">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">D</XMTok>
+          </XMath>
+        </Math>. Generator is trying to create images that look like they belong to the original dataset <Math mode="inline" tex="X" text="X" xml:id="S4.p1.m3">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">X</XMTok>
+          </XMath>
+        </Math>. The work of the discriminator is to distinguish between original data <Math mode="inline" tex="X" text="X" xml:id="S4.p1.m4">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">X</XMTok>
+          </XMath>
+        </Math> and generated images <Math mode="inline" tex="G(X)" text="G * X" xml:id="S4.p1.m5">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+              <XMTok font="italic" role="UNKNOWN">G</XMTok>
+              <XMDual>
+                <XMRef idref="S4.p1.m5.1"/>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S4.p1.m5.1">X</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMApp>
+          </XMath>
+        </Math>. In the best-case scenario, the training stops when the generator can outplay (“fool”) the discriminator. So, the generalized training objective for GAN can be described as:</p>
+    </para>
+    <para xml:id="S4.p2">
+      <equation xml:id="S4.E3">
+        <tags>
+          <tag>(3)</tag>
+          <tag role="refnum">3</tag>
+        </tags>
+        <Math mode="display" tex="\begin{split}\displaystyle\min_{G}\max_{D}V(D,G)=\mathbb{E}_{x\sim p_{\text{%&#10;data }}(x)}[\log D(x)]-\\&#10;\displaystyle-\mathbb{E}_{z\sim p_{z}(z)}[\log D(G(z))]\end{split}" text="(minimum _ G)@((maximum _ D)@(V)) * open-interval@(D, G) = E _ (x similar-to p _ [data ] * x) * delimited-[]@(logarithm@(D) * x) - E _ (z similar-to p _ z * z) * delimited-[]@(logarithm@(D) * G * z)" xml:id="S4.E3.m1">
+          <XMath>
+            <XMDual>
+              <XMApp>
+                <XMRef idref="S4.E3.m1.11"/>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMApp>
+                    <XMApp scriptpos="mid">
+                      <XMTok role="SUBSCRIPTOP" scriptpos="mid7"/>
+                      <XMRef idref="S4.E3.m1.1"/>
+                      <XMRef idref="S4.E3.m1.2.1"/>
+                    </XMApp>
+                    <XMApp>
+                      <XMApp scriptpos="mid">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="mid7"/>
+                        <XMRef idref="S4.E3.m1.3"/>
+                        <XMRef idref="S4.E3.m1.4.1"/>
+                      </XMApp>
+                      <XMRef idref="S4.E3.m1.5"/>
+                    </XMApp>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="open-interval"/>
+                    <XMRef idref="S4.E3.m1.7"/>
+                    <XMRef idref="S4.E3.m1.9"/>
+                  </XMApp>
+                </XMApp>
+                <XMApp>
+                  <XMRef idref="S4.E3.m1.21"/>
+                  <XMApp>
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                      <XMRef idref="S4.E3.m1.12"/>
+                      <XMRef idref="S4.E3.m1.13.1"/>
+                    </XMApp>
+                    <XMDual>
+                      <XMApp>
+                        <XMTok meaning="delimited-[]"/>
+                        <XMRef idref="S4.E3.m1.34"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMRef idref="S4.E3.m1.14"/>
+                        <XMApp xml:id="S4.E3.m1.34">
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMApp>
+                            <XMRef idref="S4.E3.m1.15"/>
+                            <XMRef idref="S4.E3.m1.16"/>
+                          </XMApp>
+                          <XMRef idref="S4.E3.m1.18"/>
+                        </XMApp>
+                        <XMRef idref="S4.E3.m1.20"/>
+                      </XMWrap>
+                    </XMDual>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                      <XMRef idref="S4.E3.m1.22"/>
+                      <XMRef idref="S4.E3.m1.23.1"/>
+                    </XMApp>
+                    <XMDual>
+                      <XMApp>
+                        <XMTok meaning="delimited-[]"/>
+                        <XMRef idref="S4.E3.m1.35"/>
+                      </XMApp>
+                      <XMWrap>
+                        <XMRef idref="S4.E3.m1.24"/>
+                        <XMApp xml:id="S4.E3.m1.35">
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMApp>
+                            <XMRef idref="S4.E3.m1.25"/>
+                            <XMRef idref="S4.E3.m1.26"/>
+                          </XMApp>
+                          <XMDual>
+                            <XMRef idref="S4.E3.m1.35.1"/>
+                            <XMWrap>
+                              <XMRef idref="S4.E3.m1.27"/>
+                              <XMApp xml:id="S4.E3.m1.35.1">
+                                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                                <XMRef idref="S4.E3.m1.28"/>
+                                <XMRef idref="S4.E3.m1.30"/>
+                              </XMApp>
+                              <XMRef idref="S4.E3.m1.32"/>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                        <XMRef idref="S4.E3.m1.33"/>
+                      </XMWrap>
+                    </XMDual>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+              <XMArray colsep="0pt" name="aligned">
+                <XMRow>
+                  <XMCell align="right">
+                    <XMApp>
+                      <XMTok meaning="equals" role="RELOP" xml:id="S4.E3.m1.11">=</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMApp scriptpos="mid">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="mid7"/>
+                            <XMTok meaning="minimum" role="OPFUNCTION" scriptpos="mid" xml:id="S4.E3.m1.1">min</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S4.E3.m1.2.1">G</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMApp scriptpos="mid">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="mid7"/>
+                              <XMTok meaning="maximum" role="OPFUNCTION" scriptpos="mid" xml:id="S4.E3.m1.3">max</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S4.E3.m1.4.1">D</XMTok>
+                            </XMApp>
+                            <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.5">V</XMTok>
+                          </XMApp>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false" xml:id="S4.E3.m1.6">(</XMTok>
+                          <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.7">D</XMTok>
+                          <XMTok role="PUNCT" xml:id="S4.E3.m1.8">,</XMTok>
+                          <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.9">G</XMTok>
+                          <XMTok role="CLOSE" stretchy="false" xml:id="S4.E3.m1.10">)</XMTok>
+                        </XMWrap>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok meaning="limit-from"/>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMTok font="blackboard" role="UNKNOWN" xml:id="S4.E3.m1.12">E</XMTok>
+                            <XMApp xml:id="S4.E3.m1.13.1">
+                              <XMTok fontsize="70%" meaning="similar-to" name="sim" role="RELOP">∼</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                              <XMApp>
+                                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                                <XMApp>
+                                  <XMTok role="SUBSCRIPTOP" scriptpos="post8"/>
+                                  <XMTok font="italic" fontsize="70%" role="UNKNOWN">p</XMTok>
+                                  <XMText><text fontsize="50%">data </text></XMText>
+                                </XMApp>
+                                <XMDual>
+                                  <XMRef idref="S4.E3.m1.13.1.1"/>
+                                  <XMWrap>
+                                    <XMTok fontsize="70%" role="OPEN" stretchy="false">(</XMTok>
+                                    <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S4.E3.m1.13.1.1">x</XMTok>
+                                    <XMTok fontsize="70%" role="CLOSE" stretchy="false">)</XMTok>
+                                  </XMWrap>
+                                </XMDual>
+                              </XMApp>
+                            </XMApp>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok role="OPEN" stretchy="false" xml:id="S4.E3.m1.14">[</XMTok>
+                            <XMApp xml:id="S4.E3.m1.36">
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMApp>
+                                <XMTok meaning="logarithm" role="OPFUNCTION" xml:id="S4.E3.m1.15">log</XMTok>
+                                <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.16">D</XMTok>
+                              </XMApp>
+                              <XMWrap>
+                                <XMTok role="OPEN" stretchy="false" xml:id="S4.E3.m1.17">(</XMTok>
+                                <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.18">x</XMTok>
+                                <XMTok role="CLOSE" stretchy="false" xml:id="S4.E3.m1.19">)</XMTok>
+                              </XMWrap>
+                            </XMApp>
+                            <XMTok role="CLOSE" stretchy="false" xml:id="S4.E3.m1.20">]</XMTok>
+                          </XMWrap>
+                        </XMApp>
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMCell>
+                </XMRow>
+                <XMRow>
+                  <XMCell align="right">
+                    <XMApp>
+                      <XMTok meaning="minus" role="ADDOP" xml:id="S4.E3.m1.21">-</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="blackboard" role="UNKNOWN" xml:id="S4.E3.m1.22">E</XMTok>
+                          <XMApp xml:id="S4.E3.m1.23.1">
+                            <XMTok fontsize="70%" meaning="similar-to" name="sim" role="RELOP">∼</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">z</XMTok>
+                            <XMApp>
+                              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post8"/>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">p</XMTok>
+                                <XMTok font="italic" fontsize="50%" role="UNKNOWN">z</XMTok>
+                              </XMApp>
+                              <XMDual>
+                                <XMRef idref="S4.E3.m1.23.1.1"/>
+                                <XMWrap>
+                                  <XMTok fontsize="70%" role="OPEN" stretchy="false">(</XMTok>
+                                  <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S4.E3.m1.23.1.1">z</XMTok>
+                                  <XMTok fontsize="70%" role="CLOSE" stretchy="false">)</XMTok>
+                                </XMWrap>
+                              </XMDual>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false" xml:id="S4.E3.m1.24">[</XMTok>
+                          <XMApp xml:id="S4.E3.m1.37">
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok meaning="logarithm" role="OPFUNCTION" xml:id="S4.E3.m1.25">log</XMTok>
+                              <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.26">D</XMTok>
+                            </XMApp>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false" xml:id="S4.E3.m1.27">(</XMTok>
+                              <XMApp xml:id="S4.E3.m1.37.1">
+                                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                                <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.28">G</XMTok>
+                                <XMWrap>
+                                  <XMTok role="OPEN" stretchy="false" xml:id="S4.E3.m1.29">(</XMTok>
+                                  <XMTok font="italic" role="UNKNOWN" xml:id="S4.E3.m1.30">z</XMTok>
+                                  <XMTok role="CLOSE" stretchy="false" xml:id="S4.E3.m1.31">)</XMTok>
+                                </XMWrap>
+                              </XMApp>
+                              <XMTok role="CLOSE" stretchy="false" xml:id="S4.E3.m1.32">)</XMTok>
+                            </XMWrap>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false" xml:id="S4.E3.m1.33">]</XMTok>
+                        </XMWrap>
+                      </XMApp>
+                    </XMApp>
+                  </XMCell>
+                </XMRow>
+              </XMArray>
+            </XMDual>
+          </XMath>
+        </Math>
+      </equation>
+    </para>
+<!--  %**** conference˙101719.tex Line 150 **** -->    <para xml:id="S4.p3">
+      <p>In the current architecture, we use two sub-networks made up for autoencoders <cite class="ltx_citemacro_cite">[<bibref bibrefs="vu2019anomaly" separator="," yyseparator=","/>]</cite>. The training objective for the discriminator sub-network is to maximize a pixel-wise error between the reconstructed image from original dataset <Math mode="inline" tex="X" text="X" xml:id="S4.p3.m1">
+          <XMath>
+            <XMTok font="italic" role="UNKNOWN">X</XMTok>
+          </XMath>
+        </Math> and generated image <Math mode="inline" tex="G(X)" text="G * X" xml:id="S4.p3.m2">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="times" role="MULOP">⁢</XMTok>
+              <XMTok font="italic" role="UNKNOWN">G</XMTok>
+              <XMDual>
+                <XMRef idref="S4.p3.m2.1"/>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S4.p3.m2.1">X</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMApp>
+          </XMath>
+        </Math>:</p>
+    </para>
+    <para xml:id="S4.p4">
+      <equation xml:id="S4.E4">
+        <tags>
+          <tag>(4)</tag>
+          <tag role="refnum">4</tag>
+        </tags>
+        <Math mode="display" tex="\mathcal{L}_{D}=\|X-D(X)\|_{1}-\|G(X)-D(G(X))\|_{1}" text="L _ D = (norm@(X - D * X)) _ 1 - (norm@(G * X - D * G * X)) _ 1" xml:id="S4.E4.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="caligraphic" role="UNKNOWN">L</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">D</XMTok>
+              </XMApp>
+              <XMApp>
+                <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMDual>
+                    <XMApp>
+                      <XMTok meaning="norm"/>
+                      <XMRef idref="S4.E4.m1.4"/>
+                    </XMApp>
+                    <XMWrap>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                      <XMApp xml:id="S4.E4.m1.4">
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">X</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">D</XMTok>
+                          <XMDual>
+                            <XMRef idref="S4.E4.m1.1"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMTok font="italic" role="UNKNOWN" xml:id="S4.E4.m1.1">X</XMTok>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                  <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                </XMApp>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMDual>
+                    <XMApp>
+                      <XMTok meaning="norm"/>
+                      <XMRef idref="S4.E4.m1.5"/>
+                    </XMApp>
+                    <XMWrap>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                      <XMApp xml:id="S4.E4.m1.5">
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">G</XMTok>
+                          <XMDual>
+                            <XMRef idref="S4.E4.m1.2"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMTok font="italic" role="UNKNOWN" xml:id="S4.E4.m1.2">X</XMTok>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">D</XMTok>
+                          <XMDual>
+                            <XMRef idref="S4.E4.m1.5.1"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMApp xml:id="S4.E4.m1.5.1">
+                                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                                <XMTok font="italic" role="UNKNOWN">G</XMTok>
+                                <XMDual>
+                                  <XMRef idref="S4.E4.m1.3"/>
+                                  <XMWrap>
+                                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                    <XMTok font="italic" role="UNKNOWN" xml:id="S4.E4.m1.3">X</XMTok>
+                                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                  </XMWrap>
+                                </XMDual>
+                              </XMApp>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                  <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMApp>
+          </XMath>
+        </Math>
+      </equation>
+    </para>
+    <para xml:id="S4.p5">
+      <p>At the same time, the generator is trying to minimize the same error and “fool” the discriminator. Training objective for the generator may be represented as:</p>
+    </para>
+    <para xml:id="S4.p6">
+      <equation xml:id="S4.E5">
+        <tags>
+          <tag>(5)</tag>
+          <tag role="refnum">5</tag>
+        </tags>
+        <Math mode="display" tex="\mathcal{L}_{G}=\|X-D(X)\|_{1}+\|G(X)-D(G(X))\|_{1}" text="L _ G = (norm@(X - D * X)) _ 1 + (norm@(G * X - D * G * X)) _ 1" xml:id="S4.E5.m1">
+          <XMath>
+            <XMApp>
+              <XMTok meaning="equals" role="RELOP">=</XMTok>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="caligraphic" role="UNKNOWN">L</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">G</XMTok>
+              </XMApp>
+              <XMApp>
+                <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMDual>
+                    <XMApp>
+                      <XMTok meaning="norm"/>
+                      <XMRef idref="S4.E5.m1.4"/>
+                    </XMApp>
+                    <XMWrap>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                      <XMApp xml:id="S4.E5.m1.4">
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">X</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">D</XMTok>
+                          <XMDual>
+                            <XMRef idref="S4.E5.m1.1"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMTok font="italic" role="UNKNOWN" xml:id="S4.E5.m1.1">X</XMTok>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                  <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                </XMApp>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMDual>
+                    <XMApp>
+                      <XMTok meaning="norm"/>
+                      <XMRef idref="S4.E5.m1.5"/>
+                    </XMApp>
+                    <XMWrap>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                      <XMApp xml:id="S4.E5.m1.5">
+                        <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">G</XMTok>
+                          <XMDual>
+                            <XMRef idref="S4.E5.m1.2"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMTok font="italic" role="UNKNOWN" xml:id="S4.E5.m1.2">X</XMTok>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">D</XMTok>
+                          <XMDual>
+                            <XMRef idref="S4.E5.m1.5.1"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMApp xml:id="S4.E5.m1.5.1">
+                                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                                <XMTok font="italic" role="UNKNOWN">G</XMTok>
+                                <XMDual>
+                                  <XMRef idref="S4.E5.m1.3"/>
+                                  <XMWrap>
+                                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                    <XMTok font="italic" role="UNKNOWN" xml:id="S4.E5.m1.3">X</XMTok>
+                                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                                  </XMWrap>
+                                </XMDual>
+                              </XMApp>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok meaning="parallel-to" name="||" role="VERTBAR">∥</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                  <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                </XMApp>
+              </XMApp>
+            </XMApp>
+          </XMath>
+        </Math>
+      </equation>
+    </para>
+    <para xml:id="S4.p7">
+      <p>We chose <Math mode="inline" tex="L_{g}" text="L _ g" xml:id="S4.p7.m1">
+          <XMath>
+            <XMApp>
+              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+              <XMTok font="italic" role="UNKNOWN">L</XMTok>
+              <XMTok font="italic" fontsize="70%" role="UNKNOWN">g</XMTok>
+            </XMApp>
+          </XMath>
+        </Math> (pixel-wise error) to achieve sharper results, following insights from Isola <cite class="ltx_citemacro_cite">[<bibref bibrefs="isola2017image" separator="," yyseparator=","/>]</cite>. For the sake of having a more robust model, generator sub-network and discriminator sub-network are created only from fully convolutional layers.</p>
+    </para>
+    <subsection inlist="toc" xml:id="S4.SS1">
+      <tags>
+        <tag>IV-A</tag>
+        <tag role="refnum">IV-A</tag>
+        <tag role="typerefnum">§IV-A</tag>
+      </tags>
+      <title><tag close=" ">IV-A</tag><text font="italic">Results</text></title>
+      <para xml:id="S4.SS1.p1">
+        <p>The network was trained at 400 epochs. The training results are satisfying for our goals. Still, the results of each training are unstable. Training results are floating. The network success rate floats from 60<Math mode="inline" tex="\%" text="percent" xml:id="S4.SS1.p1.m1">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math> to 68<Math mode="inline" tex="\%" text="percent" xml:id="S4.SS1.p1.m2">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math> during different training sessions. The best-achieved result is 68<Math mode="inline" tex="\%" text="percent" xml:id="S4.SS1.p1.m3">
+            <XMath>
+              <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+            </XMath>
+          </Math>.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:confusionMatrix" placement="htbp" xml:id="S4.F4">
+        <tags>
+          <tag>Fig. 4</tag>
+          <tag role="refnum">4</tag>
+          <tag role="typerefnum">Fig. 4</tag>
+        </tags>
+        <p class="ltx_align_center"><graphics candidates="figs/confusionMatrix.png" graphic="figs/confusionMatrix.png" options="width=173.448pt" xml:id="S4.F4.g1"/></p>
+        <toccaption><tag close=" ">4</tag>The Confusion Matrix of Adversarial Autoencoder. 1 = class ”left hand”, 0 = class ”right hand”.</toccaption>
+        <caption><tag close=": ">Fig. 4</tag>The Confusion Matrix of Adversarial Autoencoder. 1 = class ”left hand”, 0 = class ”right hand”.</caption>
+      </figure>
+      <figure inlist="lof" labels="LABEL:generatorStep0" placement="!htbp" xml:id="S4.F5">
+        <tags>
+          <tag>Fig. 5</tag>
+          <tag role="refnum">5</tag>
+          <tag role="typerefnum">Fig. 5</tag>
+        </tags>
+<!--  %**** conference˙101719.tex Line 175 **** -->        <p class="ltx_align_center"><graphics candidates="figs/generatorStep0.png" graphic="figs/generatorStep0.png" options="width=173.448pt" xml:id="S4.F5.g1"/></p>
+        <toccaption><tag close=" ">5</tag>Original Image after the augmentation is on a left. Generated Image is on a right. Step 0.</toccaption>
+        <caption><tag close=": ">Fig. 5</tag>Original Image after the augmentation is on a left. Generated Image is on a right. Step 0.</caption>
+      </figure>
+      <figure inlist="lof" labels="LABEL:generatorStep150" placement="!htbp" xml:id="S4.F6">
+        <tags>
+          <tag>Fig. 6</tag>
+          <tag role="refnum">6</tag>
+          <tag role="typerefnum">Fig. 6</tag>
+        </tags>
+        <p class="ltx_align_center"><graphics candidates="figs/generatorStep150.png" graphic="figs/generatorStep150.png" options="width=173.448pt" xml:id="S4.F6.g1"/></p>
+        <toccaption><tag close=" ">6</tag>Original Image after the augmentation is on a left. Generated Image is on a right. Step 150.</toccaption>
+        <caption><tag close=": ">Fig. 6</tag>Original Image after the augmentation is on a left. Generated Image is on a right. Step 150.</caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S5">
+    <tags>
+      <tag>V</tag>
+      <tag role="refnum">V</tag>
+      <tag role="typerefnum">§V</tag>
+    </tags>
+    <title><tag close=" ">V</tag><text font="smallcaps">Conclusion</text></title>
+    <para xml:id="S5.p1">
+      <p>In the work, we explored opportunities and capabilities of neural networks and computer vision-based techniques in the analysis and classification of human brain motor cortex activity using EEG neuroimaging. We have tested both supervised and semi-supervised approaches. As a result, motor cortex activity was successfully classified. However, the adversarial autoencoder approach requires more time and effort to achieve better results.</p>
+    </para>
+<!--  %Generated by IEEEtran.bst, version: 1.14 (2015/08/26) -->  </section>
+  <bibliography xml:id="bib">
+    <title>References</title>
+    <biblist>
+<!--  %**** conference˙101719.tex Line 200 **** -->      <bibitem key="chholak2019phase" xml:id="bib.bib1">
+        <tags>
+          <tag>[1]</tag>
+          <tag role="refnum">1</tag>
+        </tags>
+        <bibblock>
+P. Chholak, A. N. Pisarchik, S. A. Kurkin, V. A. Maksimenko, and A. E. Hramov,
+“Phase-amplitude coupling between mu-and gamma-waves to carry motor
+commands,” in <emph font="italic">2019 3rd School on Dynamics of Complex Networks and
+their Application in Intellectual Robotics (DCNAIR)</emph>.   IEEE, 2019, pp. 39–45.
+</bibblock>
+      </bibitem>
+      <bibitem key="kurkin2019machine" xml:id="bib.bib2">
+        <tags>
+          <tag>[2]</tag>
+          <tag role="refnum">2</tag>
+        </tags>
+        <bibblock>
+S. Kurkin, P. Chholak, V. Maksimenko, and A. Pisarchik, “Machine learning
+approaches for classification of imaginary movement type by meg data for
+neurorehabilitation,” in <emph font="italic">2019 3rd School on Dynamics of Complex
+Networks and their Application in Intellectual Robotics (DCNAIR)</emph>.   IEEE, 2019, pp. 106–108.
+<!--  %**** conference˙101719.tex Line 225 **** --></bibblock>
+      </bibitem>
+      <bibitem key="Gordleeva2020" xml:id="bib.bib3">
+        <tags>
+          <tag>[3]</tag>
+          <tag role="refnum">3</tag>
+        </tags>
+        <bibblock>
+S. Y. Gordleeva, S. A. Lobov, N. A. Grigorev, A. O. Savosenkov, M. O. Shamshin,
+M. V. Lukoyanov, M. A. Khoruzhko, and V. B. Kazantsev, “Real-time
+EEG–EMG human–machine interface-based control
+system for a lower-limb exoskeleton,” <emph font="italic">IEEE Access</emph>, vol. 8, pp.
+84 070–84 081, 2020. [Online]. Available:
+https://doi.org/10.1109/access.2020.2991812
+</bibblock>
+      </bibitem>
+      <bibitem key="kurkin2021oxygen" xml:id="bib.bib4">
+        <tags>
+          <tag>[4]</tag>
+          <tag role="refnum">4</tag>
+        </tags>
+        <bibblock>
+S. Kurkin, A. Badarin, V. Grubov, V. Maksimenko, and A. Hramov, “The oxygen
+saturation in the primary motor cortex during a single hand movement:
+functional near-infrared spectroscopy (fnirs) study,” <emph font="italic">The European
+Physical Journal Plus</emph>, vol. 136, no. 5, pp. 1–9, 2021.
+</bibblock>
+      </bibitem>
+      <bibitem key="bukina2021modern" xml:id="bib.bib5">
+        <tags>
+          <tag>[5]</tag>
+          <tag role="refnum">5</tag>
+        </tags>
+        <bibblock>
+T. Bukina, M. Khramova, and S. Kurkin, “Modern research on primary school
+children brain functioning in the learning process,” <emph font="italic">Izvestiya Vysshikh Uchebnykh Zavedeniy. Prikladnaya
+Nelineynaya Dinamika</emph>, vol. 29, no. 3, pp. 449–456, 2021.
+</bibblock>
+      </bibitem>
+      <bibitem key="chholak2021event" xml:id="bib.bib6">
+        <tags>
+          <tag>[6]</tag>
+          <tag role="refnum">6</tag>
+        </tags>
+        <bibblock>
+P. Chholak, S. A. Kurkin, A. E. Hramov, and A. N. Pisarchik, “Event-related
+coherence in visual cortex and brain noise: An meg study,” <emph font="italic"><!--  %**** conference˙101719.tex Line 250 **** -->Applied
+Sciences</emph>, vol. 11, no. 1, p. 375, 2021.
+</bibblock>
+      </bibitem>
+      <bibitem key="maksimenko2021effect" xml:id="bib.bib7">
+        <tags>
+          <tag>[7]</tag>
+          <tag role="refnum">7</tag>
+        </tags>
+        <bibblock>
+V. Maksimenko, A. Kuc, N. Frolov, S. Kurkin, and A. Hramov, “Effect of
+repetition on the behavioral and neuronal responses to ambiguous necker cube
+images,” <emph font="italic">Scientific Reports</emph>, vol. 11, no. 1, pp. 1–13, 2021.
+</bibblock>
+      </bibitem>
+      <bibitem key="kurkin2020system" xml:id="bib.bib8">
+        <tags>
+          <tag>[8]</tag>
+          <tag role="refnum">8</tag>
+        </tags>
+        <bibblock>
+S. A. Kurkin, V. V. Grubov, V. A. Maksimenko, E. N. Pitsik, M. V. Hramova, and
+A. E. Hramov, “System for monitoring and adjusting the learning process of
+primary schoolchildren based on the eeg data analysis,”
+<emph font="italic">Informatsionno-upravlyayushchiye sistemy</emph>,
+no. 5, pp. 50–61, 2020.
+</bibblock>
+      </bibitem>
+      <bibitem key="kurkin2019artificial" xml:id="bib.bib9">
+        <tags>
+          <tag>[9]</tag>
+          <tag role="refnum">9</tag>
+        </tags>
+        <bibblock>
+S. Kurkin, E. Pitsik, and N. Frolov, “Artificial intelligence systems for
+classifying eeg responses to imaginary and real movements of operators,” in
+<emph font="italic">Saratov Fall Meeting 2018: Computations and Data Analysis: from
+Nanoscale Tools to Brain Functions</emph>, vol. 11067.   International Society for Optics and Photonics, 2019, p. 1106709.
+</bibblock>
+      </bibitem>
+      <bibitem key="cha2019analysis" xml:id="bib.bib10">
+        <tags>
+          <tag>[10]</tag>
+          <tag role="refnum">10</tag>
+        </tags>
+        <bibblock>
+J. Cha, K. S. Kim, H. Zhang, and S. Lee, “Analysis on eeg signal with machine
+learning,” in <emph font="italic">2019 International Conference on Image and Video
+Processing, and Artificial Intelligence</emph>, vol. 11321.   <!--  %**** conference˙101719.tex Line 275 **** -->International Society for Optics and Photonics, 2019, p.
+113212E.
+</bibblock>
+      </bibitem>
+      <bibitem key="Gordleeva2017" xml:id="bib.bib11">
+        <tags>
+          <tag>[11]</tag>
+          <tag role="refnum">11</tag>
+        </tags>
+        <bibblock>
+S. Gordleeva, M. Lukoyanov, S. Mineev, M. Khoruzhko, V. Mironov, A. Kaplan, and
+V. Kazantsev, “Exoskeleton control system based on motor-imaginary
+brain–computer interface,” <emph font="italic">Sovremennye tehnologii v
+medicine</emph>, vol. 9, no. 3, p. 31, Sep. 2017. [Online]. Available:
+https://doi.org/10.17691/stm2017.9.3.04
+</bibblock>
+      </bibitem>
+      <bibitem key="Liburkina2018" xml:id="bib.bib12">
+        <tags>
+          <tag>[12]</tag>
+          <tag role="refnum">12</tag>
+        </tags>
+        <bibblock>
+S. P. Liburkina, A. N. Vasilyev, L. V. Yakovlev, S. Y. Gordleeva, and A. Y.
+Kaplan, “A motor imagery-based brain–computer interface with
+vibrotactile stimuli,” <emph font="italic">Neuroscience and Behavioral Physiology</emph>,
+vol. 48, no. 9, pp. 1067–1077, Nov. 2018. [Online]. Available:
+https://doi.org/10.1007/s11055-018-0669-2
+</bibblock>
+      </bibitem>
+      <bibitem key="Grigorev2020" xml:id="bib.bib13">
+        <tags>
+          <tag>[13]</tag>
+          <tag role="refnum">13</tag>
+        </tags>
+        <bibblock>
+N. Grigorev, A. Savosenkov, A. Udoratina, V. Kazantsev, M. Lukoyanov, and
+S. Gordleeva, “Influence of vibrotactile feedback on the motor evoked
+<!--  %**** conference˙101719.tex Line 300 **** -->potentials (MEPs) induced by motor imagery,” in <emph font="italic">2020 4th Scientific
+School on Dynamics of Complex Networks and their Application in Intellectual
+Robotics (DCNAIR)</emph>.   IEEE, Sep.
+2020. [Online]. Available:
+https://doi.org/10.1109/dcnair50402.2020.9216847
+</bibblock>
+      </bibitem>
+      <bibitem key="badarin2020studying" xml:id="bib.bib14">
+        <tags>
+          <tag>[14]</tag>
+          <tag role="refnum">14</tag>
+        </tags>
+        <bibblock>
+A. A. Badarin, V. V. Skazkina, and V. V. Grubov, “Studying of human’s mental
+state during visual information processing with combined eeg and fnirs,” in
+<emph font="italic">Saratov Fall Meeting 2019: Computations and Data Analysis: from
+Nanoscale Tools to Brain Functions</emph>, vol. 11459.   International Society for Optics and Photonics, 2020, p. 114590D.
+</bibblock>
+      </bibitem>
+      <bibitem key="andreev2019synchronization" xml:id="bib.bib15">
+        <tags>
+          <tag>[15]</tag>
+          <tag role="refnum">15</tag>
+        </tags>
+        <bibblock>
+A. Andreev and V. Maksimenko, “Synchronization in coupled neural network with
+inhibitory coupling,” <emph font="italic">Cybernetics and Physics</emph>, vol. 8, no. 4, pp.
+199–204, 2019.
+</bibblock>
+      </bibitem>
+      <bibitem key="andreev2021synchronization" xml:id="bib.bib16">
+        <tags>
+          <tag>[16]</tag>
+          <tag role="refnum">16</tag>
+        </tags>
+        <bibblock>
+A. V. Andreev, V. A. Maksimenko, A. N. Pisarchik, and A. E. Hramov,
+“Synchronization of interacted spiking neuronal networks with inhibitory
+coupling,” <emph font="italic">Chaos, Solitons &amp; Fractals</emph>, vol. 146, p. 110812, 2021.
+</bibblock>
+      </bibitem>
+      <bibitem key="ponomarenko2021assessment" xml:id="bib.bib17">
+        <tags>
+          <tag>[17]</tag>
+          <tag role="refnum">17</tag>
+        </tags>
+        <bibblock>
+<!--  %**** conference˙101719.tex Line 325 **** -->V. Ponomarenko, D. Kulminskiy, A. Andreev, and M. Prokhorov, “Assessment of an
+external periodic force amplitude using a small spike neuron network in a
+radiophysical experiment,” <emph font="italic">Technical Physics Letters</emph>, vol. 47, no. 2,
+pp. 162–165, 2021.
+</bibblock>
+      </bibitem>
+      <bibitem key="maris2007nonparametric" xml:id="bib.bib18">
+        <tags>
+          <tag>[18]</tag>
+          <tag role="refnum">18</tag>
+        </tags>
+        <bibblock>
+E. Maris and R. Oostenveld, “Nonparametric statistical testing of eeg-and
+meg-data,” <emph font="italic">Journal of neuroscience methods</emph>, vol. 164, no. 1, pp.
+177–190, 2007.
+</bibblock>
+      </bibitem>
+      <bibitem key="guyon1997scaling" xml:id="bib.bib19">
+        <tags>
+          <tag>[19]</tag>
+          <tag role="refnum">19</tag>
+        </tags>
+        <bibblock>
+I. Guyon <emph font="italic">et al.</emph>, “A scaling law for the validation-set training-set
+size ratio,” <emph font="italic">AT&amp;T Bell Laboratories</emph>, vol. 1, no. 11, 1997.
+</bibblock>
+      </bibitem>
+      <bibitem key="valueva2020application" xml:id="bib.bib20">
+        <tags>
+          <tag>[20]</tag>
+          <tag role="refnum">20</tag>
+        </tags>
+        <bibblock>
+M. V. Valueva, N. Nagornov, P. A. Lyakhov, G. V. Valuev, and N. I. Chervyakov,
+“Application of the residue number system to reduce hardware costs of the
+convolutional neural network implementation,” <emph font="italic">Mathematics and
+Computers in Simulation</emph>, vol. 177, pp. 232–243, 2020.
+</bibblock>
+      </bibitem>
+      <bibitem key="vu2019anomaly" xml:id="bib.bib21">
+        <tags>
+          <tag>[21]</tag>
+          <tag role="refnum">21</tag>
+        </tags>
+        <bibblock>
+H. S. Vu, D. Ueta, K. Hashimoto, K. Maeno, S. Pranata, and S. M. Shen,
+“Anomaly detection with adversarial dual autoencoders,” <emph font="italic">arXiv
+preprint arXiv:1902.06924</emph>, 2019.
+<!--  %**** conference˙101719.tex Line 350 **** --></bibblock>
+      </bibitem>
+      <bibitem key="isola2017image" xml:id="bib.bib22">
+        <tags>
+          <tag>[22]</tag>
+          <tag role="refnum">22</tag>
+        </tags>
+        <bibblock>
+P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros, “Image-to-image translation
+with conditional adversarial networks,” in <emph font="italic">Proceedings of the IEEE
+conference on computer vision and pattern recognition</emph>, 2017, pp. 1125–1134.
+</bibblock>
+      </bibitem>
+    </biblist>
+  </bibliography>
+</document>

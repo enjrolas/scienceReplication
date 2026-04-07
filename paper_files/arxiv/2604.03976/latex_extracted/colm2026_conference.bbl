@@ -1,0 +1,398 @@
+\begin{thebibliography}{78}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ahn et~al.(2024)Ahn, Almaatouq, Gulabani, and Hosanagar]{ahn2024impact}
+Daehwan Ahn, Abdullah Almaatouq, Monisha Gulabani, and Kartik Hosanagar.
+\newblock Impact of model interpretability and outcome feedback on trust in ai.
+\newblock In \emph{Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems}, pp.\  1--25, 2024.
+
+\bibitem[Aksitov et~al.(2023)Aksitov, Miryoosefi, Li, Li, Babayan, Kopparapu, Fisher, Guo, Prakash, Srinivasan, et~al.]{aksitov2023rest}
+Renat Aksitov, Sobhan Miryoosefi, Zonglin Li, Daliang Li, Sheila Babayan, Kavya Kopparapu, Zachary Fisher, Ruiqi Guo, Sushant Prakash, Pranesh Srinivasan, et~al.
+\newblock Rest meets react: Self-improvement for multi-step reasoning llm agent.
+\newblock \emph{arXiv preprint arXiv:2312.10003}, 2023.
+
+\bibitem[{Allianz Research}(2025)]{allianz2025insurance}
+{Allianz Research}.
+\newblock Allianz global insurance report 2025: Rising demand for protection.
+\newblock Technical report, Allianz SE, 2025.
+\newblock URL \url{https://www.allianz.com/en/economic_research/insights/publications/specials_fmo/250527-global-insurance-report.html}.
+
+\bibitem[Anderljung et~al.(2023)Anderljung, Barnhart, Korinek, Leung, O'Keefe, Whittlestone, Avin, Brundage, Bullock, Cass-Beggs, et~al.]{anderljung2023frontier}
+Markus Anderljung, Joslyn Barnhart, Anton Korinek, Jade Leung, Cullen O'Keefe, Jess Whittlestone, Shahar Avin, Miles Brundage, Justin Bullock, Duncan Cass-Beggs, et~al.
+\newblock Frontier ai regulation: Managing emerging risks to public safety.
+\newblock \emph{arXiv preprint arXiv:2307.03718}, 2023.
+
+\bibitem[Artemenkov \& Saccal(2025)Artemenkov and Saccal]{artemenkov2025financial}
+Andrey Artemenkov and Alessandro Saccal.
+\newblock Financial modelling of transition to escrow schemes in urban residential construction: A case study of tashkent city.
+\newblock \emph{Buildings}, 15\penalty0 (16):\penalty0 2843, 2025.
+
+\bibitem[Bereska \& Gavves(2024)Bereska and Gavves]{bereska2024mechanistic}
+Leonard Bereska and Efstratios Gavves.
+\newblock Mechanistic interpretability for ai safety--a review.
+\newblock \emph{arXiv preprint arXiv:2404.14082}, 2024.
+
+\bibitem[Bessembinder et~al.(2008)Bessembinder, Kahle, Maxwell, and Xu]{bessembinder2008measuring}
+Hendrik Bessembinder, Kathleen~M Kahle, William~F Maxwell, and Danielle Xu.
+\newblock Measuring abnormal bond performance.
+\newblock \emph{The Review of Financial Studies}, 22\penalty0 (10):\penalty0 4219--4258, 2008.
+
+\bibitem[Bhattacharjee et~al.(2023)Bhattacharjee, Moraffah, Garland, and Liu]{bhattacharjee2023towards}
+Amrita Bhattacharjee, Raha Moraffah, Joshua Garland, and Huan Liu.
+\newblock Towards llm-guided causal explainability for black-box text classifiers.
+\newblock \emph{arXiv preprint arXiv:2309.13340}, 2023.
+
+\bibitem[Bilal et~al.(2025)Bilal, Ebert, and Lin]{bilal2025llms}
+Ahsan Bilal, David Ebert, and Beiyu Lin.
+\newblock Llms for explainable ai: A comprehensive survey.
+\newblock \emph{arXiv preprint arXiv:2504.00125}, 2025.
+
+\bibitem[Borah \& Mihalcea(2024)Borah and Mihalcea]{borah2024towards}
+Angana Borah and Rada Mihalcea.
+\newblock Towards implicit bias detection and mitigation in multi-agent llm interactions.
+\newblock In \emph{Findings of the Association for Computational Linguistics: EMNLP 2024}, pp.\  9306--9326, 2024.
+
+\bibitem[Briys \& De~Varenne(2001)Briys and De~Varenne]{briys2001insurance}
+Eric Briys and Fran{\c{c}}ois De~Varenne.
+\newblock Insurance: from underwriting to derivatives.
+\newblock In \emph{Financial Innovations and the Welfare of Nations: How Cross-Border Transfers of Financial Innovations Nurture Emerging Capital Markets}, pp.\  301--314. Springer, 2001.
+
+\bibitem[Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal, Neelakantan, Shyam, Sastry, Askell, et~al.]{brown2020language}
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et~al.
+\newblock Language models are few-shot learners.
+\newblock \emph{Advances in neural information processing systems}, 33:\penalty0 1877--1901, 2020.
+
+\bibitem[Cau et~al.(2023)Cau, Hauptmann, Spano, and Tintarev]{cau2023effects}
+Federico~Maria Cau, Hanna Hauptmann, Lucio~Davide Spano, and Nava Tintarev.
+\newblock Effects of ai and logic-style explanations on users’ decisions under different levels of uncertainty.
+\newblock \emph{ACM Transactions on Interactive Intelligent Systems}, 13\penalty0 (4):\penalty0 1--42, 2023.
+
+\bibitem[Chen et~al.(2026)Chen, Liu, Hu, Yu, and Wang]{chen2026trajectory}
+Tianyu Chen, Dongrui Liu, Xia Hu, Jingyi Yu, and Wenjie Wang.
+\newblock A trajectory-based safety audit of clawdbot (openclaw).
+\newblock \emph{arXiv preprint arXiv:2602.14364}, 2026.
+
+\bibitem[Chen et~al.(2024)Chen, Xiang, Xiao, Song, and Li]{chen2024agentpoison}
+Zhaorun Chen, Zhen Xiang, Chaowei Xiao, Dawn Song, and Bo~Li.
+\newblock Agentpoison: Red-teaming llm agents via poisoning memory or knowledge bases.
+\newblock \emph{Advances in Neural Information Processing Systems}, 37:\penalty0 130185--130213, 2024.
+
+\bibitem[Comanici et~al.(2025)Comanici, Bieber, Schaekermann, Pasupat, Sachdeva, Dhillon, Blistein, Ram, Zhang, Rosen, et~al.]{comanici2025gemini}
+Gheorghe Comanici, Eric Bieber, Mike Schaekermann, Ice Pasupat, Noveen Sachdeva, Inderjit Dhillon, Marcel Blistein, Ori Ram, Dan Zhang, Evan Rosen, et~al.
+\newblock Gemini 2.5: Pushing the frontier with advanced reasoning, multimodality, long context, and next generation agentic capabilities.
+\newblock \emph{arXiv preprint arXiv:2507.06261}, 2025.
+
+\bibitem[Compton(2004)]{compton2004performance}
+Wayde Compton.
+\newblock \emph{Performance bond}.
+\newblock arsenal pulp press, 2004.
+
+\bibitem[de~Lafuente(2026)]{de2026openclaw}
+Francisco~Angulo de~Lafuente.
+\newblock Openclaw-p2p: A decentralized framework for collective ai intelligence towards artificial general intelligence.
+\newblock 2026.
+
+\bibitem[Deng et~al.(2024)Deng, Yang, Yuan, Huang, Wang, Liu, Tian, Pan, Zhang, Lin, et~al.]{deng2024composerx}
+Qixin Deng, Qikai Yang, Ruibin Yuan, Yipeng Huang, Yi~Wang, Xubo Liu, Zeyue Tian, Jiahao Pan, Ge~Zhang, Hanfeng Lin, et~al.
+\newblock Composerx: Multi-agent symbolic music composition with llms.
+\newblock \emph{arXiv preprint arXiv:2404.18081}, 2024.
+
+\bibitem[Deng et~al.(2023)Deng, Gu, Zheng, Chen, Stevens, Wang, Sun, and Su]{deng2023mind2web}
+Xiang Deng, Yu~Gu, Boyuan Zheng, Shijie Chen, Sam Stevens, Boshi Wang, Huan Sun, and Yu~Su.
+\newblock Mind2web: Towards a generalist agent for the web.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36:\penalty0 28091--28114, 2023.
+
+\bibitem[Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova]{devlin2019bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language understanding.
+\newblock In \emph{Proceedings of the 2019 conference of the North American chapter of the association for computational linguistics: human language technologies, volume 1 (long and short papers)}, pp.\  4171--4186, 2019.
+
+\bibitem[Ding et~al.(2024)Ding, Li, Wang, and Chen]{ding2024large}
+Han Ding, Yinheng Li, Junhao Wang, and Hang Chen.
+\newblock Large language model agent in financial trading: A survey.
+\newblock \emph{arXiv preprint arXiv:2408.06361}, 2024.
+
+\bibitem[Dunefsky et~al.(2024)Dunefsky, Chlenski, and Nanda]{dunefsky2024transcoders}
+Jacob Dunefsky, Philippe Chlenski, and Neel Nanda.
+\newblock Transcoders find interpretable llm feature circuits.
+\newblock \emph{Advances in Neural Information Processing Systems}, 37:\penalty0 24375--24410, 2024.
+
+\bibitem[Embrechts(2000)]{embrechts2000actuarial}
+Paul Embrechts.
+\newblock Actuarial versus financial pricing of insurance.
+\newblock \emph{The Journal of Risk Finance}, 1\penalty0 (4):\penalty0 17--26, 2000.
+
+\bibitem[Evstafev(2025)]{evstafev2025paradox}
+Evgenii Evstafev.
+\newblock The paradox of stochasticity: Limited creativity and computational decoupling in temperature-varied llm outputs of structured fictional data.
+\newblock \emph{arXiv preprint arXiv:2502.08515}, 2025.
+
+\bibitem[Fang et~al.(2026)Fang, Luo, Wang, Chen, Tian, Sun, Liu, Fang, Tan, Cui, et~al.]{fang2026safethinker}
+Xianya Fang, Xianying Luo, Yadong Wang, Xiang Chen, Yu~Tian, Zequn Sun, Rui Liu, Jun Fang, Naiqiang Tan, Yuanning Cui, et~al.
+\newblock Safethinker: Reasoning about risk to deepen safety beyond shallow alignment.
+\newblock \emph{arXiv preprint arXiv:2601.16506}, 2026.
+
+\bibitem[Gat et~al.(2023)Gat, Calderon, Feder, Chapanin, Sharma, and Reichart]{gat2023faithful}
+Yair Gat, Nitay Calderon, Amir Feder, Alexander Chapanin, Amit Sharma, and Roi Reichart.
+\newblock Faithful explanations of black-box nlp models using llm-generated counterfactuals.
+\newblock \emph{arXiv preprint arXiv:2310.00603}, 2023.
+
+\bibitem[Ge et~al.(2024)Ge, Zhou, Hou, Khabsa, Wang, Wang, Han, and Mao]{ge2024mart}
+Suyu Ge, Chunting Zhou, Rui Hou, Madian Khabsa, Yi-Chia Wang, Qifan Wang, Jiawei Han, and Yuning Mao.
+\newblock Mart: Improving llm safety with multi-round automatic red-teaming.
+\newblock In \emph{Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)}, pp.\  1927--1937, 2024.
+
+\bibitem[{Google}(2026)]{google_ucp_2026}
+{Google}.
+\newblock Universal commerce protocol ({UCP}).
+\newblock \url{https://ucp.dev/}, 2026.
+
+\bibitem[Greshake et~al.(2023)Greshake, Abdelnabi, Mishra, Endres, Holz, and Fritz]{greshake2023not}
+Kai Greshake, Sahar Abdelnabi, Shailesh Mishra, Christoph Endres, Thorsten Holz, and Mario Fritz.
+\newblock Not what you've signed up for: Compromising real-world llm-integrated applications with indirect prompt injection.
+\newblock In \emph{Proceedings of the 16th ACM workshop on artificial intelligence and security}, pp.\  79--90, 2023.
+
+\bibitem[Guo et~al.(2025)Guo, Xu, Zhu, Hong, Wang, and Mao]{guo2025mcp}
+Zikang Guo, Benfeng Xu, Chiwei Zhu, Wentao Hong, Xiaorui Wang, and Zhendong Mao.
+\newblock Mcp-agentbench: Evaluating real-world language agent performance with mcp-mediated tools.
+\newblock \emph{arXiv preprint arXiv:2509.09734}, 2025.
+
+\bibitem[Hacker(2023)]{hacker2023ai}
+Philipp Hacker.
+\newblock Ai regulation in europe: from the ai act to future regulatory challenges.
+\newblock \emph{arXiv preprint arXiv:2310.04072}, 2023.
+
+\bibitem[Hacker(2024)]{hacker2024sustainable}
+Philipp Hacker.
+\newblock Sustainable ai regulation.
+\newblock \emph{Common Market Law Review}, 61\penalty0 (2), 2024.
+
+\bibitem[Hu et~al.(2025)Hu, Liu, Yue, Zhang, Liu, Zhu, Lin, Guo, Dou, Xi, et~al.]{hu2025memory}
+Yuyang Hu, Shichun Liu, Yanwei Yue, Guibin Zhang, Boyang Liu, Fangyi Zhu, Jiahang Lin, Honglin Guo, Shihan Dou, Zhiheng Xi, et~al.
+\newblock Memory in the age of ai agents.
+\newblock \emph{arXiv preprint arXiv:2512.13564}, 2025.
+
+\bibitem[Ji et~al.(2023)Ji, Liu, Dai, Pan, Zhang, Bian, Chen, Sun, Wang, and Yang]{ji2023beavertails}
+Jiaming Ji, Mickel Liu, Josef Dai, Xuehai Pan, Chi Zhang, Ce~Bian, Boyuan Chen, Ruiyang Sun, Yizhou Wang, and Yaodong Yang.
+\newblock Beavertails: Towards improved safety alignment of llm via a human-preference dataset.
+\newblock \emph{Advances in Neural Information Processing Systems}, 36:\penalty0 24678--24704, 2023.
+
+\bibitem[Kang et~al.(2025)Kang, Ji, Zhao, and Bai]{kang2025memory}
+Jiazheng Kang, Mingming Ji, Zhe Zhao, and Ting Bai.
+\newblock Memory os of ai agent.
+\newblock In \emph{Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing}, pp.\  25972--25981, 2025.
+
+\bibitem[Kim et~al.(2024)Kim, Paranjape, Khot, and Hajishirzi]{kim2024husky}
+Joongwon Kim, Bhargavi Paranjape, Tushar Khot, and Hannaneh Hajishirzi.
+\newblock Husky: A unified, open-source language agent for multi-step reasoning.
+\newblock \emph{arXiv preprint arXiv:2406.06469}, 2024.
+
+\bibitem[Kumar et~al.(2023)Kumar, Agarwal, Srinivas, Li, Feizi, and Lakkaraju]{kumar2023certifying}
+Aounon Kumar, Chirag Agarwal, Suraj Srinivas, Aaron~Jiaxun Li, Soheil Feizi, and Himabindu Lakkaraju.
+\newblock Certifying llm safety against adversarial prompting.
+\newblock \emph{arXiv preprint arXiv:2309.02705}, 2023.
+
+\bibitem[Kumar et~al.(2024)Kumar, Sahay, Mazumder, Okur, Manuvinakurike, Beckage, Su, Lee, and Nachman]{kumar2024decoding}
+Shachi~H Kumar, Saurav Sahay, Sahisnu Mazumder, Eda Okur, Ramesh Manuvinakurike, Nicole Beckage, Hsuan Su, Hung-yi Lee, and Lama Nachman.
+\newblock Decoding biases: Automated methods and llm judges for gender bias detection in language models.
+\newblock \emph{arXiv preprint arXiv:2408.03907}, 2024.
+
+\bibitem[Kwon et~al.(2023)Kwon, Li, Zhuang, Sheng, Zheng, Yu, Gonzalez, Zhang, and Stoica]{kwon2023efficient}
+Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody~Hao Yu, Joseph Gonzalez, Hao Zhang, and Ion Stoica.
+\newblock Efficient memory management for large language model serving with pagedattention.
+\newblock In \emph{Proceedings of the 29th symposium on operating systems principles}, pp.\  611--626, 2023.
+
+\bibitem[Li et~al.(2023)Li, Qi, Liu, Di, Liu, Pei, Yi, and Zhou]{li2023trustworthy}
+Bo~Li, Peng Qi, Bo~Liu, Shuai Di, Jingen Liu, Jiquan Pei, Jinfeng Yi, and Bowen Zhou.
+\newblock Trustworthy ai: From principles to practices.
+\newblock \emph{ACM Computing Surveys}, 55\penalty0 (9):\penalty0 1--46, 2023.
+
+\bibitem[Li et~al.(2024)Li, Luo, Wang, Chen, Liu, and He]{li2024cryptotrade}
+Yuan Li, Bingqiao Luo, Qian Wang, Nuo Chen, Xu~Liu, and Bingsheng He.
+\newblock Cryptotrade: A reflective llm-based agent to guide zero-shot cryptocurrency trading.
+\newblock In \emph{Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing}, pp.\  1094--1106, 2024.
+
+\bibitem[Liang et~al.()Liang, Zhang, Xu, Sun, and You]{liangpaper2slide}
+Xin Liang, Xiang Zhang, Yiwei Xu, Siqi Sun, and Chenyu You.
+\newblock Paper2slide: A multi-agent framework for automatic scientific slide generation.
+
+\bibitem[Liang et~al.(2025)Liang, Zhang, Xu, Sun, and You]{liang2025slidegen}
+Xin Liang, Xiang Zhang, Yiwei Xu, Siqi Sun, and Chenyu You.
+\newblock Slidegen: Collaborative multimodal agents for scientific slide generation.
+\newblock \emph{arXiv preprint arXiv:2512.04529}, 2025.
+
+\bibitem[Lin et~al.(2025)Lin, Wang, Guo, and Wong]{lin2025investigating}
+Luyang Lin, Lingzhi Wang, Jinsong Guo, and Kam-Fai Wong.
+\newblock Investigating bias in llm-based bias detection: Disparities between llms and human perception.
+\newblock In \emph{Proceedings of the 31st International Conference on Computational Linguistics}, pp.\  10634--10649, 2025.
+
+\bibitem[Liu et~al.(2024)Liu, Feng, Xue, Wang, Wu, Lu, Zhao, Deng, Zhang, Ruan, et~al.]{liu2024deepseek}
+Aixin Liu, Bei Feng, Bing Xue, Bingxuan Wang, Bochao Wu, Chengda Lu, Chenggang Zhao, Chengqi Deng, Chenyu Zhang, Chong Ruan, et~al.
+\newblock Deepseek-v3 technical report.
+\newblock \emph{arXiv preprint arXiv:2412.19437}, 2024.
+
+\bibitem[Liu et~al.(2023)Liu, Deng, Li, Wang, Wang, Wang, Zhang, Liu, Wang, Zheng, et~al.]{liu2023prompt}
+Yi~Liu, Gelei Deng, Yuekang Li, Kailong Wang, Zihao Wang, Xiaofeng Wang, Tianwei Zhang, Yepang Liu, Haoyu Wang, Yan Zheng, et~al.
+\newblock Prompt injection attack against llm-integrated applications.
+\newblock \emph{arXiv preprint arXiv:2306.05499}, 2023.
+
+\bibitem[Liu et~al.(2019)Liu, Ott, Goyal, Du, Joshi, Chen, Levy, Lewis, Zettlemoyer, and Stoyanov]{liu2019roberta}
+Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov.
+\newblock Roberta: A robustly optimized bert pretraining approach.
+\newblock \emph{arXiv preprint arXiv:1907.11692}, 2019.
+
+\bibitem[Masterman et~al.(2024)Masterman, Besen, Sawtell, and Chao]{masterman2024landscape}
+Tula Masterman, Sandi Besen, Mason Sawtell, and Alex Chao.
+\newblock The landscape of emerging ai agent architectures for reasoning, planning, and tool calling: A survey.
+\newblock \emph{arXiv preprint arXiv:2404.11584}, 2024.
+
+\bibitem[McNeil et~al.(2015)McNeil, Frey, and Embrechts]{mcneil2015quantitative}
+Alexander~J. McNeil, R{\"u}diger Frey, and Paul Embrechts.
+\newblock \emph{Quantitative Risk Management: Concepts, Techniques and Tools}.
+\newblock Princeton Series in Finance. Princeton University Press, revised edition, 2015.
+
+\bibitem[Meyers(1999)]{meyers1999underwriting}
+Glenn Meyers.
+\newblock Underwriting risk.
+\newblock In \emph{CAS Forum}, pp.\  185--220, 1999.
+
+\bibitem[Mumuni \& Mumuni(2025)Mumuni and Mumuni]{mumuni2025explainable}
+Fuseini Mumuni and Alhassan Mumuni.
+\newblock Explainable artificial intelligence (xai): from inherent explainability to large language models.
+\newblock \emph{arXiv preprint arXiv:2501.09967}, 2025.
+
+\bibitem[Nong et~al.(2024)Nong, Zhu, Wu, Jin, Shan, Huang, and Xu]{nong2024mobileflow}
+Songqin Nong, Jiali Zhu, Rui Wu, Jiongchao Jin, Shuo Shan, Xiutian Huang, and Wenhao Xu.
+\newblock Mobileflow: A multimodal llm for mobile gui agent.
+\newblock \emph{arXiv preprint arXiv:2407.04346}, 2024.
+
+\bibitem[Patil et~al.(2025)Patil, Mao, Yan, Ji, Suresh, Stoica, and Gonzalez]{patil2025berkeley}
+Shishir~G Patil, Huanzhi Mao, Fanjia Yan, Charlie Cheng-Jie Ji, Vishnu Suresh, Ion Stoica, and Joseph~E Gonzalez.
+\newblock The berkeley function calling leaderboard (bfcl): From tool use to agentic evaluation of large language models.
+\newblock In \emph{Forty-second International Conference on Machine Learning}, 2025.
+
+\bibitem[Qian et~al.(2025)Qian, Peng, Wang, Zhang, He, Smith, Han, He, Li, Cao, et~al.]{qian2025agents}
+Lingfei Qian, Xueqing Peng, Yan Wang, Vincent~Jim Zhang, Huan He, Hanley Smith, Yi~Han, Yueru He, Haohang Li, Yupeng Cao, et~al.
+\newblock When agents trade: Live multi-market trading benchmark for llm agents.
+\newblock \emph{arXiv preprint arXiv:2510.11695}, 2025.
+
+\bibitem[Qin et~al.(2023)Qin, Liang, Ye, Zhu, Yan, Lu, Lin, Cong, Tang, Qian, et~al.]{qin2023toolllm}
+Yujia Qin, Shihao Liang, Yining Ye, Kunlun Zhu, Lan Yan, Yaxi Lu, Yankai Lin, Xin Cong, Xiangru Tang, Bill Qian, et~al.
+\newblock Toolllm: Facilitating large language models to master 16000+ real-world apis.
+\newblock \emph{arXiv preprint arXiv:2307.16789}, 2023.
+
+\bibitem[Ren et~al.(2025)Ren, Li, Liu, Xie, Lu, Qiao, Sha, Yan, Ma, and Shao]{ren2025llms}
+Qibing Ren, Hao Li, Dongrui Liu, Zhanxu Xie, Xiaoya Lu, Yu~Qiao, Lei Sha, Junchi Yan, Lizhuang Ma, and Jing Shao.
+\newblock Llms know their vulnerabilities: Uncover safety gaps through natural distribution shifts.
+\newblock In \emph{Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pp.\  24763--24785, 2025.
+
+\bibitem[Sager et~al.(2025)Sager, Meyer, Yan, von Wartburg-Kottler, Etaiwi, Enayati, Nobel, Abdulkadir, Grewe, and Stadelmann]{sager2025comprehensive}
+Pascal~J Sager, Benjamin Meyer, Peng Yan, Rebekka von Wartburg-Kottler, Layan Etaiwi, Aref Enayati, Gabriel Nobel, Ahmed Abdulkadir, Benjamin~F Grewe, and Thilo Stadelmann.
+\newblock A comprehensive survey of agents for computer use: Foundations, challenges, and future directions.
+\newblock \emph{arXiv preprint arXiv:2501.16150}, 2025.
+
+\bibitem[Schwartz et~al.(2023)Schwartz, Yaeli, and Shlomov]{schwartz2023enhancing}
+Sivan Schwartz, Avi Yaeli, and Segev Shlomov.
+\newblock Enhancing trust in llm-based ai automation agents: New considerations and future challenges.
+\newblock \emph{arXiv preprint arXiv:2308.05391}, 2023.
+
+\bibitem[Shin et~al.(2025)Shin, Lee, Hsieh, and Chan]{shin2025postermate}
+Donghoon Shin, Daniel Lee, Gary Hsieh, and Gromit Yeuk-Yin Chan.
+\newblock Postermate: Audience-driven collaborative persona agents for poster design.
+\newblock In \emph{Proceedings of the 38th Annual ACM Symposium on User Interface Software and Technology}, pp.\  1--20, 2025.
+
+\bibitem[Singh et~al.(2024)Singh, Inala, Galley, Caruana, and Gao]{singh2024rethinking}
+Chandan Singh, Jeevana~Priya Inala, Michel Galley, Rich Caruana, and Jianfeng Gao.
+\newblock Rethinking interpretability in the era of large language models.
+\newblock \emph{arXiv preprint arXiv:2402.01761}, 2024.
+
+\bibitem[Tang et~al.(2025)Tang, Fan, and Huang]{tang2025autoagent}
+Jiabin Tang, Tianyu Fan, and Chao Huang.
+\newblock Autoagent: A fully-automated and zero-code framework for llm agents.
+\newblock \emph{arXiv preprint arXiv:2502.05957}, 2025.
+
+\bibitem[Tian et~al.(2025)Tian, Tang, Wang, Yen, and Peng]{tian2025template}
+Yong-En Tian, Yu-Chien Tang, Kuang-Da Wang, An-Zi Yen, and Wen-Chih Peng.
+\newblock Template-based financial report generation in agentic and decomposed information retrieval.
+\newblock In \emph{Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval}, pp.\  2706--2710, 2025.
+
+\bibitem[Vella \& Sharieh(2024)Vella and Sharieh]{vella2024novice}
+Salvatore Vella and Salah Sharieh.
+\newblock From novice to expert: On-the-job learning of autonomous llm agents in white-collar labor.
+\newblock In \emph{World Conference on Information Systems for Business Management}, pp.\  285--300. Springer, 2024.
+
+\bibitem[{Virtuals Protocol}(2026)]{virtuals_acp_2026}
+{Virtuals Protocol}.
+\newblock Agent commerce protocol ({ACP}) -- virtuals protocol whitepaper.
+\newblock \url{https://whitepaper.virtuals.io/about-virtuals/agent-commerce-protocol-acp}, 2026.
+
+\bibitem[Wang et~al.(2025)Wang, Wang, Xi, Tang, Zhu, Wei, Chen, Yang, Zhang, Lu, et~al.]{wang2025adversarial}
+Yuanfu Wang, Pengyu Wang, Chenyang Xi, Bo~Tang, Junyi Zhu, Wenqiang Wei, Chen Chen, Chao Yang, Jingfeng Zhang, Chaochao Lu, et~al.
+\newblock Adversarial preference learning for robust llm alignment.
+\newblock In \emph{Findings of the Association for Computational Linguistics: ACL 2025}, pp.\  21865--21881, 2025.
+
+\bibitem[Xiao et~al.(2024)Xiao, Sun, Luo, and Wang]{xiao2024tradingagents}
+Yijia Xiao, Edward Sun, Di~Luo, and Wei Wang.
+\newblock Tradingagents: Multi-agents llm financial trading framework.
+\newblock \emph{arXiv preprint arXiv:2412.20138}, 2024.
+
+\bibitem[Yang et~al.(2025{\natexlab{a}})Yang, Li, Yang, Zhang, Hui, Zheng, Yu, Gao, Huang, Lv, et~al.]{yang2025qwen3}
+An~Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo~Zheng, Bowen Yu, Chang Gao, Chengen Huang, Chenxu Lv, et~al.
+\newblock Qwen3 technical report.
+\newblock \emph{arXiv preprint arXiv:2505.09388}, 2025{\natexlab{a}}.
+
+\bibitem[Yang et~al.(2023)Yang, Wang, Zhang, Petzold, Wang, Zhao, and Lin]{yang2023shadow}
+Xianjun Yang, Xiao Wang, Qi~Zhang, Linda Petzold, William~Yang Wang, Xun Zhao, and Dahua Lin.
+\newblock Shadow alignment: The ease of subverting safely-aligned language models.
+\newblock \emph{arXiv preprint arXiv:2310.02949}, 2023.
+
+\bibitem[Yang et~al.(2025{\natexlab{b}})Yang, Chai, Song, Qi, Wen, Li, Liao, Hu, Lin, Chang, et~al.]{yang2025survey}
+Yingxuan Yang, Huacan Chai, Yuanyi Song, Siyuan Qi, Muning Wen, Ning Li, Junwei Liao, Haoyi Hu, Jianghao Lin, Gaowei Chang, et~al.
+\newblock A survey of ai agent protocols.
+\newblock \emph{arXiv preprint arXiv:2504.16736}, 2025{\natexlab{b}}.
+
+\bibitem[Yu et~al.(2023)Yu, Song, Lu, He, Tan, Ye, Zhang, and Bian]{yu2023musicagent}
+Dingyao Yu, Kaitao Song, Peiling Lu, Tianyu He, Xu~Tan, Wei Ye, Shikun Zhang, and Jiang Bian.
+\newblock Musicagent: An ai agent for music understanding and generation with large language models.
+\newblock In \emph{EMNLP (Demos)}, pp.\  246--255, 2023.
+
+\bibitem[Yu et~al.(2025)Yu, Li, Chen, Jiang, Li, Suchow, Zhang, and Khashanah]{yu2025finmem}
+Yangyang Yu, Haohang Li, Zhi Chen, Yuechen Jiang, Yang Li, Jordan~W Suchow, Denghui Zhang, and Khaldoun Khashanah.
+\newblock Finmem: A performance-enhanced llm trading agent with layered memory and character design.
+\newblock \emph{IEEE Transactions on Big Data}, 2025.
+
+\bibitem[Zhang et~al.(2024)Zhang, He, Qian, Li, Li, Qin, Kang, Ma, Liu, Lin, et~al.]{zhang2024large}
+Chaoyun Zhang, Shilin He, Jiaxu Qian, Bowen Li, Liqun Li, Si~Qin, Yu~Kang, Minghua Ma, Guyue Liu, Qingwei Lin, et~al.
+\newblock Large language model-brained gui agents: A survey.
+\newblock \emph{arXiv preprint arXiv:2411.18279}, 2024.
+
+\bibitem[Zhang et~al.(2025{\natexlab{a}})Zhang, Yang, Liu, Li, Han, Chen, Huang, Fu, and Yu]{zhang2025appagent}
+Chi Zhang, Zhao Yang, Jiaxuan Liu, Yanda Li, Yucheng Han, Xin Chen, Zebiao Huang, Bin Fu, and Gang Yu.
+\newblock Appagent: Multimodal agents as smartphone users.
+\newblock In \emph{Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems}, pp.\  1--20, 2025{\natexlab{a}}.
+
+\bibitem[Zhang et~al.(2025{\natexlab{b}})Zhang, Zhang, Wei, Xu, and You]{zhang2025postergen}
+Zhilin Zhang, Xiang Zhang, Jiaqi Wei, Yiwei Xu, and Chenyu You.
+\newblock Postergen: Aesthetic-aware paper-to-poster generation via multi-agent llms.
+\newblock \emph{arXiv preprint arXiv:2508.17188}, 2025{\natexlab{b}}.
+
+\bibitem[Zhao et~al.(2024)Zhao, Fu, Sun, and Konidaris]{zhao2024epo}
+Qi~Zhao, Haotian Fu, Chen Sun, and George Konidaris.
+\newblock Epo: Hierarchical llm agents with environment preference optimization.
+\newblock In \emph{Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing}, pp.\  6401--6415, 2024.
+
+\bibitem[Zheng et~al.(2024)Zheng, Yin, Xie, Sun, Huang, Yu, Cao, Kozyrakis, Stoica, Gonzalez, et~al.]{zheng2024sglang}
+Lianmin Zheng, Liangsheng Yin, Zhiqiang Xie, Chuyue~Livia Sun, Jeff Huang, Cody~Hao Yu, Shiyi Cao, Christos Kozyrakis, Ion Stoica, Joseph~E Gonzalez, et~al.
+\newblock Sglang: Efficient execution of structured language model programs.
+\newblock \emph{Advances in neural information processing systems}, 37:\penalty0 62557--62583, 2024.
+
+\bibitem[Zou et~al.(2023)Zou, Wang, Carlini, Nasr, Kolter, and Fredrikson]{zou2023universal}
+Andy Zou, Zifan Wang, Nicholas Carlini, Milad Nasr, J~Zico Kolter, and Matt Fredrikson.
+\newblock Universal and transferable adversarial attacks on aligned language models.
+\newblock \emph{arXiv preprint arXiv:2307.15043}, 2023.
+
+\end{thebibliography}

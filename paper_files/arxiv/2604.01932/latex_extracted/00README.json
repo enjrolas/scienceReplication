@@ -1,0 +1,33 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "manuscript.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "BraiNCA_paper.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "manuscript.bbl"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "media/architecture.svg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "media/model.svg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "references.bib"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

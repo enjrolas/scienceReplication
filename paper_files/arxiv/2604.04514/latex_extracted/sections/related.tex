@@ -1,0 +1,78 @@
+\section{Background and Related Work}
+\label{sec:related}
+
+\subsection{Agent Memory Systems}
+
+\begin{table}[h]
+\centering
+\caption{Comparison of open-source agent memory systems. SLM~V3.3 is the only system implementing all capabilities.}
+\label{tab:memory-systems}
+\small
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{System} & \textbf{Local} & \textbf{Ch.} & \textbf{Forget} & \textbf{Quant} & \textbf{Param} & \textbf{Auto} & \textbf{Trust} & \textbf{LoCoMo} \\
+\midrule
+Mem0~\cite{mem0} & No & 1 & No & No & No & No & No & 64.2\% \\
+Letta~\cite{letta} & No & 1 & No & No & No & Partial & No & $\sim$83\% \\
+Zep v3 & No & 3 & No & No & No & No & No & 85.2\% \\
+LangMem & No & 1 & No & No & No & No & No & --- \\
+\midrule
+\textbf{SLM V3.2}~\cite{slm-paper2} & \textbf{Yes} & \textbf{4} & No & No & No & Yes & Yes & \textbf{74.8\%} \\
+\textbf{SLM V3.3} & \textbf{Yes} & \textbf{7} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{70.4\%} \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+{\footnotesize Ch.\ = retrieval channels. Forget = mathematical forgetting. Quant = embedding quantization. Param = memory parameterization. Auto = automatic lifecycle. Trust = Bayesian trust defense. LoCoMo = zero-cloud Mode~A score where available. SLM V3.3's lower LoCoMo score reflects architectural trade-offs discussed in Section~1.4.}
+\end{table}
+
+\textbf{Mem0}~\cite{mem0} provides a hosted memory API with graph-based storage, achieving 64.2\% on LoCoMo. It operates as a single-channel vector store with cloud LLM dependency for memory extraction and retrieval. No forgetting, consolidation, or learning mechanisms exist.
+
+\textbf{Letta} (formerly MemGPT)~\cite{letta} pioneered LLM-managed memory through function calls, treating the LLM as an operating system that manages its own context. While architecturally innovative, it requires cloud LLM inference for all memory operations, making it unsuitable for privacy-sensitive or air-gapped environments.
+
+\textbf{Zep} offered an open-source memory layer before deprecating it in favor of a cloud-only enterprise product. Its Graphiti engine implements bi-temporal knowledge graphs with triple-modality search (vector + BM25 + graph traversal), achieving 85.2\% on LoCoMo.
+
+\textbf{The gap:} All existing systems treat memory as static text in a vector database. None implements forgetting, consolidation, compression, or parameterization.
+
+\subsection{Cognitive Memory Architectures}
+
+\textbf{ACT-R}~\cite{collins-loftus} models memory through Base-Level Activation with spreading activation across associative links. SLM~V3.2 implements a five-step spreading activation algorithm based on the SYNAPSE formulation~\cite{synapse}.
+
+\textbf{Complementary Learning Systems (CLS)} theory~\cite{cls-theory} proposes that biological memory depends on rapid hippocampal encoding and gradual neocortical extraction of regularities. SLM~V3.3's Cognitive Consolidation Quantization directly implements this transfer.
+
+\textbf{MEM1}~\cite{mem1} introduces RL-trained memory consolidation where a 7B model with MEM1 outperforms a 14B model with 3.7$\times$ less memory. While validating the importance of forgetting, MEM1 requires RL training and cloud inference. SLM achieves analogous effects through mathematical forgetting curves requiring no training.
+
+\subsection{Vector Compression and Quantization}
+
+A research arc from Google has produced three progressively stronger data-oblivious quantization methods: \textbf{QJL}~\cite{qjl} (AAAI~2025), \textbf{PolarQuant}~\cite{polarquant} (AISTATS~2026), and \textbf{TurboQuant}~\cite{turboquant} (ICLR~2026). TurboQuant achieves MSE $\leq \sqrt{3\pi/2} \cdot 4^{-b}$, within 2.7$\times$ of the information-theoretic lower bound, with 3.5~bits per channel and zero quality loss on KV cache.
+
+\textbf{Critical insight:} All three methods target \emph{ephemeral} KV cache compression. \textbf{SLM is the first system to apply these methods to \emph{persistent} agent memory stores} (C1), where vectors must survive across sessions and support mixed-precision search.
+
+Classical approaches---FAISS Product Quantization (Meta), ScaNN (Google)---require data-dependent codebook training. SLM's TurboQuant adaptation requires no training, no codebooks, and no calibration.
+
+\textbf{The gap:} No work applies data-oblivious quantization to persistent local embedding stores. No work combines vector quantization with information-geometric distance metrics.
+
+\subsection{Memory and Forgetting in AI}
+
+\textbf{Ebbinghaus}~\cite{ebbinghaus} established in 1885 that retention follows $R(t) = e^{-t/S}$. \textbf{MemoryBank} implements this for AI companions. \textbf{Memory Bear} combines Ebbinghaus with ACT-R. \textbf{FOREVER}~\cite{forever} applies forgetting curves to replay scheduling.
+
+A particularly relevant finding: ``When Less is More''~\cite{when-less-is-more} shows that \emph{8-bit quantization noise acts as a natural regularizer against catastrophic forgetting}. This validates our forgetting-quantization coupling---the synergy is empirically supported.
+
+\textbf{The gap:} No local system implements mathematical forgetting with provable convergence. No system couples forgetting dynamics to embedding precision.
+
+\subsection{Spreading Activation and Graph Memory}
+
+\textbf{SYNAPSE}~\cite{synapse} implements spreading activation for RAG with a triple hybrid retrieval (semantic 0.5, activation 0.3, structural 0.2), fan-effect propagation, and lateral inhibition. It solves the Contextual Isolation problem: flat vector stores miss causally-connected memories.
+
+\textbf{Context-as-Memory}~\cite{context-as-memory} demonstrates that non-contiguous retrieval vastly outperforms sliding window recency, validating SLM's multi-channel architecture.
+
+\textbf{The gap:} No system combines spreading activation with information-geometric (Fisher-Rao) similarity scoring.
+
+\subsection{Memory Parameterization}
+
+Test-Time Training (TTT) validates that memory can be compressed into parameters. \textbf{MemoryLLM}~\cite{memoryllm} implements self-updatable latent memory pools but requires model internals. SLM converts consolidated text memories into \emph{natural language soft prompts} compatible with any API-based agent, at zero computational cost.
+
+\textbf{The gap:} No system converts local text memory stores into soft prompt templates automatically.
+
+% ============================================================================
+% 3. ARCHITECTURE
+% ============================================================================

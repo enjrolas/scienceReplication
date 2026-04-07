@@ -1,0 +1,1817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2604.04432/latex_extracted"?>
+<!--  %__ --><!--  %Author guideline and sample document for EG publication using LaTeX2e input --><!--  %D.Fellner, v1.21, Jan 08, 2024 --><?latexml class="egpubl"?>
+<!--  %__ for  Annual CONFERENCE --><!--  %“ConferenceSubmission   % uncomment for Conference submission --><!--  %“ConferencePaper        % uncomment for (final) Conference Paper --><!--  %“STAR                   % uncomment for STAR contribution --><!--  %“Tutorial               % uncomment for Tutorial contribution --><!--  %“ShortPresentation      % uncomment for (final) Short Conference Presentation --><!--  %“Areas                  % uncomment for Areas contribution --><!--  %“Education              % uncomment for Education contribution --><!--  %“Poster                 % uncomment for Poster contribution --><!--  %“DC                     % uncomment for Doctoral Consortium --><!--  %__ for  CGF Journal --><!--  %“JournalSubmission    % uncomment for submission to Computer Graphics Forum --><!--  %“JournalPaper         % uncomment for final version of Journal Paper --><!--  %__ for  CGF Journal: special issue --><?latexml RelaxNGSchema="LaTeXML"?>
+<?latexml package="fontenc" options="T1"?>
+<?latexml package="dfadobe"?>
+<?latexml package="cite"?>
+<?latexml package="graphicx" options="dvips"?>
+<?latexml package="egweblnk"?>
+<?latexml package="float"?>
+<?latexml package="booktabs"?>
+<?latexml package="color,soul"?>
+<?latexml package="xcolor" options="table, xcdraw"?>
+<?latexml package="amsmath"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line" prefix="dcterms: http://purl.org/dc/terms/">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>[</title>
+  <creator role="author">
+    <personname>[</personname>
+  </creator>
+  <creator before="  " role="author">
+    <personname>[</personname>
+  </creator>
+  <abstract name="Abstract">
+    <p>Affordances, originating in psychology, describe how an object’s design influences the physical and cognitive actions users may take. <text color="#000000">Past work applied affordance theory to visualization to explain how design decisions can impact the cognitive actions of visualization readers.</text> In this work, we demonstrate that affordances can complement effectiveness <text color="#000000">rankings</text> by further explaining the root causes behind visualizations’ task performance. To do so, we conduct a case study on <text color="#000000">static normal</text> probability density function plots, identifying their current affordances. Next, we <text color="#000000">identify</text> the optimal affordances for a common probability-comparison task and develop a novel affordance-driven visualization<text color="#000000">, the Croissant Chart, to support them.</text> We empirically validate the design’s effectiveness through a preregistered study (<text font="italic">n</text> = 808), demonstrating how affordances can inform predictable changes in task performance. Our findings underscore the potential for affordance-based approaches to enhance visualization effectiveness and inform future design decisions.</p>
+<!--  %ACM␣CCS␣1998 
+     %(see␣https://www.acm.org/publications/computing-classification-system/1998)
+     %\begin{classification}␣%␣according␣to␣https://www.acm.org/publications/computing-classification-system/1998
+     %\CCScat{Computer␣Graphics}{I.3.3}{Picture/Image␣Generation}{Line␣and␣curve␣generation}
+     %\end{classification}
+     %(see␣https://www.acm.org/publications/class-2012)
+     %The␣tool␣at␣\url{http://dl.acm.org/ccs.cfm}␣can␣be␣used␣to␣generate
+     %CCS␣codes.
+     %Example:-->    <ERROR class="undefined">{CCSXML}</ERROR>
+    <p>&lt;ccs2012&gt;
+&lt;concept&gt;
+&lt;concept_id&gt;10003120.10003145.10011769&lt;/concept_id&gt;
+&lt;concept_desc&gt;Human-centered computing Empirical studies in visualization&lt;/concept_desc&gt;
+&lt;concept_significance&gt;500&lt;/concept_significance&gt;
+&lt;/concept&gt;
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣75␣**** -->&lt;concept&gt;
+&lt;concept_id&gt;10003120.10003145.10011770&lt;/concept_id&gt;
+&lt;concept_desc&gt;Human-centered computing Visualization design and evaluation methods&lt;/concept_desc&gt;
+&lt;concept_significance&gt;300&lt;/concept_significance&gt;
+&lt;/concept&gt;
+&lt;concept&gt;
+&lt;concept_id&gt;10003120.10003145.10011768&lt;/concept_id&gt;
+&lt;concept_desc&gt;Human-centered computing Visualization theory, concepts and paradigms&lt;/concept_desc&gt;
+&lt;concept_significance&gt;300&lt;/concept_significance&gt;
+&lt;/concept&gt;
+&lt;/ccs2012&gt;</p>
+    <ERROR class="undefined">\ccsdesc</ERROR>
+    <p>[500]Human-centered computing Empirical studies in visualization
+<ERROR class="undefined">\ccsdesc</ERROR>[300]Human-centered computing Visualization design and evaluation methods
+<ERROR class="undefined">\ccsdesc</ERROR>[300]Human-centered computing Visualization theory, concepts and paradigms</p>
+    <ERROR class="undefined">\printccsdesc</ERROR>
+  </abstract>
+  <ERROR class="undefined">\SpecialIssueSubmission</ERROR>
+<!--  %uncomment for submission to , special issue 
+     %**** EGauthorGuidelines-eurovis26-full.tex Line 25 ****
+     %“SpecialIssuePaper         % uncomment for final version of Computer Graphics Forum, special issue
+     %% EuroVis, SGP, Rendering, PG
+     %__ for  EG Workshop Proceedings
+     %“WsSubmission      % uncomment for submission to EG Workshop
+     %“WsPaper           % uncomment for final version of EG Workshop contribution
+     %“WsSubmissionJoint % for joint events, for example ICAT-EGVE
+     %“WsPaperJoint      % for joint events, for example ICAT-EGVE
+     %“Expressive        % for SBIM, CAe, NPAR
+     %“DigitalHeritagePaper
+     %“PaperL2P          % for events EG only asks for License to Publish
+     %__ for EuroVis
+     %for full papers use “SpecialIssuePaper
+     %“STAREurovis   % for EuroVis additional material
+     %“EuroVisPoster % for EuroVis additional material
+     %“EuroVisShort  % for EuroVis additional material
+     %“MedicalPrize  % uncomment for Medical Prize (Dirk Bartz) contribution, since 2021 part of EuroVis
+     %“EuroVisEducation              % uncomment for Education contribution
+     %Licences: for CGF Journal (EG conf. full papers and STARs, EuroVis conf. full papers and STARs, SR, SGP, PG)
+     %please choose the correct license
+     %“CGFStandardLicense-->  <ERROR class="undefined">\CGFccby</ERROR>
+<!--  %“CGFccbync 
+     %“CGFccbyncnd
+     %**** EGauthorGuidelines-eurovis26-full.tex Line 50 ****
+     %!! *please* don’t change anything above
+     %!! unless you REALLY know what you are doing
+     %__-->  <ERROR class="undefined">\BibtexOrBiblatex</ERROR>
+<!--  %\usepackage[backend=biber,bibstyle=EG,citestyle=alphabetic,backref=true]{biblatex} 
+     %\addbibresource{egbibsample.bib}
+     %__-->  <ERROR class="undefined">\electronicVersion</ERROR>
+  <ERROR class="undefined">\PrintedOrElectronic</ERROR>
+<!--  %for␣including␣postscript␣figures 
+     %mind:␣package␣option␣’draft’␣will␣replace␣PS␣figure␣by␣a␣filename␣within␣a␣frame
+     %end␣of␣prologue
+     %****␣EGauthorGuidelines-eurovis26-full.tex␣Line␣75␣****
+     %__
+     %EG␣author␣guidelines␣plus␣sample␣file␣for␣EG␣publication␣using␣LaTeX2e␣input
+     %D.Fellner,␣v2.04,␣Dec␣14,␣2023-->  <para xml:id="p1">
+    <p>Croissant Charts]Croissant Charts: Modulating the Performance of Normal Distribution Visualizations with Affordances
+<!--  %for␣anonymous␣conference␣submission␣please␣enter␣your␣SUBMISSION␣ID 
+     %instead␣of␣the␣author’s␣name␣(and␣leave␣the␣affiliation␣blank)␣!!
+     %for␣final␣version:␣please␣provide␣your␣*own*␣ORCID␣in␣the␣brackets␣following␣\orcid;␣see␣https://orcid.org/␣for␣more␣details.-->Submission 1004]Submission 1004
+<!--  %UNCOMMENT␣FROM␣HERE -->R. Fygenson, E. Bertini &amp; L. M. Padilla]
+ R. Fygenson<Math mode="inline" tex="{}^{1}" text="^1" xml:id="p1.m1">
+        <XMath>
+          <XMApp role="FLOATSUPERSCRIPT" scriptpos="1">
+            <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+          </XMApp>
+        </XMath>
+      </Math><ERROR class="undefined">\orcid</ERROR>0000-0002-0705-9000, E. Bertini<Math mode="inline" tex="{}^{1,2}" text="^list@(1, 2)" xml:id="p1.m2">
+        <XMath>
+          <XMApp role="FLOATSUPERSCRIPT" scriptpos="1">
+            <XMDual>
+              <XMApp>
+                <XMTok meaning="list"/>
+                <XMRef idref="p1.m2.1"/>
+                <XMRef idref="p1.m2.2"/>
+              </XMApp>
+              <XMWrap>
+                <XMTok fontsize="70%" meaning="1" role="NUMBER" xml:id="p1.m2.1">1</XMTok>
+                <XMTok fontsize="70%" role="PUNCT">,</XMTok>
+                <XMTok fontsize="70%" meaning="2" role="NUMBER" xml:id="p1.m2.2">2</XMTok>
+              </XMWrap>
+            </XMDual>
+          </XMApp>
+        </XMath>
+      </Math><ERROR class="undefined">\orcid</ERROR>0000-0002-9932-0551, and L. M. Padilla <Math mode="inline" tex="{}^{1}" text="^1" xml:id="p1.m3">
+        <XMath>
+          <XMApp role="FLOATSUPERSCRIPT" scriptpos="1">
+            <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+          </XMApp>
+        </XMath>
+      </Math><ERROR class="undefined">\orcid</ERROR>0000-0001-9251-5279
+<break/><!--  %For␣Computer␣Graphics␣Forum:␣Please␣use␣the␣abbreviation␣of␣your␣first␣name. --><inline-block class="ltx_parbox" vattach="middle" width="433.6pt">
+        <p><Math mode="inline" tex="{}^{1}" text="^1" xml:id="p1.m4">
+            <XMath>
+              <XMApp role="FLOATSUPERSCRIPT" scriptpos="1">
+                <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>Khoury College of Computer Sciences, Northeastern University, Boston, MA, USA</p>
+        <p><Math mode="inline" tex="{}^{2}" text="^2" xml:id="p1.m5">
+            <XMath>
+              <XMApp role="FLOATSUPERSCRIPT" scriptpos="1">
+                <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>College of Arts, Media and Design, Northeastern University, Boston, MA, USA</p>
+      </inline-block>
+
+
+<!--  %TO␣HERE␣^^^^^^^^^^^^^^^^^^ 
+     %__
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣25␣****
+     %if␣the␣Editors-in-Chief␣have␣given␣you␣the␣data,␣you␣may␣uncomment
+     %the␣following␣five␣lines␣and␣insert␣it␣here
+     %\volume{36}␣␣␣%␣the␣volume␣in␣which␣the␣issue␣will␣be␣published;
+     %\issue{1}␣␣␣␣␣%␣the␣issue␣number␣of␣the␣publication
+     %\pStartPage{1}␣␣␣␣␣␣%␣set␣starting␣page
+     %__-->
+
+
+
+
+
+
+<!--  %\teaser{ 
+     %\includegraphics[width=0.9\linewidth]{figs/teaser-1.pdf}
+     %\centering
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣50␣****
+     %\caption{The␣three␣probability␣density␣function␣charts␣tested␣in␣the␣study,␣with␣annotations␣detailing␣their␣affordances␣as␣identified␣through␣qualitative␣evaluations.}
+     %\label{fig:teaser}
+     %}--></p>
+  </para>
+<!--  %__ 
+     %__-->  <section inlist="toc" labels="LABEL:sec:intro" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <para xml:id="S1.p1">
+      <p><text font="italic">Affordance</text>, rooted in psychology, refers to the potential actions—both physical and mental—that users may take based on the design of an object <cite class="ltx_citemacro_cite">[<bibref bibrefs="hartson-1999-user-actionframework,gibson-ecological-vis-perception,Kaptelinin_aff_encyclo" separator="," yyseparator=","/>]</cite>. <text color="#000000">In the context of visualizations, <text font="italic">mental actions</text> are the cognitive operations readers perform when interpreting a visualization, such as comparing values, grouping elements, or estimating trends. </text>
+<!--  %Translating␣affordance␣theory␣to␣visualization␣research␣can␣help␣identify␣visualization␣designs’␣impact␣on␣the␣likelihood␣of␣communicating␣different␣information␣to␣readers. 
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣100␣****--><text color="#000000" font="italic">Cognitive<text color="black"> affordances</text></text>, or the relationship between the design of an object and the knowledge that is imparted upon the object’s user <cite class="ltx_citemacro_cite">[<bibref bibrefs="Hartson-2003" separator="," yyseparator=","/>]</cite>, can improve understanding of <text color="#000000">visualization</text> design implications by complementing task precision evaluations <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-cog-affordance-framework" separator="," yyseparator=","/>]</cite>. <!--  %(see␣Quadri␣et␣al.’s␣work~\cite{quadri-perception-survey}␣for␣a␣review␣of␣evaluations),␣with␣investigations␣of␣the␣tasks␣that␣readers␣are␣\textit{most␣likely}␣to␣complete␣without␣explicit␣instruction␣\cite{fygenson2023affordances,␣xiong-grouping-cues,␣xiong-afford-comparison,␣xiong-reasoning-affordance,␣quadri-doyouseewhatisee,␣zacks-tversky-bars-lines,␣shah-graph-comprehension,␣stokes2025writerankratecomparing}. -->Because cognitive affordance offers an alternate lens of understanding how visualization designs impact mental actions, it can also <text color="#000000">suggest specific mental actions that</text> readers <text color="#000000">are likely to use</text>. In this paper, we demonstrate cognitive affordances<text color="#000000">’ utility by using them to</text> connect visualization designs to readers’ mental actions. <text color="#000000">This paper illustrates how</text> affordance-based visualization design can <text color="#000000">improve</text> task accuracy <text color="#000000">and</text> <!--  %We␣present␣a␣case␣study␣as␣initial␣evidence␣that␣cognitive␣affordances␣not␣only␣offer␣an␣alternate␣lens␣for␣evaluating␣visualizations␣but␣can␣also -->reveal the root cause of differences in task performance.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>Although, affordances are well-studied in psychology and human<text color="#000000">-</text>computer interaction (HCI) (for a discussion, see <cite class="ltx_citemacro_cite">[<bibref bibrefs="Kaptelinin_aff_encyclo" separator="," yyseparator=","/>]</cite>), they have only recently received attention in visualization research. <!--  %\rev{The␣majority␣of}␣past␣work␣that␣explicitly␣investigates␣affordances␣in␣visualization␣do\rev{es}␣so␣in␣the␣context␣of␣bar␣charts,␣finding␣that␣specific␣ordering␣and␣placement␣of␣bars␣can␣impact␣readers’␣data␣comparisons␣and␣takeaways␣\cite{xiong-afford-comparison,␣xiong-reasoning-affordance,␣fygenson2023affordances}. -->Fygenson et al. translate affordance theory to visualization, characterizing cognitive affordances for visualization, summarizing related constructs, and proposing a framework to scaffold future research and discussion <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-cog-affordance-framework" separator="," yyseparator=","/>]</cite>. <!--  %We␣build␣on␣this␣work␣by␣demonstrating␣cognitive␣affordances’␣utility␣in␣visualization␣evaluations␣and␣design␣processes,␣and␣\revi{by}␣establishing␣a␣foundation␣for␣future␣\revi{cognitive}␣affordance-based␣investigation. -->We extend this work by applying cognitive affordances to visualization design and evaluation, laying the groundwork for future research.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>To validate <text color="#000000">cognitive</text> affordances’ utility, we demonstrate how they can support reasoning about likely causes of interpretation errors<text color="#000000">, such as</text> mathematically <text font="italic">incorrect <text color="#000000">mental actions</text></text>, and isolate specific elements of visualizations that are problematic. <text color="#000000">We then use</text> affordances to reason about design decisions that are likely to cue <text font="italic">ideal <text color="#000000">mental actions</text></text> for a task. <!--  %\revi{Because␣we␣investigate␣mental␣rather␣than␣physical␣actions,␣our␣experimental␣design␣does␣not␣require␣interactive␣stimuli,␣and␣can␣be␣used␣to␣investigate␣a␣wide␣variety␣of␣visualizations,␣including␣those␣that␣are␣static␣and␣not␣digital.} -->We investigate <text color="#000000">affordances’</text> utility through a case study of <text color="#000000">static (i.e., non-interactive)</text> probability density function plots (PDFs). Prior research has identified systematic errors associated with <text color="#000000">static</text> PDF interpretation <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>, yet established methods for optimizing visualization design, such as the rankings of expressiveness and effectiveness <cite class="ltx_citemacro_cite">[<bibref bibrefs="munzner2015visualization" separator="," yyseparator=","/>]</cite>, have not been systematically applied to assess or improve PDFs. Moreover, established methods have not been used to assess alternative visualizations that are known to improve accuracy in probability-related tasks, such as quantile dot plots (QDPs) <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps,fernandes2018-qdp-cdf" separator="," yyseparator=","/>]</cite>. <!--  %QDPs’␣performance␣improvement␣highlights␣the␣existence␣of␣designs␣and␣affordances␣that␣better␣support␣probabilistic␣reasoning␣than␣those␣currently␣found␣in␣PDFs. -->QDPs’ superior performance indicates that alternative affordances may better support probabilistic reasoning than PDFs. Through an affordance-based analysis of <text color="#000000">these non-interactive</text> visualizations, <!--  %\revi{we}␣aim␣to␣test␣design␣decisions␣that␣may␣reduce␣misinterpretations␣of␣PDFs␣and␣improve␣data␣comprehension.␣Specifically, -->we systematically examine how <text color="#000000">cognitive</text> affordances shape <text color="#000000">probability distribution</text> interpretation, offering the following key contributions:</p>
+      <itemize xml:id="S1.I1">
+        <item xml:id="S1.I1.i1">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">1st item</tag>
+          </tags>
+          <para xml:id="S1.I1.i1.p1">
+            <p>an analysis of PDF visualizations, demonstrating how an affordance<text color="#000000">s</text> can be used to redesign PDFs for a specific task<!--  %to␣improve␣the␣accuracy␣of␣their␣comparison --></p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i2">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">2nd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i2.p1">
+            <p>hypotheses about the underlying causes of <text color="#000000">a known</text> reasoning error with PDFs <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite> and predictions as to why these effects will not extend to QDPs</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i3">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">3rd item</tag>
+          </tags>
+          <para xml:id="S1.I1.i3.p1">
+            <p>an affordance-based evaluation of cases where QDPs may <text color="#000000">lead to</text> interpretative challenges</p>
+          </para>
+        </item>
+        <item xml:id="S1.I1.i4">
+          <tags>
+            <tag>•</tag>
+            <tag role="autoref">item </tag>
+            <tag role="typerefnum">4th item</tag>
+          </tags>
+          <para xml:id="S1.I1.i4.p1">
+            <p>a preregistered, empirical evaluation of the effectiveness of our redesigned PDFs, <!--  %\rev{(Fig.␣\ref{fig:teaser},␣middle)} -->traditional PDFs, and QDPs <!--  %rev{(Fig.␣\ref{fig:teaser},␣left␣and␣right)}, --><text color="#000000">that</text> link<text color="#000000">s</text> performance differences to our affordance-driven hypotheses</p>
+          </para>
+        </item>
+      </itemize>
+      <p>These contributions advance the understanding of how <text color="#000000">cognitive</text> affordances shape probabilistic reasoning.
+<!--  %__ --></p>
+    </para>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:background" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>Background</title>
+    <subsection inlist="toc" labels="LABEL:sec:cog-aff-theory" xml:id="S2.SS1">
+      <tags>
+        <tag>2.1</tag>
+        <tag role="autoref">subsection 2.1</tag>
+        <tag role="refnum">2.1</tag>
+        <tag role="typerefnum">§2.1</tag>
+      </tags>
+      <title><tag close=" ">2.1</tag>Cognitive affordances in visualization</title>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣125␣**** -->      <para xml:id="S2.SS1.p1">
+        <p><text font="bold">Theoretical foundation</text>.
+Ecological psychologist J.J. Gibson first introduced affordances in the late 1970s to define the relationship between an object and its user in terms of action possibilities (i.e., ways in which an individual could use an object) <cite class="ltx_citemacro_cite">[<bibref bibrefs="gibson-ecological-vis-perception" separator="," yyseparator=","/>]</cite>. Over the following decades, researchers in HCI and psychology adopted affordances to describe how the shapes of physical items imply their possible and intended uses <cite class="ltx_citemacro_cite">[<bibref bibrefs="norman-psych-of-everyday-things,norman-1999" separator="," yyseparator=","/>]</cite>, and later, how digital interfaces imply possible actions (e.g., clicking a button) <cite class="ltx_citemacro_cite">[<bibref bibrefs="Kaptelinin_aff_encyclo" separator="," yyseparator=","/>]</cite>. <text color="#000000">Visualization research has investigated the affordances of user interactions, studying visual cues that incite users to hover over chart elements to reveal more information <cite class="ltx_citemacro_cite">[<bibref bibrefs="boy-interactive-vis-aff" separator="," yyseparator=","/>]</cite>, and examining how users interact with dynamic physical bar charts <cite class="ltx_citemacro_cite">[<bibref bibrefs="taher2015physicalaffbarchart" separator="," yyseparator=","/>]</cite>. However, this work does not apply to non-interactive charts, which comprise much visualized information <cite class="ltx_citemacro_cite">[<bibref bibrefs="boy-interactive-vis-aff" separator="," yyseparator=","/>]</cite>.<!--  %This␣work,␣however,␣is␣inapplicable␣to␣charts␣that␣are␣not␣interactive,␣which␣constitute␣a␣large␣portion␣of␣visualized␣information --></text></p>
+      </para>
+      <para xml:id="S2.SS1.p2">
+        <p><text color="#000000">A recent subset of work investigates the non-physical affordances of visualizations, exploring how design impacts the cognitive actions of visualization readers, and thus the information that they are most likely to glean. Fygenson et al. provide an overview of this work, and name these non-physical affordances <text font="italic">cognitive affordances<cite class="ltx_citemacro_cite"><text font="upright">[</text><bibref bibrefs="fygenson-cog-affordance-framework" separator="," yyseparator=","/><text font="upright">]</text></cite></text>.
+They define cognitive affordances in visualization similarly to Norman’s affordance definition (i.e., all possible actions that a visualization’s design enables a reader to take) <cite class="ltx_citemacro_cite">[<bibref bibrefs="norman-psych-of-everyday-things" separator="," yyseparator=","/>]</cite>, and specify that cognitive affordances are: (1) neither binary nor mutually exclusive, and (2) a factor of both a visualization’s design and its reader.</text> <text color="#000000">Examples of cognitive actions that can be afforded include taking away messages about, and interpreting characteristics of, visualized data.</text>
+They <text color="#000000">also</text> hypothesize that affordance-based evaluations can provide stronger logical reasoning for uncovering the root cause of misleading designs and suggesting successful alternatives. <text color="#000000">In this paper, we present an </text> <!--  %A␣major␣contribution␣of␣the␣present␣work␣is␣its -->initial validation of <text color="#000000">their</text> hypothesis. <!--  %that␣affordances␣can␣inform␣intentional␣visualization␣redesigns. --></p>
+      </para>
+      <para class="ltx_noindent" xml:id="S2.SS1.p3">
+        <p><text font="bold">Investigative methods.</text>
+Within visualization, the investigation of affordances, or affordance-related concepts, has been supported via several methods (for a review, see <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-cog-affordance-framework" separator="," yyseparator=","/>]</cite>). The most popular method <text color="#000000">is a free-response question in which participants are shown a visualization and asked</text> open-ended questions about what they see (e.g., “describe in a sentence
+what is shown”) <cite class="ltx_citemacro_cite">[<bibref bibrefs="quadri-doyouseewhatisee,carswell-spontaneous-interpretation,shah-graph-comprehension,zacks-tversky-bars-lines" separator="," yyseparator=","/>]</cite>. This method can be modified by scoping such questions to specific tasks <cite class="ltx_citemacro_cite">[<bibref bibrefs="xiong-afford-comparison" separator="," yyseparator=","/>]</cite>, <!--  %as␣done␣by␣Xiong␣et␣al.,␣when␣investigating␣comparisons␣in␣bar␣charts␣, -->or by restricting codes of interest when thematically coding collected responses <cite class="ltx_citemacro_cite">[<bibref bibrefs="shah-1995-comprehending-line-graphs" separator="," yyseparator=","/>]</cite>. <!--  %,␣as␣done␣by␣Shah␣and␣Carpenter.␣%when␣investigating␣whether␣nominal,␣ordinal,␣or␣metric␣data␣characteristics␣are␣likely␣to␣be␣communicated␣\cite{shah-1995-comprehending-line-graphs}.␣%Researchers␣can␣also␣investigate␣affordances␣through␣\rev{an␣inverse␣set-up},␣in␣which␣participants␣are␣given␣data␣as␣a␣table␣or␣text␣statement␣and␣asked␣to␣create␣a␣visualization␣to␣represent␣the␣data␣\cite{zacks-tversky-bars-lines}.␣This␣method␣is␣the␣least␣popular,␣perhaps␣because␣thematically␣coding␣visual␣outputs␣is␣a␣less␣established␣method. 
+     %Thirdly,␣researchers␣can␣explore␣affordances␣through␣a␣rank␣chart␣method,␣in␣which␣participants␣are␣shown␣a␣takeaway␣and␣an␣assortment␣of␣visualizations␣that␣all␣support␣the␣takeaway␣and␣asked␣to␣choose␣the␣visualization␣that␣best␣represents␣the␣takeaway␣\cite{fygenson2023affordances,␣xiong-afford-comparison,␣stokes2025writerankratecomparing}.␣Lastly,␣a␣rating␣construct␣strength␣method␣presents␣participants␣with␣a␣series␣of␣visualizations␣and␣asks␣them␣to␣rank␣each␣graph␣on␣a␣scale␣of␣how␣well␣it␣communicates␣a␣set␣of␣concepts␣(e.g.,␣uncertainty,␣balance,␣completeness,␣rigidity)␣\cite{maceachren-semiotics,␣Ziemkiewicz-dynamics-2010}.␣These␣last␣two␣methods␣are␣confirmatory␣and␣restrict␣the␣scope␣of␣findings␣to␣support␣larger␣sample␣sizes,␣replicability,␣and␣increased␣statistical␣power~\cite{fygenson2023affordances}.␣\rev{In␣recently␣published␣work,␣Stokes␣et␣al.␣test␣methods␣of␣studying␣affordances␣with␣human␣coders␣and␣a␣large␣language␣model.␣In␣this␣work,␣Stokes␣et␣al.␣introduce␣other␣methods␣of␣evaluating␣affordances,␣␣including␣a␣ranking␣conclusions␣method␣in␣which␣participants␣are␣shown␣a␣graph␣and␣a␣set␣of␣takeaways␣and␣asked␣to␣rank␣the␣them~\cite{stokes2025writerankratecomparing}.}-->In our pilot studies (Sec. <ref labelref="LABEL:sec:pilot"/>) and affordance evaluation (Sec. <ref labelref="LABEL:sec:exp-design"/> and <ref labelref="LABEL:sec:exp-analysis"/>), we employ the free-response technique because of its exploratory nature and conventional coding.</p>
+      </para>
+      <para class="ltx_noindent" xml:id="S2.SS1.p4">
+        <p><text font="bold">Effectiveness rankings.</text>
+Visualization design decisions and pedagogy are often supported by <text color="#000000">frameworks</text> that rank marks and channels by their ability to precisely communicate encoded data <cite class="ltx_citemacro_cite">[<bibref bibrefs="munzner2015visualization,ware-info-vis-book,heer-bostock-repr,cleveland_mcgill_2012,cleveland-mcgills-shape-param-graphs,isenberg-sys-review-vis-techniques" separator="," yyseparator=","/>]</cite>. Extensions of precision-focused work investigate effectiveness from similar performance-based lenses, including accurate recall <cite class="ltx_citemacro_cite">[<bibref bibrefs="borkin-beyond-memorability" separator="," yyseparator=","/>]</cite>, and minimal response time <cite class="ltx_citemacro_cite">[<bibref bibrefs="livingston-eval-multivar-vis,isenberg-sys-review-vis-techniques" separator="," yyseparator=","/>]</cite>. Effectiveness <text color="#000000">rankings</text> are useful in evaluating common charts (e.g., bar and pie charts) and have been translated into automatic chart recommendation systems <cite class="ltx_citemacro_cite">[<bibref bibrefs="mackinlay-auto-design,besher-feiner-autovisual" separator="," yyseparator=","/>]</cite>. Effectiveness <text color="#000000">rankings describe</text> the encodings that most precisely support a task, but offer little guidance as to the tasks that unprompted readers are most likely to complete (i.e., cognitive affordances). Past work has found that task effectiveness can correlate with visualizations’ cognitive fit (i.e., how well a visualization corresponds to readers’ mental representations of information) <cite class="ltx_citemacro_cite">[<bibref bibrefs="vessey-cog-fit,vessey-cog-fit-empirical-study" separator="," yyseparator=","/>]</cite>, suggesting a relationship between readers’ <text color="#000000">mental actions</text>, visualizations’ designs, and effectiveness. <!--  %Because␣affordances␣can␣influence␣readers’␣cognitive␣actions,␣and␣therefore␣their␣mental␣strategies,␣this␣past␣work␣provides␣precedent␣for␣the␣hypothesis␣that␣visualizations’␣cognitive␣affordances␣and␣performance␣\revi{may␣be}␣related. --></p>
+      </para>
+<!--  %While␣ease␣and␣likelihood␣may␣be␣connected,␣they␣are␣fundamentally␣different␣metrics␣and␣past␣work␣has␣shown␣that␣one␣is␣not␣always␣indicative␣of␣the␣other~\cite{fygenson2023affordances}. -->      <para xml:id="S2.SS1.p5">
+        <p><text color="#000000">The logical scaffolding of affordance-based investigations sets them apart from traditional performance evaluations by providing alternative diagnostic power. Response time and accuracy evaluations can illuminate a visualization’s poor performance and support its redesign through frameworks such as the effectiveness and expressiveness rankings <cite class="ltx_citemacro_cite">[<bibref bibrefs="munzner2015visualization" separator="," yyseparator=","/>]</cite>. Although these frameworks are useful, their guidance does not always increase visualizations’ interpretability <cite class="ltx_citemacro_cite">[<bibref bibrefs="bertini-all-chart-not-scatterplot" separator="," yyseparator=","/>]</cite>, or consistently change the information that readers are likely to glean. Cognitive affordances, on the other hand, can provide logical conclusions about the underlying cause of correct or incorrect interpretations and, as we show in this paper, motivate redesigns that correlate with improved performance.</text></p>
+      </para>
+      <para class="ltx_noindent" xml:id="S2.SS1.p6">
+        <p><text font="bold">Affording <text color="#000000">mental actions</text>.</text>
+<!--  %Cognitive␣affordances␣in␣visualization␣describe␣the␣likely␣mental␣actions␣that␣a␣person␣may␣take␣when␣first␣reading␣a␣visualization~\cite{fygenson-cog-affordance-framework}. 
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣150␣****-->Low-level tasks, such as comparing the lengths of two shapes or reading an axis label, contribute to higher-level takeaways and decision-making <cite class="ltx_citemacro_cite">[<bibref bibrefs="bongshin-lee-task-taxonomy,padilla2018decision" separator="," yyseparator=","/>]</cite>. <text color="#000000">By describing the probable</text> lower-level mental actions of <text color="#000000">visualization readers, cognitive affordances can shed light on the driving factors behind readers’ interpretations.</text> For example, past research has investigated how bar chart affordances can inform the likelihood of comparative takeaways <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson2023affordances,xiong-afford-comparison,xiong-grouping-cues" separator="," yyseparator=","/>]</cite>, finding <text color="#000000">bar</text> placement can significantly change the comparisons and higher-level takeaways that readers report. Afforded cognitive actions can also drive readers’ <text color="#000000">mental actions</text> when they encounter an unfamiliar graph. For example, if a reader sees a PDF for the first time, its continuous edge and aesthetic similarity to a line chart <text color="#000000">(see Fig. <ref labelref="LABEL:fig:pdf-aff"/>, top)</text> may afford extracting height information <text color="#000000">as one would do when reading a line chart</text> (<text color="#000000">Fig. <ref labelref="LABEL:fig:pdf-aff"/>, row a and b</text>). In turn, the reader might adopt a height-focused strategy and characterize the PDF by its maximum height.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:prob-visualizations" xml:id="S2.SS2">
+      <tags>
+        <tag>2.2</tag>
+        <tag role="autoref">subsection 2.2</tag>
+        <tag role="refnum">2.2</tag>
+        <tag role="typerefnum">§2.2</tag>
+      </tags>
+      <title><tag close=" ">2.2</tag>Probability Density Visualizations</title>
+      <para xml:id="S2.SS2.p1">
+        <p>Communicating probabilities is a common requirement when disseminating experimental results <cite class="ltx_citemacro_cite">[<bibref bibrefs="padilla2022know" separator="," yyseparator=","/>]</cite>, and <!--  %Advocacy␣against␣null␣hypothesis␣significance␣testing␣has␣strengthened␣the␣motivation␣for␣researchers␣to␣visualize␣probability␣distributions~\cite{dragicevic-stats-in-hci}. 
+     %\rev{Although␣several␣distributional␣visualizations␣do␣not␣fully␣eliminate␣reader␣judgments␣of␣dichotomous␣\textit{p}-values,␣they␣can␣reduce␣nonlinear␣drops␣in␣confidence␣that␣are␣indicative␣of␣a␣‘‘cliff␣effect’’␣in␣interpreting␣probabilities␣in␣comparison␣to␣traditional␣confidence␣interval␣annotations␣and␣textual␣\textit{p}-values~\cite{helske-dichotomous-vis}}.-->probability distributions can be visualized in numerous ways<!--  %(for␣review,␣see␣Padilla␣et␣al.’s␣work --> <cite class="ltx_citemacro_cite">[<bibref bibrefs="padilla_review2022" separator="," yyseparator=","/>]</cite>. Box plots, and confidence, standard deviation, and histogram intervals display key statistical properties of distributions through visual representations of summary statistics. Despite their long-standing popularity in scientific communication for both experts and the general public <cite class="ltx_citemacro_cite">[<bibref bibrefs="van2019communicating,Ross-intro-stats" separator="," yyseparator=","/>]</cite>, these visualization methods do not display the entire shape of a distribution, leading to a loss of statistical detail <cite class="ltx_citemacro_cite">[<bibref bibrefs="correll2014error" separator="," yyseparator=","/>]</cite>. Additionally, prior research finds that interval visualizations and box plots induce errors in which readers incorrectly assume that values inside visualized boundaries are more probable than those just outside the boundaries, thereby misinterpreting encoded <text color="#000000">probability</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="correll2014error,joslyn2021" separator="," yyseparator=","/>]</cite>. Visualizations that fully encode distributions’ shape instead of only showing key statistical metrics can lead to more correct conclusions <cite class="ltx_citemacro_cite">[<bibref bibrefs="greis-uncertainty" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+      <para xml:id="S2.SS2.p2">
+        <p>Many visualizations that display distribution shape, such as PDFs, violin, raincloud, and ridgeline plots, encode probability as the area under a curve. However, unlike other Cartesian-coordinate plots, these visualizations’ y-axis values do not readily communicate useful information <cite class="ltx_citemacro_cite">[<bibref bibrefs="Ross-intro-stats" separator="," yyseparator=","/>]</cite>. Instead, extracting cumulative probabilities (i.e., the probability of a random variable being above or below a threshold or between two bounding thresholds) from these charts requires finding the relevant slice of the area under the curve and calculating the percentage of total area under the curve that the slice occupies. This calculation can be challenging, especially when a distribution is not uniform and the areas in question are nonpolygonal <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+      <para xml:id="S2.SS2.p3">
+        <p>Modern visualization designs, such as quantile dot plots (QDPs) <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps" separator="," yyseparator=","/>]</cite> and hypothetical outcome plots (HOPs) <cite class="ltx_citemacro_cite">[<bibref bibrefs="hullman-hops" separator="," yyseparator=","/>]</cite>, seek to maintain the same communication of distribution shape as area-encoded visualizations, while also increasing audience understanding through the use of visual frequency framing <text color="#000000">(i.e.,</text> expressing probabilities as natural frequencies). This method of communicating odds, such as “6 out of 100 times” rather than “6%”, can improve comprehension of <text color="#000000">odds</text> in textual contexts<cite class="ltx_citemacro_cite">[<bibref bibrefs="cosmides-tooby-frequency-framing" separator="," yyseparator=","/>]</cite>. Frequency framing has inspired the discrete communication of probability as counts of marks instead of continuous areas <text color="#000000">in QDPs and HOPs</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="fernandes2018-qdp-cdf,hullman-hops" separator="," yyseparator=","/>]</cite>. <text color="#000000">Members of the general public</text> are more likely to correctly interpret frequency-framed visualizations than PDFs in specific contexts <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps,fernandes2018-qdp-cdf,hullman-hops,kale2020-qdp" separator="," yyseparator=","/>]</cite>.
+Although they communicate more information than interval visualizations<cite class="ltx_citemacro_cite">[<bibref bibrefs="padilla_review2022" separator="," yyseparator=","/>]</cite>, these discretized visualizations still sacrifice detail in exchange for facilitating human reasoning. HOPs, for example, rely on animation, making them unsuitable for nondigital formats and requiring more time to extract precise information <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps" separator="," yyseparator=","/>]</cite>. QDPs trade some statistical resolution by using discrete dots to encode continuous distributions. This limitation is particularly relevant in low (20)-quantile QDPs, which prior studies suggest are more effective than higher (100)-quantile versions <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+      <para class="ltx_noindent" xml:id="S2.SS2.p4">
+        <p><text font="bold">Equal-height scaling vs equal-area scaling.</text> Statistical plotting software typically defaults to generating equal-area PDFs, such that the area under each PDF curve occupies the same number of pixels. Because each of these areas equals 1 (i.e., 100% probability), equal-area scaling ensures all PDFs have the same probability-to-pixel ratio, allowing simple area judgments to facilitate cumulative probability comparisons (see Fig. <ref labelref="LABEL:fig:pdf-aff"/>, row c). However, for area-encoded distribution visualizations (e.g., PDFs, violin plots, ridgelines), equal-area scaling can cause occlusion when some distributions are much narrower (i.e., have lower standard deviation) than others <text color="#000000">(see Fig. <ref labelref="LABEL:fig:why-squish"/>, a)</text>. Spacing PDFs to accommodate tall distributions can use substantial vertical space <text color="#000000">(Fig. <ref labelref="LABEL:fig:why-squish"/>, b) which is often restrictive to authors working within page limits, so visualization authors may choose to scale PDFs to the same height to save space (Fig. <ref labelref="LABEL:fig:why-squish"/>, c).</text> This equal-height option is not mathematically incorrect <text color="#000000">and is popular enough to be supported by</text> statistical plotting software (e.g., STAN bayesplot <cite class="ltx_citemacro_cite">[<bibref bibrefs="bayesplot-r" separator="," yyseparator=","/>]</cite>, ggdist <cite class="ltx_citemacro_cite">[<bibref bibrefs="ggdist" separator="," yyseparator=","/>]</cite>). Still, past research establishes that equal-height PDFs lead to more incorrect judgments than equal-area PDFs, for <text color="#000000">members of the general public</text> making simple cumulative probability comparisons <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:pdf-aff" placement="t" xml:id="S2.F1">
+        <tags>
+          <tag>Figure 1</tag>
+          <tag role="autoref">Figure 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Figure 1</tag>
+        </tags>
+        <graphics candidates="figs/pdf-affordances-task.pdf" class="ltx_centering" graphic="figs/pdf-affordances-task.pdf" options="width=433.62pt, alt=The task ‘‘Which solute, if either, has a higher probability of being present at t or less ppm in the sampled seawater?’’ is presented above two normal probability density functions with different spreads and the threshold t labeled on both their x-axes. Next, we visualize strategies we observed people using to complete this task and whether these strategies lead to correct answers for equal area and equal height PDFs. The 5 strategies are 1) comparing the height of PDFs at their peaks, 2) comparing the height of PDFs at the threshold t, 3) comparing the areas under the PDFs’ curves to the left of threshold t, 4) comparing the spreads of the PDFs to the left of threshold t, and 5) comparing the slopes of the PDFs at threshold t. Strategy 1 and strategy 3 render correct comparisons for only equal area PDFs. All other strategies render incorrect comparisons." xml:id="S2.F1.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">1</tag>Top: The task we test. Bottom: PDFs’ afforded <text color="#000000">mental actions</text> from our pilot study. Some actions yield correct results for equal-area PDFs (left), but not for equal-height PDFs (right). <text color="#000000">See Section <ref labelref="LABEL:sec:pilot"/> for more detail.</text></toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 1</tag>Top: The task we test. Bottom: PDFs’ afforded <text color="#000000">mental actions</text> from our pilot study. Some actions yield correct results for equal-area PDFs (left), but not for equal-height PDFs (right). <text color="#000000">See Section <ref labelref="LABEL:sec:pilot"/> for more detail.</text></caption>
+      </figure>
+      <para xml:id="S2.SS2.p5">
+        <p>Notably, the impact of equal-height scaling on other probability distribution visualizations remains unexplored. However, we hypothesize that visualizations relying on frequency framing may be more robust to scaling as they encourage <text color="#000000">mental actions</text> independent of mark height or area. Additionally, visualizations that inherently maintain constant height, such as interval plots and box plots, fall outside this discussion, as they naturally have equal heights.
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣175␣**** --></p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:why-squish" placement="t" xml:id="S2.F2">
+        <tags>
+          <tag>Figure 2</tag>
+          <tag role="autoref">Figure 2</tag>
+          <tag role="refnum">2</tag>
+          <tag role="typerefnum">Figure 2</tag>
+        </tags>
+        <graphics candidates="figs/why-squish.pdf" class="ltx_centering" graphic="figs/why-squish.pdf" options="width=390.258pt, alt=" xml:id="S2.F2.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">2</tag><text color="#000000">Why would someone scale PDFs to equal-heights? (a) different variances can cause overlap and occlusion (b) separating them requires more space (c) equal-height scaling yields a compact, statistically correct figure.</text></toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 2</tag><text color="#000000">Why would someone scale PDFs to equal-heights? (a) different variances can cause overlap and occlusion (b) separating them requires more space (c) equal-height scaling yields a compact, statistically correct figure.</text></caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:materials-methods" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>Study Materials and Methods</title>
+    <para xml:id="S3.p1">
+      <p>Scaling pairs of PDF plots to equal heights decreases <text color="#000000">members of the general public</text>’s ability to compare the distributions’ cumulative probability below a provided threshold (see Fig. <ref labelref="LABEL:fig:pdf-aff"/>) <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>. Motivated by these results, we examine <text color="#000000">the utility of affordance theory</text>, as discussed in Section <ref labelref="LABEL:sec:cog-aff-theory"/>, in
+<text color="#000000">evaluating equal-height PDFs and designing alternate visualizations</text>.
+<text color="#000000">To do so, we proceeded in four stages. First, we analyzed pilot free-response data and relevant literature to identify possible cognitive affordances of PDFs and related distribution visualizations (Section <ref labelref="LABEL:sec:pilot"/>). We assessed these cognitive affordances’ alignment with the cumulative probability comparison task we investigate in our experiment. Second, we defined ideal affordances for the task and hypothesized which design features may better support them (Section <ref labelref="LABEL:sec:redesign"/>). Third, we developed a novel, affordance-informed visualization to more strongly cue correct mental actions (Section <ref labelref="LABEL:sec:redesign"/>). Finally, we preregistered and conducted an empirical study to test whether our predicted affordances correspond to measurable differences in task performance (Sections <ref labelref="LABEL:sec:hyp"/> through <ref labelref="LABEL:sec:exp-analysis"/>).</text></p>
+    </para>
+    <subsection inlist="toc" labels="LABEL:sec:pdf-aff LABEL:sec:pilot" xml:id="S3.SS1">
+      <tags>
+        <tag>3.1</tag>
+        <tag role="autoref">subsection 3.1</tag>
+        <tag role="refnum">3.1</tag>
+        <tag role="typerefnum">§3.1</tag>
+      </tags>
+      <title><tag close=" ">3.1</tag>Affordances of probability density visualizations</title>
+      <para class="ltx_noindent" xml:id="S3.SS1.p1">
+        <p><text font="bold">Pilot Data.</text> We collected pilot data to hypothesize about the affordances of different probability density visualizations by asking participants who completed simple tasks with normal probability visualizations<text color="#000000">, such as comparing the odds of two distributions,</text> to “please describe in as much detail as possible how [they] interpreted the graph and what strategies [they] used to answer the questions.” We conducted these pilot studies via Prolific.com with participants <text color="#000000">who had Prolific approval rate over 90%, resided in the U.S., were fluent in English, and over the age of 18 (291 female, 292 male, 14 non-binary/third gender, 4 did not report gender). These responses were between 5 and 278 words, with a median word length of 27 words.</text> These pilot studies allowed us to refine the measures for our main study and gain insights into afforded strategies for comparing distributions. <text color="#000000">We recruited 601 participants for the pilot study. Participants were randomly assigned to view either </text>normal PDFs (<text font="italic">n</text> = 300) or normal QDPs (<text font="italic">n </text>= 301).</p>
+      </para>
+      <para xml:id="S3.SS1.p2">
+        <p>We analyzed responses by thematically coding them to identify recurring concepts associated with each visualization. To do so, <!--  %The␣coding␣process␣was␣as␣follows: -->(1) an author reviewed all responses, (2) responses were <text color="#000000">manually</text> grouped based on <text color="#000000">conceptual</text> similar <text color="#000000">in the reported</text> sentiments, and (3) overarching themes were identified within these groupings.</p>
+      </para>
+      <para class="ltx_noindent" xml:id="S3.SS1.p3">
+        <p><text font="bold">Affordances of PDFs.</text> To illustrate how affordance evaluations can support visualization redesigns, we selected a visualization-task use case that has been shown to lead to errors. <text color="#000000">Members of the general public</text> are consistently worse at comparing cumulative probabilities when using equal-height PDFs (see Fig. <ref labelref="LABEL:fig:pdf-aff"/>) <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>. We investigated this visualization-task combination because it presents a clear judgment error, involves a sufficiently complex visualization to warrant redesign, and has alternative visualizations (e.g., QDPs) that have demonstrated high performance in other tasks. By focusing on a specific scaling issue, <!--  %we␣use␣affordances␣to␣identify␣reasoning␣errors␣and␣propose␣a␣novel␣design, 
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣200␣****-->we provide a case study that exhibits the process of using affordances and their generative potential.</p>
+      </para>
+      <para xml:id="S3.SS1.p4">
+        <p>Our thematic coding of pilot data identified several <text color="#000000">mental actions</text> that likely led to incorrect calculations. <text color="#000000">Some participants</text> reported comparing the heights of the normal PDFs, either at their mean (see Fig. <ref labelref="LABEL:fig:pdf-aff"/> row a) or at the threshold of a cumulative probability (row b). <text font="italic">Height-comparing</text> could be driven by PDFs’ visual similarity to line charts <text color="#000000">(see Fig. <ref labelref="LABEL:fig:pdf-aff"/> top).</text>
+Although this <text color="#000000">action</text> reflects an incorrect understanding of PDFs, it is worth noting that when PDFs are scaled to equal <text font="italic">areas</text>, height comparison can still result in correct comparisons (Fig. <ref labelref="LABEL:fig:pdf-aff"/> row a, left). When PDFs are scaled to equal <text font="italic">heights</text> (Fig. <ref labelref="LABEL:fig:pdf-aff"/> row a, right), however, height comparison no longer ensures accurate cumulative probability comparisons.</p>
+      </para>
+      <para xml:id="S3.SS1.p5">
+        <p>Participants’ also compared partial areas that correlated with the threshold
+(Fig. <ref labelref="LABEL:fig:pdf-aff"/> row c). <text font="italic">Area-comparing</text> can be afforded by participants’ interpretation of the PDF as an area chart, and although closer to a “correct” mathematical understanding of PDFs, also only yields correct judgments when the charts are scaled to equal areas.</p>
+      </para>
+      <para xml:id="S3.SS1.p6">
+        <p>Lastly, participants compared overall PDF spread (Fig. <ref labelref="LABEL:fig:pdf-aff"/> row d) and slope (row e). Both <text color="#000000">mental actions</text> commonly led to incorrect comparisons. Participants who used PDF spread reported wider graphs having higher probabilities for our task, even though the opposite is true. Participants who used slope comparisons also fell susceptible to incorrect interpretations, such as “… whichever curve was more steep was normally the one with less probability,” which is the opposite of the case. <!--  %,␣as␣seen␣in␣Fig.~\ref{fig:pdf-aff}␣row␣e. -->These <text font="italic">shape-comparing</text> <text color="#000000">actions</text> are robust to equal scaling; y-axis scaling does not change spread or significantly alter comparisons of PDF slope. Still, they led to incorrect conclusions. In summary, the first phase of our affordance evaluation identified three primary <text color="#000000">mental actions</text> that contribute to reasoning errors with equal-height PDFs: height-comparing, area-comparing, and shape-comparing.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:qdp-aff" placement="h!" xml:id="S3.F3">
+        <tags>
+          <tag>Figure 3</tag>
+          <tag role="autoref">Figure 3</tag>
+          <tag role="refnum">3</tag>
+          <tag role="typerefnum">Figure 3</tag>
+        </tags>
+        <graphics candidates="figs/qdp-affordances.pdf" class="ltx_centering" graphic="figs/qdp-affordances.pdf" options="width=294.8616pt, alt=" xml:id="S3.F3.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">3</tag><text color="#000000">QDPs’ afforded mental actions from our pilot study.</text></toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 3</tag><text color="#000000">QDPs’ afforded mental actions from our pilot study.</text></caption>
+      </figure>
+      <para class="ltx_noindent" xml:id="S3.SS1.p7">
+        <p><text font="bold">Affordances of QDPs.</text>
+A review of QDP pilot data revealed one predominant afforded strategy. Participants often reported <text font="italic">counting</text> and then comparing the number of dots on the right of the cumulative threshold for each QDP <text color="#000000">(Fig. <ref labelref="LABEL:fig:qdp-aff"/>, top)</text>.
+This strategy is robust to equal-height scaling because height manipulations do not affect dot counts (see Fig.  <ref labelref="LABEL:fig:stimuli"/> <text color="#000000">for equal-height QDPs</text>). QDPs’ strong counting affordance is indicative of their frequency-framed motivation, as participants interpreted each dot as part of a greater whole (e.g., 5 dots out of 10 total).</p>
+      </para>
+      <para xml:id="S3.SS1.p8">
+        <p>Additionally, some participants mentioned confusion when quantile dots did not align with an x-axis value of interest, indicating that they perceived each dot as a single probability, as opposed to an approximated continuous distribution <text color="#000000">(Fig. <ref labelref="LABEL:fig:qdp-aff"/>)</text>. This discrete interpretation can lead to erroneous conclusions, especially when distributions have wide spreads that lead to large spaces between dots. This affordance aligns with past research on the nature of individual areas (e.g., bar charts) affording <text color="#000000">readers to interpret data as discrete</text> and connected dots (e.g., line charts) affording <text color="#000000">readers to interpret data as continuous</text> <cite class="ltx_citemacro_cite">[<bibref bibrefs="zacks-tversky-bars-lines,shah-graph-comprehension" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣225␣**** -->      <para class="ltx_noindent" xml:id="S3.SS1.p9">
+        <p><text font="bold">Ideal affordances for equal-height PDFs.</text> After reviewing our pilot analysis, we identified ideal and undesired affordances from both PDFs and QDPs. Most significantly, QDPs afford counting, which makes them robust to equal-height scaling. PDFs lack this affordance, which we hypothesize contributes to incorrect judgments when scaled to equal heights (see Fig. <ref labelref="LABEL:fig:pdf-aff"/>). However, QDPs also afford distributional discreteness much more than PDFs, which can lead to incorrect comparisons when two distributions share similar standard deviations (see Fig. <ref labelref="LABEL:fig:cut-off-dist"/>). Thus, we identified that, for our cumulative probability task, an ideal visualization would afford both counting marks as parts of a whole and continuity.</p>
+      </para>
+      <para xml:id="S3.SS1.p10">
+        <p>Next, we <text color="#000000">we constrained our design exploration to established static visualization techniques that have been empirically shown to support part-to-whole reasoning among members of the general public. Contemporary literature on part-to-whole and probability communication has strong empirical support for two approaches: icon arrays and treemaps. Icon arrays (i.e., frequency-framed displays) have been widely shown to improve probability comprehension by visually representing both the reference class and affected subset, thereby supporting accurate part–to-whole reasoning and reducing denominator neglect, especially among less numerate individuals (for reviews, see <cite class="ltx_citemacro_cite">[<bibref bibrefs="ancker2006design,garcia2017designing" separator="," yyseparator=","/>]</cite>). Additionally, empirical work on rectangular treemaps suggests that spatial subdivision techniques can support accurate part–to-whole judgments. Although treemaps encode values using area, controlled experiments demonstrate judgment accuracy comparable to hierarchical bar charts at certain data densities and, in some cases, faster comparisons <cite class="ltx_citemacro_cite">[<bibref bibrefs="kong2010perceptual" separator="," yyseparator=","/>]</cite>.</text> <!--  %searched␣for␣well-known␣visualization␣design␣choices␣that␣are␣classically␣used␣to␣communicate␣both␣counting␣parts␣of␣a␣greater␣whole,␣and␣continuity. --><text color="#000000">Based on these prior works,</text> we identified two design choices that we hypothesized afforded counting parts of a whole:</p>
+        <enumerate xml:id="S3.I1">
+          <item xml:id="S3.I1.i1">
+            <tags>
+              <tag>1.</tag>
+              <tag role="autoref">item 1</tag>
+              <tag role="refnum">1</tag>
+              <tag role="typerefnum">item 1</tag>
+            </tags>
+            <para xml:id="S3.I1.i1.p1">
+              <p>an “icon array” technique in which colored glyphs are used to signal some items out of a larger set, as is done with QDPs, and</p>
+            </para>
+          </item>
+          <item xml:id="S3.I1.i2">
+            <tags>
+              <tag>2.</tag>
+              <tag role="autoref">item 2</tag>
+              <tag role="refnum">2</tag>
+              <tag role="typerefnum">item 2</tag>
+            </tags>
+            <para xml:id="S3.I1.i2.p1">
+              <p>a “spatial subdivision” technique in which a shape is divided by thin lines into smaller shapes, as in tree maps.</p>
+            </para>
+          </item>
+        </enumerate>
+      </para>
+      <para xml:id="S3.SS1.p11">
+        <p>Of these two techniques, only the latter has the potential to afford continuity. Currently, this spatial subdivision technique communicates probability distributions through standard deviation or histogram intervals by encoding quantiles or standard deviations as abutting, equal-height bars <cite class="ltx_citemacro_cite">[<bibref bibrefs="yang2023swaying,fernandes2018-qdp-cdf" separator="," yyseparator=","/>]</cite>. Although these charts are robust to vertical scaling and communicate a continuous distribution across a range of values, interval visualizations are susceptible to reasoning errors (for reviews see <cite class="ltx_citemacro_cite">[<bibref bibrefs="joslyn2021,padilla_review2022" separator="," yyseparator=","/>]</cite>) and are less “expressive” than alternative visualizations, which more readily communicate details of outliers and distribution shape <cite class="ltx_citemacro_cite">[<bibref bibrefs="padilla_review2022" separator="," yyseparator=","/>]</cite>. Thus, we concluded that spatial subdivision is currently employed in charts that do not show the distributional information we desire.
+<!--  %Surveying␣current␣chart␣designs,␣we␣recognized␣that␣histogram␣intervals␣use␣the␣spatial␣subdivision␣technique␣to␣communicate␣probability␣distributions␣(see␣Fig.␣SM4␣Supplemental␣Materials).␣As␣noted␣in␣Section~\ref{sec:prob-visualizations},␣however,␣we␣are␣interested␣in␣probability␣visualizations␣that␣maintain␣or␣extend␣PDFs’␣expressiveness␣and,␣therefore,␣are␣looking␣for␣designs␣that␣encode␣the␣mean,␣spread,␣and␣shape␣of␣their␣distributions. --></p>
+      </para>
+<!--  %\begin{figure}[t] 
+     %\centering
+     %\includegraphics[width=0.8\linewidth,␣alt={QDPs␣are␣often␣read␣by␣counting␣up␣each␣of␣their␣dots,␣which␣can␣communicate␣a␣part-to-whole␣relationship,␣and␣also␣a␣non-continuous␣range␣of␣probabilities␣(e.g.,␣some␣5\%␣chance␣at␣x␣=␣1,␣0\%␣chance␣at␣x␣=␣1.5,␣5\%␣chance␣at␣x␣=␣2.}]{figs/qdp-affordances.pdf}
+     %\caption{Affordances␣noted␣in␣our␣QDP␣pilot␣study.␣Top:␣counting␣individual␣dots.␣Bottom:␣discrete␣probabilities,␣such␣that␣some␣readers␣incorrectly␣interpret␣the␣gaps␣between␣columns␣of␣dots␣as␣showing␣zero␣probability.}
+     %\label{fig:qdp-aff}
+     %\vspace{-5mm}
+     %\end{figure}
+     %\begin{figure}[htb]
+     %\centering
+     %\includegraphics[width=.8\linewidth,␣alt={We␣juxtapose␣an␣icon␣array␣next␣to␣a␣QDP␣to␣show␣their␣use␣of␣similar␣encoding␣techniques.␣We␣do␣these␣same␣with␣a␣tree␣map␣and␣a␣pie␣chart␣␣next␣to␣a␣histogram␣interval␣to␣show␣their␣similar␣encoding␣techniques.}]{figs/aff-part-to-whole.pdf}
+     %\caption{Icon␣arrays␣(top␣left),␣and␣pie␣charts␣and␣tree␣maps␣(top␣right)␣both␣support␣frequency␣framing␣by␣affording␣a␣whole␣that␣is␣separated␣into␣countable␣parts.␣Their␣techniques␣can␣be␣translated␣to␣probability␣distribution␣visualizations␣(bottom).}
+     %\label{fig:part-to-whole}
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣250␣****
+     %\vspace{-3mm}
+     %\end{figure}
+     %Next,␣we␣reflected␣on␣probability␣distribution␣methods␣that␣use␣spatial␣subdivision␣to␣communicate␣parts-of-a-whole.␣We␣can␣see␣this␣technique␣in␣standard␣deviation␣or␣histogram␣intervals␣(Fig.~\ref{fig:part-to-whole},␣bottom␣right),␣which␣typically␣form␣a␣stepped␣gradient␣by␣encoding␣quantiles␣or␣standard␣deviations␣as␣abutting␣bars~\cite{yang2023swaying,␣fernandes2018-qdp-cdf}.␣Although␣these␣charts␣are␣robust␣to␣vertical␣scaling␣and␣communicate␣a␣continuous␣distribution␣across␣a␣range␣of␣values,␣interval␣visualizations␣are␣susceptible␣to␣reasoning␣errors␣(for␣reviews␣see␣\cite{joslyn2021,␣padilla_review2022})␣and␣are␣less␣‘‘expressive’’␣than␣alternative␣visualizations,␣which␣more␣readily␣communicate␣details␣of␣outliers␣and␣distribution␣shape~\cite{padilla_review2022}.␣From␣this␣reflection,␣we␣noted␣that␣spatial␣subdivision␣affords␣continuity␣but␣does␣not␣show␣the␣distributional␣information␣that␣we␣desired.-->    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:redesign" xml:id="S3.SS2">
+      <tags>
+        <tag>3.2</tag>
+        <tag role="autoref">subsection 3.2</tag>
+        <tag role="refnum">3.2</tag>
+        <tag role="typerefnum">§3.2</tag>
+      </tags>
+      <title><tag close=" ">3.2</tag>An affordance-motivated redesign</title>
+      <para xml:id="S3.SS2.p1">
+        <p>Above, we established our goal of affording 1) counting dots as parts of a whole, 2) continuity, and 3) a general distributional shape to maintain expressiveness. <!--  %In␣Section~\ref{sec:aff-design-space},␣we␣discussed␣design␣techniques␣and␣their␣respective␣affordances. -->Below, we present an affordance-informed redesign of PDFs: <text font="italic">Croissant charts</text> (see Fig. <ref labelref="LABEL:fig:anatomy"/>).</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:anatomy" placement="h!" xml:id="S3.F4">
+        <tags>
+          <tag>Figure 4</tag>
+          <tag role="autoref">Figure 4</tag>
+          <tag role="refnum">4</tag>
+          <tag role="typerefnum">Figure 4</tag>
+        </tags>
+        <graphics candidates="figs/anatomy-croissant-pow.pdf" class="ltx_centering" graphic="figs/anatomy-croissant-pow.pdf" options="width=325.215pt, alt=A croissant chart with annotations to describe how each design decisions impact the chart’s affordances. All annotations are described in the caption." xml:id="S3.F4.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">4</tag>Croissant charts’ intended affordances. PDF shape for expressiveness. Minimal slices with gaps afford continuity and parts of a whole. Dots afford counting and equality across slices.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 4</tag>Croissant charts’ intended affordances. PDF shape for expressiveness. Minimal slices with gaps afford continuity and parts of a whole. Dots afford counting and equality across slices.</caption>
+      </figure>
+      <para class="ltx_noindent" xml:id="S3.SS2.p2">
+        <p><text font="bold">Affording counting parts of a whole.</text> To afford counting strategies, we used two approaches: spatial subdivision and marks that encourage counting. <!--  %,␣and␣marks␣that␣suggest␣an␣equivalent␣area. -->Subdivision cuts single shapes into multiple parts to communicate that the parts originate from one entity. Inspired by QDPs, we slice the PDF into quantiles, such that each slice represents an equal probability <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps" separator="," yyseparator=","/>]</cite>. However, we only display vertical slices to prevent the misinterpretation that horizontal slices of area under a PDF’s curve lead to logical conclusions.</p>
+      </para>
+      <para xml:id="S3.SS2.p3">
+        <p>Additionally, we place a single dot in each quantile slice, in case QDPs’ dots afford counting due to their shape. We also hypothesize that dots help mitigate the strong area, height, or width strategies we see in our pilot data on PDFs. We hypothesize that these dots correctly afford equal probabilities across each slice <!--  %,␣even␣without␣indication␣of␣a␣uniform␣distribution) 
+     %In␣the␣case␣of␣croissant␣charts,--><text color="#000000">as a visual extrapolation of the equiprobability bias (i.e., people assume equal probabilities across items) <cite class="ltx_citemacro_cite">[<bibref bibrefs="gauvrit-eqprob" separator="," yyseparator=","/>]</cite>. We also use the dots to indicate equal probability in the charts’ legend for added clarity. We darken the border of each section and each dot to increase their saliency at smaller scales.</text>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣275␣**** --></p>
+      </para>
+      <para class="ltx_noindent" xml:id="S3.SS2.p4">
+        <p><text font="bold">Affording a continuous distribution.</text> To maintain perceptual continuity, we minimize area removal when subdividing the PDF. This decision draws on Gestalt principles of closure <cite class="ltx_citemacro_cite">[<bibref bibrefs="wagemans-gestalt-perception" separator="," yyseparator=","/>]</cite>, and preserves as much of the PDF shape as possible. However, we include slight padding around each slice to ensure visual separation.</p>
+      </para>
+      <para class="ltx_noindent" xml:id="S3.SS2.p5">
+        <p><text font="bold">Affording general distributional shape.</text> To maintain the expressiveness with which PDFs display distributional shapes, we retain their density function curve rather than making each quantile the same height as in interval plots, or adopting a discretized distribution shape as in QDPs. We observed in pilot data that dots placed in QDPs’ tails can skew readers’ perception of a distribution’s continuity and sometimes afford multimodality. Additionally, past research shows that bin width and dot size can influence the shape of QDPs <cite class="ltx_citemacro_cite">[<bibref bibrefs="correll-prob-density2019" separator="," yyseparator=","/>]</cite>. By preserving the continuous shape of PDFs, we aimed for greater resilience against these distortions.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:hyp" xml:id="S3.SS3">
+      <tags>
+        <tag>3.3</tag>
+        <tag role="autoref">subsection 3.3</tag>
+        <tag role="refnum">3.3</tag>
+        <tag role="typerefnum">§3.3</tag>
+      </tags>
+      <title><tag close=" ">3.3</tag>Investigative Questions and Hypotheses</title>
+      <para xml:id="S3.SS3.p1">
+        <p>We preregistered three main hypotheses about differences in reader performance when using PDFs, QDPs, and croissant charts on OSF. This preregistration <text color="#000000">and a visualization of our hypotheses for easier reference are available in Supplemental Materials<note mark="1" role="footnote" xml:id="footnote1"><tags>
+                <tag>1</tag>
+                <tag role="autoref">footnote 1</tag>
+                <tag role="refnum">1</tag>
+                <tag role="typerefnum">footnote 1</tag>
+              </tags>https://osf.io/txwj5/</note>.</text> The first hypothesis is that <text font="bold">(H1) equal-height PDFs will result in a lower likelihood of correct cumulative comparisons than equal-area PDFs</text>. This hypothesis is based on results from previous work <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>, and its confirmation would replicate prior findings while checking for methodological validity.
+<!--  %\begin{figure}[t] 
+     %\centering␣␣␣␣\includegraphics[width=0.8\linewidth,␣alt={Hypotheses:␣H1)␣equal␣area␣PDFs␣will␣lead␣to␣higher␣likelihood␣of␣correct␣comparison␣than␣(i.e.,␣"&gt;")␣equal␣height␣PDFs.␣H2a)␣equal␣height␣Croissant-10s␣&gt;␣equal␣height␣PDFs.␣H2b)␣equal␣height␣Croissant-20s␣&gt;␣equal␣height␣PDFs.␣H2d)␣Scaling␣from␣equal␣area␣to␣equal␣height␣will␣decrease␣QDPs,␣Croissant-10s,␣and␣Croissant-20s’␣performance␣less␣than␣PDFs’.␣H3)␣Change␣in␣performance␣between␣4.5␣v␣5␣SD␣and␣other␣SD␣conditions␣in␣QDPs␣will␣be␣different␣than␣change␣in␣performance␣beteeen␣4.5␣v␣5␣SD␣and␣other␣SD␣conditions␣in␣Croissants␣and␣PDFs.}]{figs/hypotheses-table.pdf}
+     %\caption{\rev{Visualizations␣of␣our␣preregistered␣hypotheses␣%for␣easier␣reference
+     %}}
+     %\label{fig:hyps}
+     %\vspace{-8mm}
+     %\end{figure}--></p>
+      </para>
+      <para xml:id="S3.SS3.p2">
+        <p>Our second <text color="#000000">set of</text> preregistered hypotheses examines whether visualizations that afford counting can mitigate the performance decline observed when PDFs are scaled to equal heights.
+<text color="#000000">We preregistered four hypotheses concerning counting-affording designs. <text font="bold">Performance hypotheses:</text> We hypothesized that
+<text font="bold">(H2a)</text> equal-height Croissant-10s,
+<text font="bold">(H2b)</text> equal-height Croissant-20s, and
+<text font="bold">(H2c)</text> equal-height QDPs (20 quantiles)
+would each result in a higher probability of correct cumulative comparisons than equal-height PDFs.</text> <text color="#000000" font="bold">Robustness-to-scaling hypothesis:<text font="medium"> We further hypothesized that
+</text>(H2d)<text font="medium"> QDPs, Croissant-10s, and Croissant-20s would exhibit a smaller decrease in correctness when moving from equal-area to equal-height scaling than PDFs.</text></text></p>
+      </para>
+<!--  %Specifically,␣we␣hypothesized␣that␣\textbf{(H2a)␣equal-height␣croissants␣divided␣into␣10␣quantiles␣(Croissant-10s),␣(H2b)␣equal-height␣croissants␣divided␣into␣20␣quantiles␣(Croissant-20s),␣and␣(H2c)␣equal-height␣QDPs␣divided␣into␣20␣quantiles␣would␣each␣result␣in␣a␣higher␣probability␣of␣correct␣comparisons␣than␣equal-height␣PDFs}.␣We␣also␣hypothesized␣\textbf{(H2d)␣that␣QDPs,␣Croissant-10s,␣and␣Croissant-20s␣will␣be␣less␣affected␣by␣equal␣height␣scaling␣than␣PDFs},␣that␣is,␣decreases␣in␣correct␣judgments␣due␣to␣equal-height␣scaling␣will␣be␣less␣pronounced␣in␣QDPs␣and␣both␣croissant␣charts␣than␣in␣PDFs. 
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣300␣****
+     %(i.e.,␣there␣will␣be␣an␣interaction␣between␣visualization␣type␣and␣scaling).-->      <para xml:id="S3.SS3.p3">
+        <p>Our last experimental hypothesis is motivated by our theorizing that QDPs only weakly afford a continuous distribution. We preregistered that <text font="bold">(H3) QDPs’ relationship between standard deviation (SD) pair comparisons and correctness will differ from other visualizations’ relationship between SD and correctness, specifically in the 4.5 vs. 5 SD condition</text>. In other words, QDPs’ performance would drastically change in the 4.5 v 5 SD condition in a way that other visualizations’ performance would not. We rationalized that when two distributions’ SDs are similar, their QDPs’ dots will be stacked similarly and moved only slightly along the x-axis in ways that may be too subtle for readers to recognize.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:stimuli" xml:id="S3.SS4">
+      <tags>
+        <tag>3.4</tag>
+        <tag role="autoref">subsection 3.4</tag>
+        <tag role="refnum">3.4</tag>
+        <tag role="typerefnum">§3.4</tag>
+      </tags>
+      <title><tag close=" ">3.4</tag>Stimuli</title>
+      <para xml:id="S3.SS4.p1">
+        <p>When comparing of cumulative probabilities of equal-area PDFs, readers can rely on heuristics, such as PDF height, to make accurate judgments. For equal-height PDFs, however, height comparison can lead to incorrect conclusions; other strategies, such as counting, offer a more robust approach. Following our affordance analysis of PDFs, we tested three types of visualizations: PDFs, which our pilot data suggest strongly afford continuity but only weakly afford counting, QDPs; which our pilot data suggest strongly afford counting but weakly afford distribution continuity; and croissant charts, which we designed to afford both continuity and counting.</p>
+      </para>
+      <para xml:id="S3.SS4.p2">
+        <p>We test QDPs with 20 quantiles because they have been shown to result in better performance than their 100-quantile counterparts <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps" separator="," yyseparator=","/>]</cite>. We test croissant charts with 20 quantiles (Croissant-20s), as mathematical equivalents to our QDP stimuli, and croissant charts with 10 quantiles (Croissant-10s). Our pilot data showed that Croissant-10s outperform croissants with five quantiles, so we wanted to study how Croissant-10s compare to Croissant-20s.</p>
+      </para>
+      <para xml:id="S3.SS4.p3">
+        <p>For all four graphs (PDFs, QDPs, Croissant-20s, and Croissant-10s), we created stimuli with two normal probability distributions stacked vertically (as shown in Fig. <ref labelref="LABEL:fig:pdf-aff"/>, top). These stimuli were then scaled to either “equal area” or “equal height” (see Fig. <ref labelref="LABEL:fig:stimuli"/>, left panel). For PDFs and both croissants “equal area” meant that the area below the two curves had the same number of pixels, and “equal height” meant that the distance from the highest point on the curve to the x-axis was held constant. For QDPs, “equal area” ensured that both graphs’ dots were the same pixel size, while “equal height” maintained a constant distance from the top of the highest dot to the x-axis. In narrower distributions, this adjustment reduced dots’ diameter to preserve their circular shape.</p>
+      </para>
+      <para xml:id="S3.SS4.p4">
+        <p>For each of our <text color="#000000">eight</text> stimuli types, we created four sets of distributions with varying SDs (see Fig. <ref labelref="LABEL:fig:stimuli"/>, right panel). The first set presented a distribution with an SD of 2 and a distribution with an SD of 5. The rest compared distributions with SDs of 3 and 5, 4 and 5, and finally 4.5 and 5. We chose the first three of these SD comparisons because they were shown to have varying performance in previous work <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>. We added the 4.5 vs. 5 SD comparison, because we believed it could highlight QDPs’ weaker affordance of a continuous distribution, as explained in H3 in Section <ref labelref="LABEL:sec:hyp"/>. For each of the SD combinations we created two sets of stimuli, such that the vertical position of the narrower (higher SD) distribution was counterbalanced (see Fig. <ref labelref="LABEL:fig:stimuli"/>, bottom right). This resulted in eight stimuli of each scaled visualization, for a total of 64 tested stimuli. We created all stimuli via custom D3.js functions, and edited (e.g., scaled, relabeled, etc.) them in Adobe Illustrator. Stimuli and generating scripts are available in Supplemental Materials.</p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:stimuli" placement="h" xml:id="S3.F5">
+        <tags>
+          <tag>Figure 5</tag>
+          <tag role="autoref">Figure 5</tag>
+          <tag role="refnum">5</tag>
+          <tag role="typerefnum">Figure 5</tag>
+        </tags>
+        <graphics candidates="figs/stimuli-overview-col.pdf" class="ltx_centering" graphic="figs/stimuli-overview-col.pdf" options="width=433.62pt, alt=Stimuli variations. All variations and labels are described in the caption." xml:id="S3.F5.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">5</tag>Stimuli overview. Left: Between-subjects; different visualization techniques (PDF, QDP, Croissant-10, Croissant-20) under two scaling conditions (Equal Area, Equal Height). Right: within-subjects; standard deviation pairs and position variations.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 5</tag>Stimuli overview. Left: Between-subjects; different visualization techniques (PDF, QDP, Croissant-10, Croissant-20) under two scaling conditions (Equal Area, Equal Height). Right: within-subjects; standard deviation pairs and position variations.</caption>
+      </figure>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣325␣**** -->    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:exp-design" xml:id="S3.SS5">
+      <tags>
+        <tag>3.5</tag>
+        <tag role="autoref">subsection 3.5</tag>
+        <tag role="refnum">3.5</tag>
+        <tag role="typerefnum">§3.5</tag>
+      </tags>
+      <title><tag close=" ">3.5</tag>Experimental Design</title>
+      <para xml:id="S3.SS5.p1">
+        <p>We designed a 4 (<text font="italic">Visualization</text>) × 2 (<text font="italic">Scaling</text>) × 4 (<text font="italic">SD Pairs</text>) × 2 (<text font="italic">Position</text>) mixed-subjects design <text color="#000000">(see Figure <ref labelref="LABEL:fig:stimuli"/>).</text> The between-subjects variables were <text font="italic">Visualization</text> and <text font="italic">Scaling</text>. The within-subject variable of interest was <text font="italic">SD Pairs</text>. We included <text font="italic">Position</text> to counterbalance our stimuli and increase statistical power. We did not hypothesize about <text font="italic">Position</text>’s impact, and included it as a covariate in our analysis.
+We investigated task correctness and collected participants’ qualitative responses to observe afforded strategies.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" xml:id="S3.SS6">
+      <tags>
+        <tag>3.6</tag>
+        <tag role="autoref">subsection 3.6</tag>
+        <tag role="refnum">3.6</tag>
+        <tag role="typerefnum">§3.6</tag>
+      </tags>
+      <title><tag close=" ">3.6</tag>Participants</title>
+      <para xml:id="S3.SS6.p1">
+        <p>We recruited U.S.-based participants over 18 through Prolific <cite class="ltx_citemacro_cite">[<bibref bibrefs="prolific" separator="," yyseparator=","/>]</cite>, which anonymizes, qualifies, enrolls, and compensates participants, enabling a double-blind study.
+As per our preregistered power analysis, we recruited 808 participants (<text font="italic">n</text> = 101 per between-subject group). Because affordances depend on readers’ individual characteristics <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-cog-affordance-framework" separator="," yyseparator=","/>]</cite>, we crowdsourced responses from people with varying backgrounds. <!--  %and␣exposure␣to␣visualizations. -->To account for variance in visualization education, we collected participants’ graph literacy scores using the Short Graph Literacy test <cite class="ltx_citemacro_cite">[<bibref bibrefs="okan-sgl-2019" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:procedure" xml:id="S3.SS7">
+      <tags>
+        <tag>3.7</tag>
+        <tag role="autoref">subsection 3.7</tag>
+        <tag role="refnum">3.7</tag>
+        <tag role="typerefnum">§3.7</tag>
+      </tags>
+      <title><tag close=" ">3.7</tag>Procedure</title>
+      <para xml:id="S3.SS7.p1">
+        <p>Participants were informed of the estimated duration and compensation (12 USD/hour) and consented to an IRB-approved form, after which they completed the study on Qualtrics <cite class="ltx_citemacro_cite">[<bibref bibrefs="qualtrics" separator="," yyseparator=","/>]</cite>. First, participants read instructions and were informed of a scenario in which scientists are measuring the concentration of two different solutes in seawater. This scenario was identical to that used in previous PDF comparison work <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>, and adapted from a study on HOPs <cite class="ltx_citemacro_cite">[<bibref bibrefs="hullman-hops" separator="," yyseparator=","/>]</cite>. Then, participants <text color="#000000">were asked to answer</text> an initial attention check <text color="#000000">question to confirm they were reading the instructions. Next,</text> they were instructed to make the size of their browser window as large as possible and shown an annotated illustration of an example plot. Next, participants answered eight questions, one for each pair of charts. Following previously published procedures <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>, all the charts were presented in randomized order, and the questions read “Which solute, if either, has a <text font="bold">higher probability</text> of being present at <text font="bold">X or less ppm</text> in the sampled seawater?” where X was in the same position across all stimuli (at threshold <text font="italic">t</text> in Figure <ref labelref="LABEL:fig:pdf-aff"/>), but varied depending on the numbering of each stimulus’s x-axis. Participants chose from three options (“solute A has a higher probability”, “solute B has a higher probability,” and “neither solute A nor solute B has a higher probability”). The correct option was always the solute with a lower SD. This task does not represent the full range of probability distribution use cases, but allows us to investigate the extent to which affordances can impact strategies such that specific task performance is modulated.
+After completing the chart comparison questions, participants used an open-ended text response to report their thought processes while reading the charts. Finally, participants completed Okan et al.’s Short Graph Literacy test <cite class="ltx_citemacro_cite">[<bibref bibrefs="okan-sgl-2019" separator="," yyseparator=","/>]</cite>. <!--  %,␣and␣then␣self-reported␣their␣age␣and␣gender. -->The survey and its stimuli are available in Supplemental Materials.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:exp-analysis" xml:id="S3.SS8">
+      <tags>
+        <tag>3.8</tag>
+        <tag role="autoref">subsection 3.8</tag>
+        <tag role="refnum">3.8</tag>
+        <tag role="typerefnum">§3.8</tag>
+      </tags>
+      <title><tag close=" ">3.8</tag>Analysis</title>
+      <para xml:id="S3.SS8.p1">
+        <p>We preregistered the binomial Bayesian model in <ref class="ltx_refmacro_autoref" labelref="LABEL:eq:model1" show="autoref"/> with uninformative priors centered at 0 and a standard deviation of 2.5. We used R packages <text font="italic">tidyr</text> v. 1.3.1 for data processing <cite class="ltx_citemacro_cite">[<bibref bibrefs="r-tidyr" separator="," yyseparator=","/>]</cite>, <text font="italic">brms</text> v. 2.20.4 for Bayesian modeling <cite class="ltx_citemacro_cite">[<bibref bibrefs="r-brms" separator="," yyseparator=","/>]</cite>, and <text font="italic">tidybayes</text> v. 3.0.6 for data processing and visualization <cite class="ltx_citemacro_cite">[<bibref bibrefs="r-tidybayes" separator="," yyseparator=","/>]</cite>. <text color="#000000">As denoted in Eq. <ref labelref="LABEL:eq:model1"/></text>, our model <!--  %includes␣two␣two-way␣interactions␣to␣investigate␣the␣impact␣of␣visualization,␣scaling,␣and␣SD␣pair␣on␣task␣performance.␣We␣assess -->assesses the variance in participants’ binary correctness as explained by the interaction between <text font="italic">Visualization</text> and <text font="italic">Scaling</text>, and the interaction between <text font="italic">Visualization</text> and <text font="italic">SD Pair</text>, as well as their lower-order terms. <text color="#000000">In this model, <Math mode="inline" tex="p_{i}=P(Y_{i}=1)" xml:id="S3.SS8.p1.m1">
+              <XMath>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                  <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                </XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">P</XMTok>
+                <XMWrap>
+                  <XMTok role="OPEN" stretchy="false">(</XMTok>
+                  <XMApp>
+                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">Y</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                  </XMApp>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMTok meaning="1" role="NUMBER">1</XMTok>
+                  <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                </XMWrap>
+              </XMath>
+            </Math> represents the posterior probability that participant <Math mode="inline" tex="i" text="i" xml:id="S3.SS8.p1.m2">
+              <XMath>
+                <XMTok font="italic" role="UNKNOWN">i</XMTok>
+              </XMath>
+            </Math> makes a correct comparison. Because we use a logit link, <Math mode="inline" tex="\text{logit}(p_{i})=\log\!\left(\frac{p_{i}}{1-p_{i}}\right)" text="[logit] * p _ i = logarithm@(p _ i / (1 - p _ i))" xml:id="S3.SS8.p1.m3">
+              <XMath>
+                <XMApp>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMApp>
+                    <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                    <XMText>logit</XMText>
+                    <XMDual>
+                      <XMRef idref="S3.SS8.p1.m3.3"/>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMApp xml:id="S3.SS8.p1.m3.3">
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                  </XMApp>
+                  <XMDual>
+                    <XMApp>
+                      <XMRef idref="S3.SS8.p1.m3.1"/>
+                      <XMRef idref="S3.SS8.p1.m3.2"/>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="logarithm" role="OPFUNCTION" rpadding="-1.7pt" xml:id="S3.SS8.p1.m3.1">log</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="true">(</XMTok>
+                        <XMApp xml:id="S3.SS8.p1.m3.2">
+                          <XMTok mathstyle="text" meaning="divide" role="FRACOP"/>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post3"/>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">p</XMTok>
+                            <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                            <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post3"/>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">p</XMTok>
+                              <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="true">)</XMTok>
+                      </XMWrap>
+                    </XMApp>
+                  </XMDual>
+                </XMApp>
+              </XMath>
+            </Math>, all fixed-effect coefficients are estimated on the log-odds scale.</text> Variable levels are described in Sec. <ref labelref="LABEL:sec:exp-design"/>. We also account for any variance explained by <text font="italic">Position</text> and <text font="italic">Graph Literacy</text>.
+<!--  %Below␣is␣the␣model␣described␣in␣R-notation␣\rev{\cite{r-brms}}: 
+     %\begin{equation}
+     %\begin{aligned}
+     %Binary\:␣Correctness␣\sim␣\:␣&amp;␣Visualization␣\times␣Scaling\\
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣350␣****
+     %&amp;␣+␣Visualization␣\times␣SD␣Pair\\
+     %&amp;␣+␣Position␣+␣Graph\:␣Literacy␣+␣(1|ID)
+     %\end{aligned}
+     %\label{eq:model1}
+     %\end{equation}--><text color="#000000"></text></p>
+        <equationgroup labels="LABEL:eq:model1" xml:id="S3.E1">
+          <tags>
+            <tag><text color="#000000">(1)</text></tag>
+            <tag role="autoref"><text color="#000000">Equation 1</text></tag>
+            <tag role="refnum"><text color="#000000">1</text></tag>
+          </tags>
+          <equation xml:id="S3.E1X">
+            <MathFork>
+              <Math tex="\displaystyle Y_{i}\sim\text{Bernoulli}(p_{i})" text="Y _ i similar-to [Bernoulli] * p _ i" xml:id="S3.E1X.m1">
+                <XMath>
+                  <XMApp color="#000000">
+                    <XMTok meaning="similar-to" name="sim" role="RELOP">∼</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                      <XMTok font="italic" role="UNKNOWN">Y</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMText>Bernoulli</XMText>
+                      <XMDual>
+                        <XMRef idref="S3.E1X.m1.1"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp xml:id="S3.E1X.m1.1">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                  </XMApp>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td align="right"><Math tex="\displaystyle Y_{i}" text="Y _ i" xml:id="S3.E1X.m2">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                        <XMTok font="italic" role="UNKNOWN">Y</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+                <td align="left"><Math tex="\displaystyle\sim\text{Bernoulli}(p_{i})" text="absent similar-to [Bernoulli] * p _ i" xml:id="S3.E1X.m3">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok meaning="similar-to" name="sim" role="RELOP">∼</XMTok>
+                        <XMTok meaning="absent"/>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMText>Bernoulli</XMText>
+                          <XMDual>
+                            <XMRef idref="S3.E1X.m3.1"/>
+                            <XMWrap>
+                              <XMTok role="OPEN" stretchy="false">(</XMTok>
+                              <XMApp xml:id="S3.E1X.m3.1">
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                              </XMApp>
+                              <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                            </XMWrap>
+                          </XMDual>
+                        </XMApp>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+          <equation xml:id="S3.E1Xa">
+            <MathFork>
+              <Math tex="\displaystyle\text{logit}(p_{i})=\beta_{0}+\beta_{1}\text{Visualization}_{i}+%&#10;\beta_{2}\text{Scaling}_{i}" text="[logit] * p _ i = beta _ 0 + beta _ 1 * [Visualization] _ i + beta _ 2 * [Scaling] _ i" xml:id="S3.E1Xa.m1">
+                <XMath>
+                  <XMApp color="#000000">
+                    <XMTok meaning="equals" role="RELOP">=</XMTok>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMText>logit</XMText>
+                      <XMDual>
+                        <XMRef idref="S3.E1Xa.m1.1"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp xml:id="S3.E1Xa.m1.1">
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                        <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                        <XMTok fontsize="70%" meaning="0" role="NUMBER">0</XMTok>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                          <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMText>Visualization</XMText>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                          <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMText>Scaling</XMText>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td align="right"><Math tex="\displaystyle\text{logit}(p_{i})" text="[logit] * p _ i" xml:id="S3.E1Xa.m2">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMText>logit</XMText>
+                        <XMDual>
+                          <XMRef idref="S3.E1Xa.m2.1"/>
+                          <XMWrap>
+                            <XMTok role="OPEN" stretchy="false">(</XMTok>
+                            <XMApp xml:id="S3.E1Xa.m2.1">
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                            <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+                <td align="left"><Math tex="\displaystyle=\beta_{0}+\beta_{1}\text{Visualization}_{i}+\beta_{2}\text{%&#10;Scaling}_{i}" text="absent = beta _ 0 + beta _ 1 * [Visualization] _ i + beta _ 2 * [Scaling] _ i" xml:id="S3.E1Xa.m3">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok meaning="equals" role="RELOP">=</XMTok>
+                        <XMTok meaning="absent"/>
+                        <XMApp>
+                          <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                            <XMTok fontsize="70%" meaning="0" role="NUMBER">0</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                              <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMText>Visualization</XMText>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                              <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMText>Scaling</XMText>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+          <equation xml:id="S3.E1Xb">
+            <MathFork>
+              <Math tex="\displaystyle\quad+\beta_{3}(\text{Visualization}_{i}\times\text{Scaling}_{i})%&#10;+\beta_{4}\text{SDPair}_{i}" text="+ beta _ 3 * [Visualization] _ i * [Scaling] _ i + beta _ 4 * [SDPair] _ i" xml:id="S3.E1Xb.m1">
+                <XMath>
+                  <XMApp color="#000000">
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMApp>
+                      <XMTok lpadding="10.0pt" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                          <XMTok fontsize="70%" meaning="3" role="NUMBER">3</XMTok>
+                        </XMApp>
+                        <XMDual>
+                          <XMRef idref="S3.E1Xb.m1.1"/>
+                          <XMWrap>
+                            <XMTok role="OPEN" stretchy="false">(</XMTok>
+                            <XMApp xml:id="S3.E1Xb.m1.1">
+                              <XMTok meaning="times" role="MULOP">×</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                <XMText>Visualization</XMText>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                              </XMApp>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                <XMText>Scaling</XMText>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                        <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                        <XMTok fontsize="70%" meaning="4" role="NUMBER">4</XMTok>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                        <XMText>SDPair</XMText>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td/>
+                <td align="left"><Math tex="\displaystyle\quad+\beta_{3}(\text{Visualization}_{i}\times\text{Scaling}_{i})%&#10;+\beta_{4}\text{SDPair}_{i}" text="+ beta _ 3 * [Visualization] _ i * [Scaling] _ i + beta _ 4 * [SDPair] _ i" xml:id="S3.E1Xb.m2">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMApp>
+                          <XMTok lpadding="10.0pt" meaning="plus" role="ADDOP">+</XMTok>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                              <XMTok fontsize="70%" meaning="3" role="NUMBER">3</XMTok>
+                            </XMApp>
+                            <XMDual>
+                              <XMRef idref="S3.E1Xb.m2.1"/>
+                              <XMWrap>
+                                <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                <XMApp xml:id="S3.E1Xb.m2.1">
+                                  <XMTok meaning="times" role="MULOP">×</XMTok>
+                                  <XMApp>
+                                    <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                    <XMText>Visualization</XMText>
+                                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                  </XMApp>
+                                  <XMApp>
+                                    <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                    <XMText>Scaling</XMText>
+                                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                  </XMApp>
+                                </XMApp>
+                                <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                              </XMWrap>
+                            </XMDual>
+                          </XMApp>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                            <XMTok fontsize="70%" meaning="4" role="NUMBER">4</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMText>SDPair</XMText>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+          <equation xml:id="S3.E1Xc">
+            <MathFork>
+              <Math tex="\displaystyle\quad+\beta_{5}(\text{Visualization}_{i}\times\text{SDPair}_{i})+%&#10;\beta_{6}\text{Position}_{i}" text="+ beta _ 5 * [Visualization] _ i * [SDPair] _ i + beta _ 6 * [Position] _ i" xml:id="S3.E1Xc.m1">
+                <XMath>
+                  <XMApp color="#000000">
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMApp>
+                      <XMTok lpadding="10.0pt" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                          <XMTok fontsize="70%" meaning="5" role="NUMBER">5</XMTok>
+                        </XMApp>
+                        <XMDual>
+                          <XMRef idref="S3.E1Xc.m1.1"/>
+                          <XMWrap>
+                            <XMTok role="OPEN" stretchy="false">(</XMTok>
+                            <XMApp xml:id="S3.E1Xc.m1.1">
+                              <XMTok meaning="times" role="MULOP">×</XMTok>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                <XMText>Visualization</XMText>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                              </XMApp>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                <XMText>SDPair</XMText>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                              </XMApp>
+                            </XMApp>
+                            <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                        <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                        <XMTok fontsize="70%" meaning="6" role="NUMBER">6</XMTok>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                        <XMText>Position</XMText>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td/>
+                <td align="left"><Math tex="\displaystyle\quad+\beta_{5}(\text{Visualization}_{i}\times\text{SDPair}_{i})+%&#10;\beta_{6}\text{Position}_{i}" text="+ beta _ 5 * [Visualization] _ i * [SDPair] _ i + beta _ 6 * [Position] _ i" xml:id="S3.E1Xc.m2">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMApp>
+                          <XMTok lpadding="10.0pt" meaning="plus" role="ADDOP">+</XMTok>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                              <XMTok fontsize="70%" meaning="5" role="NUMBER">5</XMTok>
+                            </XMApp>
+                            <XMDual>
+                              <XMRef idref="S3.E1Xc.m2.1"/>
+                              <XMWrap>
+                                <XMTok role="OPEN" stretchy="false">(</XMTok>
+                                <XMApp xml:id="S3.E1Xc.m2.1">
+                                  <XMTok meaning="times" role="MULOP">×</XMTok>
+                                  <XMApp>
+                                    <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                    <XMText>Visualization</XMText>
+                                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                  </XMApp>
+                                  <XMApp>
+                                    <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                                    <XMText>SDPair</XMText>
+                                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                  </XMApp>
+                                </XMApp>
+                                <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                              </XMWrap>
+                            </XMDual>
+                          </XMApp>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                            <XMTok fontsize="70%" meaning="6" role="NUMBER">6</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                            <XMText>Position</XMText>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+          <equation xml:id="S3.E1Xd">
+            <MathFork>
+              <Math tex="\displaystyle\quad+\beta_{7}\text{GraphLiteracy}_{i}+u_{ID[i]}" text="+ beta _ 7 * [GraphLiteracy] _ i + u _ (I * D * delimited-[]@(i))" xml:id="S3.E1Xd.m1">
+                <XMath>
+                  <XMApp color="#000000">
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMApp>
+                      <XMTok lpadding="10.0pt" meaning="plus" role="ADDOP">+</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                          <XMTok fontsize="70%" meaning="7" role="NUMBER">7</XMTok>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMText>GraphLiteracy</XMText>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                      </XMApp>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                      <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                      <XMApp>
+                        <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">I</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">D</XMTok>
+                        <XMDual>
+                          <XMApp>
+                            <XMTok meaning="delimited-[]"/>
+                            <XMRef idref="S3.E1Xd.m1.1"/>
+                          </XMApp>
+                          <XMWrap>
+                            <XMTok fontsize="70%" role="OPEN" stretchy="false">[</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E1Xd.m1.1">i</XMTok>
+                            <XMTok fontsize="70%" role="CLOSE" stretchy="false">]</XMTok>
+                          </XMWrap>
+                        </XMDual>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td/>
+                <td align="left"><Math tex="\displaystyle\quad+\beta_{7}\text{GraphLiteracy}_{i}+u_{ID[i]}" text="+ beta _ 7 * [GraphLiteracy] _ i + u _ (I * D * delimited-[]@(i))" xml:id="S3.E1Xd.m2">
+                    <XMath>
+                      <XMApp color="#000000">
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMApp>
+                          <XMTok lpadding="10.0pt" meaning="plus" role="ADDOP">+</XMTok>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMTok font="italic" name="beta" role="UNKNOWN">β</XMTok>
+                              <XMTok fontsize="70%" meaning="7" role="NUMBER">7</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                              <XMText>GraphLiteracy</XMText>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                          </XMApp>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post7"/>
+                          <XMTok font="italic" role="UNKNOWN">u</XMTok>
+                          <XMApp>
+                            <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">I</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">D</XMTok>
+                            <XMDual>
+                              <XMApp>
+                                <XMTok meaning="delimited-[]"/>
+                                <XMRef idref="S3.E1Xd.m2.1"/>
+                              </XMApp>
+                              <XMWrap>
+                                <XMTok fontsize="70%" role="OPEN" stretchy="false">[</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN" xml:id="S3.E1Xd.m2.1">i</XMTok>
+                                <XMTok fontsize="70%" role="CLOSE" stretchy="false">]</XMTok>
+                              </XMWrap>
+                            </XMDual>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+        </equationgroup>
+        <p>We also conducted an exploratory analysis of each visualization’s affordances. Two raters qualitatively coded participants’ descriptions of their thought processes when completing the cumulative probability task. We then calculated the intraclass correlation (ICC) for each code, and the raters reconciled any codes that had an ICC 95% confidence interval with a lower bound less than 0.6. <!--  %Qualitative␣coding␣open␣responses␣is␣the␣most␣common␣method␣used␣to␣investigate␣cognitive␣affordances␣in␣visualization~\cite{fygenson-cog-affordance-framework}. --></p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:posteriors" placement="t!" xml:id="S3.F6">
+        <tags>
+          <tag>Figure 6</tag>
+          <tag role="autoref">Figure 6</tag>
+          <tag role="refnum">6</tag>
+          <tag role="typerefnum">Figure 6</tag>
+        </tags>
+        <graphics candidates="figs/fig-posteriors.pdf" class="ltx_centering" graphic="figs/fig-posteriors.pdf" options="width=368.577pt, alt=Visualized posteriors of the numbers in Table 1. The x-axis indicates likelihood of correct comparison, and range from 0 (left) to 100 (right)." xml:id="S3.F6.g1"/>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣375␣**** -->        <toccaption class="ltx_centering"><tag close=" ">6</tag><text color="#000000">Posteriors of Eq. <ref labelref="LABEL:eq:model1"/> show that QDPs are robust to equal-height scaling and perform best across most conditions except the 4.5 v 5 SD comparison, where they perform the worst. Equal-height croissant charts outperform equal-height PDFs. Distributions show posterior predicted probabilities of correct responses, transformed from log-odds for interpretability. Black dots and lines show mean predicted probabilities and 95% credible intervals. </text></toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 6</tag><text color="#000000">Posteriors of Eq. <ref labelref="LABEL:eq:model1"/> show that QDPs are robust to equal-height scaling and perform best across most conditions except the 4.5 v 5 SD comparison, where they perform the worst. Equal-height croissant charts outperform equal-height PDFs. Distributions show posterior predicted probabilities of correct responses, transformed from log-odds for interpretability. Black dots and lines show mean predicted probabilities and 95% credible intervals. </text></caption>
+      </figure>
+    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:results" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Experimental Results</title>
+    <para xml:id="S4.p1">
+      <p>Below, we describe the results from our analysis of binary task correctness, the results from our exploratory analysis of affordances, and the relationship between observed affordance and task correctness. As in our preregistered justification, we recruited 808 participants (<text font="italic">n</text> = 101 for each between-subject group). 438 participants self-reported to not be men, with a mean age of 44.0 years (<text font="italic">SD</text> = 15.4). The mean short graph literacy score was 2.3 of 4 (<text font="italic">SD</text> = 1.1). <text color="#000000">Participants took an average of 11 minutes and 5 seconds (<text font="italic">SD</text> = 7 min, 2 sec) to complete the survey.</text> <!--  %,␣and␣the␣average␣survey␣completion␣time␣and␣compensation␣was␣11␣minutes␣and␣5.4␣seconds␣and␣12.00␣USD␣/hour. -->As preregistered, we computed our model with and without participants who failed the attention check and performed a sensitivity analysis. There were no meaningful differences in the results between the two samples. For a large sample size and more conservative results, we report posteriors of the model that uses <text color="#000000">responses from participants who passed and those who failed the attention check</text>.</p>
+    </para>
+    <subsection inlist="toc" labels="LABEL:sec:hyp-results" xml:id="S4.SS1">
+      <tags>
+        <tag>4.1</tag>
+        <tag role="autoref">subsection 4.1</tag>
+        <tag role="refnum">4.1</tag>
+        <tag role="typerefnum">§4.1</tag>
+      </tags>
+      <title><tag close=" ">4.1</tag>Task Performance: Investigating Hypotheses</title>
+      <para xml:id="S4.SS1.p1">
+        <p>We investigated the amount of variance in correct comparisons based on visualization, scaling, and SD pairs with the binomial model in Eq. <ref labelref="LABEL:eq:model1"/>. As preregistered, we interpret interaction effects with credible intervals that exclude zero as accounting for meaningful variance in task correctness. We use the term “meaningful” instead of “statistically significant” to avoid implying a fixed decision threshold (e.g., <text font="italic">p</text> &lt; .05), as advised by Bayesian best practices <cite class="ltx_citemacro_cite">[<bibref bibrefs="kruschke2021bayesianreporting" separator="," yyseparator=","/>]</cite>. We ran our model with each combination of possible referents.
+All analyses are available in Supplemental Materials.</p>
+      </para>
+      <para xml:id="S4.SS1.p2">
+        <p>To examine H1, if equal-height <text color="#B5A50E" font="bold">PDFs</text> lead to meaningfully fewer correct comparisons than equal-area <text color="#B5A50E" font="bold">PDFs</text>, we can look to <text font="italic">Scaling</text>’s main effect when <text font="italic">Visualization</text>’s referent is the <text color="#B5A50E" font="bold">PDF</text> condition (row 1 in Table <ref labelref="LABEL:tab:model1"/>). <text font="italic">Scaling</text>’s credible interval does not include zero, indicating that scaling has a meaningful effect on <text color="#B5A50E" font="bold">PDF</text> task performance. By visually examining the posteriors from this model (Fig. <ref labelref="LABEL:fig:posteriors"/>), the results show that equal-height <text color="#B5A50E" font="bold">PDFs</text> (colored yellow in rows with gray backgrounds) result in fewer correct answers than equal-area <text color="#B5A50E" font="bold">PDFs</text> (yellow in rows with white backgrounds) across all SD Pairs. Thus, we accept H1, and present evidence for the reproducibility of results from Fygenson and Padilla <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+      <para xml:id="S4.SS1.p3">
+        <p>To examine H2a-d, how equal-height visualizations that afford counting impact task correctness in comparison to equal-height <text color="#B5A50E" font="bold">PDFs</text>, we can refer to rows 5-16 in Table <ref labelref="LABEL:tab:model1"/>. These rows show the main effects of <text font="italic">Visualization</text> when the model is run with <text color="#B5A50E" font="bold">PDF</text> as the referent. Equal-height <text color="#026494" font="bold">Croissant-20s</text> resulted in meaningfully improved task correctness in comparison to equal-height <text color="#B5A50E" font="bold">PDFs</text> across all SD pairs (rows 9-12), leading us to accept H2b. Equal-height <text color="#D1485B" font="bold">QDPs</text> meaningfully improved task correctness compared to equal-height <text color="#B5A50E" font="bold">PDFs</text> across all SD pairs (rows 5–7), except for the 4.5 vs. 5 pair, where <text color="#D1485B" font="bold">QDP</text> performance was meaningfully worse, as indicated by the sign change in the last three columns of row 8. These findings support the acceptance of H2c, contingent on the considerations outlined in H3. Equal-height <text color="#6B97A6" font="bold">Croissant-10s</text> resulted in meaningfully improved task correctness only over equal-height <text color="#B5A50E" font="bold">PDFs</text> for SD pairs 2 vs. 5 and 4.5 vs. 5 (rows 13 and 16), leading us to partially accept hypothesis H2a. These results are also evident in Figure <ref labelref="LABEL:fig:posteriors"/>’s gray-background rows, which show <text color="#B5A50E" font="bold">PDFs</text> consistently trailing behind both <text color="#026494" font="bold">Croissant-20s</text> and <text color="#D1485B" font="bold">QDPs</text>. <!--  %Notably,␣in␣the␣bottom␣row,␣\qdp{QDPs}␣exhibit␣the␣lowest␣accuracy,␣meaningfully␣lower␣than␣both␣\pdf{PDFs}␣and␣croissants. --></p>
+      </para>
+      <para xml:id="S4.SS1.p4">
+        <p>To directly investigate H2d–whether <text color="#D1485B" font="bold">QDPs</text>, <text color="#026494" font="bold">Croissant-20s</text>, and <text color="#6B97A6" font="bold">Croissant-10s</text> reduce performance differences between equal-area and equal-height scaling more effectively than <text color="#B5A50E" font="bold">PDFs</text>–we can examine the interaction effects of <text font="italic">Visualization</text> and <text font="italic">Scaling</text> in rows 17-19 of Table <ref labelref="LABEL:tab:model1"/>. The results indicate that <text color="#D1485B" font="bold">QDPs</text> meaningfully decrease the expected drop in performance associated with scaling from equal-area to equal-height in comparison to <text color="#B5A50E" font="bold">PDFs</text> (row 17). However, <text color="#6B97A6" font="bold">Croissant-10s</text> and <text color="#026494" font="bold">Croissant-20s</text> show no meaningful difference in their interactions with <text color="#B5A50E" font="bold">PDFs</text> (rows 18-19). We do not find evidence to support the hypothesis that <text color="#6B97A6" font="bold">Croissant-10s</text> and <text color="#026494" font="bold">-20s</text> can mitigate the performance drop associated with equal-height <text color="#B5A50E" font="bold">PDFs</text>, and thus only partially accept H2d. <!--  %Still,␣equal-height␣\cten{Croissant-10s}␣and␣\ctw{-20s}␣meaningfully␣improve␣task␣performance␣in␣comparison␣to␣equal-height␣\pdf{PDFs}␣(rows␣9-16).␣This␣improvement␣is␣evident␣in␣Figure~\ref{fig:posteriors},␣where␣the␣gray␣rows␣show␣that␣\cten{Croissant-10s}␣and␣\ctw{Croissant-20s}␣consistently␣outperform␣\pdf{PDFs}. --></p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:cut-off-dist" placement="b" xml:id="S4.F7">
+        <tags>
+          <tag>Figure 7</tag>
+          <tag role="autoref">Figure 7</tag>
+          <tag role="refnum">7</tag>
+          <tag role="typerefnum">Figure 7</tag>
+        </tags>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣400␣**** -->        <graphics candidates="figs/interedge-interpolation.pdf" class="ltx_centering" graphic="figs/interedge-interpolation.pdf" options="width=346.896pt, alt=Equal height Croissant-10s encourage readers to interpret partial areas when the threshold t falls inside a quantile, as opposed to cleanly between two quantiles. Equal height QDPs do not encourage the interpretation of partial areas when they threshold t falls between two columns of dots, which can lead to incorrect distribution comparisons." xml:id="S4.F7.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">7</tag><text color="#000000">Equal-height Croissant-10s and QDPs with an SD of 4.5 (tops) and an SD of 5 (bottoms).</text> Results show that Croissant-10s afford inter-edge interpolation much more than QDPs.</toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 7</tag><text color="#000000">Equal-height Croissant-10s and QDPs with an SD of 4.5 (tops) and an SD of 5 (bottoms).</text> Results show that Croissant-10s afford inter-edge interpolation much more than QDPs.</caption>
+      </figure>
+      <para xml:id="S4.SS1.p5">
+        <p>Lastly, to assess whether <text color="#D1485B" font="bold">QDPs</text> exhibit different task performance when comparing the 4.5 vs. 5 SD pair relative to other SD pairs, and if this performance differs from other visualizations<!--  %under␣the␣same␣SD␣pair␣comparisons -->, we analyze the interaction between <text font="italic">SD Pair</text> and <text font="italic">Visualization</text>. Specifically, we examine meaningful differences when running the model with a <text font="italic">Visualization</text> referent of <text color="#D1485B" font="bold">QDP</text> and <text font="italic">SD Pair</text> referent of 4.5 vs. 5. Rows 20-28 in Table <ref labelref="LABEL:tab:model1"/> show relevant model outputs and are all meaningfully different. A meaningful difference in QDP task performance across SD pairs is further supported by the last two rows of Figure <ref labelref="LABEL:fig:posteriors"/>, where <text color="#D1485B" font="bold">QDPs</text> perform markedly worse than other charts. This drop in performance is notable because <text color="#D1485B" font="bold">QDPs</text> perform the best in all other conditions. These findings lead us to accept (H3) that <text color="#D1485B" font="bold">QDPs</text>’ relationship between task performance for 4.5 v 5 SD and any other SD pair is different from <text color="#B5A50E" font="bold">PDFs</text>’, <text color="#026494" font="bold">Croissant-20s</text>’, and <text color="#6B97A6" font="bold">Croissant-10s</text>’. <!--  %More␣colloquially,␣this␣finding␣shows␣that␣QDPs␣lead␣to␣worse␣performance␣when␣used␣to␣compare␣distributions␣with␣4.5␣and␣5␣SDs␣than␣their␣performance␣when␣used␣to␣compare␣distributions␣with␣other␣SDs,␣and␣this␣decrease␣in␣performance␣is␣meaningfully␣worse␣than␣the␣decrease␣in␣performance␣that␣other␣tested␣visualizations␣experience. -->To further analyze QDPs’ performance <!--  %relative␣to␣the␣other␣visualizations -->in the 4.5 v 5 <text font="italic">SD Pair</text> condition, we examine the main effect of <text font="italic">Visualization</text> when the model’s referents are set to <text color="#D1485B" font="bold">QDP</text>, 4.5 vs. 5 SD, and first Equal Height, then Equal Area. Rows 32-37 in Table <ref labelref="LABEL:tab:model1"/> show that <text color="#D1485B" font="bold">QDPs</text> perform meaningfully worse than <text color="#B5A50E" font="bold">PDFs</text>, <text color="#026494" font="bold">Croissant-20s</text>, and <text color="#6B97A6" font="bold">Croissant-10s</text> when comparing a distribution with SD of 4.5 to a distribution with SD of 5, regardless of scaling.</p>
+      </para>
+      <para xml:id="S4.SS1.p6">
+        <p>In summary, our analysis reveals that equal-height <text color="#B5A50E" font="bold">PDFs</text> lead to a lower likelihood of task correctness than equal-area <text color="#B5A50E" font="bold">PDFs</text>, equal-height <text color="#026494" font="bold">Croissant-20s</text> improved chances of correctness over equal-height <text color="#B5A50E" font="bold">PDFs</text>, although not as well as equal-height <text color="#D1485B" font="bold">QDPs</text>. <text color="#D1485B" font="bold">QDPs</text> were especially robust to scaling, and frequently outperformed other visualizations. However, <text color="#D1485B" font="bold">QDPs</text> led to meaningfully lower chances of correctly comparing distributions with SDs of 4.5 and 5, than all other visualizations. These findings highlight the benefits of <text color="#026494" font="bold">Croissant-20s</text> and <text color="#D1485B" font="bold">QDPs</text> over <text color="#B5A50E" font="bold">PDFs</text>, while also demonstrating a specific weakness of low-quantile <text color="#D1485B" font="bold">QDPs</text>.</p>
+      </para>
+      <table inlist="lot" labels="LABEL:tab:model1" placement="h!" xml:id="S4.T1">
+        <tags>
+          <tag>Table 1</tag>
+          <tag role="autoref">Table 1</tag>
+          <tag role="refnum">1</tag>
+          <tag role="typerefnum">Table 1</tag>
+        </tags>
+        <toccaption><tag close=" ">1</tag><text color="#000000">Rows report posterior log-odds from Eq. <ref labelref="LABEL:eq:model1"/> contrasted between experimental conditions with 95% Bayesian credible intervals. Darker cell backgrounds indicate stronger effects. l-CI and u-CI denote lower and upper bounds of credible intervals, respectively. Cr-20 = Croissant-20; Cr-10 = Croissant-10. Odds ratios are obtained by exponentiating the reported log-odds estimates.</text>
+</toccaption>
+        <caption><tag close=": ">Table 1</tag><text color="#000000">Rows report posterior log-odds from Eq. <ref labelref="LABEL:eq:model1"/> contrasted between experimental conditions with 95% Bayesian credible intervals. Darker cell backgrounds indicate stronger effects. l-CI and u-CI denote lower and upper bounds of credible intervals, respectively. Cr-20 = Croissant-20; Cr-10 = Croissant-10. Odds ratios are obtained by exponentiating the reported log-odds estimates.</text>
+</caption>
+        <block depth="0.0pt" width="433.6pt">
+          <tabular vattach="middle">
+            <tbody>
+              <tr>
+                <td align="center" border="r tt" colspan="4"><text fontsize="80%">Referent Conditions</text></td>
+                <td align="left" border="tt"><text fontsize="80%">Comparison</text></td>
+                <td align="center" border="tt"><text fontsize="80%">Est</text><text color="#000000" fontsize="80%">imate</text><text fontsize="80%"></text></td>
+                <td align="center" border="tt"><text font="bold" fontsize="80%">l-CI</text><text fontsize="80%"></text></td>
+                <td align="center" border="tt"><text font="bold" fontsize="80%">u-CI</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">Row</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text font="bold" fontsize="80%">Vis</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text font="bold" fontsize="80%">SD Pair</text><text fontsize="80%"></text></td>
+                <td align="center" border="r t"><text font="bold" fontsize="80%">Scaling</text></td>
+                <td border="t"><text fontsize="80%"></text></td>
+                <td border="t"><text fontsize="80%"></text></td>
+                <td border="t"><text fontsize="80%"></text></td>
+                <td border="t"/>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">1</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text fontsize="80%">PDF</text></td>
+                <td align="center" border="t"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r t"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left" border="t"><text fontsize="80%">Eq. Area</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">1.26</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">0.78</text></td>
+                <td align="center" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">1.75</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">2</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Eq. Area</text></td>
+                <td align="center"><text fontsize="80%">0.11</text></td>
+                <td align="center"><text fontsize="80%">-0.37</text></td>
+                <td align="center"><text fontsize="80%">0.61</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">3</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">Cr-20</text></td>
+                <td align="center"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Eq. Area</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.86</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.38</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.34</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">4</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">Cr-10</text></td>
+                <td align="center"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Eq. Area</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.82</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.35</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.30</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">5</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text fontsize="80%">PDF</text></td>
+                <td align="center" border="t"><text fontsize="80%">2 v 5</text></td>
+                <td align="center" border="r t"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left" border="t"><text fontsize="80%">QDP</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">1.80</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">1.24</text></td>
+                <td align="center" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">2.37</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">6</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">3 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">QDP</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">2.29</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">1.71</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">2.88</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">7</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">4 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">QDP</text></td>
+                <td align="center" backgroundcolor="#DBE7F6"><text backgroundcolor="#DBE7F6" fontsize="80%">1.45</text></td>
+                <td align="center" backgroundcolor="#DBE7F6"><text backgroundcolor="#DBE7F6" fontsize="80%">0.88</text></td>
+                <td align="center"><text backgroundcolor="#DBE7F6" fontsize="80%">2.02</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">8</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">QDP</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">-0.99</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">-1.65</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">-0.34</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">9</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">2 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-20</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.88</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.32</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.45</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">10</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">3 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-20</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.71</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.15</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.28</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">11</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">4 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-20</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.77</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.21</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.33</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">12</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-20</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.90</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.32</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.49</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">13</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">2 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-10</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.69</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.13</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.25</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">14</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">3 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-10</text></td>
+                <td align="center"><text fontsize="80%">0.49</text></td>
+                <td align="center"><text fontsize="80%">-0.06</text></td>
+                <td align="center"><text fontsize="80%">1.05</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">15</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">4 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-10</text></td>
+                <td align="center"><text fontsize="80%">0.34</text></td>
+                <td align="center"><text fontsize="80%">-0.22</text></td>
+                <td align="center"><text fontsize="80%">0.89</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">16</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-10</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.60</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.02</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.19</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">17</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text fontsize="80%">PDF</text></td>
+                <td align="center" border="t"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r t"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left" border="t"><text fontsize="80%">QDP x Eq. Area</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">-1.14</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">-1.83</text></td>
+                <td align="center" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">-0.46</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">18</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-20 x Eq. Area</text></td>
+                <td align="center"><text fontsize="80%">-0.40</text></td>
+                <td align="center"><text fontsize="80%">-1.09</text></td>
+                <td align="center"><text fontsize="80%">0.27</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">19</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">PDF</text></td>
+                <td align="center"><text fontsize="80%">N/A</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-10 x Eq. Area</text></td>
+                <td align="center"><text fontsize="80%">-0.40</text></td>
+                <td align="center"><text fontsize="80%">-1.08</text></td>
+                <td align="center"><text fontsize="80%">0.27</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">20</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text fontsize="80%">QDP</text></td>
+                <td align="center" border="t"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r t"><text fontsize="80%">N/A</text></td>
+                <td align="left" border="t"><text fontsize="80%">PDF x 2 v 5</text></td>
+                <td align="center" backgroundcolor="#C4DAF1" border="t"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.61</text></td>
+                <td align="center" backgroundcolor="#C4DAF1" border="t"><text backgroundcolor="#C4DAF1" fontsize="80%">-3.17</text></td>
+                <td align="center" border="t"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.05</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">21</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">PDF x 3 v 5</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">-3.08</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">-3.66</text></td>
+                <td align="center"><text backgroundcolor="#A5C8EA" fontsize="80%">-2.49</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">22</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">PDF x 4 v 5</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.24</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.80</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">-1.69</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">23</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">Cr-20 x 2 v 5</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.58</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-3.14</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.04</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">24</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">Cr-20 x 3 v 5</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">-3.24</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">-3.82</text></td>
+                <td align="center"><text backgroundcolor="#A5C8EA" fontsize="80%">-2.66</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">25</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">Cr-20 x 4 v 5</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.35</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.89</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">-1.79</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">26</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">Cr-10 x 2 v 5</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.47</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-3.03</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">-1.92</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">27</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">Cr-10 x 3 v 5</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">-3.15</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">-3.74</text></td>
+                <td align="center"><text backgroundcolor="#A5C8EA" fontsize="80%">-2.58</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">28</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">Cr-10 x 4 v 5</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-2.48</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">-3.02</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">-1.94</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">29</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text fontsize="80%">QDP</text></td>
+                <td align="center" border="t"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r t"><text fontsize="80%">N/A</text></td>
+                <td align="left" border="t"><text fontsize="80%">2 v 5</text></td>
+                <td align="center" backgroundcolor="#A5C8EA" border="t"><text backgroundcolor="#A5C8EA" fontsize="80%">3.86</text></td>
+                <td align="center" backgroundcolor="#A5C8EA" border="t"><text backgroundcolor="#A5C8EA" fontsize="80%">3.43</text></td>
+                <td align="center" border="t"><text backgroundcolor="#A5C8EA" fontsize="80%">4.31</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">30</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">3 v 5</text></td>
+                <td align="center" backgroundcolor="#7BAFDB"><text backgroundcolor="#7BAFDB" fontsize="80%">4.73</text></td>
+                <td align="center" backgroundcolor="#7BAFDB"><text backgroundcolor="#7BAFDB" fontsize="80%">4.27</text></td>
+                <td align="center"><text backgroundcolor="#7BAFDB" fontsize="80%">5.21</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">31</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">N/A</text></td>
+                <td align="left"><text fontsize="80%">4 v 5</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">3.43</text></td>
+                <td align="center" backgroundcolor="#A5C8EA"><text backgroundcolor="#A5C8EA" fontsize="80%">3.02</text></td>
+                <td align="center"><text backgroundcolor="#A5C8EA" fontsize="80%">3.87</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="t"><text font="italic" fontsize="80%">32</text><text fontsize="80%"></text></td>
+                <td align="center" border="t"><text fontsize="80%">QDP</text></td>
+                <td align="center" border="t"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r t"><text fontsize="80%">Eq. Area</text></td>
+                <td align="left" border="t"><text fontsize="80%">PDF</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">1.92</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">1.32</text></td>
+                <td align="center" border="t"><text backgroundcolor="#DBE7F6" fontsize="80%">2.53</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">33</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Area</text></td>
+                <td align="left"><text fontsize="80%">Cr-20</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">2.39</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">1.79</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">3.00</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">34</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Area</text></td>
+                <td align="left"><text fontsize="80%">Cr-10</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">2.07</text></td>
+                <td align="center" backgroundcolor="#C4DAF1"><text backgroundcolor="#C4DAF1" fontsize="80%">1.47</text></td>
+                <td align="center"><text backgroundcolor="#C4DAF1" fontsize="80%">2.68</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">35</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">PDF</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.78</text></td>
+                <td align="center" backgroundcolor="#EDF3FB"><text backgroundcolor="#EDF3FB" fontsize="80%">0.15</text></td>
+                <td align="center"><text backgroundcolor="#EDF3FB" fontsize="80%">1.40</text></td>
+              </tr>
+              <tr>
+                <td align="left"><text font="italic" fontsize="80%">36</text><text fontsize="80%"></text></td>
+                <td align="center"><text fontsize="80%">QDP</text></td>
+                <td align="center"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left"><text fontsize="80%">Cr-20</text></td>
+                <td align="center" backgroundcolor="#DBE7F6"><text backgroundcolor="#DBE7F6" fontsize="80%">1.69</text></td>
+                <td align="center" backgroundcolor="#DBE7F6"><text backgroundcolor="#DBE7F6" fontsize="80%">1.09</text></td>
+                <td align="center"><text backgroundcolor="#DBE7F6" fontsize="80%">2.31</text></td>
+              </tr>
+              <tr>
+                <td align="left" border="bb"><text font="italic" fontsize="80%">37</text><text fontsize="80%"></text></td>
+                <td align="center" border="bb"><text fontsize="80%">QDP</text></td>
+                <td align="center" border="bb"><text fontsize="80%">4.5 v 5</text></td>
+                <td align="center" border="bb r"><text fontsize="80%">Eq. Height</text></td>
+                <td align="left" border="bb"><text fontsize="80%">Cr-10</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="bb"><text backgroundcolor="#DBE7F6" fontsize="80%">1.39</text></td>
+                <td align="center" backgroundcolor="#DBE7F6" border="bb"><text backgroundcolor="#DBE7F6" fontsize="80%">0.78</text></td>
+                <td align="center" border="bb"><text backgroundcolor="#DBE7F6" fontsize="80%">2.00</text></td>
+              </tr>
+            </tbody>
+          </tabular>
+        </block>
+      </table>
+<!--  %\subsubsection{Visual␣Analysis␣of␣Posteriors} 
+     %\label{sec:visual-results}
+     %In␣the␣above␣subsection,␣we␣investigated␣all␣of␣our␣pre-registered␣hypotheses␣and␣walked␣through␣a␣breakdown␣of␣the␣numeric␣outputs␣associated␣with␣our␣model’s␣posteriors␣to␣determine␣if␣meaningful␣differences␣in␣performance␣exist.␣In␣this␣section,␣we␣walk␣through␣a␣visual␣analysis␣of␣the␣posteriors,␣pointing␣out␣major␣patterns␣that␣we␣observe.␣For␣every␣pattern␣we␣discuss,␣we␣refer␣back␣to␣Table~\ref{tab:model1}␣to␣include␣information␣on␣the␣existence,␣or␣lack␣thereof,␣of␣meaningful␣differences.
+     %The␣first␣major␣pattern␣that␣we␣recognize␣in␣Figure~\ref{fig:posteriors}␣is␣that␣QDPs␣appear␣to␣be␣very␣robust␣to␣equal␣height␣scaling;␣the␣top␣(equal␣area)␣and␣bottom␣(equal␣height)␣purple␣QDP␣posteriors␣have␣similar␣curve␣shapes␣and␣x-axis␣placements␣within␣each␣SD␣Pair␣condition.␣We␣also␣notice␣this␣pattern␣is␣not␣recognizable␣across␣the␣other␣visualizations’␣posteriors.␣In␣Section~\ref{sec:hyp-results}␣we␣discovered␣that␣PDFs␣show␣a␣meaningful␣decrease␣in␣performance␣when␣scaled␣from␣equal␣areas␣to␣equal␣heights.␣Rows␣2␣and␣3␣in␣Table~\ref{tab:model1}␣demonstrate␣that␣Croissant-10s␣and␣-20s␣also␣result␣in␣a␣meaningful␣decrease␣when␣equally␣scaled,␣whereas␣QDPs␣do␣not␣exhibit␣such␣a␣decrease␣(row␣4).
+     %Secondly,␣we␣observe␣QDPs␣performing␣to␣the␣extremes␣for␣each␣SD␣Pair.␣For␣most␣SD␣Pairs␣QDPs␣result␣in␣the␣highest␣accuracy␣of␣all␣tested␣visualizations,␣and␣when␣used␣to␣compare␣cumulative␣probabilities␣of␣distributions␣with␣4.5␣and␣5␣SDs,␣QDPs␣result␣in␣the␣lowest,␣nearly␣zero␣likelihood␣of␣task␣correctness.␣While␣this␣patten␣is␣visually␣obvious,␣we␣can␣confirm␣that␣performance␣across␣SD␣Pairs␣is␣meaningfully␣different␣for␣QDPs␣4.5␣v␣5␣and␣all␣other␣SD␣Pairs␣by␣examining␣the␣effects␣in␣rows␣29-31␣of␣Table~\ref{tab:model1}.␣This␣finding␣is␣conducive␣with␣our␣affordance-based␣reasoning␣about␣QDPs␣in␣Section~\ref{sec:aff-analysis},␣and␣we␣discuss␣it␣further,␣along␣with␣other␣correlations␣between␣affordance␣and␣performance,␣in␣Section~\ref{sec:task-aff-correlation}.
+     %Lastly,␣we␣observe␣that␣although␣Croissant-20s␣and␣-10s␣do␣not␣increase␣task␣performance␣to␣the␣extent␣that␣QDPs␣do␣in␣most␣SD␣Pair␣conditions,␣croissant␣charts␣consistently␣visually␣outperfom␣PDFs,␣especially␣in␣the␣equal␣height␣condition.␣In␣Section~\ref{sec:hyp-results}␣we␣confirm␣that␣this␣improvement␣over␣PDF␣performance␣is␣meaningful␣for␣equal␣height␣Croissant-20s␣across␣all␣SD␣Pairs,␣and␣meaningful␣for␣equal␣height␣Croissant-10s␣across␣two␣of␣the␣four␣SD␣Pair␣conditions.␣%Although␣other␣performance␣improvements␣may␣not␣be␣statistically␣meaningful,␣they␣are␣consistently␣visually␣apparent.-->    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:aff-results" xml:id="S4.SS2">
+      <tags>
+        <tag>4.2</tag>
+        <tag role="autoref">subsection 4.2</tag>
+        <tag role="refnum">4.2</tag>
+        <tag role="typerefnum">§4.2</tag>
+      </tags>
+      <title><tag close=" ">4.2</tag>Affordances Described in Open-Ended Responses</title>
+      <para xml:id="S4.SS2.p1">
+        <p>Two raters qualitatively coded strategies from participants’ open-ended responses. The raters also identified responses likely AI-generated when they referenced elements not present in the stimuli (e.g., labels, y-axes). Of the 808 responses, <text color="#000000">21 were identified by both and excluded from coding. We include the codes of all other responses for a more conservative analysis. All qualitative coding data and analyses are available in the Supplemental Materials.</text></p>
+      </para>
+      <para xml:id="S4.SS2.p2">
+        <p>The <text color="#000000">review of open-ended responses</text> identified six strategies (mean ICC = 0.84, SD = 0.08): counting, height comparison, area comparison, spread comparison, judgment of how far into a visual mark a threshold occurred (i.e., “inter-edge interpolation”, Fig. <ref labelref="LABEL:fig:cut-off-dist"/>), and comparison of only marks directly above the threshold (i.e., “directly over tick”). We show the percentage of participants who mentioned each strategy by <text font="italic">Visualization</text> condition in Figure <ref labelref="LABEL:fig:aff-counts"/>.</p>
+      </para>
+      <para xml:id="S4.SS2.p3">
+        <p>The results indicate that <text color="#D1485B" font="bold">QDPs</text> afforded counting (68% of participants) more than any other visualization. This
+affordance aligns with initial pilot data and <text color="#D1485B" font="bold">QDPs</text>’ frequency-framing motivation <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps" separator="," yyseparator=","/>]</cite>. <text color="#6B97A6" font="bold">Croissant-10s</text> (23%) and <text color="#026494" font="bold">-20s</text> (33%) resulted in roughly <text color="#000000">one-third to one-fourth</text> the number of counting strategies as <text color="#D1485B" font="bold">QDPs</text>, indicating a present, but weaker affordance. <text color="#026494" font="bold">C<text color="#6B97A6">r<text color="#026494">o<text color="#6B97A6">i<text color="#026494">s<text color="#6B97A6">s<text color="#026494">a<text color="#6B97A6">n<text color="#026494">t</text></text></text></text></text></text></text></text></text> <text color="#6B97A6" font="bold">c<text color="#026494">h<text color="#6B97A6">a<text color="#026494">r<text color="#6B97A6">t<text color="#026494">s</text></text></text></text></text></text>’ counting affordance was exhibited in responses, such as “… I looked at the number of 5% ‘blocks’ [that] were on one side on both charts.” <!--  %and␣‘‘I␣looked␣for␣the␣one␣that␣had␣the␣smallest␣amount␣to␣the␣right␣on␣the␣number␣mentioned␣and␣them␣[sic]␣chose␣the␣other␣as␣having␣a␣higher␣probablility[sic].’’ 
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣500␣****-->We did not observe any evidence that <text color="#B5A50E" font="bold">PDFs</text> afforded counting.
+Figure <ref labelref="LABEL:fig:aff-counts"/> also shows that there was very little evidence that <text color="#D1485B" font="bold">QDPs</text> afforded multiple strategies, in contrast to the other three visualizations.
+<!--  %Our␣qualitative␣analysis␣highlights␣the␣strong␣affordance␣of␣QDPs␣for␣counting␣strategies,␣reinforcing␣their␣intended␣frequency-framing␣motivation.␣Additionally,␣QDPs␣showed␣minimal␣evidence␣of␣alternative␣strategies,␣whereas␣croissant␣charts␣supported␣a␣more␣diverse␣range␣of␣approaches,␣including␣height␣and␣area␣comparisons,␣distribution␣width␣assessments,␣and␣threshold-based␣judgments. -->This pattern indicates that <text color="#026494" font="bold">c<text color="#6B97A6">r<text color="#026494">o<text color="#6B97A6">i<text color="#026494">s<text color="#6B97A6">s<text color="#026494">a<text color="#6B97A6">n<text color="#026494">t</text></text></text></text></text></text></text></text></text> <text color="#6B97A6" font="bold">c<text color="#026494">h<text color="#6B97A6">a<text color="#026494">r<text color="#6B97A6">t<text color="#026494">s</text></text></text></text></text></text> and <text color="#B5A50E" font="bold">PDFs</text> result in greater flexibility in strategy use than <text color="#D1485B" font="bold">QDPs</text>.<!--  %In␣the␣following␣subsection,␣we␣discuss␣the␣relationship␣between␣our␣affordance␣and␣task␣performance␣findings. --></p>
+      </para>
+      <figure inlist="lof" labels="LABEL:fig:aff-counts" placement="b!" xml:id="S4.F8">
+        <tags>
+          <tag>Figure 8</tag>
+          <tag role="autoref">Figure 8</tag>
+          <tag role="refnum">8</tag>
+          <tag role="typerefnum">Figure 8</tag>
+        </tags>
+        <graphics candidates="figs/qual-heatmap-yb.pdf" class="ltx_centering" graphic="figs/qual-heatmap-yb.pdf" options="width=390.258pt, alt=An annotated heat map shows the percent of participants that saw each of the visualization conditions (QDP, PDF, Croissant-20, and Croissant-10) and reported using different strategies when comparing distributions (counting, comparing height, area, spread, inter-edge interpolation, and whether the visual objects were directly over a a tick mark). QDPs show a high concentration (68%) of participants reporting a counting strategy, whereas PDFs show no counting strategies, and both croissants led to  20 to 30% of participants reporting counting. Additionally, 10% of croissant-10 participants reported using inter-edge interpolation, whereas only 0 to 1% of other conditions’ participants reported the same. PDFs and both croissants show a range of strategies reported, whereas QDPs show only one strategy (counting) reported by 68% of participants and other strategies reported by between 1 and 4% of participants. The last column (1 to 4%) shows percentage of participant responses we believe to be AI-written, across visualization condition." xml:id="S4.F8.g1"/>
+        <toccaption class="ltx_centering"><tag close=" ">8</tag>Percent of each visualization that led to each strategy (columns) across tested visualizations (rows). <text color="#000000">Strategies are not mutually exclusive so rows and columns may not equal 100%.</text></toccaption>
+        <caption class="ltx_centering"><tag close=": ">Figure 8</tag>Percent of each visualization that led to each strategy (columns) across tested visualizations (rows). <text color="#000000">Strategies are not mutually exclusive so rows and columns may not equal 100%.</text></caption>
+      </figure>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:task-aff-correlation" xml:id="S4.SS3">
+      <tags>
+        <tag>4.3</tag>
+        <tag role="autoref">subsection 4.3</tag>
+        <tag role="refnum">4.3</tag>
+        <tag role="typerefnum">§4.3</tag>
+      </tags>
+      <title><tag close=" ">4.3</tag>Task Performance and Observed Affordances</title>
+      <para xml:id="S4.SS3.p1">
+        <p>The results in Figure <ref labelref="LABEL:fig:aff-counts"/> show that <text color="#D1485B" font="bold">QDPs</text> strongly afforded counting strategies,
+<text color="#026494" font="bold">Croissant-20s</text> and <text color="#6B97A6" font="bold">-10s</text> weakly afforded counting, and <text color="#B5A50E" font="bold">PDFs</text> did not afford counting at all. When looking at the posteriors of Equation <ref labelref="LABEL:eq:model1"/> in Figure <ref labelref="LABEL:fig:posteriors"/>, we can see that the difference in the strength of visualizations’ counting affordances corresponds with their likelihood of leading to correct cumulative probability comparisons between three of the four equal-height conditions we tested. These conditions are 2 vs. 5, 3 vs. 5, and 4 vs. 5 SD pairs, and their relative performance is remarkably consistent across equal-height conditions, which indicates that affording counting strategies could improve cumulative comparisons. <!--  %We␣can␣even␣see␣that␣Croissant-20s,␣which␣have␣a␣slightly␣stronger␣affordance␣of␣counting␣than␣Croissant-10s,␣lead␣to␣slight␣increases␣in␣the␣likelihood␣of␣correct␣comparisons.␣These␣correlating␣patterns␣in␣our␣experimental␣results␣present␣evidence␣that␣visualization␣affordances␣may␣be␣associated␣with␣correct␣task␣completion. --></p>
+      </para>
+      <para xml:id="S4.SS3.p2">
+        <p>Additionally, our quantitative results show that <text color="#D1485B" font="bold">QDPs</text> lead to the lowest likelihood of correct comparisons of distributions with SDs of 4.5 and 5. At the same time, our results exhibit that <text color="#D1485B" font="bold">QDPs</text> lack diversity in their afforded <text color="#000000">mental actions</text>. <text color="#B5A50E" font="bold">PDFs</text>, <text color="#026494" font="bold">Croissant-20s</text> and <text color="#6B97A6" font="bold">-10s</text>, on the other hand, afford a variety of strategies. For the 4.5 vs. 5 SD Pair condition, our experimental findings illustrate that visualizations that afford noncounting strategies lead to a higher chance of correct comparisons.</p>
+      </para>
+      <para xml:id="S4.SS3.p3">
+        <p>Lastly, equal-height <text color="#B5A50E" font="bold">PDFs</text> perform meaningfully worse than equal-area <text color="#B5A50E" font="bold">PDFs</text> across all SD Pair conditions, and <text color="#B5A50E" font="bold">PDFs</text>’ most popular strategy is height comparison. To reason about this decrease, we can refer to the difference in height comparisons’ efficacy across equal-area and equal-height <text color="#B5A50E" font="bold">PDFs</text>.
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣525␣**** -->Although comparing the peak height of two equal-area <text color="#B5A50E" font="bold">PDFs</text> leads to consistently correct judgments of our tested task, peak height comparison between equal-height <text color="#B5A50E" font="bold">PDFs</text> does not (Fig. <ref labelref="LABEL:fig:pdf-aff"/>, row a).</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:discussion" xml:id="S5">
+    <tags>
+      <tag>5</tag>
+      <tag role="autoref">section 5</tag>
+      <tag role="refnum">5</tag>
+      <tag role="typerefnum">§5</tag>
+    </tags>
+    <title><tag close=" ">5</tag>Discussion and Limitations</title>
+    <para xml:id="S5.p1">
+      <p>We present an affordance-motivated analysis of PDFs, followed by empirical evidence of the performance and affordances of area-encoded probability distribution visualizations. We do so through a case study of PDFs, which restricts the scope of our findings in the interest of examining the relationship between performance and affordance. Below, we detail the concrete contributions of this work, posit potential extrapolations of our findings, and discuss the limitations of our scoping and methodology, before describing future avenues of affordance research in visualization.</p>
+    </para>
+    <subsection inlist="toc" xml:id="S5.SS1">
+      <tags>
+        <tag>5.1</tag>
+        <tag role="autoref">subsection 5.1</tag>
+        <tag role="refnum">5.1</tag>
+        <tag role="typerefnum">§5.1</tag>
+      </tags>
+      <title><tag close=" ">5.1</tag>Contributions to Affordance Research in Visualizations</title>
+      <para xml:id="S5.SS1.p1">
+        <p>We analyze the relationship between performance and affordance evidence from our study to offer insights about the drivers behind previously documented comparison errors in PDFs <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite> and performance improvements from QDPs <cite class="ltx_citemacro_cite">[<bibref bibrefs="kay-qdps,fernandes2018-qdp-cdf,kale2020-qdp" separator="," yyseparator=","/>]</cite>. We found a strong correlation between counting and equal-height visualizations’ performance, indicating that counting supports cumulative probability comparisons.
+We believe that <text color="#D1485B" font="bold">QDPs</text>’ and <text color="#026494" font="bold">c<text color="#6B97A6">r<text color="#026494">o<text color="#6B97A6">i<text color="#026494">s<text color="#6B97A6">s<text color="#026494">a<text color="#6B97A6">n<text color="#026494">t</text></text></text></text></text></text></text></text></text> <text color="#6B97A6" font="bold">c<text color="#026494">h<text color="#6B97A6">a<text color="#026494">r<text color="#6B97A6">t<text color="#026494">s</text></text></text></text></text></text>’ counting affordance provides indirect evidence of frequency-framing at work; <!--  %and␣the␣affordance␣of␣a␣part-to-whole␣relationship. -->however, we caution that this conclusion is circumstantial, as participants often struggle to fully articulate their cognitive processes<cite class="ltx_citemacro_cite">[<bibref bibrefs="Nisbett1977-NISTMT" separator="," yyseparator=","/>]</cite>.</p>
+      </para>
+      <para xml:id="S5.SS1.p2">
+        <p>Another example of affordance-performance alignment is seen in <text color="#6B97A6" font="bold">Croissant-10s</text> outperforming <text color="#D1485B" font="bold">QDPs</text> in the 4.5 vs. 5 SD condition, and <text color="#6B97A6" font="bold">Croissant-10s</text>’ stronger affordance of “inter-edge interpolation.” This <text color="#000000">term</text> refers to participants counting both the whole units prior to a threshold, and the partial amount of a visual mark that is bisected by a threshold (see Fig. <ref labelref="LABEL:fig:cut-off-dist"/>). Inter-edge interpolation suggests that participants recognize that probability does not change in discrete steps along the boundaries of visual marks, but instead forms a continuous distribution. One of our goals <text color="#000000">in designing</text> croissant charts was to afford inter-edge interpolation, because we hypothesized that <text color="#D1485B" font="bold">QDPs</text> weakly afford this interpolation, which can lead to errors when comparing similar SD pairs.</p>
+      </para>
+      <para xml:id="S5.SS1.p3">
+        <p>We also see that <text color="#026494" font="bold">Croissant-20s</text> outperform <text color="#D1485B" font="bold">QDPs</text> in the 4.5 vs. 5 SD condition. This may be because <text color="#026494" font="bold">Croissant-20s</text> show higher resolution along the x-axis than the <text color="#D1485B" font="bold">QDPs</text> we tested. Although both charts encode 20 quantiles (i.e., each visual mark equals 5% probability), <text color="#D1485B" font="bold">QDPs</text> stack quantiles such that moving from one column to the next can jump the cumulative probability by more than one quantile, affording discrete changes that may not exist. When designing <text color="#026494" font="bold">c<text color="#6B97A6">r<text color="#026494">o<text color="#6B97A6">i<text color="#026494">s<text color="#6B97A6">s<text color="#026494">a<text color="#6B97A6">n<text color="#026494">t</text></text></text></text></text></text></text></text></text> <text color="#6B97A6" font="bold">c<text color="#026494">h<text color="#6B97A6">a<text color="#026494">r<text color="#6B97A6">t<text color="#026494">s</text></text></text></text></text></text>, we sliced them into vertical quantiles, as opposed to <text color="#D1485B" font="bold">QDPs</text>’ vertical and horizontal binning technique. <!--  %We␣did␣so␣to␣better␣support␣reader␣comprehension␣because␣horizontal␣slices␣of␣PDFs␣do␣not␣have␣a␣strong␣mathematical␣interpretation. -->A benefit of this design is afforded continuity and increased detail along the x-axis such that close SD comparisons are more supported. On the other hand, <text color="#D1485B" font="bold">QDPs</text>’ binning technique affords counting much more strongly than <text color="#026494" font="bold">c<text color="#6B97A6">r<text color="#026494">o<text color="#6B97A6">i<text color="#026494">s<text color="#6B97A6">s<text color="#026494">a<text color="#6B97A6">n<text color="#026494">t<text color="#6B97A6">s</text></text></text></text></text></text></text></text></text></text>’, leading to <text color="#D1485B" font="bold">QDPs</text>’ superior performance across less similar SD Pairs. Additionally, increasing <text color="#D1485B" font="bold">QDPs</text>’ quantiles would increase their resolution, possibly improving their performance in the 4.5 vs. 5 SD condition.</p>
+      </para>
+<!--  %We␣contribute␣evidence␣that␣rationalizes␣past␣PDF␣and␣QDP␣findings␣and␣outline␣a␣process␣for␣examining␣visualization␣design.␣In␣particular,␣we␣describe␣how␣researchers␣can␣reason␣about␣current␣and␣ideal␣visualization␣affordances,␣conduct␣experiments␣to␣confirm␣the␣existence␣of␣affordances,␣and␣create␣purposeful␣new␣visualizations. 
+     %2-␣relationship␣between␣affordances␣and␣performances␣(in␣context␣of␣1)
+     %__&gt;␣bring␣in␣speculative␣stuff
+     %Our␣preregistered␣hypothesis␣anticipated␣this␣poor␣performance,␣reasoning␣that␣comparisons␣between␣such␣similar␣SDs␣require␣either␣finer-grained␣counting␣than␣20-quantile␣QDPs␣offer␣or␣the␣use␣of␣an␣alternate␣comparison␣strategy.␣Accurate␣comparison␣with␣QDPs␣in␣this␣context␣necessitates␣recognizing␣that␣they␣are␣discrete␣approximations␣of␣a␣continuous␣probability␣function,␣requiring␣interpolation.␣To␣mitigate␣the␣lack␣of␣interpolation␣afforded␣by␣QDPs,␣increasing␣resolution␣from␣20␣to␣50␣or␣100␣quantiles␣could␣enable␣more␣detailed␣counting␣and␣likely␣improve␣comparisons␣of␣distributions␣with␣similar␣SDs.␣However,␣prior␣work␣has␣reported␣mixed␣results␣when␣increasing␣the␣number␣of␣quantiles␣in␣QDPs␣\cite{kay-qdps,␣fernandes2018-qdp-cdf}.
+     %__&gt;␣pull␣in␣theory␣that␣claims␣there␣may␣be␣a␣causal␣relationship
+     %3-␣use␣affordance␣to␣confirm␣and␣understand␣the␣mechanisms␣that␣likely␣contribute␣to␣the␣results␣of␣previous␣studies␣(QDP␣and␣PDF␣past␣paper)
+     %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣550␣****
+     %4-␣a␣process␣for␣identifing␣edges␣cases␣in␣which␣visualizations␣will␣fail.␣difficult␣in␣part␣because␣it␣takes␣a␣lot␣time.␣this␣is␣an␣expident␣method.
+     %5-␣this␣process␣of␣how␣to␣build␣visualizations␣with␣affordances
+     %we␣have␣convergin␣evidence␣for␣something␣but␣we␣cant␣make␣a␣causal␣relationship.-->    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:limitations" xml:id="S5.SS2">
+      <tags>
+        <tag>5.2</tag>
+        <tag role="autoref">subsection 5.2</tag>
+        <tag role="refnum">5.2</tag>
+        <tag role="typerefnum">§5.2</tag>
+      </tags>
+      <title><tag close=" ">5.2</tag>Limitations and Future Work</title>
+      <para xml:id="S5.SS2.p1">
+        <p>We present a case study of probability visualizations that express distribution shape, which is inherently limited in scope.
+Additionally, we only investigate normal <text color="#000000">static</text> distributions because our case study is built on previous findings with normal distributions <cite class="ltx_citemacro_cite">[<bibref bibrefs="fygenson-padilla-pdf-scaling" separator="," yyseparator=","/>]</cite>, and because non-normal distributions are significantly more difficult <!--  %for␣experts␣and␣\revi{members␣of␣the␣general␣public} -->to interpret <cite class="ltx_citemacro_cite">[<bibref bibrefs="peterson1964mode" separator="," yyseparator=","/>]</cite>. Future work should examine skewed and multimodal visualizations to increase the usefulness <!--  %and␣ecological␣validity -->of this research. We also restrict our experiment to investigate a single, common task. Investigating other tasks, such as readers’ accurate estimation of cumulative probabilities, <!--  %extrapolation␣of␣the␣likelihood␣of␣events, -->and decision-making, would expand understanding of how a single affordance may correlate to a range of tasks.</p>
+      </para>
+      <para xml:id="S5.SS2.p2">
+        <p>Additionally, we used open-ended responses to uncover afforded strategies, which restricts our affordance findings to strategies that participants are conscious of and able to report. Research in psychology cautions against soley using participant-reported evidence, because of their lack of correlation to participant decision-making <cite class="ltx_citemacro_cite">[<bibref bibrefs="Nisbett1977-NISTMT" separator="," yyseparator=","/>]</cite>. Still, this open-ended reporting is useful for generating hypotheses and corroborating the confirmatory behavioral findings.</p>
+      </para>
+      <para xml:id="S5.SS2.p3">
+        <p>Lastly, expanding the study of the relationship between affordance and performance to other types of visualization and other kinds of information is warranted. This expansion would not only broaden our understanding of other visualizations and how their designs drive reader conclusions, but can also be used to hypothesize about visual techniques that can be adopted for probability communication. For example, spatial subdivision in pie charts and tree maps was instrumental to our affordance-motivated PDF redesign.</p>
+      </para>
+    </subsection>
+  </section>
+  <section inlist="toc" xml:id="S6">
+    <tags>
+      <tag>6</tag>
+      <tag role="autoref">section 6</tag>
+      <tag role="refnum">6</tag>
+      <tag role="typerefnum">§6</tag>
+    </tags>
+    <title><tag close=" ">6</tag>Conclusion</title>
+    <para xml:id="S6.p1">
+      <p>We present a case study of cognitive affordances and performance in <!--  %area-encoded -->probability distribution visualizations and demonstrate a relationship between the two metrics. In turn, our findings suggest that cognitive affordances not only exist in visualizations, but also can inform hypotheses about their task performance. This work contributes to the growing body of affordance work in visualization, and establishes empirical evidence for the utility of affordances in reasoning about visualization performance and <text color="#000000">mental actions</text>.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S7">
+    <tags>
+      <tag>7</tag>
+      <tag role="autoref">section 7</tag>
+      <tag role="refnum">7</tag>
+      <tag role="typerefnum">§7</tag>
+    </tags>
+    <title><tag close=" ">7</tag>Acknowledgments</title>
+    <para xml:id="S7.p1">
+      <p>This work was funded in part by NSF Grant #2428149.</p>
+    </para>
+<!--  %****␣EGauthorGuidelines-body_with_teaser.inc␣Line␣575␣**** -->  </section>
+  <bibliography bibstyle="eg-alpha-doi" citestyle="numbers" files="egbibsample" labels="LABEL:lastpage" xml:id="bib">
+    <title>References</title>
+  </bibliography>
+  <rdf about="" content="{\@shortauthor}" property="dcterms:creator"/>
+  <rdf about="" content="{Computer Graphics Forum" property="dcterms:subject"/>
+  <rdf about="" content="{\pdf@Subject}" property="dcterms:subject"/>
+  <rdf about="" content="{\@shorttitle}" property="dcterms:title"/>
+</document>

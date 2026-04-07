@@ -1,0 +1,196 @@
+\begin{thebibliography}{}
+
+\bibitem[Ariazi et~al., 2017]{ariazi2017tunneling}
+Ariazi, J., Benowitz, A., De~Biasi, V., Den~Boer, M.~L., Cherqui, S., Cui, H., Douillet, N., Eugenin, E.~A., Favre, D., Goodman, S., et~al. (2017).
+\newblock Tunneling nanotubes and gap junctions--their role in long-range intercellular communication during development, health, and disease conditions.
+\newblock {\em Frontiers in molecular neuroscience}, 10:333.
+
+\bibitem[Barandiaran and Stovold, 2025]{barandiaran2025growing}
+Barandiaran, M. and Stovold, J. (2025).
+\newblock Growing reservoirs with developmental graph cellular automata.
+\newblock In {\em Artificial Life Conference Proceedings 37}, volume 2025, page~26. MIT Press One Rogers Street, Cambridge, MA 02142-1209, USA journals-info~….
+
+\bibitem[Bielawski et~al., 2024]{10.1145/3638529.3654150}
+Bielawski, K., Gaylinn, N., Lunn, C., Motia, K., and Bongard, J. (2024).
+\newblock Evolving hierarchical neural cellular automata.
+\newblock In {\em Proceedings of the Genetic and Evolutionary Computation Conference}, GECCO '24, page 78–86, New York, NY, USA. Association for Computing Machinery.
+
+\bibitem[Bullmore and Sporns, 2012]{bullmore2012economy}
+Bullmore, E. and Sporns, O. (2012).
+\newblock The economy of brain network organization.
+\newblock {\em Nature reviews neuroscience}, 13(5):336--349.
+
+\bibitem[Cavuoti et~al., 2022]{cavuoti2022adversarial}
+Cavuoti, L., Sacco, F., Randazzo, E., and Levin, M. (2022).
+\newblock Adversarial takeover of neural cellular automata.
+\newblock volume ALIFE 2022: The 2022 Conference on Artificial Life of {\em ALIFE 2022: The 2022 Conference on Artificial Life}, page~38. MIT Press.
+
+\bibitem[Dodig-Crnkovic, 2022]{dodig2022cognition}
+Dodig-Crnkovic, G. (2022).
+\newblock Cognition as morphological/morphogenetic embodied computation in vivo.
+\newblock {\em Entropy}, 24(11):1576.
+
+\bibitem[Ermentrout and Edelstein-Keshet, 1993]{ermentrout1993cellular}
+Ermentrout, G.~B. and Edelstein-Keshet, L. (1993).
+\newblock Cellular automata approaches to biological modeling.
+\newblock {\em Journal of theoretical Biology}, 160(1):97--133.
+
+\bibitem[Fields and Levin, 2022]{fields2022competency}
+Fields, C. and Levin, M. (2022).
+\newblock Competency in navigating arbitrary spaces as an invariant for analyzing cognition in diverse embodiments.
+\newblock {\em Entropy}, 24(6):819.
+
+\bibitem[Friston et~al., 2016]{friston2016activeinference}
+Friston, K., FitzGerald, T., Rigoli, F., Schwartenbeck, P., O'Doherty, J., and Pezzulo, G. (2016).
+\newblock Active inference and learning.
+\newblock {\em Neuroscience \& Biobehavioral Reviews}, 68:862--879.
+
+\bibitem[Gala et~al., 2023]{gala2023n}
+Gala, G., Grattarola, D., and Quaeghebeur, E. (2023).
+\newblock E (n)-equivariant graph neural cellular automata.
+\newblock {\em arXiv preprint arXiv:2301.10497}.
+
+\bibitem[Grattarola et~al., 2021]{grattarola2021learning}
+Grattarola, D., Livi, L., and Alippi, C. (2021).
+\newblock Learning graph cellular automata.
+\newblock {\em Advances in Neural Information Processing Systems}, 34:20983--20994.
+
+\bibitem[Guichard et~al., 2025a]{guichard2025engramnca}
+Guichard, E., Reimers, F., Kvalsund, M., Lepper{\o}d, M., and Nichele, S. (2025a).
+\newblock Engramnca: a neural cellular automaton model of memory transfer.
+\newblock In {\em Artificial Life Conference Proceedings 37}, volume 2025, page~3. MIT Press One Rogers Street, Cambridge, MA 02142-1209, USA journals-info~….
+
+\bibitem[Guichard et~al., 2025b]{guichard2025arcnca}
+Guichard, E., Reimers, F., Kvalsund, M., Lepperød, M., and Nichele, S. (2025b).
+\newblock Arc-nca: Towards developmental solutions to the abstraction and reasoning corpus.
+
+\bibitem[Hartl et~al., 2025a]{hartl2025neural}
+Hartl, B., Levin, M., and Pio-Lopez, L. (2025a).
+\newblock Neural cellular automata: applications to biology and beyond classical ai.
+\newblock {\em Physics of Life Reviews}.
+
+\bibitem[Hartl et~al., 2025b]{hartl2025neuroevolution}
+Hartl, B., Levin, M., and Z{\"o}ttl, A. (2025b).
+\newblock Neuroevolution of decentralized decision-making in n-bead swimmers leads to scalable and robust collective locomotion.
+\newblock {\em Communications Physics}, 8(1):194.
+
+\bibitem[Hartl et~al., 2024]{hartl2024evolutionary}
+Hartl, B., Risi, S., and Levin, M. (2024).
+\newblock Evolutionary implications of self-assembling cybernetic materials with collective problem-solving intelligence at multiple scales.
+\newblock {\em Entropy}, 26(7):532.
+
+\bibitem[Hassabis et~al., 2017]{hassabis2017neuroscience}
+Hassabis, D., Kumaran, D., Summerfield, C., and Botvinick, M. (2017).
+\newblock Neuroscience-inspired artificial intelligence.
+\newblock {\em Neuron}, 95(2):245--258.
+
+\bibitem[Horibe et~al., 2022]{horibe2022severe}
+Horibe, K., Walker, K., Berg~Palm, R., Sudhakaran, S., and Risi, S. (2022).
+\newblock Severe damage recovery in evolving soft robots through differentiable programming.
+\newblock {\em Genetic Programming and Evolvable Machines}, 23(3):405--426.
+
+\bibitem[Horibe et~al., 2021]{horibe2021regenerating}
+Horibe, K., Walker, K., and Risi, S. (2021).
+\newblock Regenerating soft robots through neural cellular automata.
+\newblock In {\em European Conference on Genetic Programming (Part of EvoStar)}, pages 36--50. Springer.
+
+\bibitem[Kari, 2005]{kari2005theory}
+Kari, J. (2005).
+\newblock Theory of cellular automata: A survey.
+\newblock {\em Theoretical computer science}, 334(1-3):3--33.
+
+\bibitem[Kohonen, 1982]{kohonen1982self}
+Kohonen, T. (1982).
+\newblock Self-organized formation of topologically correct feature maps.
+\newblock {\em Biological cybernetics}, 43(1):59--69.
+
+\bibitem[Levin, 2014]{levin2014endogenous}
+Levin, M. (2014).
+\newblock Endogenous bioelectrical networks store non-genetic patterning information during development and regeneration.
+\newblock {\em The Journal of physiology}, 592(11):2295--2305.
+
+\bibitem[Levin, 2021]{levin2021bioelectric}
+Levin, M. (2021).
+\newblock Bioelectric signaling: Reprogrammable circuits underlying embryogenesis, regeneration, and cancer.
+\newblock {\em Cell}, 184(8):1971--1989.
+
+\bibitem[Levin, 2022]{levin2022technological}
+Levin, M. (2022).
+\newblock Technological approach to mind everywhere: an experimentally-grounded framework for understanding diverse bodies and minds.
+\newblock {\em Frontiers in systems neuroscience}, 16:768201.
+
+\bibitem[Levin, 2023]{levin2023darwin}
+Levin, M. (2023).
+\newblock Darwin’s agential materials: evolutionary implications of multiscale competency in developmental biology.
+\newblock {\em Cellular and Molecular Life Sciences}, 80(6):142.
+
+\bibitem[Li et~al., 2024]{li2024brain}
+Li, G., Deng, L., Tang, H., Pan, G., Tian, Y., Roy, K., and Maass, W. (2024).
+\newblock Brain-inspired computing: A systematic survey and future trends.
+\newblock {\em Proceedings of the IEEE}, 112(6):544--584.
+
+\bibitem[Mordvintsev et~al., 2020]{mordvintsev_growing_2020}
+Mordvintsev, A., Randazzo, E., Niklasson, E., and Levin, M. (2020).
+\newblock Growing neural cellular automata.
+\newblock {\em Distill}, 5(2).
+
+\bibitem[Moyo et~al., 2025]{moyo2025self}
+Moyo, T., Chiurunge, P., and Mazusa, A. (2025).
+\newblock Self-organizing dynamic graph neural cellular automata for history-dependent computation.
+
+\bibitem[Pande and Grattarola, 2023]{pande2023hierarchical}
+Pande, R. and Grattarola, D. (2023).
+\newblock Hierarchical neural cellular automata.
+\newblock In {\em Artificial Life Conference Proceedings 35}, volume 2023, page~20. MIT Press One Rogers Street, Cambridge, MA 02142-1209, USA journals-info~….
+
+\bibitem[Penfield and Boldrey, 1937]{penfield1937somatic}
+Penfield, W. and Boldrey, E. (1937).
+\newblock Somatic motor and sensory representation in the cerebral cortex of man as studied by electrical stimulation.
+\newblock {\em Brain: A journal of neurology}.
+
+\bibitem[Pio-Lopez et~al., 2023]{pio2023scaling}
+Pio-Lopez, L., Bischof, J., LaPalme, J.~V., and Levin, M. (2023).
+\newblock The scaling of goals from cellular to anatomical homeostasis: an evolutionary simulation, experiment and analysis.
+\newblock {\em Interface Focus}, 13(3):20220072.
+
+\bibitem[Pio-Lopez et~al., 2025]{pio2025aging}
+Pio-Lopez, L., Hartl, B., and Levin, M. (2025).
+\newblock Aging as a loss of goal-directedness: An evolutionary simulation and analysis unifying regeneration with anatomical rejuvenation.
+\newblock {\em Advanced Science}, page e09872.
+
+\bibitem[Rao and Ballard, 1999]{rao1999predictive}
+Rao, R.~P. and Ballard, D.~H. (1999).
+\newblock Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects.
+\newblock {\em Nature neuroscience}, 2(1):79--87.
+
+\bibitem[Schieber, 2001]{schieber2001constraints}
+Schieber, M.~H. (2001).
+\newblock Constraints on somatotopic organization in the primary motor cortex.
+\newblock {\em Journal of neurophysiology}, 86(5):2125--2143.
+
+\bibitem[Van Den~Heuvel and Sporns, 2011]{van2011rich}
+Van Den~Heuvel, M.~P. and Sporns, O. (2011).
+\newblock Rich-club organization of the human connectome.
+\newblock {\em Journal of Neuroscience}, 31(44):15775--15786.
+
+\bibitem[Vandenberg et~al., 2011]{vandenberg2011v}
+Vandenberg, L.~N., Morrie, R.~D., and Adams, D.~S. (2011).
+\newblock V-atpase-dependent ectodermal voltage and ph regionalization are required for craniofacial morphogenesis.
+\newblock {\em Developmental Dynamics}, 240(8):1889--1904.
+
+\bibitem[Watts and Strogatz, 1998]{watts1998collective}
+Watts, D.~J. and Strogatz, S.~H. (1998).
+\newblock Collective dynamics of ‘small-world’networks.
+\newblock {\em nature}, 393(6684):440--442.
+
+\bibitem[Williams, 1992]{williams1992simple}
+Williams, R.~J. (1992).
+\newblock Simple statistical gradient-following algorithms for connectionist reinforcement learning.
+\newblock {\em Machine learning}, 8(3):229--256.
+
+\bibitem[Xu and Miikkulainen, 2025]{xu2025neural}
+Xu, K. and Miikkulainen, R. (2025).
+\newblock Neural cellular automata for arc-agi.
+\newblock In {\em Artificial Life Conference Proceedings 37}, volume 2025, page~16. MIT Press One Rogers Street, Cambridge, MA 02142-1209, USA journals-info~….
+
+\end{thebibliography}

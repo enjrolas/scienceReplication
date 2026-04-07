@@ -1,0 +1,15 @@
+\begin{abstract}
+
+
+AI coding agents operate in a paradox: they possess vast parametric knowledge yet cannot remember a conversation from an hour ago. Existing memory systems---Mem0~\cite{mem0}, Zep, Letta/MemGPT~\cite{letta}---store text in vector databases with single-channel retrieval, require cloud LLMs for core operations, and implement none of the cognitive processes that make human memory effective: no forgetting, no consolidation, no learning, no compression.
+
+We present \textbf{SuperLocalMemory V3.3} (``The Living Brain''), a local-first agent memory system implementing the full cognitive memory taxonomy---sensory through implicit procedural---with mathematical lifecycle dynamics. Building on the information-geometric foundations of V3.2~\cite{slm-paper2}, we introduce five contributions:
+(1)~\textbf{Fisher-Rao Quantization-Aware Distance (FRQAD)}---a new metric on the Gaussian statistical manifold that correctly prefers high-precision embeddings over quantized ones with 100\% accuracy (vs.\ 85.6\% for cosine), with \emph{zero prior art};
+(2)~\textbf{Ebbinghaus Adaptive Forgetting with lifecycle-aware quantization}---the first mathematical forgetting curve in local agent memory, coupled to progressive embedding compression where fading memories lose precision (Active$\to$32-bit, Warm$\to$8-bit, Cold$\to$4-bit, Archive$\to$2-bit), achieving 6.7$\times$ discriminative power between access groups;
+(3)~\textbf{7-channel cognitive retrieval} spanning semantic, keyword, entity graph, temporal, spreading activation, consolidation, and Hopfield associative channels, achieving 70.4\% on the LoCoMo benchmark in zero-LLM Mode~A;
+(4)~\textbf{memory parameterization}---consolidated memories become soft prompts that configure agent behavior without retrieval, implementing the Long-Term Implicit tier that no existing system provides;
+and (5)~\textbf{a zero-friction auto-cognitive pipeline} that automates the complete memory lifecycle---recall, observe, learn, consolidate, parameterize, forget---through a single \texttt{npm install} with no manual commands.
+
+On the LoCoMo benchmark, V3.3 achieves 70.4\% in Mode~A (zero-LLM), with gains of +23.8pp on multi-hop and +12.7pp on adversarial reasoning compared to V3.2's retrieval baseline. V3.2 achieved 74.8\% Mode~A and 87.7\% Mode~C~\cite{slm-paper2}; the 4.4pp gap reflects a deliberate architectural trade-off: the expanded 7-channel pipeline and new capabilities (forgetting, quantization, code knowledge graph) introduce fusion complexity that affects single-hop retrieval while enabling entirely new cognitive processes that V3.2 lacked. SLM~V3.3 is open source under the Elastic License~2.0, runs entirely on CPU, and is deployed on npm and PyPI with over 5,000 monthly downloads.
+
+\end{abstract}

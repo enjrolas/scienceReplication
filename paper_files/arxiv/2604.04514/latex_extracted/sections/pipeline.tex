@@ -1,0 +1,25 @@
+\section{Zero-Friction Auto-Cognitive Pipeline (C5)}
+\label{sec:pipeline}
+
+\subsection{The Adoption Problem}
+
+Every existing memory tool requires manual invocation. A memory system that requires the user to \emph{remember to use it} is ironic---and the primary reason memory tools see low adoption.
+
+\subsection{The Zero-Friction Architecture}
+
+A single \texttt{npm install -g superlocalmemory} triggers automatic lifecycle management:
+\begin{enumerate}[topsep=2pt, itemsep=1pt]
+  \item \textbf{npm postinstall:} Auto-installs Claude Code hooks.
+  \item \textbf{Every session start:} Loads project context, memories, patterns, soft prompts.
+  \item \textbf{During coding:} Observes file changes with 5-minute per-file rate limiting.
+  \item \textbf{Session end:} Generates session summary with git context.
+  \item \textbf{Between sessions:} Ebbinghaus decay, precision scheduling, consolidation.
+\end{enumerate}
+
+The complete lifecycle: Install $\to$ Auto-recall $\to$ Auto-observe $\to$ Auto-save $\to$ Auto-learn $\to$ Auto-consolidate $\to$ Auto-parameterize $\to$ Auto-forget $\to$ Auto-recall $\to \cdots$
+
+\textbf{Design principles:} (1)~All hooks fail silently (\texttt{2>/dev/null || true}). (2)~No PreToolUse gates (three attempts failed catastrophically). (3)~Explicit opt-out via \texttt{slm hooks remove}.
+
+% ============================================================================
+% 9. COMPLIANCE
+% ============================================================================

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Topic, Paper
+from .models import Topic, Paper, PaperUpload
 
 
 @admin.register(Topic)
@@ -17,3 +17,10 @@ class PaperAdmin(admin.ModelAdmin):
     def title_short(self, obj):
         return obj.title[:80]
     title_short.short_description = 'Title'
+
+
+@admin.register(PaperUpload)
+class PaperUploadAdmin(admin.ModelAdmin):
+    list_display = ('title', 'topic', 'reviewed', 'submitted_at')
+    list_filter = ('topic', 'reviewed')
+    search_fields = ('title', 'authors')
