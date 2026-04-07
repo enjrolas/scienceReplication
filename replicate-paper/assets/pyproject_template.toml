@@ -1,0 +1,16 @@
+[project]
+name = "paper-replication-{slug}"
+version = "0.1.0"
+description = "Replication of: {title}"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "statsmodels>=0.14",
+    "scipy>=1.11",
+    "matplotlib>=3.7",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

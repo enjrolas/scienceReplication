@@ -40,7 +40,10 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://sciencereplication.artiswrong.com/manage/)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://sciencereplication.artiswrong.com/admin)",
       "Bash(apt list:*)",
-      "Bash(latexml --VERSION)"
+      "Bash(latexml --VERSION)",
+      "Bash(python replicate-paper/scripts/parse_latexml.py example_paper/2401.05347.xml)",
+      "Bash(python -m scripts.aggregate_benchmark /Users/michaelklein/Coding/python/scienceReplication/replicate-paper-workspace/iteration-1 --skill-name replicate-paper)",
+      "Bash(uv run:*)"
     ]
   }
 }

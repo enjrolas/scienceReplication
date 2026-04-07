@@ -1,0 +1,17 @@
+{
+  "skill_name": "replicate-paper",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Replicate the analysis in ./example_paper/ - the folder contains a LaTeXML XML paper about income and emotional well-being and a CSV dataset with 33,391 observations.",
+      "expected_output": "A standalone Python project in paper-replication-income-wellbeing/ that: (1) has pyproject.toml with uv deps, (2) implements OLS piecewise regression with structural break detection and quantile regression, (3) finds threshold between $175k-$250k, (4) produces comparison_report.json with replication_score, (5) has TODO.md with categorized items",
+      "files": ["./example_paper/2401.05347.xml", "./example_paper/Income_and_emotional_wellbeing_a_conflict_resolved.csv"]
+    },
+    {
+      "id": 2,
+      "prompt": "I have a paper and its data in example_paper/. Can you replicate it?",
+      "expected_output": "Same as eval 1 but with a more minimal prompt - skill should still trigger and produce a complete replication project",
+      "files": ["./example_paper/2401.05347.xml", "./example_paper/Income_and_emotional_wellbeing_a_conflict_resolved.csv"]
+    }
+  ]
+}
