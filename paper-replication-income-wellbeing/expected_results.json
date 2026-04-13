@@ -1,0 +1,39 @@
+{
+  "paper_title": "Income and emotional well-being: Evidence for well-being plateauing around $200,000 per year",
+  "paper_id": "2401.05347",
+  "results": [
+    {
+      "result_id": "2_sample_size",
+      "section": "2",
+      "description": "Total sample size (N = 33,391 employed adults)",
+      "paper_value": 33391,
+      "result_type": "count",
+      "confidence": "high",
+      "tolerance": 0.0,
+      "tolerance_type": "absolute",
+      "context": "33,391 employed adults aged 18 to 65 living in the United States"
+    },
+    {
+      "result_id": "3.1_optimal_threshold",
+      "section": "3.1",
+      "description": "Data-driven optimal income threshold from SSR minimization (between $175k-$250k)",
+      "paper_value": 200000,
+      "result_type": "threshold",
+      "confidence": "high",
+      "tolerance": 0.30,
+      "tolerance_type": "relative",
+      "context": "The optimal threshold is found to be between $175,000 and $250,000. The paper states the threshold is between these two bracket values; $200,000 is used as the round figure."
+    },
+    {
+      "result_id": "4_pct_above_250k",
+      "section": "4",
+      "description": "Percentage of sample with household income >= $250,000 (slightly more than 9%)",
+      "paper_value": 9.0,
+      "result_type": "statistic",
+      "confidence": "high",
+      "tolerance": 1.0,
+      "tolerance_type": "absolute",
+      "context": "slightly more than 9% of the sample reported household incomes of $250,000 or higher"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "paper_title": "Income and emotional well-being: Evidence for well-being plateauing around $200,000 per year",
+  "paper_id": "2401.05347",
+  "generated_at": "2026-04-07T20:05:10.059751+00:00",
+  "summary": {
+    "total_results": 3,
+    "passed": 3,
+    "failed": 0,
+    "not_computed": 0,
+    "replication_score": 100.0,
+    "overall_correlation": 0.999707,
+    "overall_rmse": 14433.75673,
+    "mean_absolute_relative_error": 0.044197
+  },
+  "per_result": [
+    {
+      "result_id": "2_sample_size",
+      "section": "2",
+      "description": "Total sample size (N = 33,391 employed adults)",
+      "result_type": "count",
+      "paper_value": 33391,
+      "computed_value": 33391,
+      "absolute_difference": 0,
+      "relative_difference": 0.0,
+      "tolerance_used": 0.0,
+      "tolerance_type": "absolute",
+      "status": "PASS",
+      "confidence": "high",
+      "notes": "33,391 employed adults aged 18 to 65 living in the United States"
+    },
+    {
+      "result_id": "3.1_optimal_threshold",
+      "section": "3.1",
+      "description": "Data-driven optimal income threshold from SSR minimization (between $175k-$250k)",
+      "result_type": "threshold",
+      "paper_value": 200000,
+      "computed_value": 175000.0,
+      "absolute_difference": 25000.0,
+      "relative_difference": 0.125,
+      "tolerance_used": 0.3,
+      "tolerance_type": "relative",
+      "status": "PASS",
+      "confidence": "high",
+      "notes": "The optimal threshold is found to be between $175,000 and $250,000. The paper states the threshold is between these two bracket values; $200,000 is used as the round figure."
+    },
+    {
+      "result_id": "4_pct_above_250k",
+      "section": "4",
+      "description": "Percentage of sample with household income >= $250,000 (slightly more than 9%)",
+      "result_type": "statistic",
+      "paper_value": 9.0,
+      "computed_value": 9.068311820550448,
+      "absolute_difference": 0.06831182,
+      "relative_difference": 0.0075902,
+      "tolerance_used": 1.0,
+      "tolerance_type": "absolute",
+      "status": "PASS",
+      "confidence": "high",
+      "notes": "slightly more than 9% of the sample reported household incomes of $250,000 or higher"
+    }
+  ],
+  "statistical_summary": {
+    "correlation": 0.999707,
+    "rmse": 14433.75673,
+    "mean_relative_error": 0.044197,
+    "max_relative_error": 0.125,
+    "by_category": {
+      "count": {
+        "count": 1,
+        "passed": 1,
+        "mean_relative_error": 0.0
+      },
+      "threshold": {
+        "count": 1,
+        "passed": 1,
+        "mean_relative_error": 0.125
+      },
+      "statistic": {
+        "count": 1,
+        "passed": 1,
+        "mean_relative_error": 0.0075902
+      }
+    }
+  },
+  "side_by_side_table": {
+    "headers": [
+      "result_id",
+      "description",
+      "paper_value",
+      "computed_value",
+      "abs_diff",
+      "rel_diff",
+      "status"
+    ],
+    "rows": [
+      [
+        "2_sample_size",
+        "Total sample size (N = 33,391 employed adults)",
+        33391,
+        33391,
+        0,
+        0.0,
+        "PASS"
+      ],
+      [
+        "3.1_optimal_threshold",
+        "Data-driven optimal income threshold from SSR minimization (between $175k-$250k)",
+        200000,
+        175000.0,
+        25000.0,
+        0.125,
+        "PASS"
+      ],
+      [
+        "4_pct_above_250k",
+        "Percentage of sample with household income >= $250,000 (slightly more than 9%)",
+        9.0,
+        9.068311820550448,
+        0.06831182,
+        0.0075902,
+        "PASS"
+      ]
+    ]
+  },
+  "todo_summary": {
+    "total_count": 8,
+    "by_category": {
+      "ambiguous_method": 2,
+      "approximation_made": 2,
+      "missing_implementation": 1,
+      "data_format_assumption": 1,
+      "library_mismatch": 2,
+      "other": 0
+    }
+  }
+}

@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?latexml searchpaths="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2401.05347/latex_extracted"?>
+<?latexml class="article" options="fleqn,11pt,letterpaper"?>
+<?latexml package="amsfonts"?>
+<?latexml package="amssymb"?>
+<?latexml package="amsmath"?>
+<?latexml package="amsthm"?>
+<?latexml package="enumerate"?>
+<?latexml package="multirow"?>
+<?latexml package="float"?>
+<?latexml package="graphicx"?>
+<?latexml package="epstopdf"?>
+<?latexml package="color"?>
+<?latexml package="geometry" options="margin=2.57cm"?>
+<?latexml package="hyperref" options="pdftitle=Income and wellbeing,pdfauthor=Mikkel Bennedsen,colorlinks=TRUE,allcolors=darkred"?>
+<?latexml package="booktabs"?>
+<?latexml package="pdflscape"?>
+<?latexml package="natbib" options="round"?>
+<!--  %“usepackage–refcheck˝ --><?latexml package="tabularx"?>
+<!--  %“usepackage–authblk˝ --><?latexml package="float"?>
+<!--  %“usepackage–smartdiagram˝ --><!--  %“epstopdfsetup–update˝ --><!--  %**** EL˙income˙wellbeing˙v13.tex Line 50 **** --><!--  %“newcommand“mikkel[1]–“textcolor–red˝–#1˝˝ --><!--  %“newenvironment–proof˝[1][Proof]–“noindent“textbf–#1.˝ ˝–“ “rule–0.5em˝–0.5em˝˝ --><!--  %“newcommand–“linespacing˝[1]–“renewcommand–“baselinestretch˝–#1˝ “normalsize˝ --><?latexml graphicspath="/home/japhy/scienceReplication.artiswrong.com/paper_files/arxiv/2401.05347/latex_extracted/Figures"?>
+<!--  %“input–tcilatex˝ --><!--  %“numberwithin–equation˝–section˝ --><!--  %**** EL˙income˙wellbeing˙v13.tex Line 75 **** --><!--  %“linenumbers --><!--  %(Corresponding author) --><?latexml RelaxNGSchema="LaTeXML"?>
+<document xmlns="http://dlmf.nist.gov/LaTeXML" class="ltx_authors_1line ltx_fleqn" prefix="dcterms: http://purl.org/dc/terms/">
+  <resource src="LaTeXML.css" type="text/css"/>
+  <resource src="ltx-article.css" type="text/css"/>
+  <title>Income and emotional well-being: <break/>Evidence for well-being plateauing around $200,000 per year</title>
+  <creator role="author">
+    <personname>Mikkel Bennedsen</personname>
+    <contact role="thanks">
+Department of Economics and Business Economics,
+Aarhus University,
+Fuglesangs Allé 4,
+8210 Aarhus V, Denmark.
+E-mail: <ref class="ltx_href" href="mailto:mbennedsen@econ.au.dk">mbennedsen@econ.au.dk</ref>
+</contact>
+  </creator>
+  <abstract name="Abstract">
+    <p>Is emotional well-being monotonically increasing in the level of income or does it reach a plateau at some income threshold, whereafter additional income does not contribute to further well-being? Conflicting answers to this question has been suggested in the academic literature. In a recent paper, using an income threshold of $100,000 per year, <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+          <bibrefphrase>(</bibrefphrase>
+          <bibrefphrase>)</bibrefphrase>
+        </bibref></cite> appears to have resolved these conflicts, concluding that emotional well-being is monotonically increasing in income for all but the unhappiest individuals. In this paper, we show that this conclusion is sensitive to the placement of the income threshold at which the relationship between emotional well-being and income is allowed to plateau. Using standard econometric methods, we propose a data-driven approach to detect the placement of the threshold. Using this data-driven income threshold, a flat relationship between household income and emotional well-being above a threshold around $200,000 per year is found. While our analysis relaxes the assumption of a pre-specified income threshold, it relies on a number of other assumptions, which we briefly discuss. We conclude that although the analysis of this paper provides some evidence for well-being plateauing around $200,000 per year, more research is needed before any definite conclusions about the relationship between emotional well-being and income can be drawn.</p>
+    <break/>
+    <p><text font="bold">JEL Classification</text>: C13; C21; I31.</p>
+    <p><text font="bold">Keywords</text>: Well-being; Income; Structural break; Quantile regression.</p>
+  </abstract>
+<!--  %**** EL˙income˙wellbeing˙v13.tex Line 100 **** -->  <pagination role="newpage"/>
+  <section inlist="toc" xml:id="S1">
+    <tags>
+      <tag>1</tag>
+      <tag role="autoref">section 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">§1</tag>
+    </tags>
+    <title><tag close=" ">1</tag>Introduction</title>
+    <para xml:id="S1.p1">
+      <p>Is well-being monotonically increasing in the level of income or does it reach a plateau at some income threshold? The answer to this question has important implications for both personal choice and public policy. Two measures of well-being are generally distinguished between in the literature, namely <emph font="italic">emotional</emph> well-being and <emph font="italic">evaluative</emph> well-being <cite class="ltx_citemacro_citep">(e.g. <bibref bibrefs="Diener2010" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Emotional well-being refers to how an individual experiences their everyday life, while evaluative well-being refers to how an individual evaluates her own life as a whole. It has been found that evaluative well-being is monotonically increasing in the level of income <cite class="ltx_citemacro_citep">(e.g. <bibref bibrefs="KD2010" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, but the relationship between emotional well-being and income is more disputed.</p>
+    </para>
+    <para xml:id="S1.p2">
+      <p>In a seminal paper, <cite class="ltx_citemacro_cite"><bibref bibrefs="KD2010" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> analyzed a survey of more than 450,000 US citizens and found that emotional well-being increases linearly with household log-income up to a certain threshold, determined to be around $75,000 per year, whereafter additional income does not increase well-being further. A similar conclusion was reached in <cite class="ltx_citemacro_cite"><bibref bibrefs="Jebb2018" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite>. Later, analyzing data sampled in real time using smartphone notifications, <cite class="ltx_citemacro_cite"><bibref bibrefs="MK2021" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> re-examined this question and found that emotional well-being increases monotonically with log-income without reaching a plateau. Recently, in a notable instance of “adversarial collaboration”, Daniel Kahneman and Matthew Killingsworth teamed up to resolve the apparent conflict between these findings <cite class="ltx_citemacro_citep">(<bibref bibrefs="KKM2023" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Using linear regression, <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> validates the findings of <cite class="ltx_citemacro_cite"><bibref bibrefs="MK2021" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite>, i.e. that emotional well-being increases monotonically with log-income without reaching a plateau. Using quantile regression, <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> finds that emotional well-being does in fact plateau at the threshold $100,000 per year, but only for the most unhappy individuals in the sample. <cite class="ltx_citemacro_citep">($100,000 being the inflation-adjusted value of the $75,000 threshold used in <bibref bibrefs="KD2010" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite> For the remaining parts of the sample, however, it is again found that emotional well-being increases monotonically with log-income without reaching a plateau. For the happiest individuals, an “accelerating” pattern is even found, where the relationship between emotional well-being and log-income becomes even stronger above the threshold.</p>
+    </para>
+    <para xml:id="S1.p3">
+      <p>The analyses in the above-mentioned papers rest on two crucial assumptions. The first assumption is that the relationship between well-being and log-income is piecewise linear with one change in both intercept and slope. The second assumption is that the change occurs at the income threshold $100,000 (or $75,000) per year. In this paper, we examine the effects on the analysis when we retain the first assumption and relax the second. We use standard econometric methods to detect the placement of a structural break in a linear model <cite class="ltx_citemacro_citep">(e.g. <bibref bibrefs="BP1998,perron2006" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Re-doing the linear regression analysis of <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> with a data-driven placement of the threshold, we find that emotional well-being does in fact plateau, but the threshold is found to be between $175,000 and $250,000, substantially higher than the $100,000 used in <cite class="ltx_citemacro_cite"><bibref bibrefs="MK2021" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> and <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite>. Then, using the data-driven threshold, we re-do the quantile regression analysis of <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> and find evidence of a plateau in the relationship between emotional well-being and log-income, regardless of the part (quantile) of the well-being distribution considered. Although the analysis presented in this paper relaxes a crucial assumption compared to the previous literature, it still imposes a number of quite stringent assumptions. We close the paper by briefly discussing these assumptions and argue that more research is needed before any definite conclusions about the relationship between emotional well-being and income can be drawn.</p>
+    </para>
+<!--  %**** EL˙income˙wellbeing˙v13.tex Line 125 **** -->  </section>
+  <section inlist="toc" xml:id="S2">
+    <tags>
+      <tag>2</tag>
+      <tag role="autoref">section 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">§2</tag>
+    </tags>
+    <title><tag close=" ">2</tag>Data</title>
+    <para xml:id="S2.p1">
+      <p>In this paper, we use the data made available by <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite>.<note mark="1" role="footnote" xml:id="footnote1"><tags>
+            <tag>1</tag>
+            <tag role="autoref">footnote 1</tag>
+            <tag role="refnum">1</tag>
+            <tag role="typerefnum">footnote 1</tag>
+          </tags>Data can be found at <ref class="ltx_url" font="typewriter" href="https://osf.io/qye4a/">https://osf.io/qye4a/</ref>, last accessed November 13, 2023. See also <ref class="ltx_url" font="typewriter" href="https://go.trackyourhappiness.org/">https://go.trackyourhappiness.org/</ref> for information about the smartphone app used to collect the data.</note> These data are constructed from 1,725,944 experience-sampling reports from 33,391 employed adults aged 18 to 65 living in the United States, collected using smartphone notifications to obtain real-time evaluations of experienced (i.e. emotional) well-being. Well-being was reported on a continuous scale between “Very bad” and “Very good”, converted into a number between 0 and 100, and subsequently an average number was constructed for each individual, leading to 33,391 data points. The only explanatory variable used in <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> was annual pre-tax household income, which was bracketed into 15 income groups labeled $15000, $25000, $35000, $45000, $55000, $65000, $75000, $85000, $95000, $112500, $137500, $175000, $250000, $400000, and $625000. We refer to <cite class="ltx_citemacro_cite"><bibref bibrefs="MK2021" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> for further details on the data.</p>
+    </para>
+  </section>
+  <section inlist="toc" xml:id="S3">
+    <tags>
+      <tag>3</tag>
+      <tag role="autoref">section 3</tag>
+      <tag role="refnum">3</tag>
+      <tag role="typerefnum">§3</tag>
+    </tags>
+    <title><tag close=" ">3</tag>Empirical analysis</title>
+    <para xml:id="S3.p1">
+      <p>In Section <ref labelref="LABEL:sec:OLS"/> we use ordinary least squares regression to examine the relationship between the conditional mean of emotional well-being and log-income. In Section <ref labelref="LABEL:sec:QR"/> we use quantile regression to examine the relationship between the conditional quantiles of emotional well-being and log-income. We reproduce the analyses of <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+            <bibrefphrase>(</bibrefphrase>
+            <bibrefphrase>)</bibrefphrase>
+          </bibref></cite> by inserting a structural break in the linear relationship at the pre-specified threshold $100,000 per year, and compare with an alternative analysis using a threshold that has been chosen in a data-driven way using standard econometric methods.</p>
+    </para>
+    <subsection inlist="toc" labels="LABEL:sec:OLS" xml:id="S3.SS1">
+      <tags>
+        <tag>3.1</tag>
+        <tag role="autoref">subsection 3.1</tag>
+        <tag role="refnum">3.1</tag>
+        <tag role="typerefnum">§3.1</tag>
+      </tags>
+      <title><tag close=" ">3.1</tag>Ordinary least squares regression analysis</title>
+      <para xml:id="S3.SS1.p1">
+        <p>We consider the following model</p>
+        <equationgroup class="ltx_eqn_align" xml:id="S4.EGx1">
+          <equation labels="LABEL:eq:OLS" xml:id="S3.E1">
+            <tags>
+              <tag>(1)</tag>
+              <tag role="autoref">Equation 1</tag>
+              <tag role="refnum">1</tag>
+            </tags>
+            <MathFork>
+              <Math tex="\displaystyle E(z_{i}|x_{i})=(a+bx_{i})I(\exp(x_{i})\leq\tau)+(c+dx_{i})I(\exp%&#10;(x_{i})&gt;\tau),\quad i=1,2,\ldots,33391," xml:id="S3.E1.m2">
+                <XMath>
+                  <XMTok font="italic" role="UNKNOWN">E</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.E1.m2.1">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                    <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                    <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok meaning="exponential" role="OPFUNCTION">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                    <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                    <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMTok meaning="1" role="NUMBER">1</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok meaning="2" role="NUMBER">2</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok name="ldots" role="ID">…</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok meaning="33391" role="NUMBER">33391</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td align="right"><Math mode="inline" tex="\displaystyle E(z_{i}|x_{i})=(a+bx_{i})I(\exp(x_{i})\leq\tau)+(c+dx_{i})I(\exp%&#10;(x_{i})&gt;\tau),\quad i=1,2,\ldots,33391," xml:id="S3.E1.m1">
+                    <XMath>
+                      <XMTok font="italic" role="UNKNOWN">E</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="VERTBAR" stretchy="false">|</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.E1.m1.1">exp</XMTok>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                        <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                        <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok meaning="exponential" role="OPFUNCTION">exp</XMTok>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                        <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                        <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok meaning="1" role="NUMBER">1</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMTok name="ldots" role="ID">…</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMTok meaning="33391" role="NUMBER">33391</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+        </equationgroup>
+        <p>where <Math mode="inline" tex="a,b,c,d\in\mathbb{R}" text="list@(a, b, c, d) element-of R" xml:id="S3.SS1.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="list"/>
+                    <XMRef idref="S3.SS1.p1.m1.1"/>
+                    <XMRef idref="S3.SS1.p1.m1.2"/>
+                    <XMRef idref="S3.SS1.p1.m1.3"/>
+                    <XMRef idref="S3.SS1.p1.m1.4"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p1.m1.1">a</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p1.m1.2">b</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p1.m1.3">c</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p1.m1.4">d</XMTok>
+                  </XMWrap>
+                </XMDual>
+                <XMTok font="blackboard" role="UNKNOWN">R</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="z_{i}" text="z _ i" xml:id="S3.SS1.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> is a measure of well-being of individual <Math mode="inline" tex="i" text="i" xml:id="S3.SS1.p1.m3">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math>, <Math mode="inline" tex="x_{i}" text="x _ i" xml:id="S3.SS1.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> is the log-income of individual <Math mode="inline" tex="i" text="i" xml:id="S3.SS1.p1.m5">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math>, <Math mode="inline" tex="E(z_{i}|x_{i})" text="E * conditional@(z _ i, x _ i)" xml:id="S3.SS1.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">E</XMTok>
+                <XMDual>
+                  <XMRef idref="S3.SS1.p1.m6.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMApp xml:id="S3.SS1.p1.m6.1">
+                      <XMTok meaning="conditional" role="MODIFIEROP" stretchy="false">|</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> is the mean of <Math mode="inline" tex="z_{i}" text="z _ i" xml:id="S3.SS1.p1.m7">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, conditional on <Math mode="inline" tex="x_{i}" text="x _ i" xml:id="S3.SS1.p1.m8">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, and <Math mode="inline" tex="I(A)" text="I * A" xml:id="S3.SS1.p1.m9">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                <XMDual>
+                  <XMRef idref="S3.SS1.p1.m9.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p1.m9.1">A</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> is the indicator function of the event <Math mode="inline" tex="A" text="A" xml:id="S3.SS1.p1.m10">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">A</XMTok>
+            </XMath>
+          </Math>, i.e. it is equal to one if <Math mode="inline" tex="A" text="A" xml:id="S3.SS1.p1.m11">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">A</XMTok>
+            </XMath>
+          </Math> is true and zero otherwise. We follow <cite class="ltx_citemacro_cite"><bibref bibrefs="MK2021" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> and <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> and let <Math mode="inline" tex="z_{i}" text="z _ i" xml:id="S3.SS1.p1.m12">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> be the z-scored well-being level reported by individual <Math mode="inline" tex="i" text="i" xml:id="S3.SS1.p1.m13">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">i</XMTok>
+            </XMath>
+          </Math>, i.e.</p>
+        <equationgroup class="ltx_eqn_align" xml:id="S4.EGx2">
+          <equation xml:id="S3.Ex1">
+            <MathFork>
+              <Math tex="\displaystyle z_{i}:=\frac{y_{i}-\overline{y}}{s_{y}}," text="z _ i assign (y _ i - overline@(y)) / s _ y" xml:id="S3.Ex1.m2">
+                <XMath>
+                  <XMDual>
+                    <XMRef idref="S3.Ex1.m2.1"/>
+                    <XMWrap>
+                      <XMApp xml:id="S3.Ex1.m2.1">
+                        <XMTok meaning="assign" role="RELOP">:=</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMApp>
+                          <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                          <XMApp>
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                              <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok name="overline" role="OVERACCENT">¯</XMTok>
+                              <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                            </XMApp>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMTok font="italic" role="UNKNOWN">s</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok role="PUNCT">,</XMTok>
+                    </XMWrap>
+                  </XMDual>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td align="right"><Math mode="inline" tex="\displaystyle z_{i}:=\frac{y_{i}-\overline{y}}{s_{y}}," text="z _ i assign (y _ i - overline@(y)) / s _ y" xml:id="S3.Ex1.m1">
+                    <XMath>
+                      <XMDual>
+                        <XMRef idref="S3.Ex1.m1.1"/>
+                        <XMWrap>
+                          <XMApp xml:id="S3.Ex1.m1.1">
+                            <XMTok meaning="assign" role="RELOP">:=</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok mathstyle="display" meaning="divide" role="FRACOP"/>
+                              <XMApp>
+                                <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                                <XMApp>
+                                  <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                                  <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                                  <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                                </XMApp>
+                                <XMApp>
+                                  <XMTok name="overline" role="OVERACCENT">¯</XMTok>
+                                  <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                                </XMApp>
+                              </XMApp>
+                              <XMApp>
+                                <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                                <XMTok font="italic" role="UNKNOWN">s</XMTok>
+                                <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                              </XMApp>
+                            </XMApp>
+                          </XMApp>
+                          <XMTok role="PUNCT">,</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+        </equationgroup>
+        <p>where <Math mode="inline" tex="\overline{y}:=N^{-1}\sum_{i=1}^{N}y_{i}" text="overline@(y) assign N ^ (- 1) * ((sum _ (i = 1)) ^ N)@(y _ i)" xml:id="S3.SS1.p1.m14">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="assign" role="RELOP">:=</XMTok>
+                <XMApp>
+                  <XMTok name="overline" role="OVERACCENT">¯</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                </XMApp>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMApp>
+                    <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                    <XMApp>
+                      <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMApp>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok mathstyle="text" meaning="sum" role="SUMOP" scriptpos="post">∑</XMTok>
+                        <XMApp>
+                          <XMTok fontsize="70%" meaning="equals" role="RELOP">=</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">N</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math> is the sample mean and <Math mode="inline" tex="s_{y}^{2}:=(N-1)^{-1}\sum_{i=1}^{N}(y_{i}-\overline{y})^{2}" text="(s _ y) ^ 2 assign (N - 1) ^ (- 1) * ((sum _ (i = 1)) ^ N)@((y _ i - overline@(y)) ^ 2)" xml:id="S3.SS1.p1.m15">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="assign" role="RELOP">:=</XMTok>
+                <XMApp>
+                  <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                  <XMApp>
+                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">s</XMTok>
+                    <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                  </XMApp>
+                  <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                </XMApp>
+                <XMApp>
+                  <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                  <XMApp>
+                    <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                    <XMDual>
+                      <XMRef idref="S3.SS1.p1.m15.1"/>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMApp xml:id="S3.SS1.p1.m15.1">
+                          <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                          <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                          <XMTok meaning="1" role="NUMBER">1</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                    </XMDual>
+                    <XMApp>
+                      <XMTok fontsize="70%" meaning="minus" role="ADDOP">-</XMTok>
+                      <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                    </XMApp>
+                  </XMApp>
+                  <XMApp>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok mathstyle="text" meaning="sum" role="SUMOP" scriptpos="post">∑</XMTok>
+                        <XMApp>
+                          <XMTok fontsize="70%" meaning="equals" role="RELOP">=</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          <XMTok fontsize="70%" meaning="1" role="NUMBER">1</XMTok>
+                        </XMApp>
+                      </XMApp>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">N</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUPERSCRIPTOP" scriptpos="post1"/>
+                      <XMDual>
+                        <XMRef idref="S3.SS1.p1.m15.2"/>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp xml:id="S3.SS1.p1.m15.2">
+                            <XMTok meaning="minus" role="ADDOP">-</XMTok>
+                            <XMApp>
+                              <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                              <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                              <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                            </XMApp>
+                            <XMApp>
+                              <XMTok name="overline" role="OVERACCENT">¯</XMTok>
+                              <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                            </XMApp>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                      </XMDual>
+                      <XMTok fontsize="70%" meaning="2" role="NUMBER">2</XMTok>
+                    </XMApp>
+                  </XMApp>
+                </XMApp>
+              </XMApp>
+            </XMath>
+          </Math> is the sample variance of the reported well-being levels, with <Math mode="inline" tex="N=" text="N = absent" xml:id="S3.SS1.p1.m16">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">N</XMTok>
+                <XMTok meaning="absent"/>
+              </XMApp>
+            </XMath>
+          </Math> 33,391 being the sample size.</p>
+      </para>
+      <para xml:id="S3.SS1.p2">
+        <p>The model for the conditional mean of <Math mode="inline" tex="z_{i}" text="z _ i" xml:id="S3.SS1.p2.m1">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> in (<ref labelref="LABEL:eq:OLS"/>) is piecewise linear in log-income <Math mode="inline" tex="x_{i}" text="x _ i" xml:id="S3.SS1.p2.m2">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>. It features a structural break in both intercept and slope at the threshold value <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS1.p2.m3">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math>; for <Math mode="inline" tex="\exp(x_{i})\leq\tau" text="exponential@(x _ i) less= tau" xml:id="S3.SS1.p2.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMRef idref="S3.SS1.p2.m4.1"/>
+                    <XMRef idref="S3.SS1.p2.m4.2"/>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.SS1.p2.m4.1">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S3.SS1.p2.m4.2">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMApp>
+                </XMDual>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> the intercept is <Math mode="inline" tex="a" text="a" xml:id="S3.SS1.p2.m5">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">a</XMTok>
+            </XMath>
+          </Math> and slope is <Math mode="inline" tex="b" text="b" xml:id="S3.SS1.p2.m6">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">b</XMTok>
+            </XMath>
+          </Math>, while for <Math mode="inline" tex="\exp(x_{i})&gt;\tau" text="exponential@(x _ i) &gt; tau" xml:id="S3.SS1.p2.m7">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMRef idref="S3.SS1.p2.m7.1"/>
+                    <XMRef idref="S3.SS1.p2.m7.2"/>
+                  </XMApp>
+                  <XMApp>
+                    <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.SS1.p2.m7.1">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp xml:id="S3.SS1.p2.m7.2">
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                  </XMApp>
+                </XMDual>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> the intercept is <Math mode="inline" tex="c" text="c" xml:id="S3.SS1.p2.m8">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">c</XMTok>
+            </XMath>
+          </Math> and slope <Math mode="inline" tex="d" text="d" xml:id="S3.SS1.p2.m9">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">d</XMTok>
+            </XMath>
+          </Math>. This model has been extensively used in the literature <cite class="ltx_citemacro_citep">(e.g. <bibref bibrefs="KD2010,MK2021,KKM2023" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite> but the value for the threshold <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS1.p2.m10">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math> has arguably been chosen rather arbitrarily. For instance, <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS1.p2.m11">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math> is set equal to $100,000 in <cite class="ltx_citemacro_cite"><bibref bibrefs="MK2021" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> and <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite>, which is simply the inflation-adjusted value used on a different data set in <cite class="ltx_citemacro_cite"><bibref bibrefs="KD2010" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite>, where <Math mode="inline" tex="\tau=" text="tau = absent" xml:id="S3.SS1.p2.m12">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                <XMTok meaning="absent"/>
+              </XMApp>
+            </XMath>
+          </Math> $75,000.</p>
+      </para>
+      <para xml:id="S3.SS1.p3">
+        <p>For a given value of <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS1.p3.m1">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math>, the parameters <Math mode="inline" tex="a,b,c,d" text="list@(a, b, c, d)" xml:id="S3.SS1.p3.m2">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="list"/>
+                  <XMRef idref="S3.SS1.p3.m2.1"/>
+                  <XMRef idref="S3.SS1.p3.m2.2"/>
+                  <XMRef idref="S3.SS1.p3.m2.3"/>
+                  <XMRef idref="S3.SS1.p3.m2.4"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p3.m2.1">a</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p3.m2.2">b</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p3.m2.3">c</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS1.p3.m2.4">d</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> in (<ref labelref="LABEL:eq:OLS"/>) may be estimated via ordinary least squares regression. We follow the econometrics literature on detecting “structural breaks” in regression models and propose to choose the threshold <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS1.p3.m3">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math> as the place where the sum of squared residuals of the regression analysis is minimized <cite class="ltx_citemacro_citep">(<bibref bibrefs="BP1998,perron2006" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. The sum of squared residuals for various placements of the threshold are shown in the left panel of Figure <ref labelref="LABEL:fig:full"/>. The optimal threshold is found to be between $175,000 and $250,000. In the right panel of Figure <ref labelref="LABEL:fig:full"/>, we plot the estimated relationship (<ref labelref="LABEL:eq:OLS"/>) between well-being and log-income using this optimal threshold. For comparison, the middle panel of Figure <ref labelref="LABEL:fig:full"/> presents the estimated relationship using the $100,000 threshold. The latter is a replication of the results from <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> and shows a consistently increasing pattern, but the former shows that choosing the threshold in a data-driven way leads to a flat relationship between income and well-being above the threshold.</p>
+      </para>
+    </subsection>
+    <subsection inlist="toc" labels="LABEL:sec:QR" xml:id="S3.SS2">
+      <tags>
+        <tag>3.2</tag>
+        <tag role="autoref">subsection 3.2</tag>
+        <tag role="refnum">3.2</tag>
+        <tag role="typerefnum">§3.2</tag>
+      </tags>
+      <title><tag close=" ">3.2</tag>Quantile regression analysis</title>
+      <para xml:id="S3.SS2.p1">
+        <p>We now consider the following model</p>
+        <equationgroup class="ltx_eqn_align" xml:id="S4.EGx3">
+          <equation labels="LABEL:eq:QR" xml:id="S3.E2">
+            <tags>
+              <tag>(2)</tag>
+              <tag role="autoref">Equation 2</tag>
+              <tag role="refnum">2</tag>
+            </tags>
+            <MathFork>
+              <Math tex="\displaystyle Q_{y_{i}|x_{i}}(p)=(a+bx_{i})I(\exp(x_{i})\leq\tau)+(c+dx_{i})I(%&#10;\exp(x_{i})&gt;\tau),\quad i=1,2,\ldots,33391," xml:id="S3.E2.m2">
+                <XMath>
+                  <XMApp>
+                    <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                    <XMTok font="italic" role="UNKNOWN">Q</XMTok>
+                    <XMApp>
+                      <XMTok fontsize="70%" meaning="conditional" role="MODIFIEROP" stretchy="false">|</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                        <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                    </XMApp>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.E2.m2.1">p</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.E2.m2.2">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                    <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                    <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                    <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                    <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                      <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok meaning="exponential" role="OPFUNCTION">exp</XMTok>
+                    <XMWrap>
+                      <XMTok role="OPEN" stretchy="false">(</XMTok>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                        <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                      </XMApp>
+                      <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                    </XMWrap>
+                    <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                    <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                  <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                  <XMTok meaning="equals" role="RELOP">=</XMTok>
+                  <XMTok meaning="1" role="NUMBER">1</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok meaning="2" role="NUMBER">2</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok name="ldots" role="ID">…</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok meaning="33391" role="NUMBER">33391</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                </XMath>
+              </Math>
+              <MathBranch>
+                <td align="right"><Math mode="inline" tex="\displaystyle Q_{y_{i}|x_{i}}(p)=(a+bx_{i})I(\exp(x_{i})\leq\tau)+(c+dx_{i})I(%&#10;\exp(x_{i})&gt;\tau),\quad i=1,2,\ldots,33391," xml:id="S3.E2.m1">
+                    <XMath>
+                      <XMApp>
+                        <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                        <XMTok font="italic" role="UNKNOWN">Q</XMTok>
+                        <XMApp>
+                          <XMTok fontsize="70%" meaning="conditional" role="MODIFIEROP" stretchy="false">|</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                            <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                            <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                        </XMApp>
+                      </XMApp>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" role="UNKNOWN" xml:id="S3.E2.m1.1">p</XMTok>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">a</XMTok>
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">b</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok meaning="exponential" role="OPFUNCTION" xml:id="S3.E2.m1.2">exp</XMTok>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                        <XMTok meaning="less-than-or-equals" name="leq" role="RELOP">≤</XMTok>
+                        <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">c</XMTok>
+                        <XMTok meaning="plus" role="ADDOP">+</XMTok>
+                        <XMTok font="italic" role="UNKNOWN">d</XMTok>
+                        <XMApp>
+                          <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                          <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                          <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                        </XMApp>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                      <XMWrap>
+                        <XMTok role="OPEN" stretchy="false">(</XMTok>
+                        <XMTok meaning="exponential" role="OPFUNCTION">exp</XMTok>
+                        <XMWrap>
+                          <XMTok role="OPEN" stretchy="false">(</XMTok>
+                          <XMApp>
+                            <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                            <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                            <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+                          </XMApp>
+                          <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                        </XMWrap>
+                        <XMTok meaning="greater-than" role="RELOP">&gt;</XMTok>
+                        <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                        <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                      </XMWrap>
+                      <XMTok role="PUNCT" rpadding="10.0pt">,</XMTok>
+                      <XMTok font="italic" role="UNKNOWN">i</XMTok>
+                      <XMTok meaning="equals" role="RELOP">=</XMTok>
+                      <XMTok meaning="1" role="NUMBER">1</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMTok meaning="2" role="NUMBER">2</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMTok name="ldots" role="ID">…</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                      <XMTok meaning="33391" role="NUMBER">33391</XMTok>
+                      <XMTok role="PUNCT">,</XMTok>
+                    </XMath>
+                  </Math></td>
+              </MathBranch>
+            </MathFork>
+          </equation>
+        </equationgroup>
+        <p>where <Math mode="inline" tex="a,b,c,d\in\mathbb{R}" text="list@(a, b, c, d) element-of R" xml:id="S3.SS2.p1.m1">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="list"/>
+                    <XMRef idref="S3.SS2.p1.m1.1"/>
+                    <XMRef idref="S3.SS2.p1.m1.2"/>
+                    <XMRef idref="S3.SS2.p1.m1.3"/>
+                    <XMRef idref="S3.SS2.p1.m1.4"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p1.m1.1">a</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p1.m1.2">b</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p1.m1.3">c</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p1.m1.4">d</XMTok>
+                  </XMWrap>
+                </XMDual>
+                <XMTok font="blackboard" role="UNKNOWN">R</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, <Math mode="inline" tex="I(\cdot)" text="I * cdot" xml:id="S3.SS2.p1.m2">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMTok font="italic" role="UNKNOWN">I</XMTok>
+                <XMDual>
+                  <XMRef idref="S3.SS2.p1.m2.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok name="cdot" role="MULOP" xml:id="S3.SS2.p1.m2.1">⋅</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> and <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS2.p1.m3">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math> as above, and <Math mode="inline" tex="Q_{y_{i}|x_{i}}(p)" text="Q _ (conditional@(y _ i, x _ i)) * p" xml:id="S3.SS2.p1.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="times" role="MULOP">⁢</XMTok>
+                <XMApp>
+                  <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                  <XMTok font="italic" role="UNKNOWN">Q</XMTok>
+                  <XMApp>
+                    <XMTok fontsize="70%" meaning="conditional" role="MODIFIEROP" stretchy="false">|</XMTok>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">y</XMTok>
+                      <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                    <XMApp>
+                      <XMTok role="SUBSCRIPTOP" scriptpos="post2"/>
+                      <XMTok font="italic" fontsize="70%" role="UNKNOWN">x</XMTok>
+                      <XMTok font="italic" fontsize="50%" role="UNKNOWN">i</XMTok>
+                    </XMApp>
+                  </XMApp>
+                </XMApp>
+                <XMDual>
+                  <XMRef idref="S3.SS2.p1.m4.1"/>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p1.m4.1">p</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> is the <Math mode="inline" tex="p" text="p" xml:id="S3.SS2.p1.m5">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math>’th quantile of <Math mode="inline" tex="y_{i}" text="y _ i" xml:id="S3.SS2.p1.m6">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, conditional on <Math mode="inline" tex="x_{i}" text="x _ i" xml:id="S3.SS2.p1.m7">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">x</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math>, with <Math mode="inline" tex="p\in(0,1)" text="p element-of open-interval@(0, 1)" xml:id="S3.SS2.p1.m8">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="element-of" name="in" role="RELOP">∈</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="open-interval"/>
+                    <XMRef idref="S3.SS2.p1.m8.1"/>
+                    <XMRef idref="S3.SS2.p1.m8.2"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMTok role="OPEN" stretchy="false">(</XMTok>
+                    <XMTok meaning="0" role="NUMBER" xml:id="S3.SS2.p1.m8.1">0</XMTok>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMTok meaning="1" role="NUMBER" xml:id="S3.SS2.p1.m8.2">1</XMTok>
+                    <XMTok role="CLOSE" stretchy="false">)</XMTok>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math>. Note that we here follow <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> and consider the level of well-being <Math mode="inline" tex="y_{i}" text="y _ i" xml:id="S3.SS2.p1.m9">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">y</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> as the dependent variable, and not the z-scored version <Math mode="inline" tex="z_{i}" text="z _ i" xml:id="S3.SS2.p1.m10">
+            <XMath>
+              <XMApp>
+                <XMTok role="SUBSCRIPTOP" scriptpos="post1"/>
+                <XMTok font="italic" role="UNKNOWN">z</XMTok>
+                <XMTok font="italic" fontsize="70%" role="UNKNOWN">i</XMTok>
+              </XMApp>
+            </XMath>
+          </Math> as we did in (<ref labelref="LABEL:eq:OLS"/>). Otherwise, the model (<ref labelref="LABEL:eq:QR"/>) is similar to (<ref labelref="LABEL:eq:OLS"/>), except that it is a model of the conditional quantile, instead of the conditional mean, of the well-being measure.</p>
+      </para>
+      <para xml:id="S3.SS2.p2">
+        <p>For given values of <Math mode="inline" tex="\tau" text="tau" xml:id="S3.SS2.p2.m1">
+            <XMath>
+              <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+            </XMath>
+          </Math> and <Math mode="inline" tex="p" text="p" xml:id="S3.SS2.p2.m2">
+            <XMath>
+              <XMTok font="italic" role="UNKNOWN">p</XMTok>
+            </XMath>
+          </Math>, the parameters <Math mode="inline" tex="a,b,c,d" text="list@(a, b, c, d)" xml:id="S3.SS2.p2.m3">
+            <XMath>
+              <XMDual>
+                <XMApp>
+                  <XMTok meaning="list"/>
+                  <XMRef idref="S3.SS2.p2.m3.1"/>
+                  <XMRef idref="S3.SS2.p2.m3.2"/>
+                  <XMRef idref="S3.SS2.p2.m3.3"/>
+                  <XMRef idref="S3.SS2.p2.m3.4"/>
+                </XMApp>
+                <XMWrap>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p2.m3.1">a</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p2.m3.2">b</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p2.m3.3">c</XMTok>
+                  <XMTok role="PUNCT">,</XMTok>
+                  <XMTok font="italic" role="UNKNOWN" xml:id="S3.SS2.p2.m3.4">d</XMTok>
+                </XMWrap>
+              </XMDual>
+            </XMath>
+          </Math> in (<ref labelref="LABEL:eq:QR"/>) may be estimated via standard quantile regression methods <cite class="ltx_citemacro_citep">(e.g. <bibref bibrefs="Koenker2005" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+              <bibrefphrase>, </bibrefphrase>
+            </bibref>)</cite>. Following <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite>, we consider the quantiles <Math mode="inline" tex="p=15\%,30\%,50\%,70\%,85\%" text="p = list@(15percent, 30percent, 50percent, 70percent, 85percent)" xml:id="S3.SS2.p2.m4">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" role="UNKNOWN">p</XMTok>
+                <XMDual>
+                  <XMApp>
+                    <XMTok meaning="list"/>
+                    <XMRef idref="S3.SS2.p2.m4.1"/>
+                    <XMRef idref="S3.SS2.p2.m4.2"/>
+                    <XMRef idref="S3.SS2.p2.m4.3"/>
+                    <XMRef idref="S3.SS2.p2.m4.4"/>
+                    <XMRef idref="S3.SS2.p2.m4.5"/>
+                  </XMApp>
+                  <XMWrap>
+                    <XMApp xml:id="S3.SS2.p2.m4.1">
+                      <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                      <XMTok meaning="15" role="NUMBER">15</XMTok>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS2.p2.m4.2">
+                      <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                      <XMTok meaning="30" role="NUMBER">30</XMTok>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS2.p2.m4.3">
+                      <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                      <XMTok meaning="50" role="NUMBER">50</XMTok>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS2.p2.m4.4">
+                      <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                      <XMTok meaning="70" role="NUMBER">70</XMTok>
+                    </XMApp>
+                    <XMTok role="PUNCT">,</XMTok>
+                    <XMApp xml:id="S3.SS2.p2.m4.5">
+                      <XMTok meaning="percent" role="POSTFIX">%</XMTok>
+                      <XMTok meaning="85" role="NUMBER">85</XMTok>
+                    </XMApp>
+                  </XMWrap>
+                </XMDual>
+              </XMApp>
+            </XMath>
+          </Math> of the well-being distribution. The left panel of Figure <ref labelref="LABEL:fig:quantile"/> presents the results with the <Math mode="inline" tex="\tau=" text="tau = absent" xml:id="S3.SS2.p2.m5">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                <XMTok meaning="absent"/>
+              </XMApp>
+            </XMath>
+          </Math> $100,000 threshold, which is a replication of the results from <cite class="ltx_citemacro_cite"><bibref bibrefs="KKM2023" separator=";" show="Authors Phrase1YearPhrase2" yyseparator=",">
+              <bibrefphrase>(</bibrefphrase>
+              <bibrefphrase>)</bibrefphrase>
+            </bibref></cite> and shows a consistently increasing pattern for all but the unhappiest individuals in the sample. For the happiest individuals, the slope even increases above the threshold, pointing to an “accelerating” pattern, where the happiest individuals appear to get relatively higher well-being benefits from additional income when their income is already very high. The right panel of Figure <ref labelref="LABEL:fig:quantile"/> presents the results with the <Math mode="inline" tex="\tau=" text="tau = absent" xml:id="S3.SS2.p2.m6">
+            <XMath>
+              <XMApp>
+                <XMTok meaning="equals" role="RELOP">=</XMTok>
+                <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+                <XMTok meaning="absent"/>
+              </XMApp>
+            </XMath>
+          </Math> $200,000 threshold suggested by our previous analysis, and shows that choosing the threshold in a data-driven way leads to a flat relationship between income and well-being above the threshold, regardless of the part of the well-being distribution considered.</p>
+      </para>
+<!--  %while . %The former is a replication of the results from  “cite–KKM2023˝ and shows a consistently increasing pattern for all but the unhappiest individuals in the sample, but the latter shows that choosing the threshold in a data-driven way leads to a flat relationship between income and well-being above the threshold, regardless of the part of the well-being distribution considered. 
+     %The  The latter, however, shows that choosing the threshold in a data-driven way leads to a flat relationship between income and well-being above the threshold, regardless of the part of the well-being distribution considered.-->    </subsection>
+  </section>
+  <section inlist="toc" labels="LABEL:sec:concl" xml:id="S4">
+    <tags>
+      <tag>4</tag>
+      <tag role="autoref">section 4</tag>
+      <tag role="refnum">4</tag>
+      <tag role="typerefnum">§4</tag>
+    </tags>
+    <title><tag close=" ">4</tag>Conclusion</title>
+    <para xml:id="S4.p1">
+      <p>The analysis of this paper challenges the finding of a monotonically increasing relationship between emotional well-being and income for all but the most unhappy people, recently reported in the literature <cite class="ltx_citemacro_citep">(<bibref bibrefs="KKM2023" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>. Indeed, our analysis shows that this conclusion rests crucially on pre-specifying the income threshold at $100,000 per year; by choosing the threshold in a data-driven way, a flat relationship between emotional well-being and income above a threshold around $200,000 is found, regardless of the part (i.e. quantile) of the well-being distribution considered. To put this threshold number in perspective, we note that slightly more than 9% of the sample reported household incomes of $250,000 or higher. The incomes in the sample matches the US census distribution closely <cite class="ltx_citemacro_citep">(<bibref bibrefs="MK2021" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>.</p>
+    </para>
+    <para xml:id="S4.p2">
+      <p>The analysis of the present paper, in turn, rests on the assumption that the relationship between emotional well-being and log-income is linear with one structural break in both intercept and slope. While this assumption has been routinely imposed in the literature, it is not given that it is satisfied in practice. Another potential drawback of the analysis conducted here (and elsewhere) is the bracketing of incomes into income groups, which may introduce biases in the results due censoring of the explanatory (income) variable. Further, it is generally believed that well-being depends on a multitude of factors besides income <cite class="ltx_citemacro_citep">(e.g. <bibref bibrefs="Diener2000,Diener2002" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+            <bibrefphrase>, </bibrefphrase>
+          </bibref>)</cite>, leading to the conjecture that there may be omitted variables in the regression equations (<ref labelref="LABEL:eq:OLS"/>) and (<ref labelref="LABEL:eq:QR"/>). What the effects of these omissions and shortcomings are to the analysis of the relationship between emotional well-being and income remains unknown. Thus, although the analysis of this paper provides some evidence for emotional well-being plateauing around $200,000 per year, more careful research is needed before any definite conclusions about this relationship can be drawn with confidence.</p>
+    </para>
+  </section>
+  <bibliography citestyle="authoryear" files="mb_references" xml:id="bib">
+    <title fontsize="90%">References</title>
+  </bibliography>
+  <pagination role="newpage"/>
+<!--  %**** EL˙income˙wellbeing˙v13.tex Line 175 **** -->  <pagination role="newpage"/>
+  <figure inlist="lof" labels="LABEL:fig:full" placement="t!" xml:id="S4.F1">
+    <tags>
+      <tag>Figure 1</tag>
+      <tag role="autoref">Figure 1</tag>
+      <tag role="refnum">1</tag>
+      <tag role="typerefnum">Figure 1</tag>
+    </tags>
+    <toccaption class="ltx_centering"><tag close=" ">1</tag>Ordinary least squares regression results from (<ref labelref="LABEL:eq:OLS"/>). Left panel: Sum of squared residuals as a function of the income threshold <Math mode="inline" tex="\tau" text="tau" xml:id="S4.F1.m1">
+        <XMath>
+          <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+        </XMath>
+      </Math>. Middle panel: Threshold at $100,000. Right panel: Threshold at $200,000. Standard errors in parentheses. Note: black dots in the middle and right panels are sample averages of well-being levels in each income brackets.</toccaption>
+    <caption class="ltx_centering"><tag close=": ">Figure 1</tag>Ordinary least squares regression results from (<ref labelref="LABEL:eq:OLS"/>). Left panel: Sum of squared residuals as a function of the income threshold <Math mode="inline" tex="\tau" text="tau" xml:id="S4.F1.m2">
+        <XMath>
+          <XMTok font="italic" name="tau" role="UNKNOWN">τ</XMTok>
+        </XMath>
+      </Math>. Middle panel: Threshold at $100,000. Right panel: Threshold at $200,000. Standard errors in parentheses. Note: black dots in the middle and right panels are sample averages of well-being levels in each income brackets.</caption>
+    <graphics candidates="orig_findOptThres_mean_v01.eps" class="ltx_centering" graphic="orig_findOptThres_mean_v01.eps" options="width=130.086pt" xml:id="S4.F1.g1"/>
+    <graphics candidates="orig_100Thres_mean_v02.eps" class="ltx_centering" graphic="orig_100Thres_mean_v02.eps" options="width=130.086pt" xml:id="S4.F1.g2"/>
+    <graphics candidates="orig_optThres_mean_v02.eps" class="ltx_centering" graphic="orig_optThres_mean_v02.eps" options="width=130.086pt" xml:id="S4.F1.g3"/>
+  </figure>
+  <figure inlist="lof" labels="LABEL:fig:quantile" placement="t!" xml:id="S4.F2">
+    <tags>
+      <tag>Figure 2</tag>
+      <tag role="autoref">Figure 2</tag>
+      <tag role="refnum">2</tag>
+      <tag role="typerefnum">Figure 2</tag>
+    </tags>
+    <toccaption class="ltx_centering"><tag close=" ">2</tag>Quantile regression results from (<ref labelref="LABEL:eq:QR"/>), implemented using the <text font="typewriter">quantreg</text> package in R <cite class="ltx_citemacro_citep">(<bibref bibrefs="Koenker2019" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+          <bibrefphrase>, </bibrefphrase>
+        </bibref>)</cite>. Left panel: Threshold at $100,000. Right panel: Threshold at $200,000. <Math mode="inline" tex="t" text="t" xml:id="S4.F2.m1">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">t</XMTok>
+        </XMath>
+      </Math>-stats in parentheses, calculated using the quantile regression sandwich formula and the Hall-Sheather
+bandwidth rule <cite class="ltx_citemacro_citep">(e.g. Section 3.2.3 in <bibref bibrefs="Koenker2005" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+          <bibrefphrase>, </bibrefphrase>
+        </bibref>)</cite>. Note: black dots are sample quantiles of well-being levels in each income brackets.</toccaption>
+    <caption class="ltx_centering"><tag close=": ">Figure 2</tag>Quantile regression results from (<ref labelref="LABEL:eq:QR"/>), implemented using the <text font="typewriter">quantreg</text> package in R <cite class="ltx_citemacro_citep">(<bibref bibrefs="Koenker2019" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+          <bibrefphrase>, </bibrefphrase>
+        </bibref>)</cite>. Left panel: Threshold at $100,000. Right panel: Threshold at $200,000. <Math mode="inline" tex="t" text="t" xml:id="S4.F2.m2">
+        <XMath>
+          <XMTok font="italic" role="UNKNOWN">t</XMTok>
+        </XMath>
+      </Math>-stats in parentheses, calculated using the quantile regression sandwich formula and the Hall-Sheather
+bandwidth rule <cite class="ltx_citemacro_citep">(e.g. Section 3.2.3 in <bibref bibrefs="Koenker2005" separator=";" show="AuthorsPhrase1Year" yyseparator=",">
+          <bibrefphrase>, </bibrefphrase>
+        </bibref>)</cite>. Note: black dots are sample quantiles of well-being levels in each income brackets.</caption>
+    <graphics candidates="orig_fixedThres100_quantreg_v03.eps" class="ltx_centering" graphic="orig_fixedThres100_quantreg_v03.eps" options="width=205.9695pt" xml:id="S4.F2.g1"/>
+    <graphics candidates="orig_fixedThres200_quantreg_v03.eps" class="ltx_centering" graphic="orig_fixedThres200_quantreg_v03.eps" options="width=205.9695pt" xml:id="S4.F2.g2"/>
+  </figure>
+<!--  %**** EL˙income˙wellbeing˙v13.tex Line 200 **** 
+     %“newpage
+     %“appendix
+     %“section–Additional analyses˝ “label–app:moreAnalysis˝
+     %“subsection–Imposing continuity in the regression function˝-->  <rdf about="" content="Mikkel Bennedsen" property="dcterms:creator"/>
+  <rdf about="" content="Income and wellbeing" property="dcterms:title"/>
+</document>
